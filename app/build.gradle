@@ -43,4 +43,12 @@ dependencies {
 
     //https://github.com/gauravk95/bubble-navigation
      implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+
+    // this is for local database debugging
+    // http://192.168.43.122:8080 <phoneIpAddress:port>
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
+
+    implementation 'com.andrognito.flashbar:flashbar:1.0.2'
 }

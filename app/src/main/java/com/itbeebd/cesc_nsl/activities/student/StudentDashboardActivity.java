@@ -6,18 +6,21 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
-import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
+import com.andrognito.flashbar.Flashbar;
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
-import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.FlashBar;
+
 
 public class StudentDashboardActivity extends AppCompatActivity  implements BubbleNavigationChangeListener {
 
     private BubbleNavigationLinearView navigationLinearView;
     private FragmentManager fragmentManager;
     private StudentDashboardFragment dashboardFragment;
+    private long time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +38,28 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragmentContainerId, dashboardFragment);
         fragmentTransaction.commit();
+
+        Flashbar flashbar = new FlashBar().flashBar(this,
+                "this is title",
+                "This is message",
+                5000
+        );
+        flashbar.show();
+
     }
 
     @Override
     public void onNavigationChanged(View view, int position) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (time + 2000 > System.currentTimeMillis()) {
+            finish();
+        } else {
+            time = System.currentTimeMillis();
+            Toast.makeText(this, "press again to exit", Toast.LENGTH_SHORT).show();
+        }
     }
 }

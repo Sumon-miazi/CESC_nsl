@@ -42,6 +42,7 @@ public class StudentLoginActivity extends AppCompatActivity {
         new LoginApi().studentLogin(userId, password, "123456", ((isSuccess, message) -> {
             if(isSuccess){
                 this.startActivity(new Intent(this, StudentDashboardActivity.class));
+                finish();
             }
             else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }));
