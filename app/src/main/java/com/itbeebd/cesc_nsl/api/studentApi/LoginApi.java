@@ -2,6 +2,7 @@ package com.itbeebd.cesc_nsl.api.studentApi;
 
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
+import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 
 import org.json.JSONObject;
 
@@ -18,20 +19,28 @@ public class LoginApi extends BaseService {
         requestBody = new RetrofitRequestBody();
     }
 
-    public void studentLogin(String studentId, String password, String fcm_token){
+    public void studentLogin(String studentId, String password, String fcm_token, BooleanResponse booleanResponse){
         Call<ResponseBody> studentLogin = service.studentLogin(studentId, password, fcm_token);
         studentLogin.enqueue(new Callback<ResponseBody>(){
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    JSONObject jsonObject =  new JSONObject(response.body().string());
-                    System.out.println(">>>>>>>>>> " + jsonObject);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                JSONObject jsonObject = null;
+                if(response.isSuccessful() && response != null){
+                    try {
+                        jsonObject =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> " + jsonObject);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    booleanResponse.response(jsonObject.optBoolean("issuccessful"), "Login");
                 }
-                System.out.println(">>>>>>>>>> " + response.isSuccessful());
-                System.out.println(">>>>>>>>>> " + response);
+                else {
+                    booleanResponse.response(jsonObject.optBoolean("issuccessful"), response.toString());
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                }
             }
 
             @Override

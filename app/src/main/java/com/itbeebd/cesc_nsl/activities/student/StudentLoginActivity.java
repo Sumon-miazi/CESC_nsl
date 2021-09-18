@@ -2,6 +2,7 @@ package com.itbeebd.cesc_nsl.activities.student;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,11 @@ public class StudentLoginActivity extends AppCompatActivity {
     }
 
     private void login(String userId, String password) {
-        new LoginApi().studentLogin(userId, password, "123456");
+        new LoginApi().studentLogin(userId, password, "123456", ((isSuccess, message) -> {
+            if(isSuccess){
+                this.startActivity(new Intent(this, StudentDashboardActivity.class));
+            }
+            else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }));
     }
 }
