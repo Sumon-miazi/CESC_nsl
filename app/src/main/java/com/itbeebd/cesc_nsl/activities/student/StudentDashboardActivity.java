@@ -19,7 +19,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
 
     private BubbleNavigationLinearView navigationLinearView;
     private FragmentManager fragmentManager;
-    private StudentDashboardFragment dashboardFragment;
+    private StudentProfileFragment dashboardFragment;
     private long time;
 
     @Override
@@ -27,7 +27,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_dashboard);
 
-        dashboardFragment = new StudentDashboardFragment();
+        dashboardFragment = new StudentProfileFragment();
 
         navigationLinearView = findViewById(R.id.bottom_navigation_view_linear);
         navigationLinearView.setCurrentActiveItem(1);
@@ -39,12 +39,15 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         fragmentTransaction.add(R.id.fragmentContainerId, dashboardFragment);
         fragmentTransaction.commit();
 
+        /*
         Flashbar flashbar = new FlashBar().flashBar(this,
                 "this is title",
                 "This is message",
                 5000
         );
         flashbar.show();
+
+         */
 
     }
 

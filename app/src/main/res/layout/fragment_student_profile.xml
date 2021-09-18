@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.student.StudentProfileFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/studentProfileBgViewId"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/blue_primary"
+            android:padding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/studentProfileViewId"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/default_male"
+            app:layout_constraintBottom_toBottomOf="@+id/studentProfileBgViewId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/studentNameViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Md. Suman Miazi"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/sectionNameViewId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/studentProfileViewId"
+            app:layout_constraintTop_toTopOf="@id/studentProfileBgViewId"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+
+        <TextView
+            android:id="@+id/sectionNameViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Academic Year: 2021"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/academicYearViewId"
+            app:layout_constraintEnd_toEndOf="@+id/studentNameViewId"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/studentNameViewId"
+            app:layout_constraintTop_toBottomOf="@+id/studentNameViewId" />
+
+
+        <TextView
+            android:id="@+id/academicYearViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Academic Year: 2021"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/studentProfileBgViewId"
+            app:layout_constraintEnd_toEndOf="@+id/studentNameViewId"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/studentNameViewId"
+            app:layout_constraintTop_toBottomOf="@+id/sectionNameViewId" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
