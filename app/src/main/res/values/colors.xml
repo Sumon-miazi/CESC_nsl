@@ -11,6 +11,7 @@
     <color name="blue_primary_dark_2">#072341</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_inactive">#EEFEFF</color>
+    <color name="white_inactive_2">#AEAEAE</color>
 
 
     <color name="red_active">#f44336</color>

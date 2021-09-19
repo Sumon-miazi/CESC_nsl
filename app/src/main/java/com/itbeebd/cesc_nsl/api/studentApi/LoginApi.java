@@ -37,7 +37,7 @@ public class LoginApi extends BaseService {
                     booleanResponse.response(jsonObject.optBoolean("issuccessful"), "Login");
                 }
                 else {
-                    booleanResponse.response(jsonObject.optBoolean("issuccessful"), response.toString());
+                    booleanResponse.response(response.isSuccessful(), response.toString());
                     System.out.println(">>>>>>>>>> " + response.isSuccessful());
                     System.out.println(">>>>>>>>>> " + response);
                 }
