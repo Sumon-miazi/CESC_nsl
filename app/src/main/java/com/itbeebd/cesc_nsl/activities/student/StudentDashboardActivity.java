@@ -1,6 +1,7 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -20,6 +21,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
     private BubbleNavigationLinearView navigationLinearView;
     private FragmentManager fragmentManager;
     private StudentDashboardFragment dashboardFragment;
+    private StudentProfileFragment profileFragment;
     private long time;
 
     @Override
@@ -28,6 +30,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         setContentView(R.layout.activity_student_dashboard);
 
         dashboardFragment = new StudentDashboardFragment();
+        profileFragment = new StudentProfileFragment();
 
         navigationLinearView = findViewById(R.id.bottom_navigation_view_linear);
         navigationLinearView.setCurrentActiveItem(1);
@@ -39,21 +42,17 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         fragmentTransaction.add(R.id.fragmentContainerId, dashboardFragment);
         fragmentTransaction.commit();
 
-        /*
-        Flashbar flashbar = new FlashBar().flashBar(this,
-                "this is title",
-                "This is message",
-                5000
-        );
-        flashbar.show();
-
-         */
-
     }
 
     @Override
     public void onNavigationChanged(View view, int position) {
-
+        if(position == 1){
+            changeFragmentInDashBoard(dashboardFragment);
+        }
+        else if (position == 4){
+            changeFragmentInDashBoard(profileFragment);
+        }
+        else changeFragmentInDashBoard(dashboardFragment);
     }
 
     @Override
@@ -65,4 +64,23 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
             Toast.makeText(this, "press again to exit", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void changeFragmentInDashBoard(Fragment fragment ){
+        // get fragment manager
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainerId, fragment);
+        fragmentTransaction.commit();
+    }
 }
+
+
+        /*
+        Flashbar flashbar = new FlashBar().flashBar(this,
+                "this is title",
+                "This is message",
+                5000
+        );
+        flashbar.show();
+
+         */

@@ -66,9 +66,9 @@
             android:layout_height="wrap_content"
             app:bt_colorActive="@color/green_active"
             app:bt_colorInactive="@color/green_inactive"
-            app:bt_icon="@drawable/ic_playlist"
+            app:bt_icon="@drawable/ic_payment_24"
             app:bt_shape="@drawable/transition_background_drawable_list"
-            app:bt_title="@string/notification" />
+            app:bt_title="@string/payment" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/l_item_profile"
