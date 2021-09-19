@@ -8,18 +8,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.andrognito.flashbar.Flashbar;
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.FlashBar;
+import com.itbeebd.cesc_nsl.activities.student.fragments.StudentDashboardFragment;
+import com.itbeebd.cesc_nsl.activities.student.fragments.StudentProfileFragment;
 
 
 public class StudentDashboardActivity extends AppCompatActivity  implements BubbleNavigationChangeListener {
 
     private BubbleNavigationLinearView navigationLinearView;
     private FragmentManager fragmentManager;
-    private StudentProfileFragment dashboardFragment;
+    private StudentDashboardFragment dashboardFragment;
     private long time;
 
     @Override
@@ -27,7 +27,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_dashboard);
 
-        dashboardFragment = new StudentProfileFragment();
+        dashboardFragment = new StudentDashboardFragment();
 
         navigationLinearView = findViewById(R.id.bottom_navigation_view_linear);
         navigationLinearView.setCurrentActiveItem(1);

@@ -1,4 +1,4 @@
-package com.itbeebd.cesc_nsl.activities.student;
+package com.itbeebd.cesc_nsl.activities.student.fragments;
 
 import android.os.Bundle;
 

@@ -1,10 +1,11 @@
-package com.itbeebd.cesc_nsl;
+package com.itbeebd.cesc_nsl.utils;
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
 
 import com.andrognito.flashbar.Flashbar;
+import com.itbeebd.cesc_nsl.R;
 
 
 public class FlashBar {

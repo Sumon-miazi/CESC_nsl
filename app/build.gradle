@@ -54,4 +54,7 @@ dependencies {
 
     // sugar orm
     implementation 'com.github.satyan:sugar:1.5'
+
+    // see more textVIew
+    implementation 'com.github.AhmMhd:SeeMoreTextView-Android:1.0.0'
 }
