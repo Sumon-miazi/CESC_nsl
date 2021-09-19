@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.activities.student.fragments.PaymentFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.StudentDashboardFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.StudentProfileFragment;
 
@@ -22,6 +23,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
     private FragmentManager fragmentManager;
     private StudentDashboardFragment dashboardFragment;
     private StudentProfileFragment profileFragment;
+    private PaymentFragment paymentFragment;
     private long time;
 
     @Override
@@ -31,6 +33,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
 
         dashboardFragment = new StudentDashboardFragment();
         profileFragment = new StudentProfileFragment();
+        paymentFragment = new PaymentFragment();
 
         navigationLinearView = findViewById(R.id.bottom_navigation_view_linear);
         navigationLinearView.setCurrentActiveItem(1);
@@ -48,6 +51,9 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
     public void onNavigationChanged(View view, int position) {
         if(position == 1){
             changeFragmentInDashBoard(dashboardFragment);
+        }
+        else if (position == 3){
+            changeFragmentInDashBoard(paymentFragment);
         }
         else if (position == 4){
             changeFragmentInDashBoard(profileFragment);
