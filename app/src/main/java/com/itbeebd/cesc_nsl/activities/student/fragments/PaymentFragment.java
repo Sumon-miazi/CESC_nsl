@@ -1,5 +1,6 @@
 package com.itbeebd.cesc_nsl.activities.student.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,18 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.activities.student.adapters.PaymentAdapter;
-import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
+import com.itbeebd.cesc_nsl.activities.student.PaymentHistoryActivity;
+import com.itbeebd.cesc_nsl.activities.student.adapters.DuePaymentAdapter;
 import com.itbeebd.cesc_nsl.utils.Payment;
 
 import java.util.ArrayList;
 
 
-public class PaymentFragment extends Fragment {
+public class PaymentFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView paymentRecyclerView;
+    private TextView paymentHistoryBtn;
 
     public PaymentFragment() {
         // Required empty public constructor
@@ -45,6 +48,9 @@ public class PaymentFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_payment, container, false);
 
         paymentRecyclerView = view.findViewById(R.id.paymentRecyclerViewId);
+        paymentHistoryBtn = view.findViewById(R.id.paymentHistoryBtnId);
+
+        paymentHistoryBtn.setOnClickListener(this);
         setDuePaymentAdapter();
 
         return view;
@@ -59,10 +65,15 @@ public class PaymentFragment extends Fragment {
         payments.add(new Payment());
         payments.add(new Payment());
 
-        PaymentAdapter paymentAdapter = new PaymentAdapter(getContext());
-        paymentAdapter.setItems(payments);
+        DuePaymentAdapter duePaymentAdapter = new DuePaymentAdapter(getContext());
+        duePaymentAdapter.setItems(payments);
         paymentRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //    paymentRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        paymentRecyclerView.setAdapter(paymentAdapter);
+        paymentRecyclerView.setAdapter(duePaymentAdapter);
+    }
+
+    @Override
+    public void onClick(View view) {
+        getActivity().startActivity(new Intent(getActivity(), PaymentHistoryActivity.class));
     }
 }

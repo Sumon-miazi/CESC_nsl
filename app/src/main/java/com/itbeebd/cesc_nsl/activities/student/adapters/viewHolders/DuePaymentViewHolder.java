@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListe
 
 import com.itbeebd.cesc_nsl.utils.Payment;
 
-public class PaymentViewHolder extends BaseViewHolder<Payment, OnRecyclerObjectClickListener<Payment>> {
+public class DuePaymentViewHolder extends BaseViewHolder<Payment, OnRecyclerObjectClickListener<Payment>> {
 
     private final TextView accountHead;
     private final TextView dueMonth;
@@ -24,7 +24,7 @@ public class PaymentViewHolder extends BaseViewHolder<Payment, OnRecyclerObjectC
 
     private Context context;
 
-    public PaymentViewHolder(@NonNull View itemView, Context context) {
+    public DuePaymentViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         this.context = context;
 
