@@ -24,7 +24,7 @@ public class PaymentHistoryAdapter  extends GenericRecyclerAdapter<Payment, OnRe
     @NonNull
     @Override
     public PaymentHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new PaymentHistoryViewHolder(inflate(R.layout.single_due_amount_view, parent), context);
+        return new PaymentHistoryViewHolder(inflate(R.layout.single_payment_history_view, parent), context);
     }
 
 }

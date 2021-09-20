@@ -14,7 +14,7 @@
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="10dp"
-    android:backgroundTint="@color/white">
+    android:backgroundTint="@color/white_green">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginStart="8dp"
-            android:src="@drawable/circle_dot"
+            android:src="@drawable/round_green_bg"
             app:layout_constraintBottom_toBottomOf="@+id/accountHeadId"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/accountHeadId" />
@@ -35,11 +35,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="School Bus Fee"
             android:textColor="@color/blue_primary_dark"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/dueAmountId"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -66,52 +66,16 @@
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-        <TextView
-            android:id="@+id/amountId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Amount: 10000"
-            android:textColor="@color/slate_black"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/accountHeadId"
-            app:layout_constraintStart_toStartOf="@+id/accountHeadId"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-        <TextView
-            android:id="@+id/paidAmountId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Paid: 0"
-            android:textColor="@color/green_active"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/accountHeadId"
-            app:layout_constraintStart_toStartOf="@+id/accountHeadId"
-            app:layout_constraintTop_toBottomOf="@+id/amountId" />
-
-        <TextView
-            android:id="@+id/waiverId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Waiver: 0"
-            android:textColor="@color/blue_inactive"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/accountHeadId"
-            app:layout_constraintStart_toStartOf="@+id/accountHeadId"
-            app:layout_constraintTop_toBottomOf="@+id/paidAmountId" />
 
 
         <TextView
             android:id="@+id/dueAmountId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="32dp"
             android:text="1000"
             android:textColor="@color/orange_active"
-            android:textSize="22sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,8 +86,14 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Due Amount"
-            android:textSize="10sp"
+            android:text="PAID"
+            android:textColor="@color/white"
+            android:background="@drawable/round_paid_bg"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/dueAmountId"
             app:layout_constraintHorizontal_bias="0.5"
@@ -132,10 +102,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/waiverId" />
+            android:layout_height="20dp"
+            app:layout_constraintTop_toBottomOf="@id/dueMonthId"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

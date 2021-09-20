@@ -115,7 +115,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(getActivity(), EditStudentProfileActivity.class);
-      //  intent.putExtra("student", student);
+        intent.putExtra("student", student);
         getActivity().startActivity(intent);
     }
 
@@ -147,7 +147,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         academicYearViewId.setText(String.format("%s", student.getAcademic_year()));
         genderViewId.setText(student.getGender());
         religionViewId.setText(student.getReligion());
-        bloodGroupViewId.setText(student.getBlood_group());
+        bloodGroupViewId.setText(student.getBlood());
         birthDayViewId.setText(student.getDate_of_birth());
         houseViewId.setText(student.getHouse_id());
         presentAddressViewId.setText(student.getPresent_address());
@@ -168,7 +168,6 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
             routeViewId.setText(transport.getBusRoute());
             busStartTimeViewId.setText(transport.getBusStartTime());
         }
-
 
     }
 }

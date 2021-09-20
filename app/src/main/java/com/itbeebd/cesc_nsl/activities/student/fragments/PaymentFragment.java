@@ -60,10 +60,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         ArrayList<Payment> payments = new ArrayList<>();
         payments.add(new Payment());
         payments.add(new Payment());
-        payments.add(new Payment());
-        payments.add(new Payment());
-        payments.add(new Payment());
-        payments.add(new Payment());
+
 
         DuePaymentAdapter duePaymentAdapter = new DuePaymentAdapter(getContext());
         duePaymentAdapter.setItems(payments);
