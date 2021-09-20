@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CESC_nsl">
-        <activity android:name=".activities.student.PaymentHistoryActivity"></activity>
+        <activity android:name=".activities.student.EditStudentProfileActivity"></activity>
+        <activity android:name=".activities.student.PaymentHistoryActivity" />
         <activity android:name=".activities.student.LessonPlanActivity" />
         <activity android:name=".activities.student.StudentAllNotificationActivity" />
         <activity
