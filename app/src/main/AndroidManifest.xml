@@ -12,18 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CESC_nsl">
-        <activity android:name=".activities.student.EditStudentProfileActivity"></activity>
+        <activity android:name=".activities.student.EditStudentProfileActivity"/>
         <activity android:name=".activities.student.PaymentHistoryActivity" />
         <activity android:name=".activities.student.LessonPlanActivity" />
         <activity android:name=".activities.student.StudentAllNotificationActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.student.StudentDashboardActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".activities.student.StudentLoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.student.StudentDashboardActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +37,7 @@
             android:value="cesc_nsl.db" />
         <meta-data
             android:name="VERSION"
-            android:value="1" />
+            android:value="2" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
