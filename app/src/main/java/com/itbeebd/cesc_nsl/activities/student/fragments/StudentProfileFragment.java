@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -16,13 +17,18 @@ import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.EditStudentProfileActivity;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
+import com.itbeebd.cesc_nsl.sugarClass.Guardian;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.sugarClass.Transport;
+
+import java.util.List;
 
 public class StudentProfileFragment extends Fragment implements View.OnClickListener {
 
     private ImageView profileEditBtn;
     private Student student;
+    private Transport transport;
+    private List<Guardian> guardians;
 
     private TextView studentNameViewId;
     private ImageView studentProfileViewId;
@@ -53,6 +59,8 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     private TextView routeViewId;
     private TextView busStartTimeViewId;
 
+    private LinearLayout guardianInfoLayout;
+
     public StudentProfileFragment() {
         // Required empty public constructor
     }
@@ -67,8 +75,14 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StudentDao studentDao = new StudentDao();
 
-        student = new StudentDao().getStudent(getContext());
+        student = studentDao.getStudent(getContext());
+
+        if(student != null){
+            transport = studentDao.getTransport(student);
+            guardians = studentDao.getGuardian(student);
+        }
     }
 
     @Override
@@ -106,6 +120,8 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         busModelViewId = view.findViewById(R.id.busModelViewId);
         routeViewId = view.findViewById(R.id.routeViewId);
         busStartTimeViewId = view.findViewById(R.id.busStartTimeViewId);
+
+        guardianInfoLayout =  view.findViewById(R.id.guardianInfoSectionLayoutId);
 
         profileEditBtn.setOnClickListener(this);
 
@@ -161,12 +177,38 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
 
 
         // Transport details
-        Transport transport = new StudentDao().getTransport(student);
         if(transport != null){
             busNameViewId.setText(transport.getBusName());
             busModelViewId.setText(transport.getBusModel());
             routeViewId.setText(transport.getBusRoute());
             busStartTimeViewId.setText(transport.getBusStartTime());
+        }
+
+        // Guardian details
+        if(guardians != null){
+
+            for (int i = 0; i < guardians.size(); i++) {
+                View guardianView = LayoutInflater.from(getContext()).inflate(R.layout.single_guardian_view,
+                        guardianInfoLayout,false);
+
+                TextView parentNameViewId = guardianView.findViewById(R.id.parentNameViewId);
+                TextView parentOccupationViewId = guardianView.findViewById(R.id.parentOccupationViewId);
+                TextView parentPhoneNoViewId = guardianView.findViewById(R.id.parentPhoneNoViewId);
+                TextView parentAddressViewId = guardianView.findViewById(R.id.parentAddressViewId);
+                TextView parentBloodGroupViewId = guardianView.findViewById(R.id.parentBloodGroupViewId);
+                TextView parentDesignationViewId = guardianView.findViewById(R.id.parentDesignationViewId);
+                TextView parentEmailViewId = guardianView.findViewById(R.id.parentEmailViewId);
+
+                parentNameViewId.setText(guardians.get(i).getName());
+                parentOccupationViewId.setText(guardians.get(i).getOccupation());
+                parentPhoneNoViewId.setText(guardians.get(i).getMobile());
+                parentAddressViewId.setText(guardians.get(i).getLocation());
+                parentBloodGroupViewId.setText(guardians.get(i).getBlood_group());
+                parentDesignationViewId.setText(guardians.get(i).getDesignation());
+                parentEmailViewId.setText(guardians.get(i).getEmail());
+
+                guardianInfoLayout.addView(guardianView);
+            }
         }
 
     }
