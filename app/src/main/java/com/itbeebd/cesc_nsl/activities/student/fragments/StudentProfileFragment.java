@@ -3,6 +3,8 @@ package com.itbeebd.cesc_nsl.activities.student.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -131,7 +133,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(getActivity(), EditStudentProfileActivity.class);
-        intent.putExtra("student", student);
+       // intent.putExtra("studentId", student.getId());
         getActivity().startActivity(intent);
     }
 
@@ -139,8 +141,12 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     public void onStart() {
         super.onStart();
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if(student != null) setStudentProfileData();
-      //  setStudentProfileData();
     }
 
     private void setStudentProfileData(){

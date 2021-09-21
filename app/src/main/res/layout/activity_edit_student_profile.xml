@@ -58,17 +58,57 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5">
 
+                <View
+                    android:id="@+id/studentProfileBgViewId"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@drawable/round_guardian_info_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/userProfileViewId"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/default_male"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="1dp"
+                    app:civ_shadow_color="@color/white_inactive_2"
+                    app:layout_constraintBottom_toBottomOf="@+id/studentProfileBgViewId"
+                    app:layout_constraintStart_toStartOf="@+id/studentProfileBgViewId"
+                    app:layout_constraintTop_toTopOf="@+id/studentProfileBgViewId" />
+
+                <Button
+                    android:id="@+id/userImageChangeBtnId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Change Image"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/studentProfileBgViewId"
+                    app:layout_constraintEnd_toEndOf="@+id/studentProfileBgViewId"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/userProfileViewId"
+                    app:layout_constraintTop_toTopOf="@+id/studentProfileBgViewId"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/religionTextFieldId"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:hint="Religion"
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/studentProfileBgViewId">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -177,10 +217,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:hint="Gender"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/studentProfileBgViewId">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -291,180 +332,31 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Student parent profile info section -->
-            <TextView
-                android:id="@+id/textView53"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/round_corner_right_side_bg"
-                android:paddingStart="10dp"
-                android:paddingTop="6dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="6dp"
-                android:text="EDIT PARENT INFO"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/speID" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/parentInfoSectionId"
+            <LinearLayout
+                android:id="@+id/guardianInfoEditLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:background="@color/white_inactive_3"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView53">
+                app:layout_constraintTop_toBottomOf="@+id/speID">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/parentNameTextFieldId"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:hint="Name"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/occupationTextFieldId"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="Occupation"
-                    app:layout_constraintEnd_toEndOf="@+id/parentNameTextFieldId"
-                    app:layout_constraintStart_toStartOf="@+id/parentNameTextFieldId"
-                    app:layout_constraintTop_toBottomOf="@+id/parentNameTextFieldId">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="date"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/phoneTextFieldId"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="Phone"
-                    app:layout_constraintEnd_toEndOf="@+id/parentNameTextFieldId"
-                    app:layout_constraintStart_toStartOf="@+id/parentNameTextFieldId"
-                    app:layout_constraintTop_toBottomOf="@+id/occupationTextFieldId">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/addressTextFieldId"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="Address"
-                    app:layout_constraintEnd_toEndOf="@+id/parentNameTextFieldId"
-                    app:layout_constraintStart_toStartOf="@+id/parentNameTextFieldId"
-                    app:layout_constraintTop_toBottomOf="@+id/phoneTextFieldId">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPostalAddress"
-                        android:maxLines="3" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/parentBloodGroupTextFieldId"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:hint="Blood Group"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline3"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/designationTextFieldId"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="Designation"
-                    app:layout_constraintEnd_toEndOf="@+id/parentBloodGroupTextFieldId"
-                    app:layout_constraintStart_toStartOf="@+id/parentBloodGroupTextFieldId"
-                    app:layout_constraintTop_toBottomOf="@+id/parentBloodGroupTextFieldId">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/parentEmailTextFieldId"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="Email"
-                    app:layout_constraintEnd_toEndOf="@+id/parentBloodGroupTextFieldId"
-                    app:layout_constraintStart_toStartOf="@+id/parentBloodGroupTextFieldId"
-                    app:layout_constraintTop_toBottomOf="@+id/designationTextFieldId">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textWebEmailAddress"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline3"
+                <TextView
+                    android:id="@+id/textView53"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.50121653" />
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/round_corner_right_side_bg"
+                    android:paddingStart="10dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="6dp"
+                    android:text="EDIT PARENT INFO"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+            </LinearLayout>
             <Button
                 android:id="@+id/submitChangesBtnId"
                 android:layout_width="match_parent"
@@ -478,7 +370,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/parentInfoSectionId" />
+                app:layout_constraintTop_toBottomOf="@id/guardianInfoEditLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
