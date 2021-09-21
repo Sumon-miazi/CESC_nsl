@@ -144,12 +144,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     }
 
     private void setStudentProfileData(){
-        if(student.getImage() != null){
-              System.out.println(">>>>>> " + ApiUrls.BASE_IMAGE_URL + student.getImage());
-            Glide.with(this)
-                    .load(ApiUrls.BASE_IMAGE_URL + student.getImage())
-                    .into(studentProfileViewId);
-        }
+        setImageInImageView(studentProfileViewId, student.getImage());
     //    System.out.println("++++++ " + String.format("Class: %s", student.getClassName()));
         studentNameViewId.setText(student.getName());
         classNameViewId.setText(String.format("Class: %s", student.getClassName()));
@@ -191,7 +186,10 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
                 View guardianView = LayoutInflater.from(getContext()).inflate(R.layout.single_guardian_view,
                         guardianInfoLayout,false);
 
+
+                ImageView guardianProfileViewId = guardianView.findViewById(R.id.guardianProfileViewId);
                 TextView parentNameViewId = guardianView.findViewById(R.id.parentNameViewId);
+                TextView studentGuardianRelationViewId = guardianView.findViewById(R.id.studentGuardianRelationViewId);
                 TextView parentOccupationViewId = guardianView.findViewById(R.id.parentOccupationViewId);
                 TextView parentPhoneNoViewId = guardianView.findViewById(R.id.parentPhoneNoViewId);
                 TextView parentAddressViewId = guardianView.findViewById(R.id.parentAddressViewId);
@@ -199,7 +197,9 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
                 TextView parentDesignationViewId = guardianView.findViewById(R.id.parentDesignationViewId);
                 TextView parentEmailViewId = guardianView.findViewById(R.id.parentEmailViewId);
 
+                setImageInImageView(guardianProfileViewId, guardians.get(i).getProfileImage());
                 parentNameViewId.setText(guardians.get(i).getName());
+                studentGuardianRelationViewId.setText(guardians.get(i).getRelation());
                 parentOccupationViewId.setText(guardians.get(i).getOccupation());
                 parentPhoneNoViewId.setText(guardians.get(i).getMobile());
                 parentAddressViewId.setText(guardians.get(i).getLocation());
@@ -211,5 +211,14 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
             }
         }
 
+    }
+
+    private void setImageInImageView(ImageView imageView, String url) {
+        if( url != null){
+            System.out.println(">>>>>> " + ApiUrls.BASE_IMAGE_URL + student.getImage());
+            Glide.with(this)
+                    .load(ApiUrls.BASE_IMAGE_URL + url)
+                    .into(imageView);
+        }
     }
 }
