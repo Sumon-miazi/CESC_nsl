@@ -1,18 +1,16 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
-import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
-import com.itbeebd.cesc_nsl.utils.Notification;
 
 import java.util.ArrayList;
 
@@ -26,7 +24,7 @@ public class LessonPlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_plan);
 
-        Toolbar mToolBar = (Toolbar) findViewById(R.id.lessonPlanToolbarId);
+        Toolbar mToolBar =  findViewById(R.id.lessonPlanToolbarId);
         setSupportActionBar(mToolBar);
         getSupportActionBar().setTitle("LESSON PLAN");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

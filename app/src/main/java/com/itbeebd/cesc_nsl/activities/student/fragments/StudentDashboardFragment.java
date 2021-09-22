@@ -1,7 +1,6 @@
 package com.itbeebd.cesc_nsl.activities.student.fragments;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -9,16 +8,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
+import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.student.LessonPlanActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;

@@ -1,4 +1,4 @@
-package com.itbeebd.cesc_nsl.activities.genericClasses;
+package com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses;
 
 import android.view.View;
 

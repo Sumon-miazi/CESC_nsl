@@ -6,12 +6,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.activities.genericClasses.GenericRecyclerAdapter;
-import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
+import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.GenericRecyclerAdapter;
+import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders.LessonPlanViewHolder;
-import com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders.StudentNotificationViewHolder;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
-import com.itbeebd.cesc_nsl.utils.Notification;
 
 public class LessonPlanAdapter  extends GenericRecyclerAdapter<LessonPlan, OnRecyclerObjectClickListener<LessonPlan>, LessonPlanViewHolder> {
 
