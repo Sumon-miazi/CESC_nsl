@@ -1,45 +1,60 @@
 package com.itbeebd.cesc_nsl.utils;
 
-public class Payment {
-    private String accountHead;
-    private String month;
+import java.io.Serializable;
+
+public class Payment implements Serializable {
+    private String transactionID;
+    private String voucher_no;
+    private String date;
+    private String status;
+    private String payment_status;
     private String amount;
-    private String paidAmount;
-    private int waiver;
-    private int dueAmount;
 
-    public Payment(){ }
-
-    public Payment(String accountHead, String month, String amount, String paidAmount, int waiver, int dueAmount) {
-        this.accountHead = accountHead;
-        this.month = month;
-        this.amount = amount;
-        this.paidAmount = paidAmount;
-        this.waiver = waiver;
-        this.dueAmount = dueAmount;
+    public String getTransactionID() {
+        return transactionID;
     }
 
-    public String getAccountHead() {
-        return accountHead;
+    public void setTransactionID(String transactionID) {
+        this.transactionID = transactionID;
     }
 
-    public String getMonth() {
-        return month;
+    public String getVoucher_no() {
+        return voucher_no;
+    }
+
+    public void setVoucher_no(String voucher_no) {
+        this.voucher_no = voucher_no;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPayment_status() {
+        return payment_status;
+    }
+
+    public void setPayment_status(String payment_status) {
+        this.payment_status = payment_status;
     }
 
     public String getAmount() {
         return amount;
     }
 
-    public String getPaidAmount() {
-        return paidAmount;
-    }
-
-    public int getWaiver() {
-        return waiver;
-    }
-
-    public int getDueAmount() {
-        return dueAmount;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 }

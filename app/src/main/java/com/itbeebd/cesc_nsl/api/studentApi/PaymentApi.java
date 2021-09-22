@@ -3,21 +3,25 @@ package com.itbeebd.cesc_nsl.api.studentApi;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.interfaces.DueHistoryResponse;
+import com.itbeebd.cesc_nsl.interfaces.PaymentHistoryResponse;
 import com.itbeebd.cesc_nsl.sugarClass.Guardian;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.sugarClass.Transport;
 import com.itbeebd.cesc_nsl.utils.Due;
 import com.itbeebd.cesc_nsl.utils.DueHistory;
+import com.itbeebd.cesc_nsl.utils.Payment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -106,6 +110,63 @@ public class PaymentApi extends BaseService {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
                 dueHistoryResponse.data(null, t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void getPaymentHistory(String token, PaymentHistoryResponse paymentHistoryResponse){
+
+        Call<ResponseBody> paymentHistory = service.paymentHistory(token);
+        paymentHistory.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                JSONArray jsonArray = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> payment " + response.body());
+                    try {
+                        Gson gson = new Gson();
+                        jsonArray =  new JSONArray(response.body().string());
+                        System.out.println(">>>>>>>>>> payment " + jsonArray);
+
+                        ArrayList<Payment> payments = new ArrayList<>();
+
+                        for(int i = 0 ; i < jsonArray.length(); i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                            Payment payment = new Payment();
+                            payment.setTransactionID(jsonObject.optString("transactionID"));
+                            payment.setVoucher_no(jsonObject.optString("voucher_no"));
+                            payment.setDate(jsonObject.optString("date"));
+                            payment.setStatus(jsonObject.optString("status"));
+                            payment.setPayment_status(jsonObject.optString("payment_status"));
+                            payment.setAmount(jsonObject.optString("amount"));
+
+                            payments.add(payment);
+                        }
+
+                        paymentHistoryResponse.data(payments, "successful");
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> payment catch " + e.fillInStackTrace());
+
+                        paymentHistoryResponse.data(null, e.getLocalizedMessage());
+                    }
+
+
+                }
+                else {
+                    paymentHistoryResponse.data(null, response.message());
+                    System.out.println(">>>>>>>>>> payment " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> payment " + response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println(">>>>>>>>>> payment " + t.getLocalizedMessage());
+                paymentHistoryResponse.data(null, t.getLocalizedMessage());
             }
         });
     }

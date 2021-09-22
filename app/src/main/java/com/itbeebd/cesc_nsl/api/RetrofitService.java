@@ -44,4 +44,9 @@ public interface RetrofitService {
     Call<ResponseBody> dueHistory(
             @Header("Authorization") String authorization
     );
+
+    @GET("auth/paymentHistory")
+    Call<ResponseBody> paymentHistory(
+            @Header("Authorization") String authorization
+    );
 }
