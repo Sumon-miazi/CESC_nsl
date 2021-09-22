@@ -89,7 +89,7 @@ public class PaymentHistoryActivity extends AppCompatActivity implements OnRecyc
         WebView webView = dialog.findViewById(R.id.webview);
 
 
-        String url = ApiUrls.BASE_WEB_URL + item.getVoucher_no();
+        String url = ApiUrls.INVOICE_URL + item.getVoucher_no();
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setUseWideViewPort(true);

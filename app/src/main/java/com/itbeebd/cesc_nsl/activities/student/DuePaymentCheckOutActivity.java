@@ -1,22 +1,16 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
-import com.itbeebd.cesc_nsl.utils.Payment;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-public class PaymentInvoiceActivity extends AppCompatActivity {
+public class DuePaymentCheckOutActivity extends AppCompatActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -29,8 +23,8 @@ public class PaymentInvoiceActivity extends AppCompatActivity {
      //   WebSettings webSettings = webView.getSettings();
       //  webSettings.setJavaScriptEnabled(true);
 
-        if(getIntent().hasExtra("paymentObj")){
-            String url = ApiUrls.BASE_WEB_URL + ((Payment)getIntent().getSerializableExtra("paymentObj")).getVoucher_no();
+        if(getIntent().hasExtra("invoiceNo")){
+            String url = ApiUrls.INVOICE_URL + getIntent().getStringExtra("invoiceNo");
 
 
             webView.getSettings().setJavaScriptEnabled(true);

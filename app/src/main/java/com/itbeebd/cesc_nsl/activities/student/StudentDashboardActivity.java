@@ -1,13 +1,13 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
@@ -42,7 +42,11 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         // get fragment manager
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentContainerId, dashboardFragment);
+        if (fragmentManager.getFragments().size() == 0) {
+            fragmentTransaction.add(R.id.fragmentContainerId, dashboardFragment);
+        } else {
+            fragmentTransaction.replace(R.id.fragmentContainerId, dashboardFragment);
+        }
         fragmentTransaction.commit();
 
     }

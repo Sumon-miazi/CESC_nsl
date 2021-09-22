@@ -22,7 +22,7 @@
         android:theme="@style/Theme.CESC_nsl"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".activities.student.PaymentInvoiceActivity"></activity>
+        <activity android:name=".activities.student.DuePaymentCheckOutActivity"></activity>
         <activity android:name=".activities.student.EditStudentProfileActivity" />
         <activity android:name=".activities.student.PaymentHistoryActivity" />
         <activity android:name=".activities.student.LessonPlanActivity" />

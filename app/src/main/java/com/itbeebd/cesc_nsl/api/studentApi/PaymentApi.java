@@ -3,16 +3,11 @@ package com.itbeebd.cesc_nsl.api.studentApi;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
-import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.interfaces.DueHistoryResponse;
 import com.itbeebd.cesc_nsl.interfaces.PaymentHistoryResponse;
-import com.itbeebd.cesc_nsl.sugarClass.Guardian;
-import com.itbeebd.cesc_nsl.sugarClass.Student;
-import com.itbeebd.cesc_nsl.sugarClass.Transport;
 import com.itbeebd.cesc_nsl.utils.Due;
 import com.itbeebd.cesc_nsl.utils.DueHistory;
 import com.itbeebd.cesc_nsl.utils.Payment;
@@ -21,7 +16,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -167,6 +161,45 @@ public class PaymentApi extends BaseService {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println(">>>>>>>>>> payment " + t.getLocalizedMessage());
                 paymentHistoryResponse.data(null, t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void getInvoiceForCheckout(String token, BooleanResponse booleanResponse){
+
+        Call<ResponseBody> invoiceForCheckout = service.invoiceForCheckout(token);
+        invoiceForCheckout.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> payment " + response.body());
+                    try {
+
+                        JSONObject jsonObject =  new JSONObject(response.body().string());
+
+                        booleanResponse.response(true, jsonObject.optString("voucher_no"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> payment catch " + e.fillInStackTrace());
+
+                        booleanResponse.response(false, e.getLocalizedMessage());
+                    }
+
+
+                }
+                else {
+                    booleanResponse.response(false,  response.message());
+                    System.out.println(">>>>>>>>>> payment " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> payment " + response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println(">>>>>>>>>> payment " + t.getLocalizedMessage());
+                booleanResponse.response(false,  t.getLocalizedMessage());
             }
         });
     }
