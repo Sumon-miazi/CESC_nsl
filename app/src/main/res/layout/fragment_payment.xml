@@ -48,18 +48,17 @@
                         android:layout_height="20dp"
                         android:src="@drawable/ic_taka"
                         android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView"
-                        app:layout_constraintEnd_toStartOf="@+id/textView"
+                        app:layout_constraintBottom_toBottomOf="@+id/totolDueAmountHintId"
+                        app:layout_constraintEnd_toStartOf="@+id/totolDueAmountHintId"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView" />
+                        app:layout_constraintTop_toTopOf="@+id/totolDueAmountHintId" />
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/totolDueAmountHintId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1000"
                         android:textColor="@color/black"
                         android:textSize="30sp"
                         android:textStyle="bold"
@@ -77,14 +76,14 @@
                         android:text="Total Due Amount"
                         android:textColor="@color/black"
                         android:textSize="10sp"
-                        app:layout_constraintBottom_toTopOf="@+id/button"
+                        app:layout_constraintBottom_toTopOf="@+id/checkOutBtn"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView" />
+                        app:layout_constraintTop_toBottomOf="@+id/totolDueAmountHintId" />
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/checkOutBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white_green"

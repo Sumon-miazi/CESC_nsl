@@ -26,13 +26,13 @@ public class BaseService  {
 
     protected final RetrofitService service = retrofit.create(RetrofitService.class);
 
-    protected MultipartBody.Part getImageFile(String imageFilePath){
+    protected MultipartBody.Part getImageFile(String imageFilePath, String name){
         if(imageFilePath == null || imageFilePath.isEmpty())
             return null;
         File file = new File(imageFilePath); // initialize file here
         //   System.out.println(">>>>>>>>> file " + file.toString());
         String imageName = imageFilePath.substring(imageFilePath.lastIndexOf("/")+1);
-        return MultipartBody.Part.createFormData("image", imageName, okhttp3.RequestBody.create(MediaType.parse("image/*"), file));
+        return MultipartBody.Part.createFormData("name", imageName, okhttp3.RequestBody.create(MediaType.parse("image/*"), file));
     }
 
 }

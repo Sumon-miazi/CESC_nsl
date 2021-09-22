@@ -9,9 +9,10 @@ import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.GenericRecyclerAdapter;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders.DuePaymentViewHolder;
+import com.itbeebd.cesc_nsl.utils.DueHistory;
 import com.itbeebd.cesc_nsl.utils.Payment;
 
-public class DuePaymentAdapter extends GenericRecyclerAdapter<Payment, OnRecyclerObjectClickListener<Payment>, DuePaymentViewHolder> {
+public class DuePaymentAdapter extends GenericRecyclerAdapter<DueHistory, OnRecyclerObjectClickListener<DueHistory>, DuePaymentViewHolder> {
 
     private Context context;
 

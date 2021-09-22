@@ -2,7 +2,7 @@ package com.itbeebd.cesc_nsl.utils.dummy;
 
 public class StudentDummy {
 
-    private String image;
+    private String imageUrl;
     private String religion;
     private String blood;
     private String date_of_birth;
@@ -17,8 +17,8 @@ public class StudentDummy {
     private String identification_mark;
 
     public StudentDummy(){}
-    public StudentDummy(String image, String religion, String blood, String date_of_birth, String gender, String present_address, String permanent_address, String email, String mobile, String nationality, String previous_school, String helth_problem, String identification_mark) {
-        this.image = image;
+    public StudentDummy(String imageUrl, String religion, String blood, String date_of_birth, String gender, String present_address, String permanent_address, String email, String mobile, String nationality, String previous_school, String helth_problem, String identification_mark) {
+        this.imageUrl = imageUrl;
         this.religion = religion;
         this.blood = blood;
         this.date_of_birth = date_of_birth;
@@ -33,8 +33,8 @@ public class StudentDummy {
         this.identification_mark = identification_mark;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getReligion() {

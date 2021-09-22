@@ -2,21 +2,14 @@ package com.itbeebd.cesc_nsl.api.studentApi;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
-import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
-import com.itbeebd.cesc_nsl.sugarClass.Guardian;
-import com.itbeebd.cesc_nsl.sugarClass.Student;
-import com.itbeebd.cesc_nsl.sugarClass.Transport;
 import com.itbeebd.cesc_nsl.utils.dummy.GuardianDummy;
 import com.itbeebd.cesc_nsl.utils.dummy.StudentDummy;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -44,9 +37,9 @@ public class ProfileEditApi extends BaseService {
 
         Call<ResponseBody> editProfile = service.editStudentProfile(token,
                 studentObjectMap,
-                getImageFile(studentDummy.getImage()),
-                getImageFile(motherDummy.getImageUrl()),
-                getImageFile(fatherDummy.getImageUrl()));
+                getImageFile(studentDummy.getImageUrl(), "student_image"),
+                getImageFile(motherDummy.getImageUrl(), "mother_image"),
+                getImageFile(fatherDummy.getImageUrl(), "father_image"));
         editProfile.enqueue(new Callback<ResponseBody>(){
 
             @Override
@@ -79,7 +72,7 @@ public class ProfileEditApi extends BaseService {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println(">>>>>>>>>> onFailure " + t.getLocalizedMessage());
+                System.out.println(">>>>>>>>>> onFailure2 " + t.getLocalizedMessage());
             }
         });
     }

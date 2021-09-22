@@ -39,4 +39,9 @@ public interface RetrofitService {
             @Part MultipartBody.Part mother_image,
             @Part MultipartBody.Part father_image
     );
+
+    @GET("auth/dueHistory")
+    Call<ResponseBody> dueHistory(
+            @Header("Authorization") String authorization
+    );
 }
