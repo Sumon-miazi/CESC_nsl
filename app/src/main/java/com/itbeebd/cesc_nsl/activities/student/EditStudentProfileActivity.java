@@ -23,9 +23,14 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.textfield.TextInputLayout;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
+import com.itbeebd.cesc_nsl.api.studentApi.ProfileEditApi;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
+import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.sugarClass.Guardian;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
+import com.itbeebd.cesc_nsl.utils.dummy.GuardianDummy;
+import com.itbeebd.cesc_nsl.utils.dummy.StudentDummy;
 import com.nguyenhoanglam.imagepicker.model.Config;
 import com.nguyenhoanglam.imagepicker.model.Image;
 import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker;
@@ -167,10 +172,13 @@ public class EditStudentProfileActivity extends AppCompatActivity implements Vie
             guardianInfoEditLayout.addView(guardianView);
 
             Map<String, Object> guardianInfo = new HashMap<>();
+            guardianInfo.put("id", guardians.get(i).getId());
+            guardianInfo.put("student_id", student.getId());
             guardianInfo.put("imageView", guardianProfileViewId);
             guardianInfo.put("imageUrl", guardians.get(i).getProfileImage());
             guardianInfo.put("imageBtn", parentImageChangeBtnId);
             guardianInfo.put("name", parentNameTextFieldId);
+            guardianInfo.put("relation", guardians.get(i).getRelation());
             guardianInfo.put("occupation", occupationTextFieldId);
             guardianInfo.put("phone", phoneTextFieldId);
             guardianInfo.put("address", addressTextFieldId);
@@ -224,6 +232,7 @@ public class EditStudentProfileActivity extends AppCompatActivity implements Vie
             imageUrl = image.getPath();
 
             if(isUserImage){
+                student.setImage(imageUrl);
                 setProfileImage(userProfileViewId, image);
             }
             else {
@@ -245,8 +254,8 @@ public class EditStudentProfileActivity extends AppCompatActivity implements Vie
             Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, String.valueOf(image.getId()));
             Glide.with(this)
                     .load(uri)
-                    .apply(RequestOptions.skipMemoryCacheOf(true))
-                    .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                  //  .apply(RequestOptions.skipMemoryCacheOf(true))
+                   // .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                     .dontAnimate()
                     .centerCrop()
                     .into(imageView);
@@ -261,21 +270,117 @@ public class EditStudentProfileActivity extends AppCompatActivity implements Vie
             //  System.out.println(">>>>>> " + ApiUrls.BASE_IMAGE_URL + student.getImage());
             Glide.with(this)
                     .load(url)
-                    .apply(RequestOptions.skipMemoryCacheOf(true))
-                    .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                   // .apply(RequestOptions.skipMemoryCacheOf(true))
+                   // .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                     .dontAnimate()
                     .centerCrop()
                     .into(imageView);
         }
     }
 
+/*
+    private void getAllEditedData(){
+        Map<String, Map<String, String>> data = new HashMap<>();
+
+        Map<String, String> studentDetails = new HashMap<>();
+        studentDetails.put("image", student.getImage());
+        studentDetails.put("religion", religionTextFieldId.getEditText().getText().toString());
+        studentDetails.put("blood", bloodGroupTextFieldId.getEditText().getText().toString());
+        studentDetails.put("date_of_birth", birthDayTextFieldId.getEditText().getText().toString());
+        studentDetails.put("gender", genderTextFieldId.getEditText().getText().toString());
+        studentDetails.put("present_address", presentAddressTextFieldId.getEditText().getText().toString());
+        studentDetails.put("permanent_address", permanentAddressTextFieldId.getEditText().getText().toString());
+        studentDetails.put("email", emailTextFieldId.getEditText().getText().toString());
+        studentDetails.put("mobile", studentPhoneTextFieldId.getEditText().getText().toString());
+        studentDetails.put("nationality", nationalityTextFieldId.getEditText().getText().toString());
+        studentDetails.put("previous_school", previousSchoolTextFieldId.getEditText().getText().toString());
+        studentDetails.put("helth_problem", healthProblemTextFieldId.getEditText().getText().toString());
+        studentDetails.put("identification_mark", idMarkTextFieldId.getEditText().getText().toString());
+
+        data.put("student", studentDetails);
+        System.out.println("????????? " + studentDetails.get("identification_mark").toString());
+     //   Map<String, Map<String, Object>> guardianDetailsList = new HashMap<>();
+
+        for(int i = 0; i < guardianInfoList.size(); i++){
+
+            Map<String, String> guardianDetail = new HashMap<>();
+
+            guardianDetail.put("relation", guardianInfoList.get(i).get("relation").toString());
+            guardianDetail.put("name",((TextInputLayout)guardianInfoList.get(i).get("name")).getEditText().getText().toString());
+            guardianDetail.put("occupation",((TextInputLayout)guardianInfoList.get(i).get("occupation")).getEditText().getText().toString());
+            guardianDetail.put("phone",((TextInputLayout)guardianInfoList.get(i).get("phone")).getEditText().getText().toString());
+            guardianDetail.put("address",((TextInputLayout)guardianInfoList.get(i).get("address")).getEditText().getText().toString());
+            guardianDetail.put("blood_group",((TextInputLayout)guardianInfoList.get(i).get("bloodGroup")).getEditText().getText().toString());
+            guardianDetail.put("designation",((TextInputLayout)guardianInfoList.get(i).get("designation")).getEditText().getText().toString());
+            guardianDetail.put("organization",((TextInputLayout)guardianInfoList.get(i).get("organization")).getEditText().getText().toString());
+            guardianDetail.put("email",((TextInputLayout)guardianInfoList.get(i).get("email")).getEditText().getText().toString());
+            guardianDetail.put("imageUrl", guardianInfoList.get(i).get("imageUrl").toString());
+
+          //  guardianDetailsList.put(guardianInfoList.get(i).get("relation").toString(), guardianDetail);
+            data.put(guardianInfoList.get(i).get("relation").toString(), guardianDetail);
+//            System.out.println("&&&&& " + ((TextInputLayout)guardianInfoList.get(i).get("name")).getEditText().getText());
+//            System.out.println("&&&&& " + ((TextInputLayout)guardianInfoList.get(i).get("occupation")).getEditText().getText());
+        }
+
+        callEditProfileApi(data);
+    }
+
+ */
 
     private void getAllEditedData(){
 
+        Map<String, Object> data = new HashMap<>();
+
+        StudentDummy studentDummy = new StudentDummy(
+                student.getImage(),
+                religionTextFieldId.getEditText().getText().toString(),
+                bloodGroupTextFieldId.getEditText().getText().toString(),
+                birthDayTextFieldId.getEditText().getText().toString(),
+                genderTextFieldId.getEditText().getText().toString(),
+                presentAddressTextFieldId.getEditText().getText().toString(),
+                permanentAddressTextFieldId.getEditText().getText().toString(),
+                emailTextFieldId.getEditText().getText().toString(),
+                studentPhoneTextFieldId.getEditText().getText().toString(),
+                nationalityTextFieldId.getEditText().getText().toString(),
+                previousSchoolTextFieldId.getEditText().getText().toString(),
+                healthProblemTextFieldId.getEditText().getText().toString(),
+                idMarkTextFieldId.getEditText().getText().toString()
+
+        );
+
+        data.put("student", studentDummy);
+
+
         for(int i = 0; i < guardianInfoList.size(); i++){
-            System.out.println("&&&&& " + ((TextInputLayout)guardianInfoList.get(i).get("name")).getEditText().getText());
-            System.out.println("&&&&& " + ((TextInputLayout)guardianInfoList.get(i).get("occupation")).getEditText().getText());
+
+            GuardianDummy guardianDummy = new GuardianDummy(
+                    Integer.parseInt(guardianInfoList.get(i).get("student_id").toString()),
+                    Integer.parseInt(guardianInfoList.get(i).get("id").toString()),
+                    guardianInfoList.get(i).get("relation").toString(),
+                    ((TextInputLayout)guardianInfoList.get(i).get("name")).getEditText().getText().toString(),
+                    ((TextInputLayout)guardianInfoList.get(i).get("occupation")).getEditText().getText().toString(),
+                    ((TextInputLayout)guardianInfoList.get(i).get("phone")).getEditText().getText().toString(),
+                    ((TextInputLayout)guardianInfoList.get(i).get("address")).getEditText().getText().toString(),
+                    ((TextInputLayout)guardianInfoList.get(i).get("bloodGroup")).getEditText().getText().toString(),
+                    ((TextInputLayout)guardianInfoList.get(i).get("designation")).getEditText().getText().toString(),
+                    ((TextInputLayout)guardianInfoList.get(i).get("organization")).getEditText().getText().toString(),
+                    ((TextInputLayout)guardianInfoList.get(i).get("email")).getEditText().getText().toString(),
+                    guardianInfoList.get(i).get("imageUrl").toString()
+            );
+
+            data.put(guardianInfoList.get(i).get("relation").toString(), guardianDummy);
         }
+
+        callEditProfileApi(data);
+    }
+
+    //   private void callEditProfileApi(Map<String, Object> studentDetails, Map<String, Map<String, Object>> guardianDetailsList) {
+    private void callEditProfileApi(Map<String, Object> data) {
+        new ProfileEditApi(this).updatedData(data,
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                (isSuccess, message) -> {
+          //  System.out.println(">>>>>>>.. " + isSuccess + " " + message);
+        });
     }
 
     @Override

@@ -29,4 +29,14 @@ public class CustomSharedPref {
         editor.putString("UserId", flag);
         editor.apply();
     }
+
+    public String getAuthToken() {
+        return sharedPreferences.getString("AuthToken", "");
+    }
+
+    public void setAuthToken(String flag) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("AuthToken", flag);
+        editor.apply();
+    }
 }

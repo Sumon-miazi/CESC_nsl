@@ -34,6 +34,7 @@ public class LoginApi extends BaseService {
     }
 
     public void studentLogin(String studentId, String password, String fcm_token, BooleanResponse booleanResponse){
+
         Call<ResponseBody> studentLogin = service.studentLogin(studentId, password, fcm_token);
         studentLogin.enqueue(new Callback<ResponseBody>(){
 
@@ -41,6 +42,7 @@ public class LoginApi extends BaseService {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 JSONObject jsonObject = null;
                 if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
                     try {
                         Gson gson = new Gson();
                         jsonObject =  new JSONObject(response.body().string());
@@ -68,12 +70,14 @@ public class LoginApi extends BaseService {
                             }
                         }
 
+                        CustomSharedPref.getInstance(context).setAuthToken("Bearer " + jsonObject.optString("token"));
                         CustomSharedPref.getInstance(context).setUserId(studentId);
 
                         booleanResponse.response(jsonObject.optBoolean("issuccessful"), "Login");
 
                     } catch (Exception e) {
                         e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
 
                         booleanResponse.response(false, e.getLocalizedMessage());
                     }
