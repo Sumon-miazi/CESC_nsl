@@ -45,4 +45,21 @@
     <color name="orange_bg_light">#fff3e0</color>
     <color name="grey_bg_light">#fafafa</color>
 
+
+    <color name="quiz_bg">#65F6FF</color>
+    <color name="quiz_text">#169097</color>
+    <color name="quiz_number">#0A4D51</color>
+
+    <color name="quiz_archive_bg">#65AAFF</color>
+    <color name="quiz_archive_text">#166FAA</color>
+    <color name="quiz_archive_number">#0A3251</color>
+
+    <color name="lesson_bg">#FFDE65</color>
+    <color name="lesson_text">#977B16</color>
+    <color name="lesson_number">#51420A</color>
+
+    <color name="online_color_bg">#BFFD98</color>
+    <color name="online_color_text">#439716</color>
+    <color name="online_color_number">#0F510A</color>
+
 </resources>

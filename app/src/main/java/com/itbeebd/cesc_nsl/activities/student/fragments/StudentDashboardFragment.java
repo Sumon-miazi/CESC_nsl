@@ -2,24 +2,22 @@ package com.itbeebd.cesc_nsl.activities.student.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.student.LessonPlanActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
+import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
 import com.itbeebd.cesc_nsl.utils.Notification;
 
@@ -29,24 +27,16 @@ import java.util.ArrayList;
 public class StudentDashboardFragment extends Fragment implements OnRecyclerObjectClickListener<Notification>, View.OnClickListener {
 
     private CardView quizBlock;
-    private ImageView quizBlockImageView;
     private TextView quizBlockNumber;
-    private TextView quizBlockName;
 
     private CardView quizArchiveBlock;
-    private ImageView quizArchiveBlockImageView;
     private TextView quizArchiveBlockNumber;
-    private TextView quizArchiveBlockName;
 
     private CardView lessonBlock;
-    private ImageView lessonBlockImageView;
     private TextView lessonBlockNumber;
-    private TextView lessonBlockName;
 
     private CardView onlineClassBlock;
-    private ImageView onlineClassBlockImageView;
     private TextView onlineClassBlockNumber;
-    private TextView onlineClassBlockName;
 
     private RecyclerView studentNotificationRecyclerView;
     private TextView notificationHint;
@@ -81,6 +71,19 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
 
+        quizBlock = view.findViewById(R.id.quizCardId);
+        quizBlockNumber = view.findViewById(R.id.quizCardHeaderSectionId).findViewById(R.id.headerSectionId);
+
+        quizArchiveBlock = view.findViewById(R.id.quizArchiveCardId);
+        quizArchiveBlockNumber = view.findViewById(R.id.quizArchiveHeaderSectionId);
+
+        lessonBlock = view.findViewById(R.id.lessonCardId).findViewById(R.id.cardViewId);
+        lessonBlockNumber = view.findViewById(R.id.lessonHeaderSectionId).findViewById(R.id.headerSectionId);
+
+        onlineClassBlock = view.findViewById(R.id.onlineClassCardId).findViewById(R.id.cardViewId);
+        onlineClassBlockNumber = view.findViewById(R.id.onlineClassHeaderSectionId).findViewById(R.id.headerSectionId);
+
+
         studentNotificationRecyclerView = view.findViewById(R.id.notificationBlockId).findViewById(R.id.studentNotificationRecyclerViewId);
         notificationHint = view.findViewById(R.id.notificationBlockId).findViewById(R.id.notificationHintId);
         notificationSeeAll = view.findViewById(R.id.notificationBlockId).findViewById(R.id.notificationSeeAllId);
@@ -92,12 +95,15 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlanSeeAll = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanSeeAllId);
         lessonPlanSeeAll.setVisibility(View.VISIBLE);
 
+        quizBlock.setOnClickListener(this::gotoQuizView);
+        quizArchiveBlock.setOnClickListener(this::gotoQuizArchiveView);
+        lessonBlock.setOnClickListener(this::gotoLessonView);
+        onlineClassBlock.setOnClickListener(this::gotoOnlineView);
 
         notificationSeeAll.setOnClickListener(this);
         lessonPlanSeeAll.setOnClickListener(this);
 
-        setDashboardComponent(view);
-
+        setDashboardComponentValues();
         setNotificationAdapter();
         setLessonPlanAdapter();
 
@@ -105,42 +111,16 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
 
-    private void setDashboardComponent(View view) {
-        quizBlock = view.findViewById(R.id.quizBlockId).findViewById(R.id.cardViewId);
-        quizBlockImageView = view.findViewById(R.id.quizBlockId).findViewById(R.id.componentImageView);
-        quizBlockNumber = view.findViewById(R.id.quizBlockId).findViewById(R.id.headerSectionId);
-        quizBlockName = view.findViewById(R.id.quizBlockId).findViewById(R.id.headerSectionNameId);
-
-        quizArchiveBlock = view.findViewById(R.id.quizArchiveBlockId).findViewById(R.id.cardViewId);
-        quizArchiveBlockImageView = view.findViewById(R.id.quizArchiveBlockId).findViewById(R.id.componentImageView);
-        quizArchiveBlockNumber = view.findViewById(R.id.quizArchiveBlockId).findViewById(R.id.headerSectionId);
-        quizArchiveBlockName = view.findViewById(R.id.quizArchiveBlockId).findViewById(R.id.headerSectionNameId);
-
-        lessonBlock = view.findViewById(R.id.lessonPlanBlockId).findViewById(R.id.cardViewId);
-        lessonBlockImageView = view.findViewById(R.id.lessonPlanBlockId).findViewById(R.id.componentImageView);
-        lessonBlockNumber = view.findViewById(R.id.lessonPlanBlockId).findViewById(R.id.headerSectionId);
-        lessonBlockName = view.findViewById(R.id.lessonPlanBlockId).findViewById(R.id.headerSectionNameId);
-
-        onlineClassBlock = view.findViewById(R.id.onlineClassBlockId).findViewById(R.id.cardViewId);
-        onlineClassBlockImageView = view.findViewById(R.id.onlineClassBlockId).findViewById(R.id.componentImageView);
-        onlineClassBlockNumber = view.findViewById(R.id.onlineClassBlockId).findViewById(R.id.headerSectionId);
-        onlineClassBlockName = view.findViewById(R.id.onlineClassBlockId).findViewById(R.id.headerSectionNameId);
-
-        setDashboardComponentValues();
-    }
-
     private void setDashboardComponentValues() {
+
         quizBlockNumber.setText("100");
-        quizBlockName.setText("Quiz");
 
         quizArchiveBlockNumber.setText("40");
-        quizArchiveBlockName.setText("Quiz Archive");
 
         lessonBlockNumber.setText("70");
-        lessonBlockName.setText("Lesson Plan");
 
         onlineClassBlockNumber.setText("10");
-        onlineClassBlockName.setText("Online Class");
+
     }
 
 
@@ -201,4 +181,19 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         }
         getActivity().startActivity(intent);
     }
+
+
+    private void gotoQuizView(View view){
+
+    }
+
+    private void gotoOnlineView(View view) {
+    }
+
+    private void gotoLessonView(View view) {
+    }
+
+    private void gotoQuizArchiveView(View view) {
+    }
+
 }
