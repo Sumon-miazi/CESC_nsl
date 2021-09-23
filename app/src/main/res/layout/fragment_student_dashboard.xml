@@ -48,9 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                android:text="23 September, 2021"
                 android:textColor="@color/white_inactive"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

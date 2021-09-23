@@ -63,4 +63,8 @@
     <color name="online_color_text">#439716</color>
     <color name="online_color_number">#0F510A</color>
 
+    <color name="cell_background_color">#ffffff</color>
+    <color name="header_line_color">#0a0a0a</color>
+    <color name="table_view_default_text_color">#0a0a0a</color>
+
 </resources>

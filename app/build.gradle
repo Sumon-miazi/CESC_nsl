@@ -68,4 +68,8 @@ dependencies {
 
     implementation 'com.evrencoskun.library:tableview:0.8.9.4'
 
+    implementation 'com.github.sidhuparas:SimpleDate:2.1.0'
+
+    implementation "com.github.skydoves:powerspinner:1.1.9"
+
 }

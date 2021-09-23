@@ -1,66 +1,89 @@
 package com.itbeebd.cesc_nsl.activities.student.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.itbeebd.cesc_nsl.R;
+import androidx.fragment.app.Fragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ResultBoardFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.evrencoskun.tableview.TableView;
+import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.activities.student.adapters.MyTableViewAdapter;
+import com.itbeebd.cesc_nsl.utils.tableDataObj.Cell;
+import com.itbeebd.cesc_nsl.utils.tableDataObj.ColumnHeader;
+import com.itbeebd.cesc_nsl.utils.tableDataObj.RowHeader;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class ResultBoardFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private List<RowHeader> mRowHeaderList;
+    private List<ColumnHeader> mColumnHeaderList;
+    private List<List<Cell>> mCellList;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private TableView tableView;
 
     public ResultBoardFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ResultBoardFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ResultBoardFragment newInstance(String param1, String param2) {
-        ResultBoardFragment fragment = new ResultBoardFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        mRowHeaderList = new ArrayList<>();
+        mColumnHeaderList = new ArrayList<>();
+        mCellList = new ArrayList<>();
+
+        mRowHeaderList.add(new RowHeader("test"));
+
+        mColumnHeaderList.add(new ColumnHeader("Full Mark"));
+        mColumnHeaderList.add(new ColumnHeader("Sub Mark"));
+        mColumnHeaderList.add(new ColumnHeader("Obj Mark"));
+        mColumnHeaderList.add(new ColumnHeader("Prac Mark"));
+        mColumnHeaderList.add(new ColumnHeader("CT Mark"));
+        mColumnHeaderList.add(new ColumnHeader("Total"));
+        mColumnHeaderList.add(new ColumnHeader("CGP"));
+        mColumnHeaderList.add(new ColumnHeader("Grade"));
+
+        List<Cell> cells = new ArrayList<>();
+        cells.add(new Cell("123"));
+        cells.add(new Cell("433"));
+        cells.add(new Cell("433"));
+        cells.add(new Cell("433"));
+        cells.add(new Cell("433"));
+        cells.add(new Cell("433"));
+        cells.add(new Cell("433"));
+        cells.add(new Cell("433"));
+        mCellList.add(cells);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result_board, container, false);
+        View view = inflater.inflate(R.layout.fragment_result_board, container, false);
+        tableView = view.findViewById(R.id.table_view_id);
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Create our custom TableView Adapter
+        MyTableViewAdapter adapter = new MyTableViewAdapter();
+
+        // Set this adapter to the our TableView
+        tableView.setAdapter(adapter);
+
+        // Let's set datas of the TableView on the Adapter
+        adapter.setAllItems(mColumnHeaderList, mRowHeaderList, mCellList);
+
     }
 }

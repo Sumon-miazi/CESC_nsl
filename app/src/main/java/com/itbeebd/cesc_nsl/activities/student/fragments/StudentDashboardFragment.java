@@ -24,10 +24,13 @@ import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapt
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
+import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
 import com.itbeebd.cesc_nsl.utils.Notification;
+import com.parassidhu.simpledate.SimpleDateKt;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class StudentDashboardFragment extends Fragment implements OnRecyclerObjectClickListener<Notification>, View.OnClickListener {
@@ -57,6 +60,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private ArrayList<LessonPlan> lessonPlans;
 
     private ImageView studentProfileViewId;
+    private TextView userNameViewId;
+    private TextView todayDateViewId;
 
     public StudentDashboardFragment() {
         // Required empty public constructor
@@ -80,6 +85,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
 
         studentProfileViewId = view.findViewById(R.id.studentProfileViewId);
+        userNameViewId = view.findViewById(R.id.userNameViewId);
+        todayDateViewId = view.findViewById(R.id.todayDateViewId);
 
         quizBlock = view.findViewById(R.id.quizCardId);
         quizBlockNumber = view.findViewById(R.id.quizCardHeaderSectionId);
@@ -124,7 +131,13 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String imageUrl = new StudentDao().getStudent(getContext()).getImage();
+        Student stdObj = new StudentDao().getStudent(getContext());
+        String imageUrl = stdObj.getImage();
+
+        Date date = new Date();
+        todayDateViewId.setText(SimpleDateKt.toDateEMY(date));
+
+        userNameViewId.setText(stdObj.getName().substring(stdObj.getName().lastIndexOf(" ")+1));
 
         if( imageUrl != null){
             Glide.with(this)
