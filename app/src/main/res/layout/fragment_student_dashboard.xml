@@ -18,7 +18,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/quizCardId"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/quiz_bg"
                 android:clickable="true"
@@ -87,7 +87,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/quizArchiveCardId"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/quiz_archive_bg"
                 android:clickable="true"
@@ -155,7 +155,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/lessonCardId"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/lesson_bg"
                 android:clickable="true"
@@ -223,7 +223,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/onlineClassCardId"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/online_color_bg"
                 android:clickable="true"

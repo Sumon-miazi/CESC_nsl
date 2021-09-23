@@ -72,16 +72,16 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
 
         quizBlock = view.findViewById(R.id.quizCardId);
-        quizBlockNumber = view.findViewById(R.id.quizCardHeaderSectionId).findViewById(R.id.headerSectionId);
+        quizBlockNumber = view.findViewById(R.id.quizCardHeaderSectionId);
 
         quizArchiveBlock = view.findViewById(R.id.quizArchiveCardId);
         quizArchiveBlockNumber = view.findViewById(R.id.quizArchiveHeaderSectionId);
 
-        lessonBlock = view.findViewById(R.id.lessonCardId).findViewById(R.id.cardViewId);
-        lessonBlockNumber = view.findViewById(R.id.lessonHeaderSectionId).findViewById(R.id.headerSectionId);
+        lessonBlock = view.findViewById(R.id.lessonCardId);
+        lessonBlockNumber = view.findViewById(R.id.lessonHeaderSectionId);
 
-        onlineClassBlock = view.findViewById(R.id.onlineClassCardId).findViewById(R.id.cardViewId);
-        onlineClassBlockNumber = view.findViewById(R.id.onlineClassHeaderSectionId).findViewById(R.id.headerSectionId);
+        onlineClassBlock = view.findViewById(R.id.onlineClassCardId);
+        onlineClassBlockNumber = view.findViewById(R.id.onlineClassHeaderSectionId);
 
 
         studentNotificationRecyclerView = view.findViewById(R.id.notificationBlockId).findViewById(R.id.studentNotificationRecyclerViewId);
@@ -184,16 +184,19 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
 
     private void gotoQuizView(View view){
-
+        System.out.println(">>>>>. " + view.getId());
     }
 
     private void gotoOnlineView(View view) {
+        System.out.println(">>>>>. " + view.getId());
     }
 
     private void gotoLessonView(View view) {
+        System.out.println(">>>>>. " + view.getId());
     }
 
     private void gotoQuizArchiveView(View view) {
+        System.out.println(">>>>>. " + view.getId());
     }
 
 }
