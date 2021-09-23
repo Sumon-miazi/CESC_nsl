@@ -40,15 +40,15 @@
             app:bt_title="@string/home" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/l_item_search"
+            android:id="@+id/l_student_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bt_badgeBackgroundColor="@color/green_active"
             app:bt_colorActive="@color/blue_active"
             app:bt_colorInactive="@color/blue_inactive"
-            app:bt_icon="@drawable/ic_search"
+            app:bt_icon="@drawable/ic_baseline_leaderboard_24"
             app:bt_shape="@drawable/transition_background_drawable_search"
-            app:bt_title="@string/search" />
+            app:bt_title="@string/result" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/l_item_profile_list"

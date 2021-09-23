@@ -13,6 +13,7 @@ import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.fragments.PaymentFragment;
+import com.itbeebd.cesc_nsl.activities.student.fragments.ResultBoardFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.StudentDashboardFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.StudentProfileFragment;
 
@@ -24,6 +25,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
     private StudentDashboardFragment dashboardFragment;
     private StudentProfileFragment profileFragment;
     private PaymentFragment paymentFragment;
+    private ResultBoardFragment resultBoardFragment;
     private long time;
 
     @Override
@@ -34,9 +36,10 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         dashboardFragment = new StudentDashboardFragment();
         profileFragment = new StudentProfileFragment();
         paymentFragment = new PaymentFragment();
+        resultBoardFragment = new ResultBoardFragment();
 
         navigationLinearView = findViewById(R.id.bottom_navigation_view_linear);
-        navigationLinearView.setCurrentActiveItem(1);
+        navigationLinearView.setCurrentActiveItem(0);
         navigationLinearView.setNavigationChangeListener(this);
 
         // get fragment manager
@@ -53,8 +56,12 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
 
     @Override
     public void onNavigationChanged(View view, int position) {
-        if(position == 1){
+        System.out.println(">>>>>.. position " + position);
+        if(position == 0){
             changeFragmentInDashBoard(dashboardFragment);
+        }
+        else if (position == 1){
+            changeFragmentInDashBoard(resultBoardFragment);
         }
         else if (position == 3){
             changeFragmentInDashBoard(paymentFragment);
