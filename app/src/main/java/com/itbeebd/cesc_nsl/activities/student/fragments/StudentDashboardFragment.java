@@ -5,19 +5,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.LessonPlanActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
+import com.itbeebd.cesc_nsl.api.ApiUrls;
+import com.itbeebd.cesc_nsl.dao.StudentDao;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
 import com.itbeebd.cesc_nsl.utils.Notification;
 
@@ -50,6 +56,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private ArrayList<Notification> notifications;
     private ArrayList<LessonPlan> lessonPlans;
 
+    private ImageView studentProfileViewId;
+
     public StudentDashboardFragment() {
         // Required empty public constructor
     }
@@ -70,6 +78,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
+
+        studentProfileViewId = view.findViewById(R.id.studentProfileViewId);
 
         quizBlock = view.findViewById(R.id.quizCardId);
         quizBlockNumber = view.findViewById(R.id.quizCardHeaderSectionId);
@@ -110,6 +120,18 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        String imageUrl = new StudentDao().getStudent(getContext()).getImage();
+
+        if( imageUrl != null){
+            Glide.with(this)
+                    .load(ApiUrls.BASE_IMAGE_URL + imageUrl)
+                    .into(studentProfileViewId);
+        }
+    }
 
     private void setDashboardComponentValues() {
 
@@ -132,8 +154,9 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         notifications.add(new Notification("this is title 3", getString(R.string.demo_notification_body)));
         notifications.add(new Notification("this is title 4", getString(R.string.demo_notification_body)));
 
-        String notificationSize = "NOTIFICATION(" + notifications.size() + ")";
-        notificationHint.setText(notificationSize);
+        String notificationSize = "See All(" + notifications.size() + ")";
+        notificationHint.setVisibility(View.VISIBLE);
+        notificationSeeAll.setText(notificationSize);
 
         StudentNotificationAdapter notificationAdapter = new StudentNotificationAdapter(getContext());
         notificationAdapter.setItems(notifications.subList(0,2));
@@ -152,8 +175,9 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlans.add(new LessonPlan("Pappu", "General Knowledge", "Chapter one", "1 September, 2021"));
         lessonPlans.add(new LessonPlan("Shihab", "English Grammer", "Chapter one", "1 September, 2021"));
 
-        String lessonPlansSize = "LESSON PLAN(" + notifications.size() + ")";
-        lessonPlanCountHint.setText(lessonPlansSize);
+        String lessonPlansSize = "See All(" + notifications.size() + ")";
+        lessonPlanCountHint.setVisibility(View.VISIBLE);
+        lessonPlanSeeAll.setText(lessonPlansSize);
 
         LessonPlanAdapter lessonPlanAdapter = new LessonPlanAdapter(getContext());
         lessonPlanAdapter.setItems(lessonPlans.subList(0,2));

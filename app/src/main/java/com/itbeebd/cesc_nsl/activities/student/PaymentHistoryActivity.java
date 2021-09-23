@@ -90,6 +90,7 @@ public class PaymentHistoryActivity extends AppCompatActivity implements OnRecyc
 
 
         String url = ApiUrls.INVOICE_URL + item.getVoucher_no();
+      //  String url = ("https://www.google.com");
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setUseWideViewPort(true);

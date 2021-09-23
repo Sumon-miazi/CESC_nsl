@@ -7,11 +7,8 @@
     android:layout_height="wrap_content"
     android:backgroundTint="@color/white_inactive"
     app:cardCornerRadius="6dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
-    android:paddingStart="4dp"
-    android:paddingEnd="4dp"
-    android:elevation="0dp"
+    android:layout_margin="4dp"
+    app:cardElevation="0dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -21,23 +18,25 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <View
             android:id="@+id/view"
             android:layout_width="6dp"
             android:layout_height="0dp"
-            android:background="@color/orange_active"
-            app:layout_constraintBottom_toBottomOf="@+id/notificationBodyId"
+            android:background="@color/orange_inactive"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/notificationTitleId" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/notificationTitleId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:paddingTop="4dp"
             android:text="Notification Title"
             android:textColor="@color/black"
@@ -51,10 +50,12 @@
             android:id="@+id/notificationBodyId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:paddingTop="5dp"
             android:paddingBottom="10dp"
             android:text="body"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/notificationTitleId"
             app:layout_constraintStart_toStartOf="@+id/notificationTitleId"
             app:layout_constraintTop_toBottomOf="@+id/notificationTitleId" />

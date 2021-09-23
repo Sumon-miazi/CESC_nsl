@@ -8,6 +8,7 @@
     android:backgroundTint="@color/blue_bg_light"
     app:cardCornerRadius="10dp"
     android:padding="2dp"
+    app:cardElevation="0dp"
     android:layout_margin="4dp"
     android:clickable="true"
     android:focusable="true"

@@ -29,7 +29,6 @@
                 android:backgroundTint="@color/white"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_margin="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="50dp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialCardView2"
@@ -40,7 +39,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:minHeight="130dp">
+                    android:minHeight="110dp">
 
                     <ImageView
                         android:id="@+id/imageView5"

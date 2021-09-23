@@ -1,12 +1,12 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
@@ -26,7 +26,7 @@ public class StudentAllNotificationActivity extends AppCompatActivity {
 
         Toolbar mToolBar = (Toolbar) findViewById(R.id.notificationToolbarId);
         setSupportActionBar(mToolBar);
-        getSupportActionBar().setTitle("NOTICE");
+        getSupportActionBar().setTitle("NOTIFICATION");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         studentNotificationRecyclerView = findViewById(R.id.studentNotificationRecyclerViewId);
