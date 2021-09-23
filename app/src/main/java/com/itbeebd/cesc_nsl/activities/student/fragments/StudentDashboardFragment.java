@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,8 +24,11 @@ import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
+import com.itbeebd.cesc_nsl.api.studentApi.DashboardApi;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
+import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
 import com.itbeebd.cesc_nsl.utils.Notification;
 import com.parassidhu.simpledate.SimpleDateKt;
@@ -59,9 +63,11 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private ArrayList<Notification> notifications;
     private ArrayList<LessonPlan> lessonPlans;
 
+    private TextView totalNotificationHindId;
     private ImageView studentProfileViewId;
     private TextView userNameViewId;
     private TextView todayDateViewId;
+    private ImageView studentNotificationAlarmViewId;
 
     public StudentDashboardFragment() {
         // Required empty public constructor
@@ -87,6 +93,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         studentProfileViewId = view.findViewById(R.id.studentProfileViewId);
         userNameViewId = view.findViewById(R.id.userNameViewId);
         todayDateViewId = view.findViewById(R.id.todayDateViewId);
+        totalNotificationHindId = view.findViewById(R.id.totalNotificationHindId);
+        studentNotificationAlarmViewId = view.findViewById(R.id.studentNotificationAlarmViewId);
 
         quizBlock = view.findViewById(R.id.quizCardId);
         quizBlockNumber = view.findViewById(R.id.quizCardHeaderSectionId);
@@ -118,6 +126,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         onlineClassBlock.setOnClickListener(this::gotoOnlineView);
 
         notificationSeeAll.setOnClickListener(this);
+        studentNotificationAlarmViewId.setOnClickListener(this);
         lessonPlanSeeAll.setOnClickListener(this);
 
         setDashboardComponentValues();
@@ -147,14 +156,33 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void setDashboardComponentValues() {
+        new DashboardApi(getContext()).getDashboardHeaderInfo(
+                CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                (object, message) -> {
+                    if(object != null){
+                        quizBlockNumber.setText(((DashboardHeaderObj)object).getTotalQuiz());
+                        quizArchiveBlockNumber.setText(((DashboardHeaderObj)object).getTotalQuizArchive());
+                        lessonBlockNumber.setText(((DashboardHeaderObj)object).getTotalLessonPlan());
+                        onlineClassBlockNumber.setText(((DashboardHeaderObj)object).getTotalOnlineClass());
 
-        quizBlockNumber.setText("100");
+                        if(((DashboardHeaderObj)object).getTotalNotifications().equals("0")){
+                            totalNotificationHindId.setVisibility(View.GONE);
+                        }
+                        else {
+                            totalNotificationHindId.setVisibility(View.VISIBLE);
+                            String total = ((DashboardHeaderObj)object).getTotalNotifications();
+                            if (total.length() == 1) {
+                                total = " " + total + " ";
+                            }
+                            totalNotificationHindId.setText(total);
+                        }
+                    }
+                    else {
+                        try { Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show(); }catch (Exception ignore){}
+                    }
+                }
+        );
 
-        quizArchiveBlockNumber.setText("40");
-
-        lessonBlockNumber.setText("70");
-
-        onlineClassBlockNumber.setText("10");
 
     }
 
@@ -207,10 +235,10 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     @Override
     public void onClick(View view) {
         Intent intent = null;
-        if(view.getId() == R.id.notificationSeeAllId){
+        if(view.getId() == R.id.notificationSeeAllId || view.getId() == R.id.studentNotificationAlarmViewId){
             intent = new Intent(getActivity(), StudentAllNotificationActivity.class);
             intent.putExtra("notifications",  notifications);
-
+            totalNotificationHindId.setVisibility(View.GONE);
         }
         if(view.getId() == R.id.lessonPlanSeeAllId){
             intent = new Intent(getActivity(), LessonPlanActivity.class);

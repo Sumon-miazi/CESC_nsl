@@ -14,9 +14,9 @@
 
     <!-- Control the radius of each corners -->
     <corners
-        android:bottomLeftRadius="40dp"
-        android:bottomRightRadius="40dp"
-        android:topLeftRadius="40dp"
-        android:topRightRadius="40dp"/>
+        android:bottomLeftRadius="50dp"
+        android:bottomRightRadius="50dp"
+        android:topLeftRadius="50dp"
+        android:topRightRadius="50dp"/>
 
 </shape>

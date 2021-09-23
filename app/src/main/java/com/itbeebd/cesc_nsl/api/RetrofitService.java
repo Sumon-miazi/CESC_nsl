@@ -48,4 +48,9 @@ public interface RetrofitService {
     Call<ResponseBody> invoiceForCheckout(
             @Header("Authorization") String authorization
     );
+
+    @GET("auth/dashboard-header-info")
+    Call<ResponseBody> dashboardHeaderInfo(
+            @Header("Authorization") String authorization
+    );
 }
