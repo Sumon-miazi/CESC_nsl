@@ -15,7 +15,7 @@
         android:paddingBottom="6dp"
         android:text="LESSON PLAN"
         android:textColor="@color/white_inactive_2"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"

@@ -490,21 +490,21 @@
 -->
         <View
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="10dp"
             android:layout_marginTop="20dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@color/white_2"/>
         <include
-            android:id="@+id/notificationBlockId"
-            layout="@layout/notification_block"
+            android:id="@+id/attendanceBlockId"
+            layout="@layout/attendance_graph_block"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="10dp"
             android:layout_marginTop="20dp"
             android:background="@color/white_2"/>
 

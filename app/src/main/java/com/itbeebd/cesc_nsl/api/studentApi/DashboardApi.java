@@ -93,7 +93,7 @@ public class DashboardApi extends BaseService {
 
 
                         Attendance attendanceObj = new Attendance(
-                                attendanceJsonObj.optInt("absend"),
+                                attendanceJsonObj.optInt("present"),
                                 attendanceJsonObj.optInt("absend")
                         );
 

@@ -1,5 +1,6 @@
 package com.itbeebd.cesc_nsl.activities.student.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +30,7 @@ import com.itbeebd.cesc_nsl.api.studentApi.DashboardApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
+import com.itbeebd.cesc_nsl.utils.Attendance;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
 import com.itbeebd.cesc_nsl.utils.NotificationObj;
@@ -69,6 +72,11 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private TextView todayDateViewId;
     private ImageView studentNotificationAlarmViewId;
 
+    private TextView attendancePresentViewId;
+    private TextView attendanceAbsentViewId;
+    private ImageView filterAttendanceBtnId;
+    private Guideline guideline;
+
     public StudentDashboardFragment() {
         // Required empty public constructor
     }
@@ -79,6 +87,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
     }
 
+    @SuppressLint("CutPasteId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,11 +112,16 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         onlineClassBlock = view.findViewById(R.id.onlineClassCardId);
         onlineClassBlockNumber = view.findViewById(R.id.onlineClassHeaderSectionId);
 
+        attendancePresentViewId = view.findViewById(R.id.attendanceBlockId).findViewById(R.id.attendancePresentViewId);
+        attendanceAbsentViewId = view.findViewById(R.id.attendanceBlockId).findViewById(R.id.attendanceAbsentViewId);
+        filterAttendanceBtnId = view.findViewById(R.id.attendanceBlockId).findViewById(R.id.filterAttendanceBtnId);
+        guideline = view.findViewById(R.id.attendanceBlockId).findViewById(R.id.guideline6);
 
-        studentNotificationRecyclerView = view.findViewById(R.id.notificationBlockId).findViewById(R.id.studentNotificationRecyclerViewId);
-        notificationHint = view.findViewById(R.id.notificationBlockId).findViewById(R.id.notificationHintId);
-        notificationSeeAll = view.findViewById(R.id.notificationBlockId).findViewById(R.id.notificationSeeAllId);
-        notificationSeeAll.setVisibility(View.VISIBLE);
+
+//        studentNotificationRecyclerView = view.findViewById(R.id.notificationBlockId).findViewById(R.id.studentNotificationRecyclerViewId);
+//        notificationHint = view.findViewById(R.id.notificationBlockId).findViewById(R.id.notificationHintId);
+//        notificationSeeAll = view.findViewById(R.id.notificationBlockId).findViewById(R.id.notificationSeeAllId);
+//        notificationSeeAll.setVisibility(View.VISIBLE);
 
 
         lessonPlanRecyclerView = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanRecyclerViewId);
@@ -119,7 +133,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonBlock.setOnClickListener(this::gotoLessonView);
         onlineClassBlock.setOnClickListener(this::gotoOnlineView);
 
-        notificationSeeAll.setOnClickListener(this);
+   //     notificationSeeAll.setOnClickListener(this);
         studentNotificationAlarmViewId.setOnClickListener(this);
         lessonPlanSeeAll.setOnClickListener(this);
 
@@ -191,6 +205,48 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
             lessonPlans = object.getLessonPlanArrayList();
             setLessonPlanAdapter();
         }
+
+        if(object.getAttendance() != null){
+            setAttendanceGraph(object.getAttendance());
+        }
+
+
+    }
+
+    @SuppressLint("DefaultLocale")
+    private void setAttendanceGraph(Attendance attendance) {
+        int present = attendance.getPresent();
+        int absent = attendance.getAbsent();
+        int sum = present + absent;
+
+        System.out.println("++++++ " + present);
+        System.out.println("++++++ " + absent);
+        System.out.println("++++++ " + sum);
+
+        if(sum == 0 || present == absent) return;
+
+        attendancePresentViewId.setText(String.format("Present: %d Day(s)", present));
+        attendanceAbsentViewId.setText(String.format("Absent: %d Day(s)", absent));
+
+        if(present == 0) {
+            guideline.setGuidelinePercent(0.0f);
+            return;
+        }
+        else if(absent == 0) {
+            guideline.setGuidelinePercent(1.0f);
+            return;
+        }
+
+        float onePercentage = (float) sum / 10;
+        float presentPercentage = (float)present * onePercentage;
+        float absentPercentage = (float)absent * onePercentage;
+
+        System.out.println("++++++ " + onePercentage);
+        System.out.println("++++++ " + presentPercentage);
+        System.out.println("++++++ " + absentPercentage);
+
+        if(presentPercentage > absentPercentage) guideline.setGuidelinePercent(presentPercentage);
+        else guideline.setGuidelinePercent(1 - absentPercentage);
 
 
     }
