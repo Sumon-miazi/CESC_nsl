@@ -13,6 +13,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 
 public interface RetrofitService {
 
@@ -34,23 +35,10 @@ public interface RetrofitService {
             @Part MultipartBody.Part father_image
     );
 
-    @GET("auth/dueHistory")
-    Call<ResponseBody> dueHistory(
-            @Header("Authorization") String authorization
+    @GET("auth/{path}")
+    Call<ResponseBody> getRequestPath(
+            @Header("Authorization") String authorization,
+            @Path("path") String path
     );
 
-    @GET("auth/paymentHistory")
-    Call<ResponseBody> paymentHistory(
-            @Header("Authorization") String authorization
-    );
-
-    @POST("auth/addPayment")
-    Call<ResponseBody> invoiceForCheckout(
-            @Header("Authorization") String authorization
-    );
-
-    @GET("auth/dashboard-header-info")
-    Call<ResponseBody> dashboardHeaderInfo(
-            @Header("Authorization") String authorization
-    );
 }

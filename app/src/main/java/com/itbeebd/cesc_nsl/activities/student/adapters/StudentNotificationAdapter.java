@@ -9,9 +9,9 @@ import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.GenericRecyclerAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders.StudentNotificationViewHolder;
-import com.itbeebd.cesc_nsl.utils.Notification;
+import com.itbeebd.cesc_nsl.utils.NotificationObj;
 
-public class StudentNotificationAdapter extends GenericRecyclerAdapter<Notification, OnRecyclerObjectClickListener<Notification>, StudentNotificationViewHolder> {
+public class StudentNotificationAdapter extends GenericRecyclerAdapter<NotificationObj, OnRecyclerObjectClickListener<NotificationObj>, StudentNotificationViewHolder> {
 
     private Context context;
 

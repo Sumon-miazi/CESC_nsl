@@ -4,27 +4,31 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.evrencoskun.tableview.TableView;
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.activities.student.adapters.MyTableViewAdapter;
-import com.itbeebd.cesc_nsl.utils.tableDataObj.Cell;
-import com.itbeebd.cesc_nsl.utils.tableDataObj.ColumnHeader;
-import com.itbeebd.cesc_nsl.utils.tableDataObj.RowHeader;
+import com.itbeebd.cesc_nsl.activities.student.adapters.ResultBoardAdapter;
+import com.itbeebd.cesc_nsl.sugarClass.ResultObj;
+import com.skydoves.powerspinner.PowerSpinnerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ResultBoardFragment extends Fragment {
 
-    private List<RowHeader> mRowHeaderList;
-    private List<ColumnHeader> mColumnHeaderList;
-    private List<List<Cell>> mCellList;
+    private RecyclerView resultBoardRecyclerViewId;
+    private ConstraintLayout resultRecordHeaderId;
+    private TextView semesterName;
+    private PowerSpinnerView powerSpinnerView;
 
-    private TableView tableView;
+    private ResultBoardAdapter resultBoardAdapter;
 
     public ResultBoardFragment() {
         // Required empty public constructor
@@ -35,31 +39,6 @@ public class ResultBoardFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mRowHeaderList = new ArrayList<>();
-        mColumnHeaderList = new ArrayList<>();
-        mCellList = new ArrayList<>();
-
-        mRowHeaderList.add(new RowHeader("test"));
-
-        mColumnHeaderList.add(new ColumnHeader("Full Mark"));
-        mColumnHeaderList.add(new ColumnHeader("Sub Mark"));
-        mColumnHeaderList.add(new ColumnHeader("Obj Mark"));
-        mColumnHeaderList.add(new ColumnHeader("Prac Mark"));
-        mColumnHeaderList.add(new ColumnHeader("CT Mark"));
-        mColumnHeaderList.add(new ColumnHeader("Total"));
-        mColumnHeaderList.add(new ColumnHeader("CGP"));
-        mColumnHeaderList.add(new ColumnHeader("Grade"));
-
-        List<Cell> cells = new ArrayList<>();
-        cells.add(new Cell("123"));
-        cells.add(new Cell("433"));
-        cells.add(new Cell("433"));
-        cells.add(new Cell("433"));
-        cells.add(new Cell("433"));
-        cells.add(new Cell("433"));
-        cells.add(new Cell("433"));
-        cells.add(new Cell("433"));
-        mCellList.add(cells);
 
     }
 
@@ -68,22 +47,35 @@ public class ResultBoardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_result_board, container, false);
-        tableView = view.findViewById(R.id.table_view_id);
+
+        powerSpinnerView = view.findViewById(R.id.powerSpinnerView);
+        resultBoardRecyclerViewId = view.findViewById(R.id.resultBoardRecyclerViewId);
+        resultRecordHeaderId = view.findViewById(R.id.resultRecordHeaderId);
+        semesterName = view.findViewById(R.id.textView38);
+
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ArrayList<ResultObj> resultObjs = new ArrayList<>();
+        resultObjs.add(new ResultObj("Higher Math first paper", "100", "80", "20", "40", "100", "49", "33", "A+"));
+        resultObjs.add(new ResultObj("Math", "100", "80", "20", "40", "100", "49", "33", "A+"));
+        resultObjs.add(new ResultObj("Math", "100", "80", "20", "40", "100", "49", "33", "A+"));
+        resultObjs.add(new ResultObj("Math", "100", "80", "20", "40", "100", "49", "33", "A+"));
+        resultObjs.add(new ResultObj("Math", "100", "80", "20", "40", "100", "49", "33", "A+"));
+
+        resultBoardAdapter = new ResultBoardAdapter(getContext());
+        resultBoardAdapter.setItems(resultObjs);
+        resultBoardRecyclerViewId.setLayoutManager(new LinearLayoutManager(getContext()));
+        resultBoardRecyclerViewId.setAdapter(resultBoardAdapter);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-        // Create our custom TableView Adapter
-        MyTableViewAdapter adapter = new MyTableViewAdapter();
-
-        // Set this adapter to the our TableView
-        tableView.setAdapter(adapter);
-
-        // Let's set datas of the TableView on the Adapter
-        adapter.setAllItems(mColumnHeaderList, mRowHeaderList, mCellList);
 
     }
 }

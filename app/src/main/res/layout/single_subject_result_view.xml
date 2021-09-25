@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resultRowId"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@color/first_row">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/resultRecordId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/subjectNoId"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textAlignment="center"
+            android:textColor="@color/red_inactive"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/subjectNameId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/subjectNameId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Mathematics"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/subjectTotalMarkViewId2"
+            app:layout_constraintStart_toEndOf="@+id/subjectNoId"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/subjectTotalMarkViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/green_active"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/subjectTotalMarkViewId2"
+            app:layout_constraintEnd_toStartOf="@+id/cgpViewId"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/subjectTotalMarkViewId2"
+            app:layout_constraintTop_toTopOf="@+id/subjectTotalMarkViewId2" />
+
+        <TextView
+            android:id="@+id/subjectTotalMarkViewId2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/orange_active"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/subjectNameId"
+            app:layout_constraintEnd_toStartOf="@+id/subjectTotalMarkViewId"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toTopOf="@+id/subjectNameId" />
+
+        <TextView
+            android:id="@+id/cgpViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/blue_active"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/subjectTotalMarkViewId"
+            app:layout_constraintEnd_toStartOf="@+id/gradeViewId"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/subjectTotalMarkViewId"
+            app:layout_constraintTop_toTopOf="@+id/subjectTotalMarkViewId2" />
+
+        <TextView
+            android:id="@+id/gradeViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="F"
+            android:textAlignment="center"
+            android:textColor="@color/quiz_number"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/cgpViewId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cgpViewId"
+            app:layout_constraintTop_toTopOf="@+id/subjectTotalMarkViewId2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="134dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/expandable_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:el_duration="500"
+        app:el_expanded="false"
+        app:el_parallax="0.5"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultRecordId">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_marginStart="30dp">
+
+            <TextView
+                android:id="@+id/subjectMarkViewId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="Subjective Mark: 100"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/objectMarkViewId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/objectMarkViewId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="Objective Mark: 100"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/practicalMarkViewId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subjectMarkViewId" />
+
+            <TextView
+                android:id="@+id/practicalMarkViewId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="Practical Mark: 100"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/classTestMarkViewId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/objectMarkViewId" />
+
+            <TextView
+                android:id="@+id/classTestMarkViewId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="Class Test Mark: 100"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/practicalMarkViewId" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

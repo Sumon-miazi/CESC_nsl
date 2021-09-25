@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
-import com.itbeebd.cesc_nsl.utils.Notification;
+import com.itbeebd.cesc_nsl.utils.NotificationObj;
 
 import java.util.ArrayList;
 
 public class StudentAllNotificationActivity extends AppCompatActivity {
 
-    private ArrayList<Notification> notifications;
+    private ArrayList<NotificationObj> notificationObjs;
     private RecyclerView studentNotificationRecyclerView;
 
     @Override
@@ -32,17 +32,17 @@ public class StudentAllNotificationActivity extends AppCompatActivity {
         studentNotificationRecyclerView = findViewById(R.id.studentNotificationRecyclerViewId);
 
         if(getIntent().hasExtra("notifications")){
-            notifications = (ArrayList<Notification>) getIntent().getSerializableExtra("notifications");
+            notificationObjs = (ArrayList<NotificationObj>) getIntent().getSerializableExtra("notifications");
 
-            if(notifications != null) setNotificationAdapter();
+            if(notificationObjs != null) setNotificationAdapter();
         }
 
-        System.out.println(">>>>>>> notice " + notifications.size() );
+        System.out.println(">>>>>>> notice " + notificationObjs.size() );
     }
 
     private void setNotificationAdapter(){
         StudentNotificationAdapter notificationAdapter = new StudentNotificationAdapter(this);
-        notificationAdapter.setItems(notifications);
+        notificationAdapter.setItems(notificationObjs);
         studentNotificationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         //    studentNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         studentNotificationRecyclerView.setAdapter(notificationAdapter);

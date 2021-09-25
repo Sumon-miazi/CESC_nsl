@@ -11,6 +11,10 @@ import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.BaseViewHolder;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
+import com.parassidhu.simpledate.SimpleDateKt;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerObjectClickListener<LessonPlan>> {
 
@@ -36,7 +40,21 @@ public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerO
         System.out.println("<<<< " + item.getTeacherName());
         teacherName.setText(item.getTeacherName());
         subjectName.setText(item.getSubjectName());
-        lessonTitle.setText(item.getLessonTile());
-        lastUpdated.setText(item.getLastUpdated());
+        lessonTitle.setText(item.getLessonTitle());
+        lastUpdated.setText(SimpleDateKt.toDateStandard(getDateFromString(item.getLastUpdated())));
+    }
+
+    private Date getDateFromString(String dateString){
+        System.out.println("????????? " + dateString);
+        Date date;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            date = format.parse(dateString);
+            System.out.println("????????? " + date);
+        } catch (Exception ignore) {
+            ignore.printStackTrace();
+            date = new Date();
+        }
+        return date;
     }
 }

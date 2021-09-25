@@ -1,11 +1,22 @@
 package com.itbeebd.cesc_nsl.utils;
 
-public class DashboardHeaderObj {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class DashboardHeaderObj implements Serializable {
     private String totalNotifications;
+    private ArrayList<NotificationObj> notificationObjArrayList;
+
     private String totalOnlineClass;
+
     private String totalLessonPlan;
+    private ArrayList<LessonPlan> lessonPlanArrayList;
+
     private String totalQuiz;
     private String totalQuizArchive;
+
+    private Attendance attendance;
+    private ArrayList<ClassRoutine> classRoutineArrayList;
 
     public DashboardHeaderObj(String totalNotifications, String totalOnlineClass, String totalLessonPlan, String totalQuiz, String totalQuizArchive) {
         this.totalNotifications = totalNotifications;
@@ -15,8 +26,32 @@ public class DashboardHeaderObj {
         this.totalQuizArchive = totalQuizArchive;
     }
 
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
+    }
+
+    public void setNotificationObjArrayList(ArrayList<NotificationObj> notificationObjArrayList) {
+        this.notificationObjArrayList = notificationObjArrayList;
+    }
+
+    public void setLessonPlanArrayList(ArrayList<LessonPlan> lessonPlanArrayList) {
+        this.lessonPlanArrayList = lessonPlanArrayList;
+    }
+
+    public void setClassRoutineArrayList(ArrayList<ClassRoutine> classRoutineArrayList) {
+        this.classRoutineArrayList = classRoutineArrayList;
+    }
+
     public String getTotalNotifications() {
         return totalNotifications;
+    }
+
+    public ArrayList<NotificationObj> getNotificationObjArrayList() {
+        return notificationObjArrayList;
     }
 
     public String getTotalOnlineClass() {
@@ -27,11 +62,19 @@ public class DashboardHeaderObj {
         return totalLessonPlan;
     }
 
+    public ArrayList<LessonPlan> getLessonPlanArrayList() {
+        return lessonPlanArrayList;
+    }
+
     public String getTotalQuiz() {
         return totalQuiz;
     }
 
     public String getTotalQuizArchive() {
         return totalQuizArchive;
+    }
+
+    public ArrayList<ClassRoutine> getClassRoutineArrayList() {
+        return classRoutineArrayList;
     }
 }

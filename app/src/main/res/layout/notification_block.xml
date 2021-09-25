@@ -16,7 +16,7 @@
         android:textColor="@color/white_inactive_2"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

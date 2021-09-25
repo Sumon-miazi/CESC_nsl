@@ -78,10 +78,13 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         new PaymentApi(getContext()).getDueHistory(
                 CustomSharedPref.getInstance(getContext()).getAuthToken(),
                 (due, message) -> {
-                    if(due != null){
-                        setUpDueOverview(due);
+                    try{
+                        if(due != null){
+                            setUpDueOverview(due);
+                        }
+                        else Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                     }
-                    else Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                    catch (Exception ignore){}
                 }
         );
     }

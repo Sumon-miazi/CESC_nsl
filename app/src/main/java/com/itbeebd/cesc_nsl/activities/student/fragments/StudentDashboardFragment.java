@@ -30,14 +30,14 @@ import com.itbeebd.cesc_nsl.dao.StudentDao;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
-import com.itbeebd.cesc_nsl.utils.Notification;
+import com.itbeebd.cesc_nsl.utils.NotificationObj;
 import com.parassidhu.simpledate.SimpleDateKt;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 
-public class StudentDashboardFragment extends Fragment implements OnRecyclerObjectClickListener<Notification>, View.OnClickListener {
+public class StudentDashboardFragment extends Fragment implements OnRecyclerObjectClickListener<NotificationObj>, View.OnClickListener {
 
     private CardView quizBlock;
     private TextView quizBlockNumber;
@@ -60,7 +60,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private TextView lessonPlanCountHint;
     private TextView lessonPlanSeeAll;
 
-    private ArrayList<Notification> notifications;
+    private ArrayList<NotificationObj> notificationObjs;
     private ArrayList<LessonPlan> lessonPlans;
 
     private TextView totalNotificationHindId;
@@ -71,11 +71,6 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
     public StudentDashboardFragment() {
         // Required empty public constructor
-    }
-
-    public static StudentDashboardFragment newInstance(String param1, String param2) {
-        StudentDashboardFragment fragment = new StudentDashboardFragment();
-        return fragment;
     }
 
     @Override
@@ -118,7 +113,6 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlanRecyclerView = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanRecyclerViewId);
         lessonPlanCountHint = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonCountHintId);
         lessonPlanSeeAll = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanSeeAllId);
-        lessonPlanSeeAll.setVisibility(View.VISIBLE);
 
         quizBlock.setOnClickListener(this::gotoQuizView);
         quizArchiveBlock.setOnClickListener(this::gotoQuizArchiveView);
@@ -130,9 +124,6 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlanSeeAll.setOnClickListener(this);
 
         setDashboardComponentValues();
-        setNotificationAdapter();
-        setLessonPlanAdapter();
-
         return view;
     }
 
@@ -160,22 +151,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                 CustomSharedPref.getInstance(getContext()).getAuthToken(),
                 (object, message) -> {
                     if(object != null){
-                        quizBlockNumber.setText(((DashboardHeaderObj)object).getTotalQuiz());
-                        quizArchiveBlockNumber.setText(((DashboardHeaderObj)object).getTotalQuizArchive());
-                        lessonBlockNumber.setText(((DashboardHeaderObj)object).getTotalLessonPlan());
-                        onlineClassBlockNumber.setText(((DashboardHeaderObj)object).getTotalOnlineClass());
-
-                        if(((DashboardHeaderObj)object).getTotalNotifications().equals("0")){
-                            totalNotificationHindId.setVisibility(View.GONE);
-                        }
-                        else {
-                            totalNotificationHindId.setVisibility(View.VISIBLE);
-                            String total = ((DashboardHeaderObj)object).getTotalNotifications();
-                            if (total.length() == 1) {
-                                total = " " + total + " ";
-                            }
-                            totalNotificationHindId.setText(total);
-                        }
+                        setDashboardData((DashboardHeaderObj) object);
                     }
                     else {
                         try { Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show(); }catch (Exception ignore){}
@@ -186,49 +162,69 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
     }
 
+    private void setDashboardData(DashboardHeaderObj object){
+        quizBlockNumber.setText(object.getTotalQuiz());
+        quizArchiveBlockNumber.setText(object.getTotalQuizArchive());
+        lessonBlockNumber.setText(object.getTotalLessonPlan());
+        onlineClassBlockNumber.setText(object.getTotalOnlineClass());
+        System.out.println("<><><><><><><> " + object.getTotalOnlineClass());
+
+        if(object.getTotalNotifications().equals("0")){
+            totalNotificationHindId.setVisibility(View.GONE);
+        }
+        else {
+            totalNotificationHindId.setVisibility(View.VISIBLE);
+            String total = object.getTotalNotifications();
+            if (total.length() == 1) {
+                total = " " + total + " ";
+            }
+            totalNotificationHindId.setText(total);
+        }
+
+
+        if(object.getNotificationObjArrayList().size() != 0){
+            notificationObjs = object.getNotificationObjArrayList();
+         //   setNotificationAdapter();
+        }
+
+        if(object.getLessonPlanArrayList().size() != 0){
+            lessonPlans = object.getLessonPlanArrayList();
+            setLessonPlanAdapter();
+        }
+
+
+    }
 
     private void setNotificationAdapter(){
-
-        notifications = new ArrayList<>();
-        notifications.add(new Notification("this is title 1", getString(R.string.demo_notification_body)));
-        notifications.add(new Notification("this is title 2", getString(R.string.demo_notification_body)));
-        notifications.add(new Notification("this is title 3", getString(R.string.demo_notification_body)));
-        notifications.add(new Notification("this is title 4", getString(R.string.demo_notification_body)));
-
-        String notificationSize = "See All(" + notifications.size() + ")";
+        String notificationSize = "See All(" + notificationObjs.size() + ")";
         notificationHint.setVisibility(View.VISIBLE);
         notificationSeeAll.setText(notificationSize);
 
         StudentNotificationAdapter notificationAdapter = new StudentNotificationAdapter(getContext());
-        notificationAdapter.setItems(notifications.subList(0,2));
+        notificationAdapter.setItems(notificationObjs.subList(0,2));
         studentNotificationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //    studentNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         studentNotificationRecyclerView.setAdapter(notificationAdapter);
     }
 
     private void setLessonPlanAdapter() {
+        String lessonPlansSize = "See All(" + lessonPlans.size() + ")";
 
-        lessonPlans = new ArrayList<>();
-        lessonPlans.add(new LessonPlan("Arif", "Bangla", "Chapter one", "1 September, 2021"));
-        lessonPlans.add(new LessonPlan("Mohian", "English", "Chapter one", "1 September, 2021"));
-        lessonPlans.add(new LessonPlan("Borhan", "Bangla", "Chapter one", "1 September, 2021"));
-        lessonPlans.add(new LessonPlan("Suman", "Higher Math", "Chapter one", "1 September, 2021"));
-        lessonPlans.add(new LessonPlan("Pappu", "General Knowledge", "Chapter one", "1 September, 2021"));
-        lessonPlans.add(new LessonPlan("Shihab", "English Grammer", "Chapter one", "1 September, 2021"));
+        if(lessonPlans.size() != 0){
+            lessonPlanCountHint.setVisibility(View.VISIBLE);
+            lessonPlanSeeAll.setVisibility(View.VISIBLE);
+        }
 
-        String lessonPlansSize = "See All(" + notifications.size() + ")";
-        lessonPlanCountHint.setVisibility(View.VISIBLE);
         lessonPlanSeeAll.setText(lessonPlansSize);
 
         LessonPlanAdapter lessonPlanAdapter = new LessonPlanAdapter(getContext());
         lessonPlanAdapter.setItems(lessonPlans.subList(0,2));
         lessonPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //    studentNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         lessonPlanRecyclerView.setAdapter(lessonPlanAdapter);
     }
 
     @Override
-    public void onItemClicked(Notification item, View view) {
+    public void onItemClicked(NotificationObj item, View view) {
 
     }
 
@@ -237,7 +233,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         Intent intent = null;
         if(view.getId() == R.id.notificationSeeAllId || view.getId() == R.id.studentNotificationAlarmViewId){
             intent = new Intent(getActivity(), StudentAllNotificationActivity.class);
-            intent.putExtra("notifications",  notifications);
+            intent.putExtra("notifications", notificationObjs);
             totalNotificationHindId.setVisibility(View.GONE);
         }
         if(view.getId() == R.id.lessonPlanSeeAllId){

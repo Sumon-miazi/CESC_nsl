@@ -3,6 +3,7 @@ package com.itbeebd.cesc_nsl.api.studentApi;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
@@ -34,7 +35,7 @@ public class PaymentApi extends BaseService {
 
     public void getDueHistory(String token, DueHistoryResponse dueHistoryResponse){
 
-        Call<ResponseBody> dueHistory = service.dueHistory(token);
+        Call<ResponseBody> dueHistory = service.getRequestPath(token, ApiUrls.DUE_HISTORY);
         dueHistory.enqueue(new Callback<ResponseBody>(){
 
             @Override
@@ -110,7 +111,7 @@ public class PaymentApi extends BaseService {
 
     public void getPaymentHistory(String token, PaymentHistoryResponse paymentHistoryResponse){
 
-        Call<ResponseBody> paymentHistory = service.paymentHistory(token);
+        Call<ResponseBody> paymentHistory = service.getRequestPath(token, ApiUrls.PAYMENT_HISTORY);
         paymentHistory.enqueue(new Callback<ResponseBody>(){
 
             @Override
@@ -167,7 +168,7 @@ public class PaymentApi extends BaseService {
 
     public void getInvoiceForCheckout(String token, BooleanResponse booleanResponse){
 
-        Call<ResponseBody> invoiceForCheckout = service.invoiceForCheckout(token);
+        Call<ResponseBody> invoiceForCheckout = service.getRequestPath(token, ApiUrls.ADD_PAYMENT);
         invoiceForCheckout.enqueue(new Callback<ResponseBody>(){
 
             @Override

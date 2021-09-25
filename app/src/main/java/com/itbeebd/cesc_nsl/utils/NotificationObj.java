@@ -1,17 +1,21 @@
 package com.itbeebd.cesc_nsl.utils;
 
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
-public class Notification implements Serializable {
+public class NotificationObj implements Serializable {
 
+    private int n_id;
     private String title;
     private String body;
 
-    public Notification(String title, String body) {
+    public NotificationObj(int n_id, String title, String body) {
+        this.n_id = n_id;
         this.title = title;
         this.body = body;
+    }
+
+    public int getN_id() {
+        return n_id;
     }
 
     public String getTitle() {
