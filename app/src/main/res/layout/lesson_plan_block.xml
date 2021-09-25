@@ -10,6 +10,7 @@
         android:id="@+id/lessonCountHintId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
         android:text="LESSON PLAN"

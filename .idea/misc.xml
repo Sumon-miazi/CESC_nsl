@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_subdirectory.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/activity_library_book.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_student_login.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/lesson_plan_block.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/single_lesson_plan_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_library_book_view.xml" value="0.25" />
       </map>
     </option>

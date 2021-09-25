@@ -1,20 +1,20 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputLayout;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.api.studentApi.LoginApi;
 
 public class StudentLoginActivity extends AppCompatActivity {
 
-    private EditText userId;
-    private EditText userPassword;
+    private TextInputLayout userId;
+    private TextInputLayout userPassword;
     private Button loginBtn;
 
     @Override
@@ -27,7 +27,7 @@ public class StudentLoginActivity extends AppCompatActivity {
         loginBtn = findViewById(R.id.loginBtnId);
 
         loginBtn.setOnClickListener(view -> {
-            loginCredentialValidate(userId.getText().toString().trim(), userPassword.getText().toString().trim());
+            loginCredentialValidate(userId.getEditText().getText().toString().trim(), userPassword.getEditText().getText().toString().trim());
         });
     }
 
