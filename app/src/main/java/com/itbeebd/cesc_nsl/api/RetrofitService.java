@@ -54,4 +54,10 @@ public interface RetrofitService {
             @Body Map<String, Object> body
     );
 
+    @POST("auth/attendance")
+    Call<ResponseBody> getAttendanceByMonthName(
+            @Header("Authorization") String authorization,
+            @Body Map<String, Object> body
+    );
+
 }

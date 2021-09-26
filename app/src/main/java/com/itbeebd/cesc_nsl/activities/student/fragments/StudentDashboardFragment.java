@@ -28,6 +28,7 @@ import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
+import com.itbeebd.cesc_nsl.api.studentApi.AttendanceApi;
 import com.itbeebd.cesc_nsl.api.studentApi.ClassRoutineApi;
 import com.itbeebd.cesc_nsl.api.studentApi.DashboardApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
@@ -143,6 +144,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         onlineClassBlock.setOnClickListener(this::gotoOnlineView);
 
         filterClassRoutineBtnId.setOnClickListener(this::filterClassRoutine);
+        filterAttendanceBtnId.setOnClickListener(this::filterAttendance);
 
    //     notificationSeeAll.setOnClickListener(this);
         studentNotificationAlarmViewId.setOnClickListener(this);
@@ -151,6 +153,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         setDashboardComponentValues();
         return view;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -343,11 +346,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
 
-    private void filterClassRoutine(View view) {
-        showBottomSheetDialogForClassRoutine();
-    }
-
-    private void showBottomSheetDialogForClassRoutine() {
+    private void filterClassRoutine(View v) {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
         bottomSheetDialog.setContentView(R.layout.weekly_days_view);
 
@@ -395,4 +394,76 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         );
     }
 
+
+    private void filterAttendance(View v) {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
+        bottomSheetDialog.setContentView(R.layout.month_name_view);
+
+        TextView januaryId = bottomSheetDialog.findViewById(R.id.januaryId);
+        TextView februaryId = bottomSheetDialog.findViewById(R.id.februaryId);
+        TextView marchId = bottomSheetDialog.findViewById(R.id.marchId);
+        TextView aprilId = bottomSheetDialog.findViewById(R.id.aprilId);
+        TextView mayId = bottomSheetDialog.findViewById(R.id.mayId);
+        TextView juneId = bottomSheetDialog.findViewById(R.id.juneId);
+        TextView julyId = bottomSheetDialog.findViewById(R.id.julyId);
+        TextView augustId = bottomSheetDialog.findViewById(R.id.augustId);
+        TextView septemberId = bottomSheetDialog.findViewById(R.id.septemberId);
+        TextView octoberId = bottomSheetDialog.findViewById(R.id.octoberId);
+        TextView novemberId = bottomSheetDialog.findViewById(R.id.novemberId);
+        TextView decemberId = bottomSheetDialog.findViewById(R.id.decemberId);
+
+        assert januaryId != null;
+        januaryId.setOnClickListener(view -> { getAttendanceByMonthName(januaryId.getText().toString());bottomSheetDialog.dismiss(); });
+
+        assert februaryId != null;
+        februaryId.setOnClickListener(view -> { getAttendanceByMonthName(februaryId.getText().toString());bottomSheetDialog.dismiss(); });
+
+        assert marchId != null;
+        marchId.setOnClickListener(view -> { getAttendanceByMonthName(marchId.getText().toString());bottomSheetDialog.dismiss(); });
+
+        assert aprilId != null;
+        aprilId.setOnClickListener(view -> { getAttendanceByMonthName(aprilId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        assert mayId != null;
+        mayId.setOnClickListener(view -> { getAttendanceByMonthName(mayId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        assert juneId != null;
+        juneId.setOnClickListener(view -> { getAttendanceByMonthName(juneId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        assert julyId != null;
+        julyId.setOnClickListener(view -> { getAttendanceByMonthName(julyId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        assert augustId != null;
+        augustId.setOnClickListener(view -> { getAttendanceByMonthName(augustId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        assert septemberId != null;
+        septemberId.setOnClickListener(view -> { getAttendanceByMonthName(septemberId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        assert octoberId != null;
+        octoberId.setOnClickListener(view -> { getAttendanceByMonthName(octoberId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        assert novemberId != null;
+        novemberId.setOnClickListener(view -> { getAttendanceByMonthName(novemberId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        assert decemberId != null;
+        decemberId.setOnClickListener(view -> { getAttendanceByMonthName(decemberId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        bottomSheetDialog.show();
+    }
+
+    private void getAttendanceByMonthName(String name){
+        new AttendanceApi(getContext()).getAttendanceByMonthName(
+                name,
+                CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                (object, message) -> {
+                    try {
+                        if(object != null){
+                            setAttendanceGraph((Attendance) object);
+                        }
+                        else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+                    catch (Exception ignore){}
+                }
+        );
+    }
 }

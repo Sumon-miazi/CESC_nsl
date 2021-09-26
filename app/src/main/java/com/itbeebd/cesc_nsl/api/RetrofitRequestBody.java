@@ -15,9 +15,9 @@ public class RetrofitRequestBody {
         return map;
     }
 
-    public Map<String, Object> getClassRoutine(String dayName){
+    public Map<String, Object> mapBody(String name){
         Map<String, Object> map = new HashMap<>();
-        map.put("day_name", dayName);
+        map.put("name", name);
         return map;
     }
 
