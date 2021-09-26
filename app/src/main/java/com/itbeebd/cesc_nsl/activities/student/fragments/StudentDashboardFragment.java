@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.LessonPlanActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
+import com.itbeebd.cesc_nsl.activities.student.adapters.ClassRoutineAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
@@ -31,6 +32,7 @@ import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.utils.Attendance;
+import com.itbeebd.cesc_nsl.utils.ClassRoutine;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
 import com.itbeebd.cesc_nsl.utils.NotificationObj;
@@ -58,6 +60,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private TextView notificationHint;
     private TextView notificationSeeAll;
 
+    private RecyclerView classRoutineRecyclerView;
 
     private RecyclerView lessonPlanRecyclerView;
     private TextView lessonPlanCountHint;
@@ -123,6 +126,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 //        notificationSeeAll = view.findViewById(R.id.notificationBlockId).findViewById(R.id.notificationSeeAllId);
 //        notificationSeeAll.setVisibility(View.VISIBLE);
 
+
+        classRoutineRecyclerView = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.classRoutineRecyclerViewId);
 
         lessonPlanRecyclerView = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanRecyclerViewId);
         lessonPlanCountHint = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonCountHintId);
@@ -210,6 +215,10 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
             setAttendanceGraph(object.getAttendance());
         }
 
+        if(object.getClassRoutineArrayList() != null){
+            setClassRoutineAdapter(object.getClassRoutineArrayList());
+        }
+
 
     }
 
@@ -277,6 +286,13 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlanAdapter.setItems(lessonPlans.subList(0,2));
         lessonPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         lessonPlanRecyclerView.setAdapter(lessonPlanAdapter);
+    }
+
+    private void setClassRoutineAdapter(ArrayList<ClassRoutine> classRoutineArrayList) {
+        ClassRoutineAdapter classRoutineAdapter = new ClassRoutineAdapter(getContext());
+        classRoutineAdapter.setItems(classRoutineArrayList);
+        classRoutineRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        classRoutineRecyclerView.setAdapter(classRoutineAdapter);
     }
 
     @Override

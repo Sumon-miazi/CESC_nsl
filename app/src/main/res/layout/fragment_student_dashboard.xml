@@ -509,6 +509,19 @@
             android:background="@color/white_2"/>
 
         <include
+            android:id="@+id/classRoutineBlockId"
+            layout="@layout/class_routine_block"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white_2"/>
+
+        <include
             android:id="@+id/dashboardLessonPlanBlockId"
             layout="@layout/lesson_plan_block"
             app:layout_constraintBottom_toBottomOf="parent"

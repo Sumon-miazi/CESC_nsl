@@ -7,6 +7,7 @@ import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.utils.Attendance;
+import com.itbeebd.cesc_nsl.utils.ClassRoutine;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
 import com.itbeebd.cesc_nsl.utils.LessonFile;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
@@ -64,6 +65,20 @@ public class DashboardApi extends BaseService {
                                 String.valueOf(data.optInt("totalQuizArchive"))
                         );
 
+                        ArrayList<ClassRoutine> classRoutineArrayList = new ArrayList<>();
+                        for (int i = 0; i < classRoutineJsonArray.length(); i++){
+                            JSONObject object = classRoutineJsonArray.getJSONObject(i);
+
+                            ClassRoutine classRoutine = new ClassRoutine(
+                                    object.optString("subject"),
+                                    object.optString("teacher"),
+                                    object.getJSONObject("duration").optString("winter_start") + " " + object.getJSONObject("duration").optString("winter_end"),
+                                    object.getJSONObject("duration").optString("start") + " " + object.getJSONObject("duration").optString("end")
+                            );
+
+                            classRoutineArrayList.add(classRoutine);
+                        }
+
                         ArrayList<LessonPlan> lessonPlanArrayList = new ArrayList<>();
 
                         for(int i = 0; i < lessonPlanJsonArray.length(); i++) {
@@ -111,6 +126,7 @@ public class DashboardApi extends BaseService {
 
 
                         headerObj.setAttendance(attendanceObj);
+                        headerObj.setClassRoutineArrayList(classRoutineArrayList);
                         headerObj.setLessonPlanArrayList(lessonPlanArrayList);
                         headerObj.setNotificationObjArrayList(notificationObjArrayList);
 
