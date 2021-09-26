@@ -357,28 +357,28 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         TextView thursdayId = bottomSheetDialog.findViewById(R.id.thursdayId);
 
         assert saturdayId != null;
-        saturdayId.setOnClickListener(view -> { getClassRoutineByDayName(saturdayId.getText().toString());bottomSheetDialog.dismiss(); });
+        saturdayId.setOnClickListener(view -> { getClassRoutineByDayName("Sat");bottomSheetDialog.dismiss(); });
 
         assert sundayId != null;
-        sundayId.setOnClickListener(view -> { getClassRoutineByDayName(sundayId.getText().toString());bottomSheetDialog.dismiss(); });
+        sundayId.setOnClickListener(view -> { getClassRoutineByDayName("Sun");bottomSheetDialog.dismiss(); });
 
         assert mondayId != null;
-        mondayId.setOnClickListener(view -> { getClassRoutineByDayName(mondayId.getText().toString());bottomSheetDialog.dismiss(); });
+        mondayId.setOnClickListener(view -> { getClassRoutineByDayName("Mon");bottomSheetDialog.dismiss(); });
 
         assert tuesdayId != null;
-        tuesdayId.setOnClickListener(view -> { getClassRoutineByDayName(tuesdayId.getText().toString()); bottomSheetDialog.dismiss(); });
+        tuesdayId.setOnClickListener(view -> { getClassRoutineByDayName("Tue"); bottomSheetDialog.dismiss(); });
 
         assert wednesdayId != null;
-        wednesdayId.setOnClickListener(view -> { getClassRoutineByDayName(wednesdayId.getText().toString()); bottomSheetDialog.dismiss(); });
+        wednesdayId.setOnClickListener(view -> { getClassRoutineByDayName("Wed"); bottomSheetDialog.dismiss(); });
 
         assert thursdayId != null;
-        thursdayId.setOnClickListener(view -> { getClassRoutineByDayName(thursdayId.getText().toString()); bottomSheetDialog.dismiss(); });
+        thursdayId.setOnClickListener(view -> { getClassRoutineByDayName("Thu"); bottomSheetDialog.dismiss(); });
 
         bottomSheetDialog.show();
     }
 
     private void getClassRoutineByDayName(String name){
-        new ClassRoutineApi(getContext()).getResult(
+        new ClassRoutineApi(getContext()).getClassRoutine(
                 name,
                 CustomSharedPref.getInstance(getContext()).getAuthToken(),
                 (object, message) -> {

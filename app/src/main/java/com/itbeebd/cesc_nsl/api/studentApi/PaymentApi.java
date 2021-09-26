@@ -168,7 +168,7 @@ public class PaymentApi extends BaseService {
 
     public void getInvoiceForCheckout(String token, BooleanResponse booleanResponse){
 
-        Call<ResponseBody> invoiceForCheckout = service.getRequestPath(token, ApiUrls.ADD_PAYMENT);
+        Call<ResponseBody> invoiceForCheckout = service.postRequestPath(token, ApiUrls.ADD_PAYMENT);
         invoiceForCheckout.enqueue(new Callback<ResponseBody>(){
 
             @Override

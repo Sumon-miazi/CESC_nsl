@@ -69,14 +69,16 @@ public class DashboardApi extends BaseService {
                         for (int i = 0; i < classRoutineJsonArray.length(); i++){
                             JSONObject object = classRoutineJsonArray.getJSONObject(i);
 
-                            ClassRoutine classRoutine = new ClassRoutine(
-                                    object.optString("subject"),
-                                    object.optString("teacher"),
-                                    object.getJSONObject("duration").optString("winter_start") + " " + object.getJSONObject("duration").optString("winter_end"),
-                                    object.getJSONObject("duration").optString("start") + " " + object.getJSONObject("duration").optString("end")
-                            );
+                            if(object.optInt("status") == 1){
+                                ClassRoutine classRoutine = new ClassRoutine(
+                                        object.optString("subject"),
+                                        object.optString("teacher"),
+                                        object.getJSONObject("duration").optString("winter_start") + " " + object.getJSONObject("duration").optString("winter_end"),
+                                        object.getJSONObject("duration").optString("start") + " " + object.getJSONObject("duration").optString("end")
+                                );
 
-                            classRoutineArrayList.add(classRoutine);
+                                classRoutineArrayList.add(classRoutine);
+                            }
                         }
 
                         ArrayList<LessonPlan> lessonPlanArrayList = new ArrayList<>();

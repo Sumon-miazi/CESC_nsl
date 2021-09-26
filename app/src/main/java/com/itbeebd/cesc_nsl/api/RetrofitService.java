@@ -42,6 +42,12 @@ public interface RetrofitService {
             @Path("path") String path
     );
 
+    @POST("auth/{path}")
+    Call<ResponseBody> postRequestPath(
+            @Header("Authorization") String authorization,
+            @Path("path") String path
+    );
+
     @POST("auth/result")
     Call<ResponseBody> getResultByExamId(
             @Header("Authorization") String authorization,

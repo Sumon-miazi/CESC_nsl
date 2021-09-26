@@ -5,9 +5,12 @@ import android.content.Context;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
-import com.itbeebd.cesc_nsl.utils.Attendance;
+import com.itbeebd.cesc_nsl.utils.ClassRoutine;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -24,28 +27,43 @@ public class ClassRoutineApi extends BaseService {
         requestBody = new RetrofitRequestBody();
     }
 
-    public void getResult(String dayName, String token, ResponseObj responseObj){
+    public void getClassRoutine(String dayName, String token, ResponseObj responseObj){
 
-        Call<ResponseBody> dashboardHeaderInfo = service.getAttendanceByMonthName(token, requestBody.mapBody(dayName));
+        Call<ResponseBody> dashboardHeaderInfo = service.getClassRoutineByDayName(token, requestBody.mapBody(dayName));
         dashboardHeaderInfo.enqueue(new Callback<ResponseBody>(){
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                JSONObject data = null;
+                JSONArray data = null;
                 if(response.isSuccessful() && response != null){
 
                     try {
-                        data =  new JSONObject(response.body().string());
-                        Attendance attendance = new Attendance(
-                                data.optInt("present"),
-                                data.optInt("absend")
-                        );
+                        data =  new JSONArray(response.body().string());
 
-                        responseObj.data(attendance, "successful");
+                        System.out.println(">>>>>>>>>> classRoutine " + dayName);
+
+                        ArrayList<ClassRoutine> classRoutineArrayList = new ArrayList<>();
+                        for (int i = 0; i < data.length(); i++){
+                            JSONObject object = data.getJSONObject(i);
+
+                            if(object.optInt("status") == 1){
+                                ClassRoutine classRoutine = new ClassRoutine(
+                                        object.optString("subject"),
+                                        object.optString("teacher"),
+                                        object.getJSONObject("duration").optString("winter_start") + " " + object.getJSONObject("duration").optString("winter_end"),
+                                        object.getJSONObject("duration").optString("start") + " " + object.getJSONObject("duration").optString("end")
+                                );
+
+                                classRoutineArrayList.add(classRoutine);
+                            }
+
+                        }
+
+                        responseObj.data(classRoutineArrayList, "successful");
 
                     } catch (Exception e) {
                         e.printStackTrace();
-                        System.out.println(">>>>>>>>>> due catch " + e.fillInStackTrace());
+                        System.out.println(">>>>>>>>>> classRoutine catch " + e.fillInStackTrace());
 
                         responseObj.data(null, e.getLocalizedMessage());
                     }
