@@ -16,7 +16,7 @@
 <!--        <item name="colorControlNormal">@color/white</item>-->
     </style>
 
-    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ToolbarTheme" parent="Theme.CESC_nsl">
         <item name="colorControlNormal">@color/white</item>
     </style>
 

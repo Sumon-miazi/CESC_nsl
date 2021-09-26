@@ -57,6 +57,7 @@
             app:bt_colorActive="@color/blue_grey_active"
             app:bt_colorInactive="@color/blue_grey_inactive"
             app:bt_icon="@drawable/ic_like"
+            android:visibility="gone"
             app:bt_shape="@drawable/transition_background_drawable_like"
             app:bt_title="@string/likes" />
 
