@@ -11,36 +11,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.skydoves.powerspinner.PowerSpinnerView
+    <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
         android:id="@+id/powerSpinnerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_bg_light"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/attendance_bg"
+        android:backgroundTint="@color/blue_primary_dark"
         android:gravity="center"
-        android:hint="Question 1"
-        android:minHeight="70dp"
-        android:padding="10dp"
-        android:textColor="@color/orange_active"
-        android:textColorHint="@color/blue_primary"
-        android:textSize="14.5sp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:spinner_arrow_gravity="end"
-        app:spinner_arrow_padding="8dp"
-        app:spinner_divider_color="@color/black"
-        app:spinner_divider_show="true"
-        app:spinner_divider_size="0.4dp"
-        app:spinner_popup_animation="dropdown"
-        app:spinner_popup_background="@color/blue_primary_dark"
-        app:spinner_popup_elevation="14dp" />
+        app:smsp_hint="Select an exam to view result"
+        app:smsp_hintColor="@color/white"
+        app:smsp_itemColor="@color/white"
+        app:smsp_itemListColor="@color/blue_primary"
+        app:smsp_itemListHintBackgroundColor="#808080"
+        app:smsp_itemListHintColor="#FFFFFF"
+        app:smsp_multilineError="false"
+        app:smsp_arrowColor="@color/white"
+        app:smsp_selectedItemListColor="@color/blue_active" />
 
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/cantonment_english_school_amp_college"
         android:textAlignment="center"
         android:textColor="@color/blue_active"
@@ -77,13 +77,12 @@
 
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/semesterNameViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@color/white_2"
         android:padding="10dp"
-        android:text="Midterm"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:textAlignment="center"
@@ -104,7 +103,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView38">
+        app:layout_constraintTop_toBottomOf="@+id/semesterNameViewId">
 
         <TextView
             android:id="@+id/subjectNoId"

@@ -5,12 +5,9 @@ import android.content.Context;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
-import com.itbeebd.cesc_nsl.utils.ClassRoutine;
+import com.itbeebd.cesc_nsl.utils.Attendance;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -29,34 +26,27 @@ public class AttendanceApi extends BaseService {
 
     public void getAttendanceByMonthName(String monthName, String token, ResponseObj responseObj){
 
-        Call<ResponseBody> getAttendance = service.getClassRoutineByDayName(token, requestBody.mapBody(monthName));
+        Call<ResponseBody> getAttendance = service.getAttendanceByMonthName(token, requestBody.mapBody(monthName));
         getAttendance.enqueue(new Callback<ResponseBody>(){
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                JSONArray data = null;
+                JSONObject data = null;
                 if(response.isSuccessful() && response != null){
 
                     try {
-                        data =  new JSONArray(response.body().string());
+                        data =  new JSONObject(response.body().string());
+                        System.out.println("><><><> " + data);
 
-                        ArrayList<ClassRoutine> classRoutineArrayList = new ArrayList<>();
-                        for (int i = 0; i < data.length(); i++){
-                            JSONObject object = data.getJSONObject(i);
+                        Attendance attendanceObj = new Attendance(
+                                data.optInt("present"),
+                                data.optInt("absend")
+                        );
 
-                            ClassRoutine classRoutine = new ClassRoutine(
-                                    object.optString("subject"),
-                                    object.optString("teacher"),
-                                    object.getJSONObject("duration").optString("winter_start") + " " + object.getJSONObject("duration").optString("winter_end"),
-                                    object.getJSONObject("duration").optString("start") + " " + object.getJSONObject("duration").optString("end")
-                            );
+                        responseObj.data(attendanceObj, "successful");
 
-                            classRoutineArrayList.add(classRoutine);
-                        }
-
-                        responseObj.data(classRoutineArrayList, "successful");
-
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e){
                         e.printStackTrace();
                         System.out.println(">>>>>>>>>> due catch " + e.fillInStackTrace());
 

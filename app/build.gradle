@@ -70,7 +70,9 @@ dependencies {
 
     implementation 'com.github.sidhuparas:SimpleDate:2.1.0'
 
-    implementation "com.github.skydoves:powerspinner:1.1.9"
+//spinner
+    //https://github.com/Chivorns/SmartMaterialSpinner
+    implementation 'com.github.chivorns:smartmaterialspinner:1.5.0'
 
     //expendable layout
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'

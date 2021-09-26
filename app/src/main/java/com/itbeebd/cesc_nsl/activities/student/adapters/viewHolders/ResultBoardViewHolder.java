@@ -37,7 +37,7 @@ public class ResultBoardViewHolder extends BaseViewHolder<ResultObj, OnRecyclerO
     public ResultBoardViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         this.context = context;
-
+        System.out.println("subject name = " + itemView.findViewById(R.id.subjectNameId));
         resultRowId = itemView.findViewById(R.id.resultRowId);
         subjectNoId = itemView.findViewById(R.id.subjectNoId);
         subjectNameId = itemView.findViewById(R.id.subjectNameId);

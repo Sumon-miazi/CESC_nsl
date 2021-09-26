@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/activity_student_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/attendance_graph_block.xml" value="0.22" />
         <entry key="app/src/main/res/layout/class_routine_block.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_result_board.xml" value="0.3" />
+        <entry key="app/src/main/res/layout/fragment_result_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.15" />
         <entry key="app/src/main/res/layout/lesson_plan_block.xml" value="0.25" />
@@ -43,5 +43,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="jsonEditor">
+    <option name="stateMap">
+      <map>
+        <entry key="CESC_nsl" value="{&#10;  &quot;id&quot;: 5748,&#10;  &quot;std_class_id&quot;: 4,&#10;  &quot;section_id&quot;: 54,&#10;  &quot;roll&quot;: 1,&#10;  &quot;name&quot;: &quot;Md. Shariful Islam&quot;,&#10;  &quot;group&quot;: null,&#10;  &quot;subject_id&quot;: 127,&#10;  &quot;student_id&quot;: 2914,&#10;  &quot;studentid&quot;: &quot;321005432&quot;,&#10;  &quot;optional_subject&quot;: 0,&#10;  &quot;is_optional&quot;: 0,&#10;  &quot;updated_at&quot;: &quot;2021-04-25T15:05:22.000000Z&quot;,&#10;  &quot;created_at&quot;: &quot;2021-04-25T15:05:22.000000Z&quot;,&#10;  &quot;exams&quot;: null,&#10;  &quot;subject&quot;: {&#10;    &quot;id&quot;: 127,&#10;    &quot;old_id&quot;: &quot;5e60a8c7273fea53f161bf93&quot;,&#10;    &quot;std_class_id&quot;: 4,&#10;    &quot;group&quot;: null,&#10;    &quot;name&quot;: &quot;English&quot;,&#10;    &quot;updated_at&quot;: &quot;2020-03-04T19:22:47.000000Z&quot;,&#10;    &quot;created_at&quot;: &quot;2020-03-04T19:22:47.000000Z&quot;,&#10;    &quot;code&quot;: 1,&#10;    &quot;pass_ct_mark&quot;: null,&#10;    &quot;pass_mark&quot;: null,&#10;    &quot;pass_obj_mark&quot;: null,&#10;    &quot;pass_prac_mark&quot;: null,&#10;    &quot;pass_sub_mark&quot;: null,&#10;    &quot;total_ct_mark&quot;: 0,&#10;    &quot;total_mark&quot;: null,&#10;    &quot;total_obj_mark&quot;: 0,&#10;    &quot;total_prac_mark&quot;: 0,&#10;    &quot;total_sub_mark&quot;: 20,&#10;    &quot;full_mark&quot;: 20&#10;  }&#10;}&#10;" />
+      </map>
+    </option>
   </component>
 </project>

@@ -237,14 +237,17 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         int absent = attendance.getAbsent();
         int sum = present + absent;
 
+        attendancePresentViewId.setText(String.format("Present: %d Day(s)", present));
+        attendanceAbsentViewId.setText(String.format("Absent: %d Day(s)", absent));
+
         System.out.println("++++++ " + present);
         System.out.println("++++++ " + absent);
         System.out.println("++++++ " + sum);
 
-        if(sum == 0 || present == absent) return;
-
-        attendancePresentViewId.setText(String.format("Present: %d Day(s)", present));
-        attendanceAbsentViewId.setText(String.format("Absent: %d Day(s)", absent));
+        if(sum == 0 || present == absent) {
+            guideline.setGuidelinePercent(0.5f);
+            return;
+        }
 
         if(present == 0) {
             guideline.setGuidelinePercent(0.0f);
@@ -258,10 +261,6 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         float onePercentage = (float) sum / 10;
         float presentPercentage = (float)present * onePercentage;
         float absentPercentage = (float)absent * onePercentage;
-
-        System.out.println("++++++ " + onePercentage);
-        System.out.println("++++++ " + presentPercentage);
-        System.out.println("++++++ " + absentPercentage);
 
         if(presentPercentage > absentPercentage) guideline.setGuidelinePercent(presentPercentage);
         else guideline.setGuidelinePercent(1 - absentPercentage);
@@ -394,7 +393,6 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         );
     }
 
-
     private void filterAttendance(View v) {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
         bottomSheetDialog.setContentView(R.layout.month_name_view);
@@ -413,40 +411,40 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         TextView decemberId = bottomSheetDialog.findViewById(R.id.decemberId);
 
         assert januaryId != null;
-        januaryId.setOnClickListener(view -> { getAttendanceByMonthName(januaryId.getText().toString());bottomSheetDialog.dismiss(); });
+        januaryId.setOnClickListener(view -> { getAttendanceByMonthName("01");bottomSheetDialog.dismiss(); });
 
         assert februaryId != null;
-        februaryId.setOnClickListener(view -> { getAttendanceByMonthName(februaryId.getText().toString());bottomSheetDialog.dismiss(); });
+        februaryId.setOnClickListener(view -> { getAttendanceByMonthName("02");bottomSheetDialog.dismiss(); });
 
         assert marchId != null;
-        marchId.setOnClickListener(view -> { getAttendanceByMonthName(marchId.getText().toString());bottomSheetDialog.dismiss(); });
+        marchId.setOnClickListener(view -> { getAttendanceByMonthName("03");bottomSheetDialog.dismiss(); });
 
         assert aprilId != null;
-        aprilId.setOnClickListener(view -> { getAttendanceByMonthName(aprilId.getText().toString()); bottomSheetDialog.dismiss(); });
+        aprilId.setOnClickListener(view -> { getAttendanceByMonthName("04"); bottomSheetDialog.dismiss(); });
 
         assert mayId != null;
-        mayId.setOnClickListener(view -> { getAttendanceByMonthName(mayId.getText().toString()); bottomSheetDialog.dismiss(); });
+        mayId.setOnClickListener(view -> { getAttendanceByMonthName("05"); bottomSheetDialog.dismiss(); });
 
         assert juneId != null;
-        juneId.setOnClickListener(view -> { getAttendanceByMonthName(juneId.getText().toString()); bottomSheetDialog.dismiss(); });
+        juneId.setOnClickListener(view -> { getAttendanceByMonthName("06"); bottomSheetDialog.dismiss(); });
 
         assert julyId != null;
-        julyId.setOnClickListener(view -> { getAttendanceByMonthName(julyId.getText().toString()); bottomSheetDialog.dismiss(); });
+        julyId.setOnClickListener(view -> { getAttendanceByMonthName("07"); bottomSheetDialog.dismiss(); });
 
         assert augustId != null;
-        augustId.setOnClickListener(view -> { getAttendanceByMonthName(augustId.getText().toString()); bottomSheetDialog.dismiss(); });
+        augustId.setOnClickListener(view -> { getAttendanceByMonthName("08"); bottomSheetDialog.dismiss(); });
 
         assert septemberId != null;
-        septemberId.setOnClickListener(view -> { getAttendanceByMonthName(septemberId.getText().toString()); bottomSheetDialog.dismiss(); });
+        septemberId.setOnClickListener(view -> { getAttendanceByMonthName("09"); bottomSheetDialog.dismiss(); });
 
         assert octoberId != null;
-        octoberId.setOnClickListener(view -> { getAttendanceByMonthName(octoberId.getText().toString()); bottomSheetDialog.dismiss(); });
+        octoberId.setOnClickListener(view -> { getAttendanceByMonthName("10"); bottomSheetDialog.dismiss(); });
 
         assert novemberId != null;
-        novemberId.setOnClickListener(view -> { getAttendanceByMonthName(novemberId.getText().toString()); bottomSheetDialog.dismiss(); });
+        novemberId.setOnClickListener(view -> { getAttendanceByMonthName("11"); bottomSheetDialog.dismiss(); });
 
         assert decemberId != null;
-        decemberId.setOnClickListener(view -> { getAttendanceByMonthName(decemberId.getText().toString()); bottomSheetDialog.dismiss(); });
+        decemberId.setOnClickListener(view -> { getAttendanceByMonthName("12"); bottomSheetDialog.dismiss(); });
 
         bottomSheetDialog.show();
     }

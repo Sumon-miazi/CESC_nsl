@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,14 +14,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chivorn.smartmaterialspinner.SmartMaterialSpinner;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.ResultBoardAdapter;
 import com.itbeebd.cesc_nsl.api.studentApi.ResultApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
-import com.itbeebd.cesc_nsl.sugarClass.ResultObj;
-import com.skydoves.powerspinner.PowerSpinnerView;
+import com.itbeebd.cesc_nsl.utils.TermExam;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class ResultBoardFragment extends Fragment {
@@ -28,7 +29,10 @@ public class ResultBoardFragment extends Fragment {
     private RecyclerView resultBoardRecyclerViewId;
     private ConstraintLayout resultRecordHeaderId;
     private TextView semesterName;
-    private PowerSpinnerView powerSpinnerView;
+    private SmartMaterialSpinner powerSpinnerView;
+    private int examId = 0;
+    private TermExam termExam;
+    private List<String> examList;
 
     private ResultBoardAdapter resultBoardAdapter;
 
@@ -53,7 +57,7 @@ public class ResultBoardFragment extends Fragment {
         powerSpinnerView = view.findViewById(R.id.powerSpinnerView);
         resultBoardRecyclerViewId = view.findViewById(R.id.resultBoardRecyclerViewId);
         resultRecordHeaderId = view.findViewById(R.id.resultRecordHeaderId);
-        semesterName = view.findViewById(R.id.textView38);
+        semesterName = view.findViewById(R.id.semesterNameViewId);
 
         return view;
     }
@@ -62,17 +66,7 @@ public class ResultBoardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        new ResultApi(getContext()).getResult(
-                4,
-                CustomSharedPref.getInstance(getContext()).getAuthToken(),
-                (object, message) -> {
-            if(object != null){
-                resultBoardAdapter = new ResultBoardAdapter(getContext());
-                resultBoardAdapter.setItems((ArrayList<ResultObj>) object);
-                resultBoardRecyclerViewId.setLayoutManager(new LinearLayoutManager(getContext()));
-                resultBoardRecyclerViewId.setAdapter(resultBoardAdapter);
-            }
-        });
+        getResultByExamId();
 
     }
 
@@ -80,5 +74,54 @@ public class ResultBoardFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        if(this.examList != null) {
+            initSpinner();
+        }
+    }
+
+    private void initSpinner(){
+        powerSpinnerView.setFloatingLabelText("");
+        powerSpinnerView.setItem(examList);
+
+        powerSpinnerView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+              //  Toast.makeText(getContext(), examList.get(position), Toast.LENGTH_SHORT).show();
+              //  powerSpinnerView.setFloatingLabelText(examList.get(position));
+                examId = termExam.getExamId(examList.get(position));
+                getResultByExamId();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+    }
+
+    private void getResultByExamId(){
+        new ResultApi(getContext()).getResult(
+                examId,
+                CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                (resultObjArrayList, termExam, message) -> {
+                    if(resultObjArrayList != null){
+                        if(resultObjArrayList.size() != 0){
+                            semesterName.setText(resultObjArrayList.get(0).getExamName());
+                        }
+
+                        resultBoardAdapter = new ResultBoardAdapter(getContext());
+                        resultBoardAdapter.setItems(resultObjArrayList);
+                        resultBoardRecyclerViewId.setLayoutManager(new LinearLayoutManager(getContext()));
+                        resultBoardRecyclerViewId.setAdapter(resultBoardAdapter);
+                    }
+                    if(termExam != null){
+                        this.termExam = termExam;
+
+                        if(this.examList == null) {
+                            this.examList = termExam.getExamList();
+                            initSpinner();
+                        }
+                    }
+                });
     }
 }

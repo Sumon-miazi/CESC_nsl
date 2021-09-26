@@ -5,6 +5,7 @@ import com.orm.SugarRecord;
 import java.io.Serializable;
 
 public class ResultObj extends SugarRecord implements Serializable {
+    private String examName;
     private String subjectName;
     private int fullMark;
     private int subjectiveMark;
@@ -16,11 +17,13 @@ public class ResultObj extends SugarRecord implements Serializable {
     private String grade;
     private int highest_mark;
 
-    public ResultObj(String subjectName) {
+    public ResultObj(String examName, String subjectName) {
+        this.examName = examName;
         this.subjectName = subjectName;
     }
 
-    public ResultObj(String subjectName, int fullMark, int subjectiveMark, int objectiveMark, int practicalMark, int totalMark, int ctMark, int cgp, String grade, int highest_mark) {
+    public ResultObj(String examName, String subjectName, int fullMark, int subjectiveMark, int objectiveMark, int practicalMark, int totalMark, int ctMark, int cgp, String grade, int highest_mark) {
+        this.examName = examName;
         this.subjectName = subjectName;
         this.fullMark = fullMark;
         this.subjectiveMark = subjectiveMark;
@@ -31,6 +34,10 @@ public class ResultObj extends SugarRecord implements Serializable {
         this.cgp = cgp;
         this.grade = grade;
         this.highest_mark = highest_mark;
+    }
+
+    public String getExamName() {
+        return examName;
     }
 
     public String getSubjectName() {
