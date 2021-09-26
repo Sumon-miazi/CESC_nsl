@@ -1,16 +1,9 @@
 package com.itbeebd.cesc_nsl.api;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -32,7 +25,7 @@ public class BaseService  {
         File file = new File(imageFilePath); // initialize file here
         //   System.out.println(">>>>>>>>> file " + file.toString());
         String imageName = imageFilePath.substring(imageFilePath.lastIndexOf("/")+1);
-        return MultipartBody.Part.createFormData("name", imageName, okhttp3.RequestBody.create(MediaType.parse("image/*"), file));
+        return MultipartBody.Part.createFormData(name, imageName, okhttp3.RequestBody.create(MediaType.parse("image/*"), file));
     }
 
 }

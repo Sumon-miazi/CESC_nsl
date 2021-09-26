@@ -1,5 +1,8 @@
 package com.itbeebd.cesc_nsl.api;
 
+import com.itbeebd.cesc_nsl.utils.dummy.GuardianDummy;
+import com.itbeebd.cesc_nsl.utils.dummy.StudentDummy;
+
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -13,7 +16,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 
 public interface RetrofitService {
@@ -30,11 +32,19 @@ public interface RetrofitService {
     @POST("auth/profile/update-request")
     Call<ResponseBody> editStudentProfile(
             @Header("Authorization") String authorization,
-            @PartMap() Map<String, Object> data,
+            @Part("student") StudentDummy student,
+            @Part("Father")GuardianDummy father,
+            @Part("Mother") GuardianDummy mother,
             @Part MultipartBody.Part student_image,
             @Part MultipartBody.Part mother_image,
             @Part MultipartBody.Part father_image
-    );
+            );
+
+//
+//    @POST("auth/profile/update-request")
+//    Call<ResponseBody> editStudentProfile(
+//            @Header("Authorization") String authorization
+//    );
 
     @GET("auth/{path}")
     Call<ResponseBody> getRequestPath(

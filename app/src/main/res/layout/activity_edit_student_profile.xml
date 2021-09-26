@@ -358,6 +358,22 @@
                     android:textSize="10sp"
                     android:textStyle="bold" />
 
+                <include
+                    android:id="@+id/motherBlockId"
+                    layout="@layout/single_guardian_info_edit_view"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <include
+                    android:id="@+id/fatherBlockId"
+                    layout="@layout/single_guardian_info_edit_view"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent" />
+
             </LinearLayout>
             <Button
                 android:id="@+id/submitChangesBtnId"

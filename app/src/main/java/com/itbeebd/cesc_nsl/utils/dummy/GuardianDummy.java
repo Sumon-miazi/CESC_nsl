@@ -13,11 +13,10 @@ public class GuardianDummy {
     private String designation;
     private String organization;
     private String email;
-    private String imageUrl;
 
     public GuardianDummy(){}
 
-    public GuardianDummy(int student_id, int guardian_id , String relation, String name, String occupation, String mobile, String location, String blood_group, String designation, String organization, String email, String imageUrl) {
+    public GuardianDummy(int student_id, int guardian_id , String relation, String name, String occupation, String mobile, String location, String blood_group, String designation, String organization, String email) {
         this.student_id = student_id;
         this.guardian_id = guardian_id;
         this.relation = relation;
@@ -29,7 +28,6 @@ public class GuardianDummy {
         this.designation = designation;
         this.organization = organization;
         this.email = email;
-        this.imageUrl = imageUrl;
     }
 
     public int getGuardian_id() {
@@ -76,7 +74,4 @@ public class GuardianDummy {
         return email;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
 }

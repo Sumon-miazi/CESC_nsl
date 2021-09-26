@@ -10,8 +10,6 @@ import com.itbeebd.cesc_nsl.utils.dummy.StudentDummy;
 
 import org.json.JSONObject;
 
-import java.util.Map;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,20 +24,26 @@ public class ProfileEditApi extends BaseService {
         requestBody = new RetrofitRequestBody();
     }
 
-    public void updatedData(Map<String,Object> studentObjectMap,
+    public void updatedData(
                             String token,
+                            StudentDummy studentDummy,
+                            GuardianDummy motherDummy,
+                            GuardianDummy fatherDummy,
+                            String student_image,
+                            String mother_image,
+                            String father_image,
                             BooleanResponse booleanResponse
     ){
-        System.out.println(">>>>>>>>>> map " + studentObjectMap.toString());
-        StudentDummy studentDummy = studentObjectMap.get("student") == null? new StudentDummy() : (StudentDummy) studentObjectMap.get("student") ;
-        GuardianDummy motherDummy = studentObjectMap.get("Mother") == null? new GuardianDummy() : (GuardianDummy) studentObjectMap.get("Mother") ;
-        GuardianDummy fatherDummy = studentObjectMap.get("Father") == null? new GuardianDummy() : (GuardianDummy) studentObjectMap.get("Father") ;
 
-        Call<ResponseBody> editProfile = service.editStudentProfile(token,
-                studentObjectMap,
-                getImageFile(studentDummy.getImageUrl(), "student_image"),
-                getImageFile(motherDummy.getImageUrl(), "mother_image"),
-                getImageFile(fatherDummy.getImageUrl(), "father_image"));
+        Call<ResponseBody> editProfile = service.editStudentProfile(
+                token,
+                studentDummy,
+                fatherDummy,
+                motherDummy,
+                getImageFile(student_image, "student_image"),
+                getImageFile(mother_image, "mother_image"),
+                getImageFile(father_image, "father_image")
+                );
         editProfile.enqueue(new Callback<ResponseBody>(){
 
             @Override
@@ -49,7 +53,7 @@ public class ProfileEditApi extends BaseService {
                     try {
 
                         System.out.println(">>>>>>>>>> isSuccessful " + response);
-                        System.out.println(">>>>>>>>>> isSuccessful " + response.body().string());
+                        System.out.println(">>>>>>>>>> isSuccessful " + response.body());
                         System.out.println(">>>>>>>>>> isSuccessful " + response.message());
 
                         jsonObject =  new JSONObject(response.body().string());
@@ -57,11 +61,10 @@ public class ProfileEditApi extends BaseService {
                         booleanResponse.response(jsonObject.optBoolean("issuccessful"), "Login");
 
                     } catch (Exception e) {
+                        e.printStackTrace();
                         System.out.println(">>>>>>>>>> catch " + e.getLocalizedMessage());;
                         booleanResponse.response(false, e.getLocalizedMessage());
                     }
-
-
                 }
                 else {
                     booleanResponse.response(response.isSuccessful(), response.toString());

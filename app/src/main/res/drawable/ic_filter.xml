@@ -1,5 +1,12 @@
-<vector android:height="40dp" android:tint="?attr/colorControlNormal"
-    android:viewportHeight="24" android:viewportWidth="24"
-    android:width="40dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <path android:fillColor="@android:color/white" android:pathData="M4.25,5.61C6.27,8.2 10,13 10,13v6c0,0.55 0.45,1 1,1h2c0.55,0 1,-0.45 1,-1v-6c0,0 3.72,-4.8 5.74,-7.39C20.25,4.95 19.78,4 18.95,4H5.04C4.21,4 3.74,4.95 4.25,5.61z"/>
+<vector android:height="60dp" android:viewportHeight="24"
+    android:viewportWidth="24" android:width="60dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@color/filter_color" android:pathData="m12,23.45a2.86,2.86 0,1 1,2.86 -2.86,2.86 2.86,0 0,1 -2.86,2.86zM12,19.64a1,1 0,1 0,0.95 0.95,0.94 0.94,0 0,0 -0.95,-0.95z"/>
+    <path android:fillColor="@color/filter_color" android:pathData="m18.68,14.86a2.86,2.86 0,1 1,2.87 -2.86,2.86 2.86,0 0,1 -2.87,2.86zM18.68,11.04a1,1 0,1 0,1 1,1 1,0 0,0 -1,-1.04z"/>
+    <path android:fillColor="@color/filter_color" android:pathData="m5.32,6.27a2.86,2.86 0,1 1,2.86 -2.86,2.87 2.87,0 0,1 -2.86,2.86zM5.32,2.45a1,1 0,1 0,0 1.91,1 1,0 0,0 0,-1.91z"/>
+    <path android:fillColor="@color/filter_color" android:pathData="m7.23,2.46h16.23v1.91h-16.23z"/>
+    <path android:fillColor="@color/filter_color" android:pathData="m0.55,2.46h2.86v1.91h-2.86z"/>
+    <path android:fillColor="@color/filter_color" android:pathData="m20.59,11.05h2.86v1.91h-2.86z"/>
+    <path android:fillColor="@color/filter_color" android:pathData="m0.55,11.05h16.23v1.91h-16.23z"/>
+    <path android:fillColor="@color/filter_color" android:pathData="m13.91,19.64h9.55v1.91h-9.55z"/>
+    <path android:fillColor="@color/filter_color" android:pathData="m0.55,19.64h9.55v1.91h-9.55z"/>
 </vector>
