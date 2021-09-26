@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.ResultBoardAdapter;
+import com.itbeebd.cesc_nsl.api.studentApi.ResultApi;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.sugarClass.ResultObj;
 import com.skydoves.powerspinner.PowerSpinnerView;
 
@@ -60,17 +62,18 @@ public class ResultBoardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ArrayList<ResultObj> resultObjs = new ArrayList<>();
-        resultObjs.add(new ResultObj("Higher Math first paper", "100", "80", "20", "40", "100", "49", "33", "A+"));
-        resultObjs.add(new ResultObj("Math", "100", "80", "20", "40", "100", "49", "33", "A+"));
-        resultObjs.add(new ResultObj("Math", "100", "80", "20", "40", "100", "49", "33", "A+"));
-        resultObjs.add(new ResultObj("Math", "100", "80", "20", "40", "100", "49", "33", "A+"));
-        resultObjs.add(new ResultObj("Math", "100", "80", "20", "40", "100", "49", "33", "A+"));
+        new ResultApi(getContext()).getResult(
+                4,
+                CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                (object, message) -> {
+            if(object != null){
+                resultBoardAdapter = new ResultBoardAdapter(getContext());
+                resultBoardAdapter.setItems((ArrayList<ResultObj>) object);
+                resultBoardRecyclerViewId.setLayoutManager(new LinearLayoutManager(getContext()));
+                resultBoardRecyclerViewId.setAdapter(resultBoardAdapter);
+            }
+        });
 
-        resultBoardAdapter = new ResultBoardAdapter(getContext());
-        resultBoardAdapter.setItems(resultObjs);
-        resultBoardRecyclerViewId.setLayoutManager(new LinearLayoutManager(getContext()));
-        resultBoardRecyclerViewId.setAdapter(resultBoardAdapter);
     }
 
     @Override

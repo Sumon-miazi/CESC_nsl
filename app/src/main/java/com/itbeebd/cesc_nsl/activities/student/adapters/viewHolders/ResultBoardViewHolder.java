@@ -28,6 +28,7 @@ public class ResultBoardViewHolder extends BaseViewHolder<ResultObj, OnRecyclerO
     private final TextView objectMarkViewId;
     private final TextView practicalMarkViewId;
     private final TextView classTestMarkViewId;
+    private final TextView highestMarkViewId;
     private final ExpandableLayout expandable_layout;
 
 
@@ -49,6 +50,7 @@ public class ResultBoardViewHolder extends BaseViewHolder<ResultObj, OnRecyclerO
         practicalMarkViewId = itemView.findViewById(R.id.practicalMarkViewId);
         classTestMarkViewId = itemView.findViewById(R.id.classTestMarkViewId);
         expandable_layout = itemView.findViewById(R.id.expandable_layout);
+        highestMarkViewId = itemView.findViewById(R.id.highestMarkViewId);
 
     }
 
@@ -58,13 +60,14 @@ public class ResultBoardViewHolder extends BaseViewHolder<ResultObj, OnRecyclerO
             resultRowId.setBackgroundColor(context.getResources().getColor(R.color.first_row));
         }
         else resultRowId.setBackgroundColor(context.getResources().getColor(R.color.second_row));
+
         subjectNoId.setText(String.valueOf(this.getPosition() + 1));
+        highestMarkViewId.setText(String.format("HIGHEST MARK: %s", item.getHighest_mark()));
         subjectNameId.setText(item.getSubjectName());
-        subjectNameId.setText(item.getSubjectName());
-        subjectFullMarkViewId.setText(item.getFullMark());
-        subjectTotalMarkViewId.setText(item.getTotalMark());
-        cgpViewId.setText(item.getCgp());
-        gradeViewId.setText(item.getGrade());
+        subjectFullMarkViewId.setText(String.valueOf(item.getFullMark()));
+        subjectTotalMarkViewId.setText(String.valueOf(item.getTotalMark()));
+        cgpViewId.setText(String.valueOf(item.getCgp()));
+        gradeViewId.setText(String.valueOf(item.getGrade()));
         subjectiveMarkViewId.setText(String.format("Subjective Mark: %s", item.getSubjectiveMark()));
         objectMarkViewId.setText(String.format("Objective Mark: %s", item.getObjectiveMark()));
         practicalMarkViewId.setText(String.format("Practical Mark: %s", item.getPracticalMark()));

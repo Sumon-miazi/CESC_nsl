@@ -9,9 +9,9 @@ public class RetrofitRequestBody {
 
     }
 
-    public Map<String, Object> studentLogin(int sectionId){
+    public Map<String, Object> getResult(int examId){
         Map<String, Object> map = new HashMap<>();
-        map.put("section_id", sectionId);
+        map.put("exam_id", examId);
         return map;
     }
 

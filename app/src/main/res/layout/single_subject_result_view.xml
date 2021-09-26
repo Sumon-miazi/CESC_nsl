@@ -13,9 +13,9 @@
         android:id="@+id/resultRecordId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -115,18 +115,33 @@
         android:id="@+id/expandable_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:el_duration="500"
         app:el_expanded="false"
         app:el_parallax="0.5"
-        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultRecordId">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout_marginStart="30dp">
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/highestMarkViewId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_inactive"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/subjectMarkViewId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/subjectMarkViewId"
@@ -134,14 +149,12 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:text="Subjective Mark: 100"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/objectMarkViewId"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintTop_toBottomOf="@+id/highestMarkViewId" />
 
             <TextView
                 android:id="@+id/objectMarkViewId"
@@ -149,7 +162,6 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:text="Objective Mark: 100"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/practicalMarkViewId"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -163,7 +175,6 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:text="Practical Mark: 100"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/classTestMarkViewId"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -177,7 +188,6 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:text="Class Test Mark: 100"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

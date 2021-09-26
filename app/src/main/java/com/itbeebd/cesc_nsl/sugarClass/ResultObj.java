@@ -6,16 +6,21 @@ import java.io.Serializable;
 
 public class ResultObj extends SugarRecord implements Serializable {
     private String subjectName;
-    private String fullMark;
-    private String subjectiveMark;
-    private String objectiveMark;
-    private String practicalMark;
-    private String totalMark;
-    private String ctMark;
-    private String cgp;
+    private int fullMark;
+    private int subjectiveMark;
+    private int objectiveMark;
+    private int practicalMark;
+    private int totalMark;
+    private int ctMark;
+    private int cgp;
     private String grade;
+    private int highest_mark;
 
-    public ResultObj(String subjectName, String fullMark, String subjectiveMark, String practicalMark, String objectiveMark, String totalMark, String ctMark, String cgp, String grade) {
+    public ResultObj(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    public ResultObj(String subjectName, int fullMark, int subjectiveMark, int objectiveMark, int practicalMark, int totalMark, int ctMark, int cgp, String grade, int highest_mark) {
         this.subjectName = subjectName;
         this.fullMark = fullMark;
         this.subjectiveMark = subjectiveMark;
@@ -25,41 +30,46 @@ public class ResultObj extends SugarRecord implements Serializable {
         this.ctMark = ctMark;
         this.cgp = cgp;
         this.grade = grade;
-    }
-
-    public String getPracticalMark() {
-        return practicalMark;
+        this.highest_mark = highest_mark;
     }
 
     public String getSubjectName() {
         return subjectName;
     }
 
-    public String getFullMark() {
+    public int getFullMark() {
         return fullMark;
     }
 
-    public String getSubjectiveMark() {
+    public int getSubjectiveMark() {
         return subjectiveMark;
     }
 
-    public String getObjectiveMark() {
+    public int getObjectiveMark() {
         return objectiveMark;
     }
 
-    public String getTotalMark() {
+    public int getPracticalMark() {
+        return practicalMark;
+    }
+
+    public int getTotalMark() {
         return totalMark;
     }
 
-    public String getCtMark() {
+    public int getCtMark() {
         return ctMark;
     }
 
-    public String getCgp() {
+    public int getCgp() {
         return cgp;
     }
 
     public String getGrade() {
-        return grade;
+        return grade == null? "-" : grade;
+    }
+
+    public int getHighest_mark() {
+        return highest_mark;
     }
 }

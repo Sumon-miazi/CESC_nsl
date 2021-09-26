@@ -4,6 +4,18 @@ import android.content.Context;
 
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
+import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
+import com.itbeebd.cesc_nsl.sugarClass.ResultObj;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ResultApi extends BaseService {
     private Context context;
@@ -13,10 +25,10 @@ public class ResultApi extends BaseService {
         this.context = context;
         requestBody = new RetrofitRequestBody();
     }
-/*
-    public void getResult(String token, ResponseObj responseObj){
 
-        Call<ResponseBody> getResult = service.getRequestPath(token, ApiUrls.RESULT);
+    public void getResult(int examId, String token, ResponseObj responseObj){
+
+        Call<ResponseBody> getResult = service.getResultByExamId(token, requestBody.getResult(examId));
         getResult.enqueue(new Callback<ResponseBody>(){
 
             @Override
@@ -26,35 +38,37 @@ public class ResultApi extends BaseService {
                     System.out.println(">>>>>>>>>> due " + response.body());
                     try {
                         jsonObject =  new JSONObject(response.body().string());
-                        JSONObject data =  jsonObject.getJSONObject("data");
+                        JSONArray data =  jsonObject.getJSONArray("data");
 
-                        System.out.println(">>>>>>>>>> due " + jsonObject);
+                        System.out.println(">>>>>>>>>> result " + jsonObject);
 
                         ArrayList<ResultObj> resultObjArrayList = new ArrayList<>();
 
-                        for(int i = 0; i < jsonObject.length(); i++){
-                            JSONObject dueHistoryObj = dueHistoryArray.getJSONObject(i);
+                        for(int i = 0; i < data.length(); i++){
+                            JSONObject resultJsonObj = data.getJSONObject(i);
+                            String examMarkAsString = resultJsonObj.getJSONObject("exams").optString("exam_mark");
+                            ResultObj resultObj;
+                            if(examMarkAsString.endsWith("null")){
+                                resultObj = new ResultObj(resultJsonObj.getJSONObject("subject").optString("name"));
+                            }
+                            else {
+                                 resultObj = new ResultObj(
+                                        resultJsonObj.getJSONObject("subject").optString("name"),
+                                        resultJsonObj.getJSONObject("exams").getJSONObject("exam_mark").optInt("full_mark"),
+                                        resultJsonObj.getJSONObject("exams").getJSONObject("exam_mark").optInt("sub_mark"),
+                                        resultJsonObj.getJSONObject("exams").getJSONObject("exam_mark").optInt("obj_mark"),
+                                        resultJsonObj.getJSONObject("exams").getJSONObject("exam_mark").optInt("prac_mark"),
+                                        resultJsonObj.getJSONObject("exams").getJSONObject("exam_mark").optInt("total_obtained_marks"),
+                                        resultJsonObj.getJSONObject("exams").getJSONObject("exam_mark").optInt("ct_mark"),
+                                        resultJsonObj.getJSONObject("exams").getJSONObject("exam_mark").optInt("grade_point"),
+                                        resultJsonObj.getJSONObject("exams").getJSONObject("exam_mark").optString("grade_letter"),
+                                        resultJsonObj.getJSONObject("exams").getJSONObject("exam_mark").optInt("highest_marks")
+                                );
+                            }
 
-                            DueHistory dueHistory = new DueHistory(
-                                    dueHistoryObj.optInt("academic_year"),
-                                    dueHistoryObj.optInt("account_head_id"),
-                                    dueHistoryObj.getJSONObject("account_head").getString("name"),
-                                    dueHistoryObj.optInt("amount"),
-                                    dueHistoryObj.optInt("paid_amount"),
-                                    dueHistoryObj.optInt("due_amount"),
-                                    dueHistoryObj.optInt("weiber"),
-                                    dueHistoryObj.getInt("collected_month"),
-                                    dueHistoryObj.optString("month"),
-                                    dueHistoryObj.getJSONObject("student").optString("payment_category"),
-                                    dueHistoryObj.getJSONObject("student").getJSONObject("stdclass").optString("type")
-                            );
-
-                            dueHistories.add(dueHistory);
+                            resultObjArrayList.add(resultObj);
                         }
-
-                        due.setDueHistoryArrayList(dueHistories);
-
-                        responseObj.data(due, "successful");
+                        responseObj.data(resultObjArrayList, "successful");
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -79,7 +93,4 @@ public class ResultApi extends BaseService {
             }
         });
     }
-
- */
-
 }

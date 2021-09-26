@@ -5,6 +5,7 @@ import java.util.Map;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -39,6 +40,12 @@ public interface RetrofitService {
     Call<ResponseBody> getRequestPath(
             @Header("Authorization") String authorization,
             @Path("path") String path
+    );
+
+    @POST("auth/result")
+    Call<ResponseBody> getResultByExamId(
+            @Header("Authorization") String authorization,
+            @Body Map<String, Object> body
     );
 
 }

@@ -21,7 +21,7 @@
         <entry key="app/src/main/res/layout/lesson_plan_block.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_lesson_plan_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_library_book_view.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/single_subject_result_view.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/single_subject_result_view.xml" value="0.33" />
       </map>
     </option>
   </component>
