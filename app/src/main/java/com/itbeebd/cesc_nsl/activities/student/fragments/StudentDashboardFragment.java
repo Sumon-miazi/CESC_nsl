@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.LessonPlanActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
@@ -27,6 +28,7 @@ import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
+import com.itbeebd.cesc_nsl.api.studentApi.ClassRoutineApi;
 import com.itbeebd.cesc_nsl.api.studentApi.DashboardApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
@@ -60,6 +62,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private TextView notificationHint;
     private TextView notificationSeeAll;
 
+    private ImageView filterClassRoutineBtnId;
     private RecyclerView classRoutineRecyclerView;
 
     private RecyclerView lessonPlanRecyclerView;
@@ -127,6 +130,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 //        notificationSeeAll.setVisibility(View.VISIBLE);
 
 
+        filterClassRoutineBtnId = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.filterClassRoutineBtnId);
         classRoutineRecyclerView = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.classRoutineRecyclerViewId);
 
         lessonPlanRecyclerView = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanRecyclerViewId);
@@ -137,6 +141,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         quizArchiveBlock.setOnClickListener(this::gotoQuizArchiveView);
         lessonBlock.setOnClickListener(this::gotoLessonView);
         onlineClassBlock.setOnClickListener(this::gotoOnlineView);
+
+        filterClassRoutineBtnId.setOnClickListener(this::filterClassRoutine);
 
    //     notificationSeeAll.setOnClickListener(this);
         studentNotificationAlarmViewId.setOnClickListener(this);
@@ -325,11 +331,68 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void gotoLessonView(View view) {
+        if(lessonPlans == null || lessonPlans.size() == 0) return;
         System.out.println(">>>>>. " + view.getId());
+        Intent intent = new Intent(getActivity(), LessonPlanActivity.class);
+        intent.putExtra("lessonPlan",  lessonPlans);
+        getActivity().startActivity(intent);
     }
 
     private void gotoQuizArchiveView(View view) {
         System.out.println(">>>>>. " + view.getId());
+    }
+
+
+    private void filterClassRoutine(View view) {
+        showBottomSheetDialogForClassRoutine();
+    }
+
+    private void showBottomSheetDialogForClassRoutine() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
+        bottomSheetDialog.setContentView(R.layout.weekly_days_view);
+
+        TextView saturdayId = bottomSheetDialog.findViewById(R.id.saturdayId);
+        TextView sundayId = bottomSheetDialog.findViewById(R.id.sundayId);
+        TextView mondayId = bottomSheetDialog.findViewById(R.id.mondayId);
+        TextView tuesdayId = bottomSheetDialog.findViewById(R.id.tuesdayId);
+        TextView wednesdayId = bottomSheetDialog.findViewById(R.id.wednesdayId);
+        TextView thursdayId = bottomSheetDialog.findViewById(R.id.thursdayId);
+
+        assert saturdayId != null;
+        saturdayId.setOnClickListener(view -> { getClassRoutineByDayName(saturdayId.getText().toString());bottomSheetDialog.dismiss(); });
+
+        assert sundayId != null;
+        sundayId.setOnClickListener(view -> { getClassRoutineByDayName(sundayId.getText().toString());bottomSheetDialog.dismiss(); });
+
+        assert mondayId != null;
+        mondayId.setOnClickListener(view -> { getClassRoutineByDayName(mondayId.getText().toString());bottomSheetDialog.dismiss(); });
+
+        assert tuesdayId != null;
+        tuesdayId.setOnClickListener(view -> { getClassRoutineByDayName(tuesdayId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        assert wednesdayId != null;
+        wednesdayId.setOnClickListener(view -> { getClassRoutineByDayName(wednesdayId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        assert thursdayId != null;
+        thursdayId.setOnClickListener(view -> { getClassRoutineByDayName(thursdayId.getText().toString()); bottomSheetDialog.dismiss(); });
+
+        bottomSheetDialog.show();
+    }
+
+    private void getClassRoutineByDayName(String name){
+        new ClassRoutineApi(getContext()).getResult(
+                name,
+                CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                (object, message) -> {
+                    try {
+                        if(object != null){
+                            setClassRoutineAdapter((ArrayList<ClassRoutine>) object);
+                        }
+                        else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+                    catch (Exception ignore){}
+                }
+        );
     }
 
 }

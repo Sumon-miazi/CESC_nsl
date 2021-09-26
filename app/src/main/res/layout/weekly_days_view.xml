@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blue_primary_dark">
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/heebo_bold"
+        android:padding="10dp"
+        android:text="Select a day"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/saturdayId"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weekly_days_bg"
+        android:fontFamily="@font/heebo_semi_bold"
+        android:padding="10dp"
+        android:text="Saturday"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/blue_primary_dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/sundayId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView42"
+        app:layout_constraintVertical_bias="0.060000002"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/sundayId"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weekly_days_bg"
+        android:fontFamily="@font/heebo_semi_bold"
+        android:padding="10dp"
+        android:text="Sunday"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/blue_primary_dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/mondayId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saturdayId" />
+
+    <TextView
+        android:id="@+id/mondayId"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weekly_days_bg"
+        android:fontFamily="@font/heebo_semi_bold"
+        android:padding="10dp"
+        android:text="Monday"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/blue_primary_dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tuesdayId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sundayId" />
+
+    <TextView
+        android:id="@+id/tuesdayId"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weekly_days_bg"
+        android:fontFamily="@font/heebo_semi_bold"
+        android:padding="10dp"
+        android:text="Tuesday"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/blue_primary_dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/wednesdayId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mondayId" />
+
+    <TextView
+        android:id="@+id/wednesdayId"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weekly_days_bg"
+        android:fontFamily="@font/heebo_semi_bold"
+        android:padding="10dp"
+        android:text="Wednesday"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/blue_primary_dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/thursdayId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tuesdayId" />
+
+    <TextView
+        android:id="@+id/thursdayId"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weekly_days_bg"
+        android:fontFamily="@font/heebo_semi_bold"
+        android:padding="10dp"
+        android:text="Thursday"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/blue_primary_dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wednesdayId" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,4 +48,10 @@ public interface RetrofitService {
             @Body Map<String, Object> body
     );
 
+    @POST("auth/class-routine")
+    Call<ResponseBody> getClassRoutineByDayName(
+            @Header("Authorization") String authorization,
+            @Body Map<String, Object> body
+    );
+
 }

@@ -32,4 +32,6 @@
         <item name="cornerSizeBottomRight">60dp</item>
         <item name="cornerSizeBottomLeft">60dp</item>
     </style>
+
+
 </resources>
