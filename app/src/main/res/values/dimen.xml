@@ -9,4 +9,18 @@
     <!-- Overriding the default values of the tableView -->
     <dimen name="default_row_header_width">55dp</dimen>
     <dimen name="default_column_header_height">40dp</dimen>
+
+    <dimen name="t_dashboard_menu_padding">10dp</dimen>
+    <dimen name="t_dashboard_menu_txt_size">16sp</dimen>
+    <dimen name="t_dashboard_submenu_txt_size">14sp</dimen>
+
+    <dimen name="t_dashboard_menu_card_margin_top">10dp</dimen>
+    <dimen name="t_dashboard_menu_card_margin_bottom">10dp</dimen>
+    <dimen name="t_dashboard_menu_card_margin_start">20dp</dimen>
+    <dimen name="t_dashboard_menu_card_margin_end">20dp</dimen>
+
+    <dimen name="t_submenu_padding">4dp</dimen>
+
+
+    <dimen name="t_dashboard_menu_expendable_margin_top">8dp</dimen>
 </resources>

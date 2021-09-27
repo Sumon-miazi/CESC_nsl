@@ -23,6 +23,11 @@
     <color name="white_inactive_3">#F3FDFF</color>
 
 
+    <color name="zic">#F1F5FF</color>
+    <color name="zac">#EEFBFF</color>
+    <color name="menu_text_color">#020202</color>
+
+
     <color name="red_active">#f44336</color>
     <color name="purple_active">#9c27b0</color>
     <color name="blue_active">#03a9f4</color>
@@ -72,5 +77,21 @@
     <color name="cell_background_color">#ffffff</color>
     <color name="header_line_color">#0a0a0a</color>
     <color name="table_view_default_text_color">#0a0a0a</color>
+
+    <color name="academic_tint">#79C9F1</color>
+    <color name="student_tint">#84ECCE</color>
+    <color name="result_tint">#EDBE79</color>
+    <color name="lesson_plan_tint">#81F1BD</color>
+    <color name="guided_student_tint">#B998F6</color>
+    <color name="report_tint">#F68C83</color>
+
+    <color name="academic_txt">#4F9AC0</color>
+    <color name="student_txt">#45B091</color>
+    <color name="result_txt">#B7853B</color>
+    <color name="lesson_plan_txt">#54D197</color>
+    <color name="guided_student_txt">#9F77EA</color>
+    <color name="report_txt">#C85249</color>
+
+
 
 </resources>

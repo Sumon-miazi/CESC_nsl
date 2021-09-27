@@ -22,9 +22,8 @@
         android:theme="@style/Theme.CESC_nsl"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity
-            android:name=".activities.student.LibraryBookActivity"
-            android:exported="true" />
+        <activity android:name=".activities.teacher.TeacherDashboardActivity"/>
+        <activity android:name=".activities.student.LibraryBookActivity" />
         <activity android:name=".activities.student.DuePaymentCheckOutActivity" />
         <activity android:name=".activities.student.EditStudentProfileActivity" />
         <activity android:name=".activities.student.PaymentHistoryActivity" />
@@ -38,8 +37,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -58,7 +58,7 @@
         android:id="@+id/bookDownloadBtnId"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:backgroundTint="@color/green_active"
+        app:tint="@color/green_inactive"
         android:src="@drawable/ic_download"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

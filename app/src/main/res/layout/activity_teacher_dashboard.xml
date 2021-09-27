@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.teacher.TeacherDashboardActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/studentProfileBgViewId"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/round_corner_bottom_bg"
+            android:minHeight="90dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/teacherProfileViewId"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/default_male"
+            app:civ_border_width="0dp"
+            app:civ_shadow="true"
+            app:civ_shadow_color="@color/blue_primary_dark"
+            app:civ_shadow_radius="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />"
+
+
+        <TextView
+            android:id="@+id/todayDateViewId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="23 September, 2021"
+            android:textColor="@color/white_inactive"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello, "
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/todayDateViewId"
+            app:layout_constraintTop_toBottomOf="@+id/todayDateViewId" />
+
+        <TextView
+            android:id="@+id/userNameViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="There"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/teacherProfileViewId"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/t_menu_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/academicCardId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/academic_tint"
+                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="cardViewClicked"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UsingOnClickInXml">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_school"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:text="Academic"
+                        android:textAllCaps="true"
+                        android:textColor="@color/academic_txt"
+                        android:textSize="@dimen/t_dashboard_menu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView6"
+                        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/academic_expandable_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:background="@color/white"
+                app:el_duration="500"
+                app:el_expanded="false"
+                app:el_parallax="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/academicCardId">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/t_onlineClassViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zic"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:paddingStart="@dimen/t_submenu_padding"
+                        android:paddingEnd="@dimen/t_submenu_padding"
+                        android:text="Online Class"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_classRoutineViewId"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <Button
+                        android:id="@+id/t_classRoutineViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zac"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Class Routine"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_teacherRoutineViewId"
+                        app:layout_constraintTop_toBottomOf="@+id/t_onlineClassViewId"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                    <Button
+                        android:id="@+id/t_teacherRoutineViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zic"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Teacher Routine"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_onlineExamViewId"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/t_classRoutineViewId" />
+
+                    <Button
+                        android:id="@+id/t_onlineExamViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zac"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Online Exam"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/t_teacherRoutineViewId"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/studentCardId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/student_tint"
+                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="cardViewClicked"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/academic_expandable_layout"
+                tools:ignore="UsingOnClickInXml">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/imageVi2ew6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_people"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:text="Student"
+                        android:textAllCaps="true"
+                        android:textColor="@color/student_txt"
+                        android:textSize="@dimen/t_dashboard_menu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageVi2ew6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageVi2ew6"
+                        app:layout_constraintTop_toTopOf="@+id/imageVi2ew6" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/student_expandable_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:background="@color/white"
+                app:el_duration="500"
+                app:el_expanded="false"
+                app:el_parallax="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/studentCardId">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/t_promotionViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zic"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Manual Promotion"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_attendanceListViewId"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <Button
+                        android:id="@+id/t_attendanceListViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zac"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Attendance List"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_absentFeeViewId"
+                        app:layout_constraintTop_toBottomOf="@+id/t_promotionViewId"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                    <Button
+                        android:id="@+id/t_absentFeeViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zic"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Absent Fee"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_studentListViewId"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/t_attendanceListViewId" />
+
+                    <Button
+                        android:id="@+id/t_studentListViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zac"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Student List"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/t_absentFeeViewId"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/resultCardId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/result_tint"
+                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="cardViewClicked"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/student_expandable_layout"
+                tools:ignore="UsingOnClickInXml">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/ima3geVi2ew6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_sticky"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:text="Result"
+                        android:textAllCaps="true"
+                        android:textColor="@color/result_txt"
+                        android:textSize="@dimen/t_dashboard_menu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/ima3geVi2ew6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ima3geVi2ew6"
+                        app:layout_constraintTop_toTopOf="@+id/ima3geVi2ew6" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/result_expandable_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:background="@color/white"
+                app:el_duration="500"
+                app:el_expanded="false"
+                app:el_parallax="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/resultCardId">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/t_resultSheetViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zic"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Result Sheet"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_resultEntryViewId"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <Button
+                        android:id="@+id/t_resultEntryViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zac"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Result (Entry)"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_tabulationSheetViewId"
+                        app:layout_constraintTop_toBottomOf="@+id/t_resultSheetViewId"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                    <Button
+                        android:id="@+id/t_tabulationSheetViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zic"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Tabulation Sheet"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/t_resultEntryViewId" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/lessonPlanCardId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/lesson_plan_tint"
+                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="cardViewClicked"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/result_expandable_layout"
+                tools:ignore="UsingOnClickInXml">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/imw6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_lesson_plan"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:text="Lesson Plan"
+                        android:textAllCaps="true"
+                        android:textColor="@color/lesson_plan_txt"
+                        android:textSize="@dimen/t_dashboard_menu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/imw6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imw6"
+                        app:layout_constraintTop_toTopOf="@+id/imw6" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/guidedStudentCardId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/guided_student_tint"
+                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="cardViewClicked"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lessonPlanCardId"
+                tools:ignore="UsingOnClickInXml">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/ima342ew6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_guided_student"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:text="Guided Student"
+                        android:textAllCaps="true"
+                        android:textColor="@color/guided_student_txt"
+                        android:textSize="@dimen/t_dashboard_menu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/ima342ew6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ima342ew6"
+                        app:layout_constraintTop_toTopOf="@+id/ima342ew6" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/reportCardId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/report_tint"
+                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="cardViewClicked"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guidedStudentCardId"
+                tools:ignore="UsingOnClickInXml">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/idamw6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_report_card"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:text="Report"
+                        android:textAllCaps="true"
+                        android:textColor="@color/report_txt"
+                        android:textSize="@dimen/t_dashboard_menu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/idamw6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/idamw6"
+                        app:layout_constraintTop_toTopOf="@+id/idamw6" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/report_expandable_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:background="@color/white"
+                app:el_duration="500"
+                app:el_expanded="false"
+                app:el_parallax="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reportCardId">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/t_reportStudentListViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zic"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Student List"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_reportStudentAttendanceViewId"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <Button
+                        android:id="@+id/t_reportStudentAttendanceViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zac"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Student Attendance"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/t_reportStudentListViewId"
+                        tools:layout_editor_absoluteX="0dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/report_expandable_layout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>
