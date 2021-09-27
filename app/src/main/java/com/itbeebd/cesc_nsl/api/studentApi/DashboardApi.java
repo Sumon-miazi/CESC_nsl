@@ -6,6 +6,7 @@ import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
+import com.itbeebd.cesc_nsl.sugarClass.Book;
 import com.itbeebd.cesc_nsl.utils.Attendance;
 import com.itbeebd.cesc_nsl.utils.ClassRoutine;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
@@ -54,6 +55,7 @@ public class DashboardApi extends BaseService {
                         JSONObject notificationJsonObj =  data.getJSONObject("notification");
                         JSONArray notificationJsonArray =  notificationJsonObj.getJSONArray("notification");
                         JSONArray classRoutineJsonArray =  data.getJSONArray("classRoutine");
+                        JSONArray libraryBookJsonArray =  data.getJSONArray("libraryBooks");
 
                         System.out.println(">>>>>>>>>> dashboardHeaderInfo " + data.optInt("totalOnlineClass"));
 
@@ -126,12 +128,24 @@ public class DashboardApi extends BaseService {
                             notificationObjArrayList.add(notificationObj);
                         }
 
+                        ArrayList<Book> bookArrayList = new ArrayList<>();
+                        for(int i = 0; i < libraryBookJsonArray.length(); i++) {
+                            JSONObject object = libraryBookJsonArray.getJSONObject(i);
+
+                            Book book = new Book(
+                                    ApiUrls.BASE_IMAGE_URL + object.optString("book"),
+                                    object.optString("image"),
+                                    object.optString("title"),
+                                    object.optString("author")
+                            );
+                            bookArrayList.add(book);
+                        }
 
                         headerObj.setAttendance(attendanceObj);
                         headerObj.setClassRoutineArrayList(classRoutineArrayList);
                         headerObj.setLessonPlanArrayList(lessonPlanArrayList);
                         headerObj.setNotificationObjArrayList(notificationObjArrayList);
-
+                        headerObj.setBookArrayList(bookArrayList);
                         responseObj.data(headerObj, "successful");
 
                     } catch (Exception e) {

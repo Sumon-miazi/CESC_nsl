@@ -36,8 +36,6 @@ public class LessonPlanActivity extends AppCompatActivity  {
 
             if(lessonPlans != null) setLessonPlanAdapter();
         }
-
-        System.out.println(">>>>>>> lesson " + lessonPlans.size() );
     }
 
     private void setLessonPlanAdapter(){

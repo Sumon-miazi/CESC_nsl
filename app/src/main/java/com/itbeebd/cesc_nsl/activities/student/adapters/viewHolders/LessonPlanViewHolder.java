@@ -23,7 +23,7 @@ import java.util.Date;
 
 public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerObjectClickListener<LessonPlan>> {
 
-    private FileDownloader fileDownloader;
+    private final FileDownloader fileDownloader;
     private final TextView teacherName;
     private final TextView subjectName;
     private final TextView lessonTitle;
@@ -73,7 +73,7 @@ public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerO
 
     private void downloadLessonFiles(ArrayList<LessonFile> lessonFileArrayList){
         if(fileDownloader == null) return;
-        fileDownloader.downloadFiles(lessonFileArrayList, (isSuccess, message) -> {
+        fileDownloader.downloadFiles(lessonFileArrayList,"LessonPlanFiles", (isSuccess, message) -> {
             try {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }

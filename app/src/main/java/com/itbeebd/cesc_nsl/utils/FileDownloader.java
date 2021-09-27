@@ -113,17 +113,13 @@ public class FileDownloader{
         }
     };
 
-    public void downloadFile(LessonFile lessonFile, BooleanResponse booleanResponse){
-    //    String url = "http:www.example.com/test.txt";
-    //    String file = "/downloads/test.txt";
-        System.out.println(">>>>  file url " + lessonFile.getFileUrl());
-        System.out.println(">>>>  file name " + lessonFile.getFileName());
+    public void downloadFile(String url, String fileName, String dirPath, BooleanResponse booleanResponse){
 
-        Request request = new Request(lessonFile.getFileUrl(), getDownloadPath(lessonFile.getFileName()));
+        Request request = new Request(url, getDownloadPath(fileName, dirPath));
         request.setPriority(Priority.HIGH);
         request.setNetworkType(NetworkType.ALL);
-       // request.addHeader("clientKey", "SD78DF93_3947&MVNGHE1WONG");
-       // request.addHeader("clientKey", String.valueOf(Math.random() * 100000 + 1));
+        // request.addHeader("clientKey", "SD78DF93_3947&MVNGHE1WONG");
+        // request.addHeader("clientKey", String.valueOf(Math.random() * 100000 + 1));
         request.addHeader("clientKey", "SD78DF93_3947&MVNGHE1WONG");
 
         fetch.enqueue(request, updatedRequest -> {
@@ -137,21 +133,49 @@ public class FileDownloader{
             System.out.println("<><><><> request " + error.toString());
         });
 
-
-
         fetch.addListener(fetchListener);
 
     }
 
-    public void downloadFiles(ArrayList<LessonFile> files, BooleanResponse booleanResponse){
+//    public void downloadFile(LessonFile lessonFile, BooleanResponse booleanResponse){
+//    //    String url = "http:www.example.com/test.txt";
+//    //    String file = "/downloads/test.txt";
+//        System.out.println(">>>>  file url " + lessonFile.getFileUrl());
+//        System.out.println(">>>>  file name " + lessonFile.getFileName());
+//
+//        Request request = new Request(lessonFile.getFileUrl(), getDownloadPath(lessonFile.getFileName()));
+//        request.setPriority(Priority.HIGH);
+//        request.setNetworkType(NetworkType.ALL);
+//       // request.addHeader("clientKey", "SD78DF93_3947&MVNGHE1WONG");
+//       // request.addHeader("clientKey", String.valueOf(Math.random() * 100000 + 1));
+//        request.addHeader("clientKey", "SD78DF93_3947&MVNGHE1WONG");
+//
+//        fetch.enqueue(request, updatedRequest -> {
+//            //Request was successfully enqueued for download.
+//            booleanResponse.response(true, "Downloading");
+//        }, error -> {
+//            //An error occurred enqueuing the request.
+//            booleanResponse.response(false, error.toString());
+//            System.out.println("<><><><> request " + request.getUrl());
+//            System.out.println("<><><><> request " + error.getHttpResponse());
+//            System.out.println("<><><><> request " + error.toString());
+//        });
+//
+//
+//
+//        fetch.addListener(fetchListener);
+//
+//    }
+
+    public void downloadFiles(ArrayList<LessonFile> files, String dirPath, BooleanResponse booleanResponse){
         for(int i = 0; i < files.size(); i++){
-            downloadFile(files.get(i), booleanResponse::response);
+            downloadFile(files.get(i).getFileUrl(), files.get(i).getFileName(), dirPath, booleanResponse::response);
         }
     }
 
-    private String getDownloadPath(String path){
+    private String getDownloadPath(String path, String dirPath){
 
-        String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/LessonPlanFiles";
+        String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/CESC/" + dirPath;
 
         try {
             File dir = new File(fullPath);

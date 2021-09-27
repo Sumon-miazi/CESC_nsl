@@ -49,9 +49,14 @@ public class PaymentHistoryActivity extends AppCompatActivity implements OnRecyc
         new PaymentApi(this).getPaymentHistory(
                 CustomSharedPref.getInstance(this).getAuthToken(),
                 ((payments, message) -> {
-                    if (payments.size() != 0) {
-                        setPaymentHistoryAdapter(payments);
-                    } else Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                    try {
+                        if (payments != null) {
+                            if(payments.size() == 0) Toast.makeText(this, "No payment history found", Toast.LENGTH_LONG).show();
+                            setPaymentHistoryAdapter(payments);
+                        }
+                        else Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                    }
+                    catch (Exception ignore){}
                 })
         );
     }

@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.LessonPlanActivity;
+import com.itbeebd.cesc_nsl.activities.student.LibraryBookActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.ClassRoutineAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
@@ -33,6 +34,7 @@ import com.itbeebd.cesc_nsl.api.studentApi.ClassRoutineApi;
 import com.itbeebd.cesc_nsl.api.studentApi.DashboardApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
+import com.itbeebd.cesc_nsl.sugarClass.Book;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.utils.Attendance;
 import com.itbeebd.cesc_nsl.utils.ClassRoutine;
@@ -53,8 +55,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private CardView quizArchiveBlock;
     private TextView quizArchiveBlockNumber;
 
-    private CardView lessonBlock;
-    private TextView lessonBlockNumber;
+    private CardView libraryBlock;
+    private TextView libraryBlockNumber;
 
     private CardView onlineClassBlock;
     private TextView onlineClassBlockNumber;
@@ -72,6 +74,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
     private ArrayList<NotificationObj> notificationObjs;
     private ArrayList<LessonPlan> lessonPlans;
+    private ArrayList<Book> bookArrayList;
 
     private TextView totalNotificationHindId;
     private ImageView studentProfileViewId;
@@ -83,7 +86,6 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private TextView attendanceAbsentViewId;
     private ImageView filterAttendanceBtnId;
     private Guideline guideline;
-    private static final int REQUEST_WRITE_PERMISSION = 786;
 
     public StudentDashboardFragment() {
         // Required empty public constructor
@@ -113,8 +115,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         quizArchiveBlock = view.findViewById(R.id.quizArchiveCardId);
         quizArchiveBlockNumber = view.findViewById(R.id.quizArchiveHeaderSectionId);
 
-        lessonBlock = view.findViewById(R.id.lessonCardId);
-        lessonBlockNumber = view.findViewById(R.id.lessonHeaderSectionId);
+        libraryBlock = view.findViewById(R.id.libraryCardId);
+        libraryBlockNumber = view.findViewById(R.id.libraryHeaderSectionId);
 
         onlineClassBlock = view.findViewById(R.id.onlineClassCardId);
         onlineClassBlockNumber = view.findViewById(R.id.onlineClassHeaderSectionId);
@@ -131,8 +133,14 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 //        notificationSeeAll.setVisibility(View.VISIBLE);
 
 
-        filterClassRoutineBtnId = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.filterClassRoutineBtnId);
-        classRoutineRecyclerView = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.classRoutineRecyclerViewId);
+//        libraryHeader = view.findViewById(R.id.libraryBlockId).findViewById(R.id.sectionHeaderViewId);
+//        filterSectionDataBtnId = view.findViewById(R.id.libraryBlockId).findViewById(R.id.filterSectionDataBtnId);
+//        filterSectionDataBtnId.setVisibility(View.GONE);
+//        libraryHeader.setText("Library Books");
+//        libraryRecyclerView = view.findViewById(R.id.libraryBlockId).findViewById(R.id.sectionRecyclerViewId);
+
+        filterClassRoutineBtnId = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.filterSectionDataBtnId);
+        classRoutineRecyclerView = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.sectionRecyclerViewId);
 
         lessonPlanRecyclerView = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanRecyclerViewId);
         lessonPlanCountHint = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonCountHintId);
@@ -140,7 +148,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
         quizBlock.setOnClickListener(this::gotoQuizView);
         quizArchiveBlock.setOnClickListener(this::gotoQuizArchiveView);
-        lessonBlock.setOnClickListener(this::gotoLessonView);
+        libraryBlock.setOnClickListener(this::gotoLibraryBookView);
         onlineClassBlock.setOnClickListener(this::gotoOnlineView);
 
         filterClassRoutineBtnId.setOnClickListener(this::filterClassRoutine);
@@ -193,7 +201,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private void setDashboardData(DashboardHeaderObj object){
         quizBlockNumber.setText(object.getTotalQuiz());
         quizArchiveBlockNumber.setText(object.getTotalQuizArchive());
-        lessonBlockNumber.setText(object.getTotalLessonPlan());
+        libraryBlockNumber.setText(object.getLibraryBookTotal());
         onlineClassBlockNumber.setText(object.getTotalOnlineClass());
         System.out.println("<><><><><><><> " + object.getTotalOnlineClass());
 
@@ -228,7 +236,9 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
             setClassRoutineAdapter(object.getClassRoutineArrayList());
         }
 
-
+        if(object.getBookArrayList() != null){
+            this.bookArrayList = object.getBookArrayList();
+        }
     }
 
     @SuppressLint("DefaultLocale")
@@ -312,6 +322,10 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     public void onClick(View view) {
         Intent intent = null;
         if(view.getId() == R.id.notificationSeeAllId || view.getId() == R.id.studentNotificationAlarmViewId){
+            if(notificationObjs == null || notificationObjs.size() == 0){
+                Toast.makeText(getContext(), "No notification found", Toast.LENGTH_SHORT).show();
+                return;
+            }
             intent = new Intent(getActivity(), StudentAllNotificationActivity.class);
             intent.putExtra("notifications", notificationObjs);
             totalNotificationHindId.setVisibility(View.GONE);
@@ -332,11 +346,11 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         System.out.println(">>>>>. " + view.getId());
     }
 
-    private void gotoLessonView(View view) {
-        if(lessonPlans == null || lessonPlans.size() == 0) return;
+    private void gotoLibraryBookView(View view) {
+        if(bookArrayList == null || bookArrayList.size() == 0) return;
         System.out.println(">>>>>. " + view.getId());
-        Intent intent = new Intent(getActivity(), LessonPlanActivity.class);
-        intent.putExtra("lessonPlan",  lessonPlans);
+        Intent intent = new Intent(getActivity(), LibraryBookActivity.class);
+        intent.putExtra("books",  bookArrayList);
         getActivity().startActivity(intent);
     }
 

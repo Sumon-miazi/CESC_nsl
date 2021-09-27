@@ -1,5 +1,7 @@
 package com.itbeebd.cesc_nsl.utils;
 
+import com.itbeebd.cesc_nsl.sugarClass.Book;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -18,12 +20,18 @@ public class DashboardHeaderObj implements Serializable {
     private Attendance attendance;
     private ArrayList<ClassRoutine> classRoutineArrayList;
 
+    private ArrayList<Book> bookArrayList;
+
     public DashboardHeaderObj(String totalNotifications, String totalOnlineClass, String totalLessonPlan, String totalQuiz, String totalQuizArchive) {
         this.totalNotifications = totalNotifications;
         this.totalOnlineClass = totalOnlineClass;
         this.totalLessonPlan = totalLessonPlan;
         this.totalQuiz = totalQuiz;
         this.totalQuizArchive = totalQuizArchive;
+    }
+
+    public String getLibraryBookTotal(){
+        return String.valueOf(this.bookArrayList.size());
     }
 
     public Attendance getAttendance() {
@@ -76,5 +84,13 @@ public class DashboardHeaderObj implements Serializable {
 
     public ArrayList<ClassRoutine> getClassRoutineArrayList() {
         return classRoutineArrayList;
+    }
+
+    public ArrayList<Book> getBookArrayList() {
+        return bookArrayList;
+    }
+
+    public void setBookArrayList(ArrayList<Book> bookArrayList) {
+        this.bookArrayList = bookArrayList;
     }
 }

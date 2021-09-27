@@ -10,7 +10,7 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/textView41"
+        android:id="@+id/sectionHeaderViewId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="6dp"
@@ -20,26 +20,26 @@
         android:textColor="@color/white_inactive_2"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/filterClassRoutineBtnId"
+        app:layout_constraintEnd_toStartOf="@+id/filterSectionDataBtnId"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/filterClassRoutineBtnId"
+        android:id="@+id/filterSectionDataBtnId"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/ic_filter"
-        app:layout_constraintBottom_toBottomOf="@+id/textView41"
+        app:layout_constraintBottom_toBottomOf="@+id/sectionHeaderViewId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/classRoutineRecyclerViewId"
+        android:id="@+id/sectionRecyclerViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+        app:layout_constraintTop_toBottomOf="@+id/sectionHeaderViewId" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
