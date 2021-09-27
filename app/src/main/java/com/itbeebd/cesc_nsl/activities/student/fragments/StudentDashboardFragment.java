@@ -83,6 +83,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private TextView attendanceAbsentViewId;
     private ImageView filterAttendanceBtnId;
     private Guideline guideline;
+    private static final int REQUEST_WRITE_PERMISSION = 786;
 
     public StudentDashboardFragment() {
         // Required empty public constructor
@@ -91,7 +92,6 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @SuppressLint("CutPasteId")
@@ -464,4 +464,5 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                 }
         );
     }
+
 }

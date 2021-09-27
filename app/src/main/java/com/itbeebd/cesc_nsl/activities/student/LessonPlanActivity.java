@@ -14,7 +14,7 @@ import com.itbeebd.cesc_nsl.utils.LessonPlan;
 
 import java.util.ArrayList;
 
-public class LessonPlanActivity extends AppCompatActivity {
+public class LessonPlanActivity extends AppCompatActivity  {
 
     private RecyclerView lessonPlanRecyclerView;
     private ArrayList<LessonPlan> lessonPlans;
@@ -44,7 +44,6 @@ public class LessonPlanActivity extends AppCompatActivity {
         LessonPlanAdapter lessonPlanAdapter = new LessonPlanAdapter(this);
         lessonPlanAdapter.setItems(lessonPlans);
         lessonPlanRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //    lessonPlanRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         lessonPlanRecyclerView.setAdapter(lessonPlanAdapter);
     }
 

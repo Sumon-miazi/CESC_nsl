@@ -99,7 +99,7 @@ public class DashboardApi extends BaseService {
                             for(int j = 0; j < fileObjectJsonArray.length(); j++) {
                                 JSONObject fileObject = fileObjectJsonArray.getJSONObject(j);
                                 LessonFile lessonFile = new LessonFile(
-                                        fileObject.optString("file"),
+                                        ApiUrls.BASE_IMAGE_URL + fileObject.optString("file"),
                                         fileObject.optString("original_name")
                                 );
                                 lessonFileArrayList.add(lessonFile);

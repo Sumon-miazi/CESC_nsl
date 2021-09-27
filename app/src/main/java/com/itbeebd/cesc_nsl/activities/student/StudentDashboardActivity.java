@@ -1,10 +1,13 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,7 +21,7 @@ import com.itbeebd.cesc_nsl.activities.student.fragments.StudentDashboardFragmen
 import com.itbeebd.cesc_nsl.activities.student.fragments.StudentProfileFragment;
 
 
-public class StudentDashboardActivity extends AppCompatActivity  implements BubbleNavigationChangeListener {
+public class StudentDashboardActivity extends AppCompatActivity  implements BubbleNavigationChangeListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private BubbleNavigationLinearView navigationLinearView;
     private FragmentManager fragmentManager;
@@ -27,6 +30,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
     private PaymentFragment paymentFragment;
     private ResultBoardFragment resultBoardFragment;
     private long time;
+    private static final int REQUEST_WRITE_PERMISSION = 786;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
             fragmentTransaction.replace(R.id.fragmentContainerId, dashboardFragment);
         }
         fragmentTransaction.commit();
+
+        requestPermission();
 
     }
 
@@ -88,6 +94,28 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerId, fragment);
         fragmentTransaction.commit();
+    }
+
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_WRITE_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            //   openFilePicker();
+        }
+        else {
+            Toast.makeText(this, "You will not able to download any files without giving access permission", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_PERMISSION);
+        } else {
+            //  openFilePicker();
+        }
     }
 }
 
