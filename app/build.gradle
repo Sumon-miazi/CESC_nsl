@@ -68,6 +68,7 @@ dependencies {
 
     implementation 'com.evrencoskun.library:tableview:0.8.9.4'
 
+    // simple date format like 23 September, 2021
     implementation 'com.github.sidhuparas:SimpleDate:2.1.0'
 
 //spinner
@@ -77,6 +78,11 @@ dependencies {
     //expendable layout
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
+    // file Downloader
     implementation "com.tonyodev.fetch2:fetch2:3.0.12"
+
+    // Drawer menu
+    implementation 'com.czerwii:SlidingdrawerMenu:1.0.1'
+
 
 }
