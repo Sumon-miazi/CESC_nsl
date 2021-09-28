@@ -117,7 +117,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
         // Find our drawer view
-        studentDrawerId = (DrawerLayout)  view.findViewById(R.id.studentDrawerId);
+        studentDrawerId = view.findViewById(R.id.studentDrawerId);
        // studentDrawerId.openDrawer(GravityCompat.START);
         studentAllMenuViewId = view.findViewById(R.id.studentAllMenuViewId);
         studentProfileViewId = view.findViewById(R.id.studentProfileViewId);

@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
+import com.itbeebd.cesc_nsl.dao.StudentDao;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.sugarClass.Guardian;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
@@ -25,9 +26,11 @@ public class LoginApi extends BaseService {
     private Context context;
     final RetrofitRequestBody requestBody;
     private CustomProgressDialog progressDialog;
+    private final StudentDao studentDao;
 
     public LoginApi(Context context){
         this.context = context;
+        this.studentDao = new StudentDao();
         requestBody = new RetrofitRequestBody();
         this.progressDialog = new CustomProgressDialog(context, "Signing in...");
     }
@@ -51,12 +54,14 @@ public class LoginApi extends BaseService {
                         Student student = gson.fromJson(jsonObject.getJSONObject("user").toString(), Student.class);
                         student.setClassName(jsonObject.getJSONObject("user").getJSONObject("stdclass").optString("name"));
                         student.setSectionName(jsonObject.getJSONObject("user").getJSONObject("section").optString("name"));
-                        student.save();
+                       // student.save();
+                        studentDao.saveStudent(student);
 
                         if(! jsonObject.getJSONObject("user").optString("transport_info").equalsIgnoreCase("null")){
                             Transport transport = gson.fromJson(jsonObject.getJSONObject("user").getJSONObject("transport_info").toString(), Transport.class);
                             transport.setStudent(student);
-                            transport.save();
+                      //      transport.save();
+                            studentDao.saveTransport(transport);
                         }
                    //     Guardian guardian = gson.fromJson(jsonObject.getJSONObject("user").getJSONArray("guardians").toString(), Guardian.class);
 
@@ -66,7 +71,8 @@ public class LoginApi extends BaseService {
                                 for(int i = 0; i < guardianJsonArray.length(); i++){
                                     Guardian guardian = gson.fromJson(guardianJsonArray.get(i).toString(), Guardian.class);
                                     guardian.setStudent(student);
-                                    guardian.save();
+                                //    guardian.save();
+                                    studentDao.saveGuardian(guardian, guardian.getRelation());
                                 }
                             }
                         }

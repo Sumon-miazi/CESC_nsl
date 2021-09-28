@@ -1,13 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_first_fragment"
-            android:title="First" />
-        <item
-            android:id="@+id/nav_second_fragment"
-            android:title="Second" />
-        <item
-            android:id="@+id/nav_third_fragment"
-            android:title="Third" />
+
+    <item
+        android:id="@+id/home"
+        android:title="Home" />
+
+    <group>
+        <item android:title="Management">
+            <menu>
+                <item
+                    android:id="@+id/nav_chairman_message"
+                    android:title="Chairman Message" />
+
+                <item
+                    android:id="@+id/nav_pricipal_message"
+                    android:title="Principal Message" />
+
+                <item
+                    android:id="@+id/nav_managing_committee"
+                    android:title="Managing Committee" />
+
+                <item
+                    android:id="@+id/nav_sub_committee"
+                    android:title="Sub Committee" />
+
+                <item
+                    android:id="@+id/nav_mission_vision"
+                    android:title="Mission and Vision" />
+
+            </menu>
+        </item>
     </group>
+
+
+    <group>
+        <item android:title="Academic">
+            <menu>
+                <item
+                    android:id="@+id/nav_dress_code"
+                    android:title="Dress Code" />
+
+                <item
+                    android:id="@+id/nav_eligibility"
+                    android:title="Eligibility" />
+
+                <item
+                    android:id="@+id/nav_applyOnline_academic"
+                    android:title="Apply Online" />
+            </menu>
+        </item>
+    </group>
+
+    <group>
+        <item android:title="Admission">
+            <menu>
+                <item
+                    android:id="@+id/applyOnlineAdmission"
+                    android:title="Apply Online" />
+
+                <item
+                    android:id="@+id/tutionFee"
+                    android:title="Tution Fee" />
+
+                <item
+                    android:id="@+id/howToApplyAdmission"
+                    android:title="How To Apply" />
+
+                <item
+                    android:id="@+id/dressCodeAdmission"
+                    android:title="Dress Code" />
+            </menu>
+        </item>
+    </group>
+
+    <group>
+        <item
+            android:id="@+id/careers"
+            android:title="Careers">
+            <menu>
+                <item
+                    android:id="@+id/nav_job_vacancies"
+                    android:title="Job Vacancies" />
+
+                <item
+                    android:id="@+id/nav_submit_resume"
+                    android:title="Submit Resume" />
+
+            </menu>
+        </item>
+    </group>
+
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/downloads">
+        <item
+            android:title="Downloads" />
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/contact">
+        <item
+            android:title="Contact" />
+    </group>
+
+
 </menu>

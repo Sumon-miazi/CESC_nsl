@@ -93,6 +93,7 @@
         android:layout_height="wrap_content"
         android:tooltipText="Select who you are"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/loginBtnId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
