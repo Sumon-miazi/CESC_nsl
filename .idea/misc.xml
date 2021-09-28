@@ -43,6 +43,8 @@
         <entry key="app/src/main/res/layout/activity_top_bar.xml" value="0.15" />
         <entry key="app/src/main/res/layout/attendance_graph_block.xml" value="0.22" />
         <entry key="app/src/main/res/layout/class_routine_block.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/content_student_nav.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_result_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.25" />
@@ -55,10 +57,15 @@
         <entry key="app/src/main/res/layout/single_guardian_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_lesson_plan_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_library_book_view.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/single_menu_layout.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_student_notification_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_subject_result_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/weekly_days_bg.xml" value="0.15" />
         <entry key="app/src/main/res/layout/weekly_days_view.xml" value="0.22" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.15" />
+        <entry key="app/src/main/res/menu/main.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/menu_filter.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/menu_public_dashboard.xml" value="0.1" />
       </map>
     </option>
   </component>

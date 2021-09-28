@@ -6,6 +6,7 @@ import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.utils.ClassRoutine;
+import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,19 +22,22 @@ public class ClassRoutineApi extends BaseService {
 
     private Context context;
     final RetrofitRequestBody requestBody;
+    private CustomProgressDialog progressDialog;
 
     public ClassRoutineApi(Context context) {
         this.context = context;
         requestBody = new RetrofitRequestBody();
+        this.progressDialog = new CustomProgressDialog(context, "Loading...");
     }
 
     public void getClassRoutine(String dayName, String token, ResponseObj responseObj){
-
+        progressDialog.show();
         Call<ResponseBody> dashboardHeaderInfo = service.getClassRoutineByDayName(token, requestBody.mapBody(dayName));
         dashboardHeaderInfo.enqueue(new Callback<ResponseBody>(){
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
                 JSONArray data = null;
                 if(response.isSuccessful() && response != null){
 
@@ -79,6 +83,7 @@ public class ClassRoutineApi extends BaseService {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
                 System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
                 responseObj.data(null, t.getLocalizedMessage());
             }

@@ -6,6 +6,7 @@ import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.GetResultExam;
 import com.itbeebd.cesc_nsl.sugarClass.ResultObj;
+import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 import com.itbeebd.cesc_nsl.utils.TermExam;
 
 import org.json.JSONArray;
@@ -24,19 +25,22 @@ import retrofit2.Response;
 public class ResultApi extends BaseService {
     private Context context;
     final RetrofitRequestBody requestBody;
+    private CustomProgressDialog progressDialog;
 
     public ResultApi(Context context){
         this.context = context;
         requestBody = new RetrofitRequestBody();
+        this.progressDialog = new CustomProgressDialog(context, "Loading...");
     }
 
     public void getResult(int examId, String token, GetResultExam responseObj){
-
+        progressDialog.show();
         Call<ResponseBody> getResult = service.getResultByExamId(token, requestBody.getResult(examId));
         getResult.enqueue(new Callback<ResponseBody>(){
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
                 JSONObject jsonObject = null;
                 if(response.isSuccessful() && response != null){
                    // System.out.println(">>>>>>>>>> due " + response.body());
@@ -111,6 +115,7 @@ public class ResultApi extends BaseService {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
                 System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
                 responseObj.data(null,null, t.getLocalizedMessage());
             }

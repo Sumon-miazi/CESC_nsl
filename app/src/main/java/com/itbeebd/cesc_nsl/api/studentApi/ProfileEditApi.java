@@ -5,6 +5,7 @@ import android.content.Context;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
+import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 import com.itbeebd.cesc_nsl.utils.dummy.GuardianDummy;
 import com.itbeebd.cesc_nsl.utils.dummy.StudentDummy;
 
@@ -18,10 +19,12 @@ import retrofit2.Response;
 public class ProfileEditApi extends BaseService {
     private Context context;
     final RetrofitRequestBody requestBody;
+    private CustomProgressDialog progressDialog;
 
     public ProfileEditApi(Context context){
         this.context = context;
         requestBody = new RetrofitRequestBody();
+        this.progressDialog =  new CustomProgressDialog(context, "Loading...");
     }
 
     public void updatedData(
@@ -34,7 +37,7 @@ public class ProfileEditApi extends BaseService {
                             String father_image,
                             BooleanResponse booleanResponse
     ){
-
+        progressDialog.show();
         Call<ResponseBody> editProfile = service.editStudentProfile(
                 token,
                 studentDummy,
@@ -48,6 +51,7 @@ public class ProfileEditApi extends BaseService {
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
                 JSONObject jsonObject = null;
                 if(response.isSuccessful() && response != null){
                     try {
@@ -75,6 +79,7 @@ public class ProfileEditApi extends BaseService {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
                 System.out.println(">>>>>>>>>> onFailure2 " + t.getLocalizedMessage());
             }
         });

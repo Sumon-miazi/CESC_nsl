@@ -84,5 +84,6 @@ dependencies {
     // Drawer menu
     implementation 'com.czerwii:SlidingdrawerMenu:1.0.1'
 
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
 }

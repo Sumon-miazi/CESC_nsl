@@ -9,6 +9,7 @@ import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.interfaces.DueHistoryResponse;
 import com.itbeebd.cesc_nsl.interfaces.PaymentHistoryResponse;
+import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 import com.itbeebd.cesc_nsl.utils.Due;
 import com.itbeebd.cesc_nsl.utils.DueHistory;
 import com.itbeebd.cesc_nsl.utils.Payment;
@@ -27,19 +28,22 @@ public class PaymentApi extends BaseService {
 
     private Context context;
     final RetrofitRequestBody requestBody;
+    private CustomProgressDialog progressDialog;
 
     public PaymentApi(Context context) {
         this.context = context;
         requestBody = new RetrofitRequestBody();
+        this.progressDialog = new CustomProgressDialog(context, "Loading...");
     }
 
     public void getDueHistory(String token, DueHistoryResponse dueHistoryResponse){
-
+        progressDialog.show();
         Call<ResponseBody> dueHistory = service.getRequestPath(token, ApiUrls.DUE_HISTORY);
         dueHistory.enqueue(new Callback<ResponseBody>(){
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
                 JSONObject jsonObject = null;
                 if(response.isSuccessful() && response != null){
                     System.out.println(">>>>>>>>>> due " + response.body());
@@ -103,6 +107,7 @@ public class PaymentApi extends BaseService {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
                 System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
                 dueHistoryResponse.data(null, t.getLocalizedMessage());
             }
@@ -110,12 +115,13 @@ public class PaymentApi extends BaseService {
     }
 
     public void getPaymentHistory(String token, PaymentHistoryResponse paymentHistoryResponse){
-
+        progressDialog.show();
         Call<ResponseBody> paymentHistory = service.getRequestPath(token, ApiUrls.PAYMENT_HISTORY);
         paymentHistory.enqueue(new Callback<ResponseBody>(){
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
                 JSONArray jsonArray = null;
                 if(response.isSuccessful() && response != null){
                     System.out.println(">>>>>>>>>> payment " + response.body());
@@ -160,6 +166,7 @@ public class PaymentApi extends BaseService {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
                 System.out.println(">>>>>>>>>> payment " + t.getLocalizedMessage());
                 paymentHistoryResponse.data(null, t.getLocalizedMessage());
             }
@@ -167,7 +174,7 @@ public class PaymentApi extends BaseService {
     }
 
     public void getInvoiceForCheckout(String token, BooleanResponse booleanResponse){
-
+        progressDialog.show();
         Call<ResponseBody> invoiceForCheckout = service.postRequestPath(token, ApiUrls.ADD_PAYMENT);
         invoiceForCheckout.enqueue(new Callback<ResponseBody>(){
 
@@ -199,6 +206,7 @@ public class PaymentApi extends BaseService {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
                 System.out.println(">>>>>>>>>> payment " + t.getLocalizedMessage());
                 booleanResponse.response(false,  t.getLocalizedMessage());
             }

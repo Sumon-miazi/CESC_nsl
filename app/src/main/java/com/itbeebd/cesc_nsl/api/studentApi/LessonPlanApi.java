@@ -4,15 +4,18 @@ import android.content.Context;
 
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
+import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 
 public class LessonPlanApi extends BaseService {
 
     private Context context;
     final RetrofitRequestBody requestBody;
+    private CustomProgressDialog progressDialog;
 
     public LessonPlanApi(Context context) {
         this.context = context;
         requestBody = new RetrofitRequestBody();
+        this.progressDialog = new CustomProgressDialog(context, "Loading...");
     }
 
 }

@@ -9,6 +9,7 @@ import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.sugarClass.Book;
 import com.itbeebd.cesc_nsl.utils.Attendance;
 import com.itbeebd.cesc_nsl.utils.ClassRoutine;
+import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
 import com.itbeebd.cesc_nsl.utils.LessonFile;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
@@ -28,19 +29,22 @@ public class DashboardApi extends BaseService {
 
     private Context context;
     final RetrofitRequestBody requestBody;
+    private CustomProgressDialog progressDialog;
 
     public DashboardApi(Context context) {
         this.context = context;
         requestBody = new RetrofitRequestBody();
+        this.progressDialog = new CustomProgressDialog(context, "Loading...");
     }
 
     public void getDashboardHeaderInfo(String token, ResponseObj responseObj){
-
+        progressDialog.show();
         Call<ResponseBody> dashboardHeaderInfo = service.getRequestPath(token, ApiUrls.DASHBOARD_HEADER_INFO);
         dashboardHeaderInfo.enqueue(new Callback<ResponseBody>(){
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
                 JSONObject data = null;
                 if(response.isSuccessful() && response != null){
 
@@ -166,6 +170,7 @@ public class DashboardApi extends BaseService {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
                 System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
             responseObj.data(null, t.getLocalizedMessage());
             }
