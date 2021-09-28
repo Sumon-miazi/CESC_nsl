@@ -3,7 +3,6 @@ package com.itbeebd.cesc_nsl.api.studentApi;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
@@ -14,9 +13,6 @@ import com.itbeebd.cesc_nsl.sugarClass.Transport;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -53,14 +49,15 @@ public class LoginApi extends BaseService {
                         student.setSectionName(jsonObject.getJSONObject("user").getJSONObject("section").optString("name"));
                         student.save();
 
-                        Transport transport = gson.fromJson(jsonObject.getJSONObject("user").getJSONObject("transport_info").toString(), Transport.class);
-                        transport.setStudent(student);
-                        transport.save();
-
+                        if(! jsonObject.getJSONObject("user").optString("transport_info").equalsIgnoreCase("null")){
+                            Transport transport = gson.fromJson(jsonObject.getJSONObject("user").getJSONObject("transport_info").toString(), Transport.class);
+                            transport.setStudent(student);
+                            transport.save();
+                        }
                    //     Guardian guardian = gson.fromJson(jsonObject.getJSONObject("user").getJSONArray("guardians").toString(), Guardian.class);
-                        JSONArray guardianJsonArray = jsonObject.getJSONObject("user").getJSONArray("guardians");
 
-                        if(guardianJsonArray != null){
+                        if(! jsonObject.getJSONObject("user").optString("guardians").equals("null")){
+                            JSONArray guardianJsonArray = jsonObject.getJSONObject("user").getJSONArray("guardians");
                             if(guardianJsonArray.length() != 0){
                                 for(int i = 0; i < guardianJsonArray.length(); i++){
                                     Guardian guardian = gson.fromJson(guardianJsonArray.get(i).toString(), Guardian.class);
@@ -70,7 +67,9 @@ public class LoginApi extends BaseService {
                             }
                         }
 
+                        System.out.println("+++++++++++ token " + jsonObject.optString("token"));
                         CustomSharedPref.getInstance(context).setAuthToken("Bearer " + jsonObject.optString("token"));
+                     //   CustomSharedPref.getInstance(context).setAuthToken(jsonObject.optString("token"));
                         CustomSharedPref.getInstance(context).setUserId(studentId);
 
                         booleanResponse.response(jsonObject.optBoolean("issuccessful"), "Login");

@@ -22,15 +22,13 @@ import com.itbeebd.cesc_nsl.sugarClass.Guardian;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.sugarClass.Transport;
 
-import java.util.List;
-
 public class StudentProfileFragment extends Fragment implements View.OnClickListener {
 
     private ImageView profileEditBtn;
     private Student student;
+    private Guardian mother;
+    private Guardian father;
     private Transport transport;
-    private List<Guardian> guardians;
-
     private TextView studentNameViewId;
     private ImageView studentProfileViewId;
     private TextView classNameViewId;
@@ -61,6 +59,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     private TextView busStartTimeViewId;
 
     private LinearLayout guardianInfoLayout;
+    private LinearLayout transportInfoLayoutId;
 
     public StudentProfileFragment() {
         // Required empty public constructor
@@ -80,9 +79,10 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
 
         student = studentDao.getStudent(getContext());
 
-        if(student != null){
+        if (student != null) {
             transport = studentDao.getTransport(student);
-            guardians = studentDao.getGuardian(student);
+            mother = studentDao.getGuardian(student, "Mother");
+            father = studentDao.getGuardian(student, "Father");
         }
     }
 
@@ -122,7 +122,8 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         routeViewId = view.findViewById(R.id.routeViewId);
         busStartTimeViewId = view.findViewById(R.id.busStartTimeViewId);
 
-        guardianInfoLayout =  view.findViewById(R.id.guardianInfoSectionLayoutId);
+        transportInfoLayoutId = view.findViewById(R.id.transportInfoLayoutId);
+        guardianInfoLayout = view.findViewById(R.id.guardianInfoSectionLayoutId);
 
         profileEditBtn.setOnClickListener(this);
 
@@ -132,7 +133,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(getActivity(), EditStudentProfileActivity.class);
-       // intent.putExtra("studentId", student.getId());
+        // intent.putExtra("studentId", student.getId());
         getActivity().startActivity(intent);
     }
 
@@ -145,12 +146,12 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(student != null) setStudentProfileData();
+        if (student != null) setStudentProfileData();
     }
 
-    private void setStudentProfileData(){
+    private void setStudentProfileData() {
         setImageInImageView(studentProfileViewId, student.getImage());
-    //    System.out.println("++++++ " + String.format("Class: %s", student.getClassName()));
+        //    System.out.println("++++++ " + String.format("Class: %s", student.getClassName()));
         studentNameViewId.setText(student.getName());
         classNameViewId.setText(String.format("Class: %s", student.getClassName()));
         rollViewId.setText(String.format("Roll no: %s", student.getRoll()));
@@ -177,7 +178,8 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
 
 
         // Transport details
-        if(transport != null){
+        if (transport != null) {
+            transportInfoLayoutId.setVisibility(View.VISIBLE);
             busNameViewId.setText(transport.getBusName());
             busModelViewId.setText(transport.getBusModel());
             routeViewId.setText(transport.getBusRoute());
@@ -185,44 +187,47 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         }
 
         // Guardian details
-        if(guardians != null){
+        if (mother != null) setGuardianInfo(mother);
+        if (father != null) setGuardianInfo(father);
+    }
 
-            for (int i = 0; i < guardians.size(); i++) {
-                View guardianView = LayoutInflater.from(getContext()).inflate(R.layout.single_guardian_view,
-                        guardianInfoLayout,false);
+    private void setGuardianInfo(Guardian guardian) {
 
+        View guardianView = LayoutInflater.from(getContext()).inflate(R.layout.single_guardian_view, guardianInfoLayout, false);
 
-                ImageView guardianProfileViewId = guardianView.findViewById(R.id.guardianProfileViewId);
-                TextView parentNameViewId = guardianView.findViewById(R.id.parentNameViewId);
-                TextView studentGuardianRelationViewId = guardianView.findViewById(R.id.studentGuardianRelationViewId);
-                TextView parentOccupationViewId = guardianView.findViewById(R.id.parentOccupationViewId);
-                TextView parentPhoneNoViewId = guardianView.findViewById(R.id.parentPhoneNoViewId);
-                TextView parentAddressViewId = guardianView.findViewById(R.id.parentAddressViewId);
-                TextView parentBloodGroupViewId = guardianView.findViewById(R.id.parentBloodGroupViewId);
-                TextView parentDesignationViewId = guardianView.findViewById(R.id.parentDesignationViewId);
-                TextView parentEmailViewId = guardianView.findViewById(R.id.parentEmailViewId);
+        ImageView guardianProfileViewId = guardianView.findViewById(R.id.guardianProfileViewId);
+        TextView parentNameViewId = guardianView.findViewById(R.id.parentNameViewId);
+        TextView studentGuardianRelationViewId = guardianView.findViewById(R.id.studentGuardianRelationViewId);
+        TextView parentOccupationViewId = guardianView.findViewById(R.id.parentOccupationViewId);
+        TextView parentPhoneNoViewId = guardianView.findViewById(R.id.parentPhoneNoViewId);
+        TextView parentAddressViewId = guardianView.findViewById(R.id.parentAddressViewId);
+        TextView parentBloodGroupViewId = guardianView.findViewById(R.id.parentBloodGroupViewId);
+        TextView parentDesignationViewId = guardianView.findViewById(R.id.parentDesignationViewId);
+        TextView parentEmailViewId = guardianView.findViewById(R.id.parentEmailViewId);
 
-                setImageInImageView(guardianProfileViewId, guardians.get(i).getProfileImage());
-                parentNameViewId.setText(guardians.get(i).getName());
-                studentGuardianRelationViewId.setText(guardians.get(i).getRelation());
-                parentOccupationViewId.setText(guardians.get(i).getOccupation());
-                parentPhoneNoViewId.setText(guardians.get(i).getMobile());
-                parentAddressViewId.setText(guardians.get(i).getLocation());
-                parentBloodGroupViewId.setText(guardians.get(i).getBlood_group());
-                parentDesignationViewId.setText(guardians.get(i).getDesignation());
-                parentEmailViewId.setText(guardians.get(i).getEmail());
+        setImageInImageView(guardianProfileViewId, guardian.getProfileImage());
+        parentNameViewId.setText(guardian.getName());
+        studentGuardianRelationViewId.setText(guardian.getRelation());
+        parentOccupationViewId.setText(guardian.getOccupation());
+        parentPhoneNoViewId.setText(guardian.getMobile());
+        parentAddressViewId.setText(guardian.getLocation());
+        parentBloodGroupViewId.setText(guardian.getBlood_group());
+        parentDesignationViewId.setText(guardian.getDesignation());
+        parentEmailViewId.setText(guardian.getEmail());
 
-                guardianInfoLayout.addView(guardianView);
-            }
-        }
+        guardianInfoLayout.addView(guardianView);
+        guardianInfoLayout.setVisibility(View.VISIBLE);
+
     }
 
     private void setImageInImageView(ImageView imageView, String url) {
-        if( url != null){
+        if (url != null) {
             System.out.println(">>>>>> " + ApiUrls.BASE_IMAGE_URL + student.getImage());
             Glide.with(this)
                     .load(ApiUrls.BASE_IMAGE_URL + url)
+                    .placeholder(R.drawable.default_male)
                     .error(R.drawable.default_male)
+                    .fallback(R.drawable.default_male)
                     .into(imageView);
         }
     }

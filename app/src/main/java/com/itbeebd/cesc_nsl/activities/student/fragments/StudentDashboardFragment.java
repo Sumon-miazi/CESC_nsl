@@ -237,7 +237,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
          //   setNotificationAdapter();
         }
 
-        if(object.getLessonPlanArrayList().size() != 0){
+        if(object.getLessonPlanArrayList() != null){
             lessonPlans = object.getLessonPlanArrayList();
             setLessonPlanAdapter();
         }

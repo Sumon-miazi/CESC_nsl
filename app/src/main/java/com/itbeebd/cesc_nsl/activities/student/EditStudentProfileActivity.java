@@ -163,7 +163,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         student = new StudentDao().getStudent(this);
 
         if(student != null){
-            guardians = new StudentDao().getGuardian(student);
+          //  guardians = new StudentDao().getGuardian(student);
             setUserProfileInfo();
         }
     }

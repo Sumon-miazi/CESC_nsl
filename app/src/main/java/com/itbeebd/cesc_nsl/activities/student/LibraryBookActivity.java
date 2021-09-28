@@ -1,6 +1,8 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 public class LibraryBookActivity extends AppCompatActivity {
 
+    private LinearLayout no_book_foundId;
     private RecyclerView libraryRecyclerView;
     private ArrayList<Book> bookArrayList;
     @Override
@@ -27,12 +30,18 @@ public class LibraryBookActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("LIBRARY BOOK");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        no_book_foundId = findViewById(R.id.no_book_foundId);
         libraryRecyclerView = findViewById(R.id.libraryRecyclerViewId);
 
         if(getIntent().hasExtra("books")){
             bookArrayList = (ArrayList<Book>) getIntent().getSerializableExtra("books");
-            if(bookArrayList != null) setLibraryAdapter();
+            if(bookArrayList != null) {
+                no_book_foundId.setVisibility(bookArrayList.size() == 0? View.VISIBLE : View.GONE);
+                setLibraryAdapter();
+            }
+            else no_book_foundId.setVisibility(View.VISIBLE);
         }
+        else no_book_foundId.setVisibility(View.VISIBLE);
     }
 
     private void setLibraryAdapter() {

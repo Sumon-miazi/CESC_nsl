@@ -27,8 +27,8 @@ public class DuePaymentCheckOutActivity extends AppCompatActivity {
         webView.setInitialScale(100);
 
         if(getIntent().hasExtra("invoiceNo")){
-            String url = ApiUrls.INVOICE_URL + getIntent().getStringExtra("invoiceNo");
-           // String url = ("https://www.google.com");
+          //  String url = ApiUrls.INVOICE_URL + getIntent().getStringExtra("invoiceNo");
+            String url = ("https://192.165.1.251/cescms/invoiceDetails/VN-0024921");
 
             webView.setWebViewClient(new WebViewClient() {
 

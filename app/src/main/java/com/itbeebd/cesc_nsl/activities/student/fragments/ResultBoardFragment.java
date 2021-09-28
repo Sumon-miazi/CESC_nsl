@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,8 @@ public class ResultBoardFragment extends Fragment {
     private List<String> examList;
 
     private ResultBoardAdapter resultBoardAdapter;
+    private ConstraintLayout resultViewLayoutID;
+    private LinearLayout no_result_foundId;
 
     public ResultBoardFragment() {
         // Required empty public constructor
@@ -58,6 +61,9 @@ public class ResultBoardFragment extends Fragment {
         resultBoardRecyclerViewId = view.findViewById(R.id.resultBoardRecyclerViewId);
         resultRecordHeaderId = view.findViewById(R.id.resultRecordHeaderId);
         semesterName = view.findViewById(R.id.semesterNameViewId);
+
+        resultViewLayoutID = view.findViewById(R.id.resultViewLayoutID);
+        no_result_foundId = view.findViewById(R.id.no_result_foundId);
 
         return view;
     }
@@ -106,14 +112,17 @@ public class ResultBoardFragment extends Fragment {
                 (resultObjArrayList, termExam, message) -> {
                     if(resultObjArrayList != null){
                         if(resultObjArrayList.size() != 0){
+                            viewWidget(true);
                             semesterName.setText(resultObjArrayList.get(0).getExamName());
                         }
+                        else viewWidget(false);
 
                         resultBoardAdapter = new ResultBoardAdapter(getContext());
                         resultBoardAdapter.setItems(resultObjArrayList);
                         resultBoardRecyclerViewId.setLayoutManager(new LinearLayoutManager(getContext()));
                         resultBoardRecyclerViewId.setAdapter(resultBoardAdapter);
                     }
+                    else viewWidget(false);
                     if(termExam != null){
                         this.termExam = termExam;
 
@@ -123,5 +132,10 @@ public class ResultBoardFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+    private void viewWidget(boolean showResult){
+            resultViewLayoutID.setVisibility(showResult? View.VISIBLE: View.GONE);
+            no_result_foundId.setVisibility(showResult? View.GONE: View.VISIBLE);
     }
 }

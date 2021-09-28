@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.PaymentHistoryAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
-import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.studentApi.PaymentApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.utils.Payment;
@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 public class PaymentHistoryActivity extends AppCompatActivity implements OnRecyclerObjectClickListener<Payment> {
 
+    private LinearLayout no_history_foundId;
     private Dialog dialog;
     private RecyclerView paymentHistoryRecyclerView;
 
@@ -40,6 +41,7 @@ public class PaymentHistoryActivity extends AppCompatActivity implements OnRecyc
         getSupportActionBar().setTitle("PAYMENT HISTORY");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        no_history_foundId = findViewById(R.id.no_history_foundId);
         paymentHistoryRecyclerView = findViewById(R.id.paymentHistoryRecyclerViewId);
 
         callPaymentHistoryApi();
@@ -51,12 +53,17 @@ public class PaymentHistoryActivity extends AppCompatActivity implements OnRecyc
                 ((payments, message) -> {
                     try {
                         if (payments != null) {
-                            if(payments.size() == 0) Toast.makeText(this, "No payment history found", Toast.LENGTH_LONG).show();
+                            no_history_foundId.setVisibility(payments.size() == 0? View.VISIBLE : View.GONE);
                             setPaymentHistoryAdapter(payments);
                         }
-                        else Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                        else {
+                            no_history_foundId.setVisibility(View.VISIBLE);
+                            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                        }
                     }
-                    catch (Exception ignore){}
+                    catch (Exception ignore){
+                        no_history_foundId.setVisibility(View.VISIBLE);
+                    }
                 })
         );
     }
@@ -94,7 +101,8 @@ public class PaymentHistoryActivity extends AppCompatActivity implements OnRecyc
         WebView webView = dialog.findViewById(R.id.webview);
 
 
-        String url = ApiUrls.INVOICE_URL + item.getVoucher_no();
+     //   String url = ApiUrls.INVOICE_URL + item.getVoucher_no();
+        String url =("https://192.165.1.251/cescms/invoiceDetails/VN-0024921");
       //  String url = ("https://www.google.com");
 
         webView.getSettings().setJavaScriptEnabled(true);
@@ -105,9 +113,9 @@ public class PaymentHistoryActivity extends AppCompatActivity implements OnRecyc
             @Override
             public void onLoadResource(WebView view, String url) {
                 super.onLoadResource(view, url);
-                view.loadUrl("javascript:(function() { " +
-                        "(elem = document.getElementsByTagName('footer')[0]).parentNode.removeChild(elem); " +
-                        "})()");
+//                view.loadUrl("javascript:(function() { " +
+//                        "(elem = document.getElementsByTagName('footer')[0]).parentNode.removeChild(elem); " +
+//                        "})()");
             }
 
             @Override

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     private TextView totolDueAmountHintId;
     private Button checkOutBtn;
     private TextView paymentHistoryBtn;
+    private LinearLayout no_Due_history_foundId;
 
     public PaymentFragment() {
         // Required empty public constructor
@@ -63,6 +65,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
         paymentRecyclerView = view.findViewById(R.id.paymentRecyclerViewId);
 
+        no_Due_history_foundId = view.findViewById(R.id.no_Due_history_foundId);
         paymentHistoryBtn = view.findViewById(R.id.paymentHistoryBtnId);
 
         checkOutBtn.setOnClickListener(this);
@@ -82,9 +85,14 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                         if(due != null){
                             setUpDueOverview(due);
                         }
-                        else Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                        else{
+                            no_Due_history_foundId.setVisibility(View.VISIBLE);
+                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                        }
                     }
-                    catch (Exception ignore){}
+                    catch (Exception ignore){
+                        no_Due_history_foundId.setVisibility(View.VISIBLE);
+                    }
                 }
         );
     }
@@ -94,7 +102,13 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     private void setUpDueOverview(Due due){
         totolDueAmountHintId.setText(String.valueOf(due.getTotalDue()));
 
-        if(due.getDueHistoryArrayList() != null) setDuePaymentAdapter(due.getDueHistoryArrayList());
+        if(due.getDueHistoryArrayList() != null) {
+            no_Due_history_foundId.setVisibility(due.getDueHistoryArrayList().size() == 0? View.VISIBLE : View.GONE);
+            setDuePaymentAdapter(due.getDueHistoryArrayList());
+        }
+        else {
+            no_Due_history_foundId.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setDuePaymentAdapter(ArrayList<DueHistory> dueHistories){
