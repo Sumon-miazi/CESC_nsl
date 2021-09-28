@@ -50,9 +50,9 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (fragmentManager.getFragments().size() == 0) {
-            fragmentTransaction.add(R.id.fragmentContainerId, dashboardFragment);
+            fragmentTransaction.add(R.id.fragmentContainerId, dashboardFragment, "Dashboard");
         } else {
-            fragmentTransaction.replace(R.id.fragmentContainerId, dashboardFragment);
+            fragmentTransaction.replace(R.id.fragmentContainerId, dashboardFragment, "Dashboard");
         }
         fragmentTransaction.commit();
 

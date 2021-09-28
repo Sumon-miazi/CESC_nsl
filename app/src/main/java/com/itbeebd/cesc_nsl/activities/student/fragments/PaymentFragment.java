@@ -35,6 +35,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     private Button checkOutBtn;
     private TextView paymentHistoryBtn;
     private LinearLayout no_Due_history_foundId;
+    private Due due;
 
     public PaymentFragment() {
         // Required empty public constructor
@@ -78,23 +79,27 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        new PaymentApi(getContext()).getDueHistory(
-                CustomSharedPref.getInstance(getContext()).getAuthToken(),
-                (due, message) -> {
-                    try{
-                        if(due != null){
-                            setUpDueOverview(due);
+        if(due == null){
+            new PaymentApi(getContext()).getDueHistory(
+                    CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                    (due, message) -> {
+                        try{
+                            if(due != null){
+                                this.due = due;
+                                setUpDueOverview(due);
+                            }
+                            else{
+                                no_Due_history_foundId.setVisibility(View.VISIBLE);
+                                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            }
                         }
-                        else{
+                        catch (Exception ignore){
                             no_Due_history_foundId.setVisibility(View.VISIBLE);
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                         }
                     }
-                    catch (Exception ignore){
-                        no_Due_history_foundId.setVisibility(View.VISIBLE);
-                    }
-                }
-        );
+            );
+        }
+        else setUpDueOverview(due);
     }
 
 

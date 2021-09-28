@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -93,6 +95,11 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
     private LinearLayout routingNotFoundId;
     private TextView routineHindId;
+    private ImageView studentAllMenuViewId;
+    private DrawerLayout studentDrawerId;
+    private DashboardHeaderObj dashboardHeaderObj;
+    private ArrayList<ClassRoutine> classRoutines;
+    private Attendance attendance;
 
     public StudentDashboardFragment() {
         // Required empty public constructor
@@ -109,7 +116,10 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
-
+        // Find our drawer view
+        studentDrawerId = (DrawerLayout)  view.findViewById(R.id.studentDrawerId);
+       // studentDrawerId.openDrawer(GravityCompat.START);
+        studentAllMenuViewId = view.findViewById(R.id.studentAllMenuViewId);
         studentProfileViewId = view.findViewById(R.id.studentProfileViewId);
         userNameViewId = view.findViewById(R.id.userNameViewId);
         todayDateViewId = view.findViewById(R.id.todayDateViewId);
@@ -157,6 +167,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlanCountHint = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonCountHintId);
         lessonPlanSeeAll = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanSeeAllId);
 
+        studentAllMenuViewId.setOnClickListener(this::toggleStudentDrawerMenu);
+
         quizBlock.setOnClickListener(this::gotoQuizView);
         quizArchiveBlock.setOnClickListener(this::gotoQuizArchiveView);
         libraryBlock.setOnClickListener(this::gotoLibraryBookView);
@@ -171,6 +183,13 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
         setDashboardComponentValues();
         return view;
+    }
+
+    private void toggleStudentDrawerMenu(View view) {
+        if(studentDrawerId.isDrawerOpen(GravityCompat.START)){
+            studentDrawerId.closeDrawer(GravityCompat.START);
+        }
+        else studentDrawerId.openDrawer(GravityCompat.START);
     }
 
 
@@ -197,19 +216,21 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void setDashboardComponentValues() {
-        new DashboardApi(getContext()).getDashboardHeaderInfo(
-                CustomSharedPref.getInstance(getContext()).getAuthToken(),
-                (object, message) -> {
-                    if(object != null){
-                        setDashboardData((DashboardHeaderObj) object);
+        if(dashboardHeaderObj == null){
+            new DashboardApi(getContext()).getDashboardHeaderInfo(
+                    CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                    (object, message) -> {
+                        if(object != null){
+                            this.dashboardHeaderObj = (DashboardHeaderObj) object;
+                            setDashboardData(dashboardHeaderObj);
+                        }
+                        else {
+                            try { Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show(); }catch (Exception ignore){}
+                        }
                     }
-                    else {
-                        try { Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show(); }catch (Exception ignore){}
-                    }
-                }
-        );
-
-
+            );
+        }
+        else setDashboardData(dashboardHeaderObj);
     }
 
     private void setDashboardData(DashboardHeaderObj object){
@@ -423,22 +444,25 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void getClassRoutineByDayName(String name){
-        new ClassRoutineApi(getContext()).getClassRoutine(
-                name,
-                CustomSharedPref.getInstance(getContext()).getAuthToken(),
-                (object, message) -> {
-                    try {
-                        if(object != null){
-                            ArrayList<ClassRoutine> classRoutines = (ArrayList<ClassRoutine>) object;
-                            setClassRoutineAdapter(classRoutines);
+        if(classRoutines == null){
+            new ClassRoutineApi(getContext()).getClassRoutine(
+                    name,
+                    CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                    (object, message) -> {
+                        try {
+                            if(object != null){
+                                this.classRoutines = (ArrayList<ClassRoutine>) object;
+                                setClassRoutineAdapter(classRoutines);
+                            }
+                            else{
+                                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else{
-                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                        }
+                        catch (Exception ignore){ }
                     }
-                    catch (Exception ignore){ }
-                }
-        );
+            );
+        }
+        else setClassRoutineAdapter(classRoutines);
     }
 
     private void filterAttendance(View v) {
@@ -498,19 +522,24 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void getAttendanceByMonthName(String name){
-        new AttendanceApi(getContext()).getAttendanceByMonthName(
-                name,
-                CustomSharedPref.getInstance(getContext()).getAuthToken(),
-                (object, message) -> {
-                    try {
-                        if(object != null){
-                            setAttendanceGraph((Attendance) object);
+        if(attendance == null){
+            new AttendanceApi(getContext()).getAttendanceByMonthName(
+                    name,
+                    CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                    (object, message) -> {
+                        try {
+                            if(object != null){
+                                this.attendance = (Attendance) object;
+                                setAttendanceGraph(attendance);
+                            }
+                            else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                         }
-                        else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        catch (Exception ignore){}
                     }
-                    catch (Exception ignore){}
-                }
-        );
+            );
+        }
+        else setAttendanceGraph(attendance);
+
     }
 
 }

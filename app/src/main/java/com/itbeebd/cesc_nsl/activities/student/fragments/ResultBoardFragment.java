@@ -20,8 +20,10 @@ import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.ResultBoardAdapter;
 import com.itbeebd.cesc_nsl.api.studentApi.ResultApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
+import com.itbeebd.cesc_nsl.sugarClass.ResultObj;
 import com.itbeebd.cesc_nsl.utils.TermExam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,9 +34,10 @@ public class ResultBoardFragment extends Fragment {
     private TextView semesterName;
     private SmartMaterialSpinner powerSpinnerView;
     private int examId = 0;
+    private int oldExamId = 0;
     private TermExam termExam;
     private List<String> examList;
-
+    private ArrayList<ResultObj> resultObjArrayList;
     private ResultBoardAdapter resultBoardAdapter;
     private ConstraintLayout resultViewLayoutID;
     private LinearLayout no_result_foundId;
@@ -106,36 +109,58 @@ public class ResultBoardFragment extends Fragment {
     }
 
     private void getResultByExamId(){
-        new ResultApi(getContext()).getResult(
-                examId,
-                CustomSharedPref.getInstance(getContext()).getAuthToken(),
-                (resultObjArrayList, termExam, message) -> {
-                    if(resultObjArrayList != null){
-                        if(resultObjArrayList.size() != 0){
-                            viewWidget(true);
-                            semesterName.setText(resultObjArrayList.get(0).getExamName());
-                        }
-                        else viewWidget(false);
+        if(resultObjArrayList == null || examId != oldExamId){
+            new ResultApi(getContext()).getResult(
+                    examId,
+                    CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                    (resultObjArrayList, termExam, message) -> {
+                        oldExamId = examId;
+                        if(resultObjArrayList != null){
+                            this.resultObjArrayList = resultObjArrayList;
 
-                        resultBoardAdapter = new ResultBoardAdapter(getContext());
-                        resultBoardAdapter.setItems(resultObjArrayList);
-                        resultBoardRecyclerViewId.setLayoutManager(new LinearLayoutManager(getContext()));
-                        resultBoardRecyclerViewId.setAdapter(resultBoardAdapter);
-                    }
-                    else viewWidget(false);
-                    if(termExam != null){
-                        this.termExam = termExam;
-
-                        if(this.examList == null) {
-                            this.examList = termExam.getExamList();
-                            initSpinner();
+                            if(resultObjArrayList.size() != 0){
+                                viewWidget();
+                                semesterName.setText(resultObjArrayList.get(0).getExamName());
+                            }
+                            else viewWidget();
+                            setAdapter();
                         }
-                    }
-                });
+                        else viewWidget();
+
+                        if(termExam != null){
+                            this.termExam = termExam;
+
+                            if(this.examList == null) {
+                                this.examList = termExam.getExamList();
+                                initSpinner();
+                            }
+                        }
+                    });
+        }
+        else {
+            viewWidget();
+            setAdapter();
+        }
+
+        if(examList != null){ initSpinner(); }
+
     }
 
-    private void viewWidget(boolean showResult){
-            resultViewLayoutID.setVisibility(showResult? View.VISIBLE: View.GONE);
-            no_result_foundId.setVisibility(showResult? View.GONE: View.VISIBLE);
+    private void setAdapter(){
+        resultBoardAdapter = new ResultBoardAdapter(getContext());
+        resultBoardAdapter.setItems(resultObjArrayList);
+        resultBoardRecyclerViewId.setLayoutManager(new LinearLayoutManager(getContext()));
+        resultBoardRecyclerViewId.setAdapter(resultBoardAdapter);
+    }
+
+    private void viewWidget(){
+
+            if(resultObjArrayList.size() != 0){
+
+                semesterName.setText(resultObjArrayList.get(0).getExamName());
+            }
+
+            resultViewLayoutID.setVisibility(resultObjArrayList.size() != 0? View.VISIBLE: View.GONE);
+            no_result_foundId.setVisibility(resultObjArrayList.size() != 0? View.GONE: View.VISIBLE);
     }
 }

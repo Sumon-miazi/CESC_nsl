@@ -47,7 +47,7 @@
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_result_board.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.33" />
         <entry key="app/src/main/res/layout/lesson_plan_block.xml" value="0.25" />
         <entry key="app/src/main/res/layout/month_name_view.xml" value="0.22" />
@@ -66,6 +66,7 @@
         <entry key="app/src/main/res/menu/main.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_filter.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_public_dashboard.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/student_menu.xml" value="0.22" />
       </map>
     </option>
   </component>

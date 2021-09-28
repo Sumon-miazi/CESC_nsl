@@ -121,7 +121,10 @@ public class PaymentHistoryActivity extends AppCompatActivity implements OnRecyc
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                dialog.show();
+                try {
+                    dialog.show();
+                }
+                catch (Exception ignore){}
             }
 
             @Override
