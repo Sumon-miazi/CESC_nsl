@@ -273,6 +273,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
                     .load(uri)
                   //  .apply(RequestOptions.skipMemoryCacheOf(true))
                    // .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                    .error(R.drawable.default_male)
                     .dontAnimate()
                     .centerCrop()
                     .into(imageView);
@@ -289,6 +290,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
                     .load(url)
                    // .apply(RequestOptions.skipMemoryCacheOf(true))
                    // .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                    .error(R.drawable.default_male)
                     .dontAnimate()
                     .centerCrop()
                     .into(imageView);

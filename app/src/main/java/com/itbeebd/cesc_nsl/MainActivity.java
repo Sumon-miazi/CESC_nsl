@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.itbeebd.cesc_nsl.activities.teacher.TeacherDashboardActivity;
+import com.itbeebd.cesc_nsl.activities.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.startActivity(new Intent(this, TeacherDashboardActivity.class));
+        this.startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 }

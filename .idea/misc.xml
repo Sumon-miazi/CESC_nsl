@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/layout/activity_equal_bottom_bar.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_lesson_plan.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_library_book.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_payment_history.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_payment_invoice.xml" value="0.15" />
@@ -42,7 +43,7 @@
         <entry key="app/src/main/res/layout/attendance_graph_block.xml" value="0.22" />
         <entry key="app/src/main/res/layout/class_routine_block.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_result_board.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.15" />
         <entry key="app/src/main/res/layout/lesson_plan_block.xml" value="0.25" />
         <entry key="app/src/main/res/layout/month_name_view.xml" value="0.22" />
@@ -51,7 +52,7 @@
         <entry key="app/src/main/res/layout/single_guardian_info_edit_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_guardian_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_lesson_plan_view.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/single_library_book_view.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/single_library_book_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_student_notification_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_subject_result_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/weekly_days_bg.xml" value="0.15" />

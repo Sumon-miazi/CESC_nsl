@@ -29,10 +29,35 @@
                 android:layout_marginBottom="0dp"
                 app:layout_constraintBottom_toTopOf="@+id/blankViewId"/>
 
+            "
+
             <ImageView
-                android:id="@+id/studentNotificationAlarmViewId"
+                android:id="@+id/studentAllMenuViewId"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:padding="6dp"
+                android:src="@drawable/ic_menu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CESC"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/studentAllMenuViewId"
+                app:layout_constraintStart_toEndOf="@+id/studentAllMenuViewId"
+                app:layout_constraintTop_toTopOf="@+id/studentAllMenuViewId" />
+
+            <ImageView
+                android:id="@+id/studentNotificationAlarmViewId"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp"
                 android:padding="6dp"
                 android:src="@drawable/ic_alarm"
                 app:layout_constraintBottom_toBottomOf="@+id/studentProfileViewId"
@@ -57,29 +82,34 @@
                 app:layout_constraintStart_toStartOf="@+id/studentNotificationAlarmViewId"
                 app:layout_constraintTop_toTopOf="@+id/studentNotificationAlarmViewId" />
 
+            "
+
+
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/studentProfileViewId"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="8dp"
                 android:src="@drawable/default_male"
                 app:civ_border_width="0dp"
                 app:civ_shadow="true"
                 app:civ_shadow_color="@color/blue_primary_dark"
-                app:civ_shadow_radius="6dp"
+                app:civ_shadow_radius="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/studentAllMenuViewId"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />"
-
+                app:layout_constraintTop_toTopOf="@+id/studentAllMenuViewId" />
 
             <TextView
                 android:id="@+id/todayDateViewId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
+                android:text="29 September, 2021"
                 android:textColor="@color/white_inactive"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/studentAllMenuViewId" />
 
             <TextView
                 android:id="@+id/textView"
@@ -96,11 +126,12 @@
                 android:id="@+id/userNameViewId"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:text="There"
                 android:textColor="@color/white"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/totalNotificationHindId"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toTopOf="@+id/textView" />
 
@@ -134,6 +165,7 @@
                     app:cardElevation="0dp"
                     app:cardPreventCornerOverlap="true"
                     app:cardUseCompatPadding="true"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/quizArchiveCardId"
                     app:layout_constraintHorizontal_bias="0.5"

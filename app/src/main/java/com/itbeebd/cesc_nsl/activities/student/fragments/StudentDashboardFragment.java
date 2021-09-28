@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -71,6 +73,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private RecyclerView lessonPlanRecyclerView;
     private TextView lessonPlanCountHint;
     private TextView lessonPlanSeeAll;
+    private LinearLayout lessonPlanNotFoundId;
+    private ConstraintLayout lessonPlanMainViewId;
 
     private ArrayList<NotificationObj> notificationObjs;
     private ArrayList<LessonPlan> lessonPlans;
@@ -86,6 +90,9 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private TextView attendanceAbsentViewId;
     private ImageView filterAttendanceBtnId;
     private Guideline guideline;
+
+    private LinearLayout routingNotFoundId;
+    private TextView routineHindId;
 
     public StudentDashboardFragment() {
         // Required empty public constructor
@@ -139,9 +146,13 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 //        libraryHeader.setText("Library Books");
 //        libraryRecyclerView = view.findViewById(R.id.libraryBlockId).findViewById(R.id.sectionRecyclerViewId);
 
+        routineHindId = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.sectionHeaderViewId);
+        routingNotFoundId = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.routingNotFoundId);
         filterClassRoutineBtnId = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.filterSectionDataBtnId);
         classRoutineRecyclerView = view.findViewById(R.id.classRoutineBlockId).findViewById(R.id.sectionRecyclerViewId);
 
+        lessonPlanMainViewId = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanMainViewId);
+        lessonPlanNotFoundId = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanNotFoundId);
         lessonPlanRecyclerView = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanRecyclerViewId);
         lessonPlanCountHint = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonCountHintId);
         lessonPlanSeeAll = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanSeeAllId);
@@ -178,6 +189,9 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         if( imageUrl != null){
             Glide.with(this)
                     .load(ApiUrls.BASE_IMAGE_URL + imageUrl)
+                    .placeholder(R.drawable.default_male)
+                    .error(R.drawable.default_male)
+                    .fallback(R.drawable.default_male)
                     .into(studentProfileViewId);
         }
     }
@@ -293,10 +307,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private void setLessonPlanAdapter() {
         String lessonPlansSize = "See All(" + lessonPlans.size() + ")";
 
-        if(lessonPlans.size() != 0){
-            lessonPlanCountHint.setVisibility(View.VISIBLE);
-            lessonPlanSeeAll.setVisibility(View.VISIBLE);
-        }
+
 
         lessonPlanSeeAll.setText(lessonPlansSize);
 
@@ -304,6 +315,18 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlanAdapter.setItems(lessonPlans.subList(0,2));
         lessonPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         lessonPlanRecyclerView.setAdapter(lessonPlanAdapter);
+
+        if (lessonPlans.size() != 0) {
+            lessonPlanMainViewId.setVisibility(View.VISIBLE);
+            lessonPlanNotFoundId.setVisibility(View.GONE);
+
+            lessonPlanCountHint.setVisibility(View.VISIBLE);
+            lessonPlanSeeAll.setVisibility(View.VISIBLE);
+        }
+        else {
+            lessonPlanMainViewId.setVisibility(View.GONE);
+            lessonPlanNotFoundId.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setClassRoutineAdapter(ArrayList<ClassRoutine> classRoutineArrayList) {
@@ -311,6 +334,15 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         classRoutineAdapter.setItems(classRoutineArrayList);
         classRoutineRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         classRoutineRecyclerView.setAdapter(classRoutineAdapter);
+
+        if (classRoutineArrayList.size() != 0) {
+            routineHindId.setVisibility(View.VISIBLE);
+            routingNotFoundId.setVisibility(View.GONE);
+        }
+        else {
+            routineHindId.setVisibility(View.GONE);
+            routingNotFoundId.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -398,11 +430,14 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                 (object, message) -> {
                     try {
                         if(object != null){
-                            setClassRoutineAdapter((ArrayList<ClassRoutine>) object);
+                            ArrayList<ClassRoutine> classRoutines = (ArrayList<ClassRoutine>) object;
+                            setClassRoutineAdapter(classRoutines);
                         }
-                        else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        else{
+                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    catch (Exception ignore){}
+                    catch (Exception ignore){ }
                 }
         );
     }

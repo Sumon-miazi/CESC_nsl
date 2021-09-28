@@ -45,6 +45,7 @@ public class LibraryBookViewHolder  extends BaseViewHolder<Book, OnRecyclerObjec
         if( item.getBookImageUrl() != null){
             Glide.with(context)
                     .load(ApiUrls.BASE_IMAGE_URL + item.getBookImageUrl())
+                    .error(R.drawable.ic_menu_book)
                     .into(bookImageId);
         }
         bookDownloadBtnId.setOnClickListener(view -> {

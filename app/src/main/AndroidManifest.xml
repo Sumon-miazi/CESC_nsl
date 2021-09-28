@@ -22,6 +22,7 @@
         android:theme="@style/Theme.CESC_nsl"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
+
         <activity android:name=".activities.teacher.TeacherDashboardActivity"/>
         <activity android:name=".activities.student.LibraryBookActivity" />
         <activity android:name=".activities.student.DuePaymentCheckOutActivity" />
@@ -29,11 +30,12 @@
         <activity android:name=".activities.student.PaymentHistoryActivity" />
         <activity android:name=".activities.student.LessonPlanActivity" />
         <activity android:name=".activities.student.StudentAllNotificationActivity" />
+
         <activity
             android:name=".activities.student.StudentDashboardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.student.StudentLoginActivity"
+            android:name=".activities.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"

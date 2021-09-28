@@ -22,7 +22,7 @@ public class LibraryBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library_book);
 
-        Toolbar mToolBar =  findViewById(R.id.libraryToolbarId);
+        Toolbar mToolBar =  (Toolbar) findViewById(R.id.libraryToolbarId);
         setSupportActionBar(mToolBar);
         getSupportActionBar().setTitle("LIBRARY BOOK");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
