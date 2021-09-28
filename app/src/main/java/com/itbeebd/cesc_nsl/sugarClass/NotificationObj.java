@@ -1,12 +1,18 @@
-package com.itbeebd.cesc_nsl.utils;
+package com.itbeebd.cesc_nsl.sugarClass;
+
+import com.orm.SugarRecord;
 
 import java.io.Serializable;
 
-public class NotificationObj implements Serializable {
+public class NotificationObj extends SugarRecord implements Serializable {
 
     private int n_id;
     private String title;
     private String body;
+
+    public NotificationObj() {
+
+    }
 
     public NotificationObj(int n_id, String title, String body) {
         this.n_id = n_id;

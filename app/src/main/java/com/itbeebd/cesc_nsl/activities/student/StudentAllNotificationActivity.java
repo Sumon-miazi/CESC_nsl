@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
-import com.itbeebd.cesc_nsl.utils.NotificationObj;
+import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,7 @@
 package com.itbeebd.cesc_nsl.utils;
 
 import com.itbeebd.cesc_nsl.sugarClass.Book;
+import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,6 +29,10 @@ public class DashboardHeaderObj implements Serializable {
         this.totalLessonPlan = totalLessonPlan;
         this.totalQuiz = totalQuiz;
         this.totalQuizArchive = totalQuizArchive;
+    }
+
+    public void setTotalNotifications(String totalNotifications) {
+        this.totalNotifications = totalNotifications;
     }
 
     public String getLibraryBookTotal(){

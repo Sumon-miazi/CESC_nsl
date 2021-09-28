@@ -44,7 +44,7 @@ import com.itbeebd.cesc_nsl.utils.Attendance;
 import com.itbeebd.cesc_nsl.utils.ClassRoutine;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
-import com.itbeebd.cesc_nsl.utils.NotificationObj;
+import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 import com.parassidhu.simpledate.SimpleDateKt;
 
 import java.util.ArrayList;

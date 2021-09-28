@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.BaseViewHolder;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
-import com.itbeebd.cesc_nsl.utils.NotificationObj;
+import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 
 public class StudentNotificationViewHolder extends BaseViewHolder<NotificationObj, OnRecyclerObjectClickListener<NotificationObj>> {
     private final TextView notificationTitle;

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
+import com.itbeebd.cesc_nsl.dao.NotificationDao;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.sugarClass.Book;
 import com.itbeebd.cesc_nsl.utils.Attendance;
@@ -13,7 +14,7 @@ import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
 import com.itbeebd.cesc_nsl.utils.LessonFile;
 import com.itbeebd.cesc_nsl.utils.LessonPlan;
-import com.itbeebd.cesc_nsl.utils.NotificationObj;
+import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -144,6 +145,10 @@ public class DashboardApi extends BaseService {
                             );
                             bookArrayList.add(book);
                         }
+                        try {
+                            headerObj.setTotalNotifications(new NotificationDao().saveNotification(notificationObjArrayList));
+                        }
+                        catch (Exception ignore){}
 
                         headerObj.setAttendance(attendanceObj);
                         headerObj.setClassRoutineArrayList(classRoutineArrayList);
