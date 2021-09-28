@@ -305,18 +305,16 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void setLessonPlanAdapter() {
-        String lessonPlansSize = "See All(" + lessonPlans.size() + ")";
-
-
-
-        lessonPlanSeeAll.setText(lessonPlansSize);
 
         LessonPlanAdapter lessonPlanAdapter = new LessonPlanAdapter(getContext());
-        lessonPlanAdapter.setItems(lessonPlans.subList(0,2));
+        lessonPlanAdapter.setItems(lessonPlans.size() > 2 ? lessonPlans.subList(0,2): lessonPlans);
         lessonPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         lessonPlanRecyclerView.setAdapter(lessonPlanAdapter);
 
         if (lessonPlans.size() != 0) {
+            String lessonPlansSize = "See All(" + lessonPlans.size() + ")";
+            lessonPlanSeeAll.setText(lessonPlansSize);
+
             lessonPlanMainViewId.setVisibility(View.VISIBLE);
             lessonPlanNotFoundId.setVisibility(View.GONE);
 
@@ -324,6 +322,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
             lessonPlanSeeAll.setVisibility(View.VISIBLE);
         }
         else {
+            lessonPlanSeeAll.setVisibility(View.GONE);
             lessonPlanMainViewId.setVisibility(View.GONE);
             lessonPlanNotFoundId.setVisibility(View.VISIBLE);
         }

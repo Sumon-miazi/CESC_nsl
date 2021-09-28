@@ -61,7 +61,7 @@
             android:fontFamily="@font/heebo_extra_bold"
             android:text="Oops!"
             android:textAlignment="center"
-            android:textColor="@color/blue_primary"
+            android:textColor="@color/oops"
             android:textSize="30sp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
