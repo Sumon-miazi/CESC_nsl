@@ -102,10 +102,128 @@
             android:padding="10dp"
             android:text="Due History"
             android:textAlignment="center"
-            android:textColor="@color/green_active"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView2" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dueRecordHeaderId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <TextView
+                android:id="@+id/subjectNoId"
+                android:layout_width="30dp"
+                android:layout_height="0dp"
+                android:background="@color/red_inactive"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="No"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/subjectNameId"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/blue_primary_dark"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Title"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/subjectTotalMarkViewId2"
+                app:layout_constraintStart_toEndOf="@+id/subjectNoId"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/subjectTotalMarkViewId"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/green_active"
+                android:gravity="center"
+                android:text="Paid"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/subjectTotalMarkViewId2"
+                app:layout_constraintEnd_toStartOf="@+id/cgpViewId"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/subjectTotalMarkViewId2"
+                app:layout_constraintTop_toTopOf="@+id/subjectTotalMarkViewId2" />
+
+            <TextView
+                android:id="@+id/subjectTotalMarkViewId2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/quiz_number"
+                android:gravity="center"
+                android:text="Amount"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/subjectNameId"
+                app:layout_constraintEnd_toStartOf="@+id/subjectTotalMarkViewId"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toTopOf="@+id/subjectNameId" />
+
+            <TextView
+                android:id="@+id/cgpViewId"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/blue_active"
+                android:gravity="center"
+                android:text="Waiver"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/subjectTotalMarkViewId"
+                app:layout_constraintEnd_toStartOf="@+id/gradeViewId"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/subjectTotalMarkViewId"
+                app:layout_constraintTop_toTopOf="@+id/subjectTotalMarkViewId2" />
+
+            <TextView
+                android:id="@+id/gradeViewId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/orange_active"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Due"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/cgpViewId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cgpViewId"
+                app:layout_constraintTop_toTopOf="@+id/subjectTotalMarkViewId2" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="134dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/paymentRecyclerViewId"
@@ -114,7 +232,7 @@
             app:layout_constraintBottom_toTopOf="@+id/paymentHistoryBtnId"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/dueRecordHeaderId" />
 
         <LinearLayout
             android:id="@+id/no_Due_history_foundId"

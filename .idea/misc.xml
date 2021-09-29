@@ -45,7 +45,7 @@
         <entry key="app/src/main/res/layout/class_routine_block.xml" value="0.33" />
         <entry key="app/src/main/res/layout/content_student_nav.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_result_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.33" />
@@ -53,11 +53,13 @@
         <entry key="app/src/main/res/layout/month_name_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/single_class_routine.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_dashboard_component.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/single_due_amount_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_guardian_info_edit_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_guardian_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_lesson_plan_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_library_book_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_menu_layout.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/single_payment_history_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_student_notification_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_subject_result_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/weekly_days_bg.xml" value="0.15" />
