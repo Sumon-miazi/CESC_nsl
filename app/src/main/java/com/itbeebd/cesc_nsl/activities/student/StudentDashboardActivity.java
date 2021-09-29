@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -31,20 +33,31 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
     private ResultBoardFragment resultBoardFragment;
     private long time;
     private static final int REQUEST_WRITE_PERMISSION = 786;
+    private String currentFragment = "dashboardFragment";
+    private DrawerLayout studentDrawerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_dashboard);
 
-        dashboardFragment = new StudentDashboardFragment();
-        profileFragment = new StudentProfileFragment();
-        paymentFragment = new PaymentFragment();
-        resultBoardFragment = new ResultBoardFragment();
-
         navigationLinearView = findViewById(R.id.bottom_navigation_view_linear);
         navigationLinearView.setCurrentActiveItem(0);
         navigationLinearView.setNavigationChangeListener(this);
+
+
+        dashboardFragment = new StudentDashboardFragment((drawerLayout, data) -> {
+            this.studentDrawerId = drawerLayout;
+
+            if(data.equals("change")) {
+                navigationLinearView.setCurrentActiveItem(4);
+                onNavigationChanged(null, 4);
+            }
+        });
+
+        profileFragment = new StudentProfileFragment();
+        paymentFragment = new PaymentFragment();
+        resultBoardFragment = new ResultBoardFragment();
 
         // get fragment manager
         fragmentManager = getSupportFragmentManager();
@@ -64,22 +77,50 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
     public void onNavigationChanged(View view, int position) {
         System.out.println(">>>>>.. position " + position);
         if(position == 0){
+            currentFragment = "dashboardFragment";
             changeFragmentInDashBoard(dashboardFragment);
         }
         else if (position == 1){
+            currentFragment = "resultBoardFragment";
             changeFragmentInDashBoard(resultBoardFragment);
         }
         else if (position == 3){
+            currentFragment = "paymentFragment";
             changeFragmentInDashBoard(paymentFragment);
         }
         else if (position == 4){
+            currentFragment = "profileFragment";
             changeFragmentInDashBoard(profileFragment);
         }
-        else changeFragmentInDashBoard(dashboardFragment);
+        else {
+            currentFragment = "dashboardFragment";
+            changeFragmentInDashBoard(dashboardFragment);
+        }
     }
 
     @Override
     public void onBackPressed() {
+        if(!currentFragment.equals("dashboardFragment")){
+            navigationLinearView.setCurrentActiveItem(0);
+            onNavigationChanged(null, 0);
+        }
+        else{
+            if(this.studentDrawerId != null){
+                try {
+                    if(studentDrawerId.isDrawerOpen(GravityCompat.START))
+                        studentDrawerId.closeDrawer(GravityCompat.START);
+                    else closeApp();
+                }
+                catch (Exception ignore){
+                    closeApp();
+                }
+            }
+            else closeApp();
+
+        }
+    }
+
+    private void closeApp(){
         if (time + 2000 > System.currentTimeMillis()) {
             finish();
         } else {

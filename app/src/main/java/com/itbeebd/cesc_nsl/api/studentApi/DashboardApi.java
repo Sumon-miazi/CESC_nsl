@@ -8,18 +8,19 @@ import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.dao.NotificationDao;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.sugarClass.Book;
-import com.itbeebd.cesc_nsl.utils.dummy.Attendance;
-import com.itbeebd.cesc_nsl.utils.dummy.ClassRoutine;
+import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
+import com.itbeebd.cesc_nsl.utils.dummy.Attendance;
+import com.itbeebd.cesc_nsl.utils.dummy.ClassRoutine;
 import com.itbeebd.cesc_nsl.utils.dummy.LessonFile;
 import com.itbeebd.cesc_nsl.utils.dummy.LessonPlan;
-import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -149,6 +150,8 @@ public class DashboardApi extends BaseService {
                             headerObj.setTotalNotifications(new NotificationDao().saveNotification(notificationObjArrayList));
                         }
                         catch (Exception ignore){}
+
+                        Collections.reverse(notificationObjArrayList);
 
                         headerObj.setAttendance(attendanceObj);
                         headerObj.setClassRoutineArrayList(classRoutineArrayList);

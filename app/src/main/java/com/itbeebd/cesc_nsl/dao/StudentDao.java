@@ -19,6 +19,7 @@ public class StudentDao {
         student.save();
 
     }
+
     public Student getStudent(Context context) {
         List<Student> students = Student.find(Student.class, "STUDENT_ID = ?", CustomSharedPref.getInstance(context).getUserId());
         return students == null? null : students.size() == 0? null : students.get(0);

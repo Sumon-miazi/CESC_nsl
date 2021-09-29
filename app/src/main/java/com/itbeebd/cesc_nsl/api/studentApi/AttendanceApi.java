@@ -40,7 +40,7 @@ public class AttendanceApi extends BaseService {
 
                     try {
                         data =  new JSONObject(response.body().string());
-                        System.out.println("><><><> " + data);
+                        System.out.println("><><><> attendance " + data);
 
                         Attendance attendanceObj = new Attendance(
                                 data.optInt("present"),

@@ -38,13 +38,14 @@ import com.itbeebd.cesc_nsl.api.studentApi.ClassRoutineApi;
 import com.itbeebd.cesc_nsl.api.studentApi.DashboardApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
+import com.itbeebd.cesc_nsl.interfaces.FragmentToActivity;
 import com.itbeebd.cesc_nsl.sugarClass.Book;
+import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
+import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
 import com.itbeebd.cesc_nsl.utils.dummy.Attendance;
 import com.itbeebd.cesc_nsl.utils.dummy.ClassRoutine;
-import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
 import com.itbeebd.cesc_nsl.utils.dummy.LessonPlan;
-import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 import com.parassidhu.simpledate.SimpleDateKt;
 
 import java.util.ArrayList;
@@ -100,9 +101,13 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private DashboardHeaderObj dashboardHeaderObj;
     private ArrayList<ClassRoutine> classRoutines;
     private Attendance attendance;
+    private FragmentToActivity fragmentToActivity;
 
-    public StudentDashboardFragment() {
-        // Required empty public constructor
+    public StudentDashboardFragment(){
+
+    }
+    public StudentDashboardFragment(FragmentToActivity fragmentToActivity) {
+        this.fragmentToActivity = fragmentToActivity;
     }
 
     @Override
@@ -178,11 +183,27 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         filterAttendanceBtnId.setOnClickListener(this::filterAttendance);
 
    //     notificationSeeAll.setOnClickListener(this);
+        studentProfileViewId.setOnClickListener(view1 -> {
+            fragmentToActivity.call(studentDrawerId,"change");
+        });
         studentNotificationAlarmViewId.setOnClickListener(this);
         lessonPlanSeeAll.setOnClickListener(this);
 
         setDashboardComponentValues();
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(studentDrawerId.isDrawerOpen(GravityCompat.START)){
+            studentDrawerId.closeDrawer(GravityCompat.START);
+        }
+
+        try {
+            fragmentToActivity.call(studentDrawerId, "closeDrawer");
+        }
+        catch (Exception ignore){}
     }
 
     private void toggleStudentDrawerMenu(View view) {
@@ -356,11 +377,11 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         classRoutineRecyclerView.setAdapter(classRoutineAdapter);
 
         if (classRoutineArrayList.size() != 0) {
-            routineHindId.setVisibility(View.VISIBLE);
+       //     routineHindId.setVisibility(View.VISIBLE);
             routingNotFoundId.setVisibility(View.GONE);
         }
         else {
-            routineHindId.setVisibility(View.GONE);
+        //    routineHindId.setVisibility(View.GONE);
             routingNotFoundId.setVisibility(View.VISIBLE);
         }
     }
@@ -382,10 +403,11 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
             intent.putExtra("notifications", notificationObjs);
             totalNotificationHindId.setVisibility(View.GONE);
         }
-        if(view.getId() == R.id.lessonPlanSeeAllId){
+        else if(view.getId() == R.id.lessonPlanSeeAllId){
             intent = new Intent(getActivity(), LessonPlanActivity.class);
             intent.putExtra("lessonPlan",  lessonPlans);
         }
+
         getActivity().startActivity(intent);
     }
 
@@ -409,7 +431,6 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private void gotoQuizArchiveView(View view) {
         System.out.println(">>>>>. " + view.getId());
     }
-
 
     private void filterClassRoutine(View v) {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
@@ -444,7 +465,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void getClassRoutineByDayName(String name){
-        if(classRoutines == null){
+//        if(classRoutines == null){
             new ClassRoutineApi(getContext()).getClassRoutine(
                     name,
                     CustomSharedPref.getInstance(getContext()).getAuthToken(),
@@ -461,8 +482,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                         catch (Exception ignore){ }
                     }
             );
-        }
-        else setClassRoutineAdapter(classRoutines);
+//        }
+//        else setClassRoutineAdapter(classRoutines);
     }
 
     private void filterAttendance(View v) {
@@ -522,7 +543,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void getAttendanceByMonthName(String name){
-        if(attendance == null){
+//        if(attendance == null){
             new AttendanceApi(getContext()).getAttendanceByMonthName(
                     name,
                     CustomSharedPref.getInstance(getContext()).getAuthToken(),
@@ -537,8 +558,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                         catch (Exception ignore){}
                     }
             );
-        }
-        else setAttendanceGraph(attendance);
+//        }
+//        else setAttendanceGraph(attendance);
 
     }
 
