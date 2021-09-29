@@ -51,13 +51,13 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
         dashboardFragment = new StudentDashboardFragment((drawerLayout, data) -> {
             this.studentDrawerId = drawerLayout;
 
-            if(data.equals("change")) {
-                navigationLinearView.setCurrentActiveItem(4);
-                onNavigationChanged(null, 4);
-            }
             if(data.equals("Successfully logged out.")){
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
+            }
+            else {
+                navigationLinearView.setCurrentActiveItem(Integer.parseInt(data));
+                onNavigationChanged(null, Integer.parseInt(data));
             }
         });
 

@@ -12,6 +12,10 @@
     <color name="black">#FF000000</color>
     <color name="oops">#7E8397</color>
     <color name="blue_primary">#0B2D51</color>
+
+    <color name="primary_active">#144A84</color>
+    <color name="primary_bg_active">#D7E9FB</color>
+    <color name="primary_inactive">#407EBC</color>
     <color name="blue_primary_dark">#0B2D51</color>
     <color name="blue_primary_dark_2">#072341</color>
     <color name="white">#FFFFFFFF</color>

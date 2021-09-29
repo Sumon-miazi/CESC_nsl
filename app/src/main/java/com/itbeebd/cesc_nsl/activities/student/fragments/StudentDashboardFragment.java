@@ -27,6 +27,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.LessonPlanActivity;
 import com.itbeebd.cesc_nsl.activities.student.LibraryBookActivity;
+import com.itbeebd.cesc_nsl.activities.student.PaymentHistoryActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.ClassRoutineAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
@@ -201,14 +202,14 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlanSeeAll = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanSeeAllId);
 
         studentAllMenuViewId.setOnClickListener(this::toggleStudentDrawerMenu);
-        profileLinkBtnId.setOnClickListener(this::drawerNavClicked);
-        resultLinkBtnId.setOnClickListener(this::drawerNavClicked);
-        dueLinkBtnId.setOnClickListener(this::drawerNavClicked);
-        paymentHistoryLinkBtnId.setOnClickListener(this::drawerNavClicked);
-        libraryLinkBtnId.setOnClickListener(this::drawerNavClicked);
-        lessonPlanLinkBtnId.setOnClickListener(this::drawerNavClicked);
-        quizArchiveLinkBtnId.setOnClickListener(this::drawerNavClicked);
-        onlineClassLinkBtnId.setOnClickListener(this::drawerNavClicked);
+        profileLinkBtnId.setOnClickListener(this::changeFragment);
+        resultLinkBtnId.setOnClickListener(this::changeFragment);
+        dueLinkBtnId.setOnClickListener(this::changeFragment);
+        paymentHistoryLinkBtnId.setOnClickListener(this::changeActivity);
+        libraryLinkBtnId.setOnClickListener(this::changeActivity);
+        lessonPlanLinkBtnId.setOnClickListener(this::changeActivity);
+        quizArchiveLinkBtnId.setOnClickListener(this::changeActivity);
+        onlineClassLinkBtnId.setOnClickListener(this::changeActivity);
         logoutId.setOnClickListener(this::logout);
 
 
@@ -222,13 +223,25 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
    //     notificationSeeAll.setOnClickListener(this);
         studentProfileViewId.setOnClickListener(view1 -> {
-            fragmentToActivity.call(studentDrawerId,"change");
+            fragmentToActivity.call(studentDrawerId,"4");
         });
         studentNotificationAlarmViewId.setOnClickListener(this);
         lessonPlanSeeAll.setOnClickListener(this);
 
         setDashboardComponentValues();
         return view;
+    }
+
+    private void changeFragment(View view) {
+        if(view.getId() == R.id.profileLinkBtnId){
+            fragmentToActivity.call(studentDrawerId, "4");
+        }
+        else if(view.getId() == R.id.resultLinkBtnId){
+            fragmentToActivity.call(studentDrawerId, "1");
+        }
+        else if(view.getId() == R.id.dueLinkBtnId){
+            fragmentToActivity.call(studentDrawerId, "3");
+        }
     }
 
     private void logout(View view) {
@@ -243,8 +256,22 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         );
     }
 
-    private void drawerNavClicked(View view) {
+    private void changeActivity(View view) {
+        if(view.getId() == R.id.paymentHistoryLinkBtnId){
+            getActivity().startActivity(new Intent(getActivity(), PaymentHistoryActivity.class));
+        }
+        else if(view.getId() == R.id.libraryLinkBtnId){
+            gotoLibraryBookView(view);
+        }
+        else if(view.getId() == R.id.lessonPlanLinkBtnId){
+          onClick(view);
+        }
+        else if(view.getId() == R.id.quizArchiveLinkBtnId){
 
+        }
+        else if(view.getId() == R.id.onlineClassLinkBtnId){
+
+        }
     }
 
     @Override
@@ -465,7 +492,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
             intent.putExtra("notifications", notificationObjs);
             totalNotificationHindId.setVisibility(View.GONE);
         }
-        else if(view.getId() == R.id.lessonPlanSeeAllId){
+        else if(view.getId() == R.id.lessonPlanSeeAllId || view.getId() == R.id.lessonPlanLinkBtnId){
             intent = new Intent(getActivity(), LessonPlanActivity.class);
             intent.putExtra("lessonPlan",  lessonPlans);
         }
