@@ -584,13 +584,27 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@android:color/white"
-        app:menu="@menu/student_menu" />
+        android:background="@android:color/white">
+        <include
+            layout="@layout/drawer_layout"/>
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
 
 
     <!--
+
+        <com.google.android.material.navigation.NavigationView
+        android:id="@+id/studentNavId"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+    app:menu="@menu/student_menu"/>
+
+
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

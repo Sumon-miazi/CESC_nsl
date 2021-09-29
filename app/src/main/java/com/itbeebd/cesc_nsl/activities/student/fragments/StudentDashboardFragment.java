@@ -36,6 +36,7 @@ import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.studentApi.AttendanceApi;
 import com.itbeebd.cesc_nsl.api.studentApi.ClassRoutineApi;
 import com.itbeebd.cesc_nsl.api.studentApi.DashboardApi;
+import com.itbeebd.cesc_nsl.api.studentApi.LoginApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
 import com.itbeebd.cesc_nsl.interfaces.FragmentToActivity;
@@ -97,11 +98,25 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private LinearLayout routingNotFoundId;
     private TextView routineHindId;
     private ImageView studentAllMenuViewId;
+
     private DrawerLayout studentDrawerId;
     private DashboardHeaderObj dashboardHeaderObj;
     private ArrayList<ClassRoutine> classRoutines;
     private Attendance attendance;
     private FragmentToActivity fragmentToActivity;
+
+    private ImageView d_studentProfileViewId;
+    private TextView d_studentNameViewId;
+    private TextView d_studentIdViewId;
+    private CardView profileLinkBtnId;
+    private CardView resultLinkBtnId;
+    private CardView dueLinkBtnId;
+    private CardView paymentHistoryLinkBtnId;
+    private CardView libraryLinkBtnId;
+    private CardView lessonPlanLinkBtnId;
+    private CardView quizArchiveLinkBtnId;
+    private CardView onlineClassLinkBtnId;
+    private CardView logoutId;
 
     public StudentDashboardFragment(){
 
@@ -123,6 +138,19 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
         // Find our drawer view
         studentDrawerId = view.findViewById(R.id.studentDrawerId);
+        d_studentProfileViewId = view.findViewById(R.id.studentNavId).findViewById(R.id.d_studentProfileViewId);
+        d_studentNameViewId = view.findViewById(R.id.studentNavId).findViewById(R.id.d_studentNameViewId);
+        d_studentIdViewId = view.findViewById(R.id.studentNavId).findViewById(R.id.d_studentIdViewId);
+        profileLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.profileLinkBtnId);
+        resultLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.resultLinkBtnId);
+        dueLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.dueLinkBtnId);
+        paymentHistoryLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.paymentHistoryLinkBtnId);
+        libraryLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.libraryLinkBtnId);
+        lessonPlanLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.lessonPlanLinkBtnId);
+        quizArchiveLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.quizArchiveLinkBtnId);
+        onlineClassLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.onlineClassLinkBtnId);
+        logoutId = view.findViewById(R.id.studentNavId).findViewById(R.id.logoutId);
+
        // studentDrawerId.openDrawer(GravityCompat.START);
         studentAllMenuViewId = view.findViewById(R.id.studentAllMenuViewId);
         studentProfileViewId = view.findViewById(R.id.studentProfileViewId);
@@ -173,6 +201,16 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlanSeeAll = view.findViewById(R.id.dashboardLessonPlanBlockId).findViewById(R.id.lessonPlanSeeAllId);
 
         studentAllMenuViewId.setOnClickListener(this::toggleStudentDrawerMenu);
+        profileLinkBtnId.setOnClickListener(this::drawerNavClicked);
+        resultLinkBtnId.setOnClickListener(this::drawerNavClicked);
+        dueLinkBtnId.setOnClickListener(this::drawerNavClicked);
+        paymentHistoryLinkBtnId.setOnClickListener(this::drawerNavClicked);
+        libraryLinkBtnId.setOnClickListener(this::drawerNavClicked);
+        lessonPlanLinkBtnId.setOnClickListener(this::drawerNavClicked);
+        quizArchiveLinkBtnId.setOnClickListener(this::drawerNavClicked);
+        onlineClassLinkBtnId.setOnClickListener(this::drawerNavClicked);
+        logoutId.setOnClickListener(this::logout);
+
 
         quizBlock.setOnClickListener(this::gotoQuizView);
         quizArchiveBlock.setOnClickListener(this::gotoQuizArchiveView);
@@ -191,6 +229,22 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
         setDashboardComponentValues();
         return view;
+    }
+
+    private void logout(View view) {
+        new LoginApi(getContext(), "Logging out...").logout(
+                CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                (isSuccess, message) -> {
+                    if(isSuccess){
+                        fragmentToActivity.call(studentDrawerId, message);
+                    }
+                    else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+        );
+    }
+
+    private void drawerNavClicked(View view) {
+
     }
 
     @Override
@@ -225,15 +279,23 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         todayDateViewId.setText(SimpleDateKt.toDateEMY(date));
 
         userNameViewId.setText(stdObj.getName().substring(stdObj.getName().lastIndexOf(" ")+1));
+        d_studentNameViewId.setText(stdObj.getName());
+        d_studentIdViewId.setText(String.format("Student ID: %d", stdObj.getStudentId()));
 
         if( imageUrl != null){
-            Glide.with(this)
-                    .load(ApiUrls.BASE_IMAGE_URL + imageUrl)
-                    .placeholder(R.drawable.default_male)
-                    .error(R.drawable.default_male)
-                    .fallback(R.drawable.default_male)
-                    .into(studentProfileViewId);
+            setProfileImage(studentProfileViewId, imageUrl);
+            setProfileImage(d_studentProfileViewId, imageUrl);
+
         }
+    }
+
+    private void setProfileImage(ImageView imageView, String imageUrl){
+        Glide.with(this)
+                .load(ApiUrls.BASE_IMAGE_URL + imageUrl)
+                .placeholder(R.drawable.default_male)
+                .error(R.drawable.default_male)
+                .fallback(R.drawable.default_male)
+                .into(imageView);
     }
 
     private void setDashboardComponentValues() {

@@ -3,6 +3,7 @@ package com.itbeebd.cesc_nsl.api.studentApi;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
@@ -28,11 +29,11 @@ public class LoginApi extends BaseService {
     private CustomProgressDialog progressDialog;
     private final StudentDao studentDao;
 
-    public LoginApi(Context context){
+    public LoginApi(Context context, String message){
         this.context = context;
         this.studentDao = new StudentDao();
         requestBody = new RetrofitRequestBody();
-        this.progressDialog = new CustomProgressDialog(context, "Signing in...");
+        this.progressDialog = new CustomProgressDialog(context, message);
     }
 
     public void studentLogin(String studentId, String password, String fcm_token, BooleanResponse booleanResponse){
@@ -107,4 +108,44 @@ public class LoginApi extends BaseService {
             }
         });
     }
+
+    public void logout(String token, BooleanResponse booleanResponse){
+        progressDialog.show();
+        Call<ResponseBody> studentLogout = service.getRequestPath(token, ApiUrls.LOGOUT);
+        studentLogout.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONObject jsonObject = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
+                    try {
+                        jsonObject =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> " + jsonObject);
+                        booleanResponse.response(true, jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+                        booleanResponse.response(false, e.getLocalizedMessage());
+                    }
+
+
+                }
+                else {
+                    booleanResponse.response(response.isSuccessful(), response.toString());
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
+            }
+        });
+    }
+
 }

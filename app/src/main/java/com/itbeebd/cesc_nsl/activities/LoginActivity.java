@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(String userId, String password) {
-        new LoginApi(this).studentLogin(userId, password, "123456", ((isSuccess, message) -> {
+        new LoginApi(this, "Signing in...").studentLogin(userId, password, "123456", ((isSuccess, message) -> {
             if(isSuccess){
                 this.startActivity(new Intent(this, StudentDashboardActivity.class));
                 finish();

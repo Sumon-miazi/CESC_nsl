@@ -1,5 +1,6 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
+import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.fragments.PaymentFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.ResultBoardFragment;
@@ -52,6 +54,10 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
             if(data.equals("change")) {
                 navigationLinearView.setCurrentActiveItem(4);
                 onNavigationChanged(null, 4);
+            }
+            if(data.equals("Successfully logged out.")){
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
             }
         });
 

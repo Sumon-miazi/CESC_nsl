@@ -11,4 +11,5 @@ public class ApiUrls {
     public static final String ADD_PAYMENT =  "addPayment";
     public static final String DASHBOARD_HEADER_INFO =  "dashboard-header-info";
     public static final String RESULT =  "result";
+    public static final String LOGOUT =  "logout";
 }

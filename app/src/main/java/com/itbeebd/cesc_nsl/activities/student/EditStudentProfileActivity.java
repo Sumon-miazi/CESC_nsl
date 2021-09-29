@@ -38,8 +38,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
 
     private Student student;
     private Guardian mother;
-    private Guardian father2;
-    private List<Guardian> guardians;
+    private Guardian father;
     private List<Map<String, Object>> guardianInfoList;
 
     private ImageView userProfileViewId;
@@ -165,6 +164,12 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         if(student != null){
           //  guardians = new StudentDao().getGuardian(student);
             setUserProfileInfo();
+
+            mother = new StudentDao().getGuardian(student, "Mother");
+            father = new StudentDao().getGuardian(student, "Father");
+
+            setStudentGuardianEditInfo(mother, father);
+
         }
     }
 
@@ -182,18 +187,12 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         emailTextFieldId.getEditText().setText(student.getEmail());
         previousSchoolTextFieldId.getEditText().setText(student.getPrevious_school());
         idMarkTextFieldId.getEditText().setText(student.getIdentification_mark());
-
-        if (guardians != null) {
-            mother = guardians.get(0).getRelation().equalsIgnoreCase("mother")? guardians.get(0): guardians.get(1);
-            father2 = guardians.get(1).getRelation().equalsIgnoreCase("father")? guardians.get(1) :guardians.get(0);
-            setStudentGuardianEditInfo(mother, father2);
-        }
-        else System.out.println(">>>>>>>> guardian is null ");
     }
 
     private void setStudentGuardianEditInfo(Guardian mother, Guardian father) {
 
         // mother details
+        if(mother != null){
             setImageInImageView(motherProfileViewId, ApiUrls.BASE_IMAGE_URL + mother.getProfileImage());
             motherRelationViewId.setText(mother.getRelation());
             motherNameTextFieldId.getEditText().setText(mother.getName());
@@ -204,19 +203,22 @@ public class EditStudentProfileActivity extends AppCompatActivity {
             m_parentBloodGroupTextFieldId.getEditText().setText(mother.getBlood_group());
             m_designationTextFieldId.getEditText().setText(mother.getDesignation());
             m_parentEmailTextFieldId.getEditText().setText(mother.getEmail());
+        }
 
 
         // father details
-        setImageInImageView(fatherProfileViewId, ApiUrls.BASE_IMAGE_URL + father.getProfileImage());
-        fatherRelationViewId.setText(father.getRelation());
-        fatherNameTextFieldId.getEditText().setText(father.getName());
-        f_occupationTextFieldId.getEditText().setText(father.getOccupation());
-        f_parentOrganizationFieldId.getEditText().setText(father.getOrganization());
-        f_phoneTextFieldId.getEditText().setText(father.getMobile());
-        f_addressTextFieldId.getEditText().setText(father.getLocation());
-        f_parentBloodGroupTextFieldId.getEditText().setText(father.getBlood_group());
-        f_designationTextFieldId.getEditText().setText(father.getDesignation());
-        f_parentEmailTextFieldId.getEditText().setText(father.getEmail());
+        if(father != null){
+            setImageInImageView(fatherProfileViewId, ApiUrls.BASE_IMAGE_URL + father.getProfileImage());
+            fatherRelationViewId.setText(father.getRelation());
+            fatherNameTextFieldId.getEditText().setText(father.getName());
+            f_occupationTextFieldId.getEditText().setText(father.getOccupation());
+            f_parentOrganizationFieldId.getEditText().setText(father.getOrganization());
+            f_phoneTextFieldId.getEditText().setText(father.getMobile());
+            f_addressTextFieldId.getEditText().setText(father.getLocation());
+            f_parentBloodGroupTextFieldId.getEditText().setText(father.getBlood_group());
+            f_designationTextFieldId.getEditText().setText(father.getDesignation());
+            f_parentEmailTextFieldId.getEditText().setText(father.getEmail());
+        }
 
     }
 
@@ -313,34 +315,39 @@ public class EditStudentProfileActivity extends AppCompatActivity {
                 healthProblemTextFieldId.getEditText().getText().toString(),
                 idMarkTextFieldId.getEditText().getText().toString()
         );
+        GuardianDummy motherDummy = null;
+if(mother != null){
+    motherDummy = new GuardianDummy(
+            student.getStudentId(),
+            Integer.parseInt(String.valueOf(mother.getId())),
+            mother.getRelation(),
+            motherNameTextFieldId.getEditText().getText().toString(),
+            m_occupationTextFieldId.getEditText().getText().toString(),
+            m_phoneTextFieldId.getEditText().getText().toString(),
+            m_addressTextFieldId.getEditText().getText().toString(),
+            m_parentBloodGroupTextFieldId.getEditText().getText().toString(),
+            m_designationTextFieldId.getEditText().getText().toString(),
+            m_parentOrganizationFieldId.getEditText().getText().toString(),
+            m_parentEmailTextFieldId.getEditText().getText().toString()
+    );
+}
 
-        GuardianDummy motherDummy = new GuardianDummy(
-                student.getStudentId(),
-                Integer.parseInt(String.valueOf(mother.getId())),
-                mother.getRelation(),
-                motherNameTextFieldId.getEditText().getText().toString(),
-                m_occupationTextFieldId.getEditText().getText().toString(),
-                m_phoneTextFieldId.getEditText().getText().toString(),
-                m_addressTextFieldId.getEditText().getText().toString(),
-                m_parentBloodGroupTextFieldId.getEditText().getText().toString(),
-                m_designationTextFieldId.getEditText().getText().toString(),
-                m_parentOrganizationFieldId.getEditText().getText().toString(),
-                m_parentEmailTextFieldId.getEditText().getText().toString()
-        );
-
-        GuardianDummy fatherDummy = new GuardianDummy(
-                student.getStudentId(),
-                Integer.parseInt(String.valueOf(father2.getId())),
-                father2.getRelation(),
-                fatherNameTextFieldId.getEditText().getText().toString(),
-                f_occupationTextFieldId.getEditText().getText().toString(),
-                f_phoneTextFieldId.getEditText().getText().toString(),
-                f_addressTextFieldId.getEditText().getText().toString(),
-                f_parentBloodGroupTextFieldId.getEditText().getText().toString(),
-                f_designationTextFieldId.getEditText().getText().toString(),
-                f_parentOrganizationFieldId.getEditText().getText().toString(),
-                f_parentEmailTextFieldId.getEditText().getText().toString()
-        );
+        GuardianDummy fatherDummy = null;
+if(father != null){
+    fatherDummy = new GuardianDummy(
+            student.getStudentId(),
+            Integer.parseInt(String.valueOf(father.getId())),
+            father.getRelation(),
+            fatherNameTextFieldId.getEditText().getText().toString(),
+            f_occupationTextFieldId.getEditText().getText().toString(),
+            f_phoneTextFieldId.getEditText().getText().toString(),
+            f_addressTextFieldId.getEditText().getText().toString(),
+            f_parentBloodGroupTextFieldId.getEditText().getText().toString(),
+            f_designationTextFieldId.getEditText().getText().toString(),
+            f_parentOrganizationFieldId.getEditText().getText().toString(),
+            f_parentEmailTextFieldId.getEditText().getText().toString()
+    );
+}
 
 
         new ProfileEditApi(this).updatedData(
