@@ -9,7 +9,7 @@ import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.GenericRecyclerAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders.ClassRoutineViewHolder;
-import com.itbeebd.cesc_nsl.utils.ClassRoutine;
+import com.itbeebd.cesc_nsl.utils.dummy.ClassRoutine;
 
 public class ClassRoutineAdapter extends GenericRecyclerAdapter<ClassRoutine, OnRecyclerObjectClickListener<ClassRoutine>, ClassRoutineViewHolder> {
 

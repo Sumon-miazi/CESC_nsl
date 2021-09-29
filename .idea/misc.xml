@@ -67,6 +67,7 @@
         <entry key="app/src/main/res/menu/menu_filter.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_public_dashboard.xml" value="0.1" />
         <entry key="app/src/main/res/menu/student_menu.xml" value="0.22" />
+        <entry key="app/src/main/res/xml/file_paths.xml" value="0.15" />
       </map>
     </option>
   </component>

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
-import com.itbeebd.cesc_nsl.utils.LessonPlan;
+import com.itbeebd.cesc_nsl.utils.dummy.LessonPlan;
 
 import java.util.ArrayList;
 

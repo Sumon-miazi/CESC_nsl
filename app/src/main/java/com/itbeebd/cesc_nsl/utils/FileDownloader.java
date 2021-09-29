@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
+import com.itbeebd.cesc_nsl.utils.dummy.LessonFile;
 import com.tonyodev.fetch2.Download;
 import com.tonyodev.fetch2.Error;
 import com.tonyodev.fetch2.Fetch;
@@ -25,97 +26,109 @@ import java.util.List;
 public class FileDownloader{
     private Fetch fetch;
     private Context context;
+    private final NotificationReminder notificationReminder;
+    private String fileName;
+    private String fileUrl;
+    FetchListener fetchListener;
 
     public FileDownloader(Context context) {
         this.context = context;
+        notificationReminder = new NotificationReminder(context);
         FetchConfiguration fetchConfiguration = new FetchConfiguration.Builder(context)
                 .setDownloadConcurrentLimit(3)
                 .build();
 
         fetch= Fetch.Impl.getInstance(fetchConfiguration);
 
+        fetchListener = new FetchListener() {
+            @Override
+            public void onWaitingNetwork(@NonNull Download download) {
+
+            }
+
+            @Override
+            public void onStarted(@NonNull Download download, @NonNull List<? extends DownloadBlock> list, int i) {
+
+            }
+
+            @Override
+            public void onResumed(@NonNull Download download) {
+
+            }
+
+            @Override
+            public void onRemoved(@NonNull Download download) {
+
+            }
+
+            @Override
+            public void onQueued(@NonNull Download download, boolean b) {
+
+            }
+
+            @Override
+            public void onProgress(@NonNull Download download, long l, long l1) {
+
+            }
+
+            @Override
+            public void onPaused(@NonNull Download download) {
+
+            }
+
+            @Override
+            public void onError(@NonNull Download download, @NonNull Error error, @Nullable Throwable throwable) {
+                try {
+                    //Remove listener when done.
+                    //  if(fetch != null) fetch.removeListener(fetchListener);
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                }
+                catch (Exception ignore){}
+            }
+
+            @Override
+            public void onDownloadBlockUpdated(@NonNull Download download, @NonNull DownloadBlock downloadBlock, int i) {
+
+            }
+
+            @Override
+            public void onDeleted(@NonNull Download download) {
+
+            }
+
+            @Override
+            public void onCompleted(@NonNull Download download) {
+                try {
+                    //Remove listener when done.
+                    //  if(fetch != null) fetch.removeListener(fetchListener);
+                    Toast.makeText(context, "Download complete", Toast.LENGTH_SHORT).show();
+                   System.out.println(">>>>>>> file url " + fileUrl);
+                    notificationReminder.sendNotification(fileName, "Download Complete ", fileUrl);
+                }
+                catch (Exception ignore){}
+            }
+
+            @Override
+            public void onCancelled(@NonNull Download download) {
+
+            }
+
+            @Override
+            public void onAdded(@NonNull Download download) {
+
+            }
+        };
+
     }
 
-    FetchListener fetchListener = new FetchListener() {
-        @Override
-        public void onWaitingNetwork(@NonNull Download download) {
 
-        }
-
-        @Override
-        public void onStarted(@NonNull Download download, @NonNull List<? extends DownloadBlock> list, int i) {
-
-        }
-
-        @Override
-        public void onResumed(@NonNull Download download) {
-
-        }
-
-        @Override
-        public void onRemoved(@NonNull Download download) {
-
-        }
-
-        @Override
-        public void onQueued(@NonNull Download download, boolean b) {
-
-        }
-
-        @Override
-        public void onProgress(@NonNull Download download, long l, long l1) {
-
-        }
-
-        @Override
-        public void onPaused(@NonNull Download download) {
-
-        }
-
-        @Override
-        public void onError(@NonNull Download download, @NonNull Error error, @Nullable Throwable throwable) {
-            try {
-                //Remove listener when done.
-                //  if(fetch != null) fetch.removeListener(fetchListener);
-                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-            catch (Exception ignore){}
-        }
-
-        @Override
-        public void onDownloadBlockUpdated(@NonNull Download download, @NonNull DownloadBlock downloadBlock, int i) {
-
-        }
-
-        @Override
-        public void onDeleted(@NonNull Download download) {
-
-        }
-
-        @Override
-        public void onCompleted(@NonNull Download download) {
-            try {
-                //Remove listener when done.
-              //  if(fetch != null) fetch.removeListener(fetchListener);
-                Toast.makeText(context, "Download complete", Toast.LENGTH_SHORT).show();
-            }
-            catch (Exception ignore){}
-        }
-
-        @Override
-        public void onCancelled(@NonNull Download download) {
-
-        }
-
-        @Override
-        public void onAdded(@NonNull Download download) {
-
-        }
-    };
 
     public void downloadFile(String url, String fileName, String dirPath, BooleanResponse booleanResponse){
 
-        Request request = new Request(url, getDownloadPath(fileName, dirPath));
+        this.fileName = fileName;
+        this.fileUrl = getDownloadPath(fileName, dirPath);
+
+        Request request = new Request(url, fileUrl);
         request.setPriority(Priority.HIGH);
         request.setNetworkType(NetworkType.ALL);
         // request.addHeader("clientKey", "SD78DF93_3947&MVNGHE1WONG");

@@ -9,7 +9,7 @@ import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.GenericRecyclerAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders.LessonPlanViewHolder;
-import com.itbeebd.cesc_nsl.utils.LessonPlan;
+import com.itbeebd.cesc_nsl.utils.dummy.LessonPlan;
 
 public class LessonPlanAdapter  extends GenericRecyclerAdapter<LessonPlan, OnRecyclerObjectClickListener<LessonPlan>, LessonPlanViewHolder> {
 

@@ -8,10 +8,8 @@ import androidx.annotation.NonNull;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.GenericRecyclerAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
-import com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders.LessonPlanViewHolder;
 import com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders.LibraryBookViewHolder;
 import com.itbeebd.cesc_nsl.sugarClass.Book;
-import com.itbeebd.cesc_nsl.utils.LessonPlan;
 
 public class LibraryBookAdapter extends GenericRecyclerAdapter<Book, OnRecyclerObjectClickListener<Book>, LibraryBookViewHolder> {
 

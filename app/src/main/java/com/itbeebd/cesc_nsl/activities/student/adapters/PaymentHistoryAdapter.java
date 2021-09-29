@@ -9,7 +9,7 @@ import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.GenericRecyclerAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders.PaymentHistoryViewHolder;
-import com.itbeebd.cesc_nsl.utils.Payment;
+import com.itbeebd.cesc_nsl.utils.dummy.Payment;
 
 public class PaymentHistoryAdapter  extends GenericRecyclerAdapter<Payment, OnRecyclerObjectClickListener<Payment>, PaymentHistoryViewHolder> {
 

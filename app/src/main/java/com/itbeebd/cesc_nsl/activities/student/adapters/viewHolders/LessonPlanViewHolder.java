@@ -13,8 +13,8 @@ import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.BaseViewHolder;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.utils.FileDownloader;
-import com.itbeebd.cesc_nsl.utils.LessonFile;
-import com.itbeebd.cesc_nsl.utils.LessonPlan;
+import com.itbeebd.cesc_nsl.utils.dummy.LessonFile;
+import com.itbeebd.cesc_nsl.utils.dummy.LessonPlan;
 import com.parassidhu.simpledate.SimpleDateKt;
 
 import java.text.SimpleDateFormat;

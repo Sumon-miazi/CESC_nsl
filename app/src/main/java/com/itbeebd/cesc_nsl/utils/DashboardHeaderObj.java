@@ -2,6 +2,9 @@ package com.itbeebd.cesc_nsl.utils;
 
 import com.itbeebd.cesc_nsl.sugarClass.Book;
 import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
+import com.itbeebd.cesc_nsl.utils.dummy.Attendance;
+import com.itbeebd.cesc_nsl.utils.dummy.ClassRoutine;
+import com.itbeebd.cesc_nsl.utils.dummy.LessonPlan;
 
 import java.io.Serializable;
 import java.util.ArrayList;

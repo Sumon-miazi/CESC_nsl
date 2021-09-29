@@ -59,6 +59,18 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.itbeebd.cesc_nsl.sugarClass" />
+
+
+<!--        <provider-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="com.com.itbeebd.cesc_nsl.fileprovider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--            android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--            android:resource="@xml/file_paths" />-->
+<!--        </provider>-->
+
     </application>
 
 </manifest>

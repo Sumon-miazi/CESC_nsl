@@ -8,12 +8,12 @@ import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.dao.NotificationDao;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.sugarClass.Book;
-import com.itbeebd.cesc_nsl.utils.Attendance;
-import com.itbeebd.cesc_nsl.utils.ClassRoutine;
+import com.itbeebd.cesc_nsl.utils.dummy.Attendance;
+import com.itbeebd.cesc_nsl.utils.dummy.ClassRoutine;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
-import com.itbeebd.cesc_nsl.utils.LessonFile;
-import com.itbeebd.cesc_nsl.utils.LessonPlan;
+import com.itbeebd.cesc_nsl.utils.dummy.LessonFile;
+import com.itbeebd.cesc_nsl.utils.dummy.LessonPlan;
 import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 
 import org.json.JSONArray;

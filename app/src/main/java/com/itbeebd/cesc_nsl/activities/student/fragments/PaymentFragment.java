@@ -22,8 +22,8 @@ import com.itbeebd.cesc_nsl.activities.student.PaymentHistoryActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.DuePaymentAdapter;
 import com.itbeebd.cesc_nsl.api.studentApi.PaymentApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
-import com.itbeebd.cesc_nsl.utils.Due;
-import com.itbeebd.cesc_nsl.utils.DueHistory;
+import com.itbeebd.cesc_nsl.utils.dummy.Due;
+import com.itbeebd.cesc_nsl.utils.dummy.DueHistory;
 
 import java.util.ArrayList;
 

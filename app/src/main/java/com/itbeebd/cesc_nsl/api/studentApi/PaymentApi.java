@@ -10,9 +10,9 @@ import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.interfaces.DueHistoryResponse;
 import com.itbeebd.cesc_nsl.interfaces.PaymentHistoryResponse;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
-import com.itbeebd.cesc_nsl.utils.Due;
-import com.itbeebd.cesc_nsl.utils.DueHistory;
-import com.itbeebd.cesc_nsl.utils.Payment;
+import com.itbeebd.cesc_nsl.utils.dummy.Due;
+import com.itbeebd.cesc_nsl.utils.dummy.DueHistory;
+import com.itbeebd.cesc_nsl.utils.dummy.Payment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

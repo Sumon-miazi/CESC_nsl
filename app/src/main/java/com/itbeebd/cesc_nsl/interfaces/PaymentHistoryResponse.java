@@ -1,7 +1,6 @@
 package com.itbeebd.cesc_nsl.interfaces;
 
-import com.itbeebd.cesc_nsl.utils.Due;
-import com.itbeebd.cesc_nsl.utils.Payment;
+import com.itbeebd.cesc_nsl.utils.dummy.Payment;
 
 import java.util.ArrayList;
 

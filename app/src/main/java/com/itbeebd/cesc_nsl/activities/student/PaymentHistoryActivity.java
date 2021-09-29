@@ -21,7 +21,7 @@ import com.itbeebd.cesc_nsl.activities.student.adapters.PaymentHistoryAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.api.studentApi.PaymentApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
-import com.itbeebd.cesc_nsl.utils.Payment;
+import com.itbeebd.cesc_nsl.utils.dummy.Payment;
 
 import java.util.ArrayList;
 

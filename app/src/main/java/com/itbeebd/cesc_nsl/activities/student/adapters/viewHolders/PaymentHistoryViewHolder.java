@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.BaseViewHolder;
 import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
-import com.itbeebd.cesc_nsl.utils.Payment;
+import com.itbeebd.cesc_nsl.utils.dummy.Payment;
 
 public class PaymentHistoryViewHolder  extends BaseViewHolder<Payment, OnRecyclerObjectClickListener<Payment>> {
 

@@ -40,10 +40,10 @@ import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
 import com.itbeebd.cesc_nsl.sugarClass.Book;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
-import com.itbeebd.cesc_nsl.utils.Attendance;
-import com.itbeebd.cesc_nsl.utils.ClassRoutine;
+import com.itbeebd.cesc_nsl.utils.dummy.Attendance;
+import com.itbeebd.cesc_nsl.utils.dummy.ClassRoutine;
 import com.itbeebd.cesc_nsl.utils.DashboardHeaderObj;
-import com.itbeebd.cesc_nsl.utils.LessonPlan;
+import com.itbeebd.cesc_nsl.utils.dummy.LessonPlan;
 import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 import com.parassidhu.simpledate.SimpleDateKt;
 

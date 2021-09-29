@@ -5,7 +5,7 @@ import android.content.Context;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
-import com.itbeebd.cesc_nsl.utils.ClassRoutine;
+import com.itbeebd.cesc_nsl.utils.dummy.ClassRoutine;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 
 import org.json.JSONArray;

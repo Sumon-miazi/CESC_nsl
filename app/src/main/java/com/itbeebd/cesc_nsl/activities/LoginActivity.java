@@ -38,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(view -> {
             loginCredentialValidate(userId.getEditText().getText().toString().trim(), userPassword.getEditText().getText().toString().trim());
         });
+
+    //    new NotificationReminder(this).sendNotification("Hee", "hi", "/storage/emulated/0/CESC/LessonPlanFiles/fother.jpg");
     }
 
     private void loginCredentialValidate(String userId, String password) {
