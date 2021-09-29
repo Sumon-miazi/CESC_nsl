@@ -8,7 +8,7 @@
     tools:context=".activities.student.LibraryBookActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/libraryToolbarId"
+        android:id="@+id/library_ToolbarId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/blue_primary"
@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/libraryToolbarId" />
+        app:layout_constraintTop_toBottomOf="@+id/library_ToolbarId" />
 
     <LinearLayout
         android:id="@+id/no_book_foundId"
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/libraryToolbarId"
+        app:layout_constraintTop_toBottomOf="@id/library_ToolbarId"
         app:layout_constraintVertical_bias="0.41000003">
 
         <ImageView

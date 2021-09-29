@@ -1,6 +1,7 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -25,7 +26,7 @@ public class LibraryBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library_book);
 
-        Toolbar mToolBar =  (Toolbar) findViewById(R.id.libraryToolbarId);
+        Toolbar mToolBar =  findViewById(R.id.library_ToolbarId);
         setSupportActionBar(mToolBar);
         getSupportActionBar().setTitle("LIBRARY BOOK");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -49,5 +50,15 @@ public class LibraryBookActivity extends AppCompatActivity {
         libraryBookAdapter.setItems(bookArrayList);
         libraryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         libraryRecyclerView.setAdapter(libraryBookAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Respond to the action bar's Up/Home button
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
