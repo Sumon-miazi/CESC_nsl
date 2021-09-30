@@ -51,10 +51,10 @@ public class ClassRoutineApi extends BaseService {
                             JSONObject object = data.getJSONObject(i);
                             JSONObject durationObj = new JSONObject(object.optString("duration"));
 
-                            System.out.println(">>>>>>>>>> durationObj " + durationObj);
+                            System.out.println(">>>>>>>>>> status " + object.optString("status"));
 
 
-                            if(object.optInt("status") == 1){
+                            if(object.optString("status").equals("1")){
                                 ClassRoutine classRoutine = new ClassRoutine(
                                         object.optString("subject"),
                                         object.optString("teacher"),

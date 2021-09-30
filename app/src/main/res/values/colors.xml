@@ -26,6 +26,8 @@
     <color name="white_inactive">#EEFEFF</color>
     <color name="white_inactive_2">#AEAEAE</color>
     <color name="white_inactive_3">#F3FDFF</color>
+    <color name="white_inactive_4">#999999</color>
+    <color name="white_inactive_5">#5B5B5B</color>
 
     <color name="view_bg">#F1F1F1</color>
 

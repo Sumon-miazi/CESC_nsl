@@ -564,7 +564,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
         assert thursdayId != null;
         thursdayId.setOnClickListener(view -> {
-            getClassRoutineByDayName("Thu");
+            getClassRoutineByDayName("Thur");
             bottomSheetDialog.dismiss();
         });
 
