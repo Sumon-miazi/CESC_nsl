@@ -50,7 +50,7 @@ public class LibraryBookViewHolder  extends BaseViewHolder<Book, OnRecyclerObjec
                     .error(R.drawable.ic_menu_book)
                     .into(bookImageId);
         }
-        
+
         bookDownloadBtnId.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(item.getBookUrl()));
