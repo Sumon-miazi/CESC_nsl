@@ -62,7 +62,7 @@ public class ProfileEditApi extends BaseService {
 
                         jsonObject =  new JSONObject(response.body().string());
                         System.out.println(">>>>>>>>>> isSuccessful " + jsonObject);
-                        booleanResponse.response(jsonObject.optBoolean("issuccessful"), "Login");
+                        booleanResponse.response(jsonObject.optString("isSuccessful").equals("true"), jsonObject.optString("message"));
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -71,7 +71,7 @@ public class ProfileEditApi extends BaseService {
                     }
                 }
                 else {
-                    booleanResponse.response(response.isSuccessful(), response.toString());
+                    booleanResponse.response(false, response.toString());
                     System.out.println(">>>>>>>>>> else " + response.isSuccessful());
                     System.out.println(">>>>>>>>>> else " + response);
                 }

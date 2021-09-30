@@ -1,6 +1,7 @@
 package com.itbeebd.cesc_nsl.activities.student.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,14 +13,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.activities.student.DuePaymentCheckOutActivity;
 import com.itbeebd.cesc_nsl.activities.student.PaymentHistoryActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.DuePaymentAdapter;
+import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.studentApi.PaymentApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.utils.dummy.Due;
@@ -35,6 +37,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     private Button checkOutBtn;
     private TextView paymentHistoryBtn;
     private LinearLayout no_Due_history_foundId;
+    private ConstraintLayout dueRecordHeaderId;
     private Due due;
 
     public PaymentFragment() {
@@ -66,6 +69,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
         paymentRecyclerView = view.findViewById(R.id.paymentRecyclerViewId);
 
+        dueRecordHeaderId = view.findViewById(R.id.dueRecordHeaderId);
         no_Due_history_foundId = view.findViewById(R.id.no_Due_history_foundId);
         paymentHistoryBtn = view.findViewById(R.id.paymentHistoryBtnId);
 
@@ -108,10 +112,12 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         totolDueAmountHintId.setText(String.valueOf(due.getTotalDue()));
 
         if(due.getDueHistoryArrayList() != null) {
+            dueRecordHeaderId.setVisibility(View.VISIBLE);
             no_Due_history_foundId.setVisibility(due.getDueHistoryArrayList().size() == 0? View.VISIBLE : View.GONE);
             setDuePaymentAdapter(due.getDueHistoryArrayList());
         }
         else {
+            dueRecordHeaderId.setVisibility(View.GONE);
             no_Due_history_foundId.setVisibility(View.VISIBLE);
         }
     }
@@ -135,9 +141,14 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                     CustomSharedPref.getInstance(getContext()).getAuthToken(),
                     (isSuccess, message) -> {
                         if(isSuccess){
-                            Intent intent = new Intent(getActivity(), DuePaymentCheckOutActivity.class);
-                            intent.putExtra("invoiceNo",message);
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(ApiUrls.INVOICE_URL + message));
                             getActivity().startActivity(intent);
+
+                            //this code is previous working code
+//                            Intent intent = new Intent(getActivity(), DuePaymentCheckOutActivity.class);
+//                            intent.putExtra("invoiceNo",message);
+//                            getActivity().startActivity(intent);
                         }
                         else Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                     }

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -40,8 +41,11 @@ import java.util.Map;
 public class EditStudentProfileActivity extends AppCompatActivity {
 
     private Student student;
+    private StudentDummy studentDummy = null;
     private Guardian mother;
+    private GuardianDummy motherDummy  = null;
     private Guardian father;
+    private GuardianDummy fatherDummy  = null;
     private List<Map<String, Object>> guardianInfoList;
 
     private ImageView userProfileViewId;
@@ -122,7 +126,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         previousSchoolTextFieldId = findViewById(R.id.previousSchoolTextFieldId);
         idMarkTextFieldId = findViewById(R.id.idMarkTextFieldId);
 
-      //  guardianInfoEditLayout = findViewById(R.id.guardianInfoEditLayout);
+        //  guardianInfoEditLayout = findViewById(R.id.guardianInfoEditLayout);
 
         motherProfileViewId = findViewById(R.id.motherBlockId).findViewById(R.id.guardianProfileViewId);
         motherRelationViewId = findViewById(R.id.motherBlockId).findViewById(R.id.studentGuardianRelationViewId);
@@ -136,7 +140,6 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         m_designationTextFieldId = findViewById(R.id.motherBlockId).findViewById(R.id.designationTextFieldId);
         m_parentOrganizationFieldId = findViewById(R.id.motherBlockId).findViewById(R.id.parentOrganizationFieldId);
         m_parentEmailTextFieldId = findViewById(R.id.motherBlockId).findViewById(R.id.parentEmailTextFieldId);
-
 
 
         fatherProfileViewId = findViewById(R.id.fatherBlockId).findViewById(R.id.guardianProfileViewId);
@@ -153,9 +156,15 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         f_parentEmailTextFieldId = findViewById(R.id.fatherBlockId).findViewById(R.id.parentEmailTextFieldId);
 
 
-        userImageChangeBtnId.setOnClickListener(view -> {changeImage("student");});
-        motherImageChangeBtnId.setOnClickListener(view -> {changeImage("mother");});
-        fatherImageChangeBtnId.setOnClickListener(view -> {changeImage("father");});
+        userImageChangeBtnId.setOnClickListener(view -> {
+            changeImage("student");
+        });
+        motherImageChangeBtnId.setOnClickListener(view -> {
+            changeImage("mother");
+        });
+        fatherImageChangeBtnId.setOnClickListener(view -> {
+            changeImage("father");
+        });
 
         submitChangesBtnId = findViewById(R.id.submitChangesBtnId);
         submitChangesBtnId.setOnClickListener(view -> {
@@ -164,8 +173,8 @@ public class EditStudentProfileActivity extends AppCompatActivity {
 
         student = new StudentDao().getStudent(this);
 
-        if(student != null){
-          //  guardians = new StudentDao().getGuardian(student);
+        if (student != null) {
+            //  guardians = new StudentDao().getGuardian(student);
             setUserProfileInfo();
 
             mother = new StudentDao().getGuardian(student, "Mother");
@@ -195,7 +204,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
     private void setStudentGuardianEditInfo(Guardian mother, Guardian father) {
 
         // mother details
-        if(mother != null){
+        if (mother != null) {
             setImageInImageView(motherProfileViewId, ApiUrls.BASE_IMAGE_URL + mother.getProfileImage());
             motherRelationViewId.setText(mother.getRelation());
             motherNameTextFieldId.getEditText().setText(mother.getName());
@@ -210,7 +219,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
 
 
         // father details
-        if(father != null){
+        if (father != null) {
             setImageInImageView(fatherProfileViewId, ApiUrls.BASE_IMAGE_URL + father.getProfileImage());
             fatherRelationViewId.setText(father.getRelation());
             fatherNameTextFieldId.getEditText().setText(father.getName());
@@ -254,21 +263,19 @@ public class EditStudentProfileActivity extends AppCompatActivity {
 
     private void setUpImageInView(Image image) {
         assert image != null;
-          //  Uri filePath = Uri.fromFile(new File(image.getPath()));
-            imageUrl = image.getPath();
+        //  Uri filePath = Uri.fromFile(new File(image.getPath()));
+        imageUrl = image.getPath();
 
-            if(imageOwner.equals("student")) {
-                studentImageUrl = image.getPath();
-                setProfileImage(userProfileViewId, image);
-            }
-            else if(imageOwner.equals("mother")){
-                motherImageUrl = image.getPath();
-                setProfileImage(motherProfileViewId, image);
-            }
-            else if(imageOwner.equals("father")){
-                fatherImageUrl = image.getPath();
-                setProfileImage(fatherProfileViewId, image);
-            }
+        if (imageOwner.equals("student")) {
+            studentImageUrl = image.getPath();
+            setProfileImage(userProfileViewId, image);
+        } else if (imageOwner.equals("mother")) {
+            motherImageUrl = image.getPath();
+            setProfileImage(motherProfileViewId, image);
+        } else if (imageOwner.equals("father")) {
+            fatherImageUrl = image.getPath();
+            setProfileImage(fatherProfileViewId, image);
+        }
     }
 
     private void setProfileImage(ImageView imageView, Image image) {
@@ -276,8 +283,8 @@ public class EditStudentProfileActivity extends AppCompatActivity {
             Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, String.valueOf(image.getId()));
             Glide.with(this)
                     .load(uri)
-                  //  .apply(RequestOptions.skipMemoryCacheOf(true))
-                   // .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                    //  .apply(RequestOptions.skipMemoryCacheOf(true))
+                    // .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                     .error(R.drawable.default_male)
                     .dontAnimate()
                     .centerCrop()
@@ -293,8 +300,8 @@ public class EditStudentProfileActivity extends AppCompatActivity {
             //  System.out.println(">>>>>> " + ApiUrls.BASE_IMAGE_URL + student.getImage());
             Glide.with(this)
                     .load(url)
-                   // .apply(RequestOptions.skipMemoryCacheOf(true))
-                   // .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                    // .apply(RequestOptions.skipMemoryCacheOf(true))
+                    // .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                     .error(R.drawable.default_male)
                     .dontAnimate()
                     .centerCrop()
@@ -302,9 +309,9 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void getAllEditedData(){
+    private void getAllEditedData() {
 
-        StudentDummy studentDummy = new StudentDummy(
+        studentDummy = new StudentDummy(
                 religionTextFieldId.getEditText().getText().toString(),
                 bloodGroupTextFieldId.getEditText().getText().toString(),
                 birthDayTextFieldId.getEditText().getText().toString(),
@@ -318,40 +325,37 @@ public class EditStudentProfileActivity extends AppCompatActivity {
                 healthProblemTextFieldId.getEditText().getText().toString(),
                 idMarkTextFieldId.getEditText().getText().toString()
         );
-        GuardianDummy motherDummy = null;
-if(mother != null){
-    motherDummy = new GuardianDummy(
-            student.getStudentId(),
-            Integer.parseInt(String.valueOf(mother.getId())),
-            mother.getRelation(),
-            motherNameTextFieldId.getEditText().getText().toString(),
-            m_occupationTextFieldId.getEditText().getText().toString(),
-            m_phoneTextFieldId.getEditText().getText().toString(),
-            m_addressTextFieldId.getEditText().getText().toString(),
-            m_parentBloodGroupTextFieldId.getEditText().getText().toString(),
-            m_designationTextFieldId.getEditText().getText().toString(),
-            m_parentOrganizationFieldId.getEditText().getText().toString(),
-            m_parentEmailTextFieldId.getEditText().getText().toString()
-    );
-}
 
-        GuardianDummy fatherDummy = null;
-if(father != null){
-    fatherDummy = new GuardianDummy(
-            student.getStudentId(),
-            Integer.parseInt(String.valueOf(father.getId())),
-            father.getRelation(),
-            fatherNameTextFieldId.getEditText().getText().toString(),
-            f_occupationTextFieldId.getEditText().getText().toString(),
-            f_phoneTextFieldId.getEditText().getText().toString(),
-            f_addressTextFieldId.getEditText().getText().toString(),
-            f_parentBloodGroupTextFieldId.getEditText().getText().toString(),
-            f_designationTextFieldId.getEditText().getText().toString(),
-            f_parentOrganizationFieldId.getEditText().getText().toString(),
-            f_parentEmailTextFieldId.getEditText().getText().toString()
-    );
-}
-
+        if (mother != null) {
+            motherDummy = new GuardianDummy(
+                    student.getStudentId(),
+                    Integer.parseInt(String.valueOf(mother.getId())),
+                    mother.getRelation(),
+                    motherNameTextFieldId.getEditText().getText().toString(),
+                    m_occupationTextFieldId.getEditText().getText().toString(),
+                    m_phoneTextFieldId.getEditText().getText().toString(),
+                    m_addressTextFieldId.getEditText().getText().toString(),
+                    m_parentBloodGroupTextFieldId.getEditText().getText().toString(),
+                    m_designationTextFieldId.getEditText().getText().toString(),
+                    m_parentOrganizationFieldId.getEditText().getText().toString(),
+                    m_parentEmailTextFieldId.getEditText().getText().toString()
+            );
+        }
+        if (father != null) {
+            fatherDummy = new GuardianDummy(
+                    student.getStudentId(),
+                    Integer.parseInt(String.valueOf(father.getId())),
+                    father.getRelation(),
+                    fatherNameTextFieldId.getEditText().getText().toString(),
+                    f_occupationTextFieldId.getEditText().getText().toString(),
+                    f_phoneTextFieldId.getEditText().getText().toString(),
+                    f_addressTextFieldId.getEditText().getText().toString(),
+                    f_parentBloodGroupTextFieldId.getEditText().getText().toString(),
+                    f_designationTextFieldId.getEditText().getText().toString(),
+                    f_parentOrganizationFieldId.getEditText().getText().toString(),
+                    f_parentEmailTextFieldId.getEditText().getText().toString()
+            );
+        }
 
         new ProfileEditApi(this).updatedData(
                 CustomSharedPref.getInstance(this).getAuthToken(),
@@ -363,9 +367,17 @@ if(father != null){
                 fatherImageUrl,
                 (isSuccess, message) -> {
                     //  System.out.println(">>>>>>>.. " + isSuccess + " " + message);
+                    try {
+                        if (isSuccess) {
+                            Toast.makeText(this, "Request submitted successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception ignore) {
+                    }
                 });
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -381,7 +393,7 @@ if(father != null){
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-      //  System.out.println("ev.toString() " + ev.toString());
+        //  System.out.println("ev.toString() " + ev.toString());
         if (getCurrentFocus() != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);

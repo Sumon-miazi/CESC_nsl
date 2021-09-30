@@ -180,6 +180,7 @@ public class PaymentApi extends BaseService {
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
                 if(response.isSuccessful() && response != null){
                     System.out.println(">>>>>>>>>> payment " + response.body());
                     try {
