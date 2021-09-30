@@ -30,6 +30,7 @@ import com.itbeebd.cesc_nsl.activities.student.LessonPlanActivity;
 import com.itbeebd.cesc_nsl.activities.student.LibraryBookActivity;
 import com.itbeebd.cesc_nsl.activities.student.OnlineClassActivity;
 import com.itbeebd.cesc_nsl.activities.student.PaymentHistoryActivity;
+import com.itbeebd.cesc_nsl.activities.student.QuizArchiveActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.ClassRoutineAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
@@ -270,7 +271,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         } else if (view.getId() == R.id.lessonPlanLinkBtnId) {
             onClick(view);
         } else if (view.getId() == R.id.quizArchiveLinkBtnId) {
-
+            gotoQuizArchiveView(view);
         } else if (view.getId() == R.id.onlineClassLinkBtnId) {
             gotoOnlineView(view);
         }
@@ -517,6 +518,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
     private void gotoQuizArchiveView(View view) {
         System.out.println(">>>>>. " + view.getId());
+        startActivity(new Intent(getContext(), QuizArchiveActivity.class));
     }
 
     private void filterClassRoutine(View v) {

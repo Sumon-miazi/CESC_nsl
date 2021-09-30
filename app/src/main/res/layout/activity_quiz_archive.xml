@@ -6,4 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".activities.student.QuizArchiveActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/quizArchiveToolbarId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_primary"
+        android:minWidth="?actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

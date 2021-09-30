@@ -42,6 +42,7 @@
         <entry key="app/src/main/res/layout/activity_online_class.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_payment_history.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_payment_invoice.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_quiz_archive.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_student_all_notification.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_student_dashboard.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_student_login.xml" value="0.25" />
@@ -69,6 +70,7 @@
         <entry key="app/src/main/res/layout/single_menu_layout.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_online_class.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_payment_history_view.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/single_quiz_archive_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_student_notification_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_subject_result_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/weekly_days_bg.xml" value="0.15" />
