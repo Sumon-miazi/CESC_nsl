@@ -13,8 +13,8 @@ public class BaseService  {
     Retrofit retrofit = new Retrofit.Builder()
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://cesc.edu.bd/api/")
-          //  .baseUrl("http://192.168.1.251/cescms/api/")
+          //  .baseUrl("https://cesc.edu.bd/api/")
+            .baseUrl("http://192.168.1.251/cescms/api/")
             .build();
 
     protected final RetrofitService service = retrofit.create(RetrofitService.class);

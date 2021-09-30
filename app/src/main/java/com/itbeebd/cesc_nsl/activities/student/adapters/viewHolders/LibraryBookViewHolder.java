@@ -1,6 +1,8 @@
 package com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,8 +50,12 @@ public class LibraryBookViewHolder  extends BaseViewHolder<Book, OnRecyclerObjec
                     .error(R.drawable.ic_menu_book)
                     .into(bookImageId);
         }
+        
         bookDownloadBtnId.setOnClickListener(view -> {
-            downloadLessonFile(item);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(item.getBookUrl()));
+            context.startActivity(intent);
+            // downloadLessonFile(item);
         });
     }
 

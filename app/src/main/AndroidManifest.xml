@@ -23,6 +23,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".activities.student.OnlineClassActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.WebViwerActivity"
             android:exported="true" />
         <activity android:name=".activities.teacher.TeacherDashboardActivity" />

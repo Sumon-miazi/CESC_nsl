@@ -1,6 +1,8 @@
 package com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,7 +55,7 @@ public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerO
         lastUpdated.setText(SimpleDateKt.toDateStandard(getDateFromString(item.getLastUpdated())));
 
         lessonFileDownloaderBtnId.setOnClickListener(view -> {
-            downloadLessonFiles(item.getLessonFileArrayList());
+            if(item.getLessonFileArrayList() != null) downloadLessonFiles(item.getLessonFileArrayList());
         });
     }
 
@@ -73,21 +75,19 @@ public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerO
 
     private void downloadLessonFiles(ArrayList<LessonFile> lessonFileArrayList){
 
-//        if(lessonFileArrayList.size() != 0){
-//            if(lessonFileArrayList.get(0).getFileUrl() != null || !lessonFileArrayList.get(0).getFileUrl().isEmpty()){
-//                Intent intent = new Intent(context, WebViwerActivity.class);
-//                intent.putExtra("url", lessonFileArrayList.get(0).getFileUrl());
-//                context.startActivity(intent);
-//            }
-//            return;
-//        }
-
-        if(fileDownloader == null) return;
-        fileDownloader.downloadFiles(lessonFileArrayList,"LessonPlanFiles", (isSuccess, message) -> {
-            try {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-            catch (Exception ignore){}
-        });
+        if(lessonFileArrayList.size() == 1){
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(lessonFileArrayList.get(0).getFileUrl()));
+                context.startActivity(intent);
+        }
+        else {
+            if(fileDownloader == null) return;
+            fileDownloader.downloadFiles(lessonFileArrayList,"LessonPlanFiles", (isSuccess, message) -> {
+                try {
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+                catch (Exception ignore){}
+            });
+        }
     }
 }

@@ -28,6 +28,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.LessonPlanActivity;
 import com.itbeebd.cesc_nsl.activities.student.LibraryBookActivity;
+import com.itbeebd.cesc_nsl.activities.student.OnlineClassActivity;
 import com.itbeebd.cesc_nsl.activities.student.PaymentHistoryActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.ClassRoutineAdapter;
@@ -503,6 +504,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
     private void gotoOnlineView(View view) {
         System.out.println(">>>>>. " + view.getId());
+        getContext().startActivity(new Intent(getContext(), OnlineClassActivity.class));
     }
 
     private void gotoLibraryBookView(View view) {
