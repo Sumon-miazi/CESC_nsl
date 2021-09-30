@@ -77,6 +77,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:hint="Name"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guardianProfileBgViewId">
@@ -96,6 +99,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Occupation"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="@+id/parentNameTextFieldId"
         app:layout_constraintStart_toStartOf="@+id/parentNameTextFieldId"
         app:layout_constraintTop_toBottomOf="@+id/parentNameTextFieldId">
@@ -103,7 +109,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1" />
+            android:maxLines="2" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,6 +120,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Phone"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="@+id/parentNameTextFieldId"
         app:layout_constraintStart_toStartOf="@+id/parentNameTextFieldId"
         app:layout_constraintTop_toBottomOf="@+id/occupationTextFieldId">
@@ -133,6 +142,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Address"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="@+id/parentNameTextFieldId"
         app:layout_constraintStart_toStartOf="@+id/parentNameTextFieldId"
         app:layout_constraintTop_toBottomOf="@+id/phoneTextFieldId">
@@ -140,7 +152,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPostalAddress"
             android:maxLines="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -154,6 +165,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="Blood Group"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/guardianProfileBgViewId">
@@ -172,6 +186,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Designation"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="@+id/parentBloodGroupTextFieldId"
         app:layout_constraintStart_toStartOf="@+id/parentBloodGroupTextFieldId"
         app:layout_constraintTop_toBottomOf="@+id/parentBloodGroupTextFieldId">
@@ -179,7 +196,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1" />
+            android:maxLines="2" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -190,6 +207,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Organization"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="@+id/parentBloodGroupTextFieldId"
         app:layout_constraintStart_toStartOf="@+id/parentBloodGroupTextFieldId"
         app:layout_constraintTop_toBottomOf="@+id/designationTextFieldId">
@@ -197,7 +217,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1" />
+            android:maxLines="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -208,6 +228,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Email"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="@+id/parentBloodGroupTextFieldId"
         app:layout_constraintStart_toStartOf="@+id/parentBloodGroupTextFieldId"
         app:layout_constraintTop_toBottomOf="@+id/parentOrganizationFieldId">
@@ -216,7 +239,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textWebEmailAddress"
-            android:maxLines="1" />
+            android:maxLines="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

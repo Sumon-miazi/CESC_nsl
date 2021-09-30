@@ -23,6 +23,7 @@ import com.itbeebd.cesc_nsl.activities.student.fragments.PaymentFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.ResultBoardFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.StudentDashboardFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.StudentProfileFragment;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 
 
 public class StudentDashboardActivity extends AppCompatActivity  implements BubbleNavigationChangeListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -52,6 +53,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
             this.studentDrawerId = drawerLayout;
 
             if(data.equals("Successfully logged out.")){
+                CustomSharedPref.getInstance(this).setStudentLoggedInOrNot(false);
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
             }
@@ -164,6 +166,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
             //  openFilePicker();
         }
     }
+
 }
 
 

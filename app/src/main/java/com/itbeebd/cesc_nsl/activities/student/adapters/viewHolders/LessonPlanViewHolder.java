@@ -72,6 +72,16 @@ public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerO
     }
 
     private void downloadLessonFiles(ArrayList<LessonFile> lessonFileArrayList){
+
+//        if(lessonFileArrayList.size() != 0){
+//            if(lessonFileArrayList.get(0).getFileUrl() != null || !lessonFileArrayList.get(0).getFileUrl().isEmpty()){
+//                Intent intent = new Intent(context, WebViwerActivity.class);
+//                intent.putExtra("url", lessonFileArrayList.get(0).getFileUrl());
+//                context.startActivity(intent);
+//            }
+//            return;
+//        }
+
         if(fileDownloader == null) return;
         fileDownloader.downloadFiles(lessonFileArrayList,"LessonPlanFiles", (isSuccess, message) -> {
             try {

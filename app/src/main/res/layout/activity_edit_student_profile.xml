@@ -108,6 +108,9 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:hint="Religion"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/studentProfileBgViewId">
@@ -115,6 +118,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxEms="20"
                         android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -126,6 +130,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Birthday"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="@+id/religionTextFieldId"
                     app:layout_constraintStart_toStartOf="@+id/religionTextFieldId"
                     app:layout_constraintTop_toBottomOf="@+id/religionTextFieldId">
@@ -133,7 +140,6 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="date"
                         android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -145,6 +151,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Present address"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="@+id/religionTextFieldId"
                     app:layout_constraintStart_toStartOf="@+id/religionTextFieldId"
                     app:layout_constraintTop_toBottomOf="@+id/birthDayTextFieldId">
@@ -152,7 +161,6 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPostalAddress"
                         android:maxLines="3" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -164,6 +172,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Phone"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="@+id/religionTextFieldId"
                     app:layout_constraintStart_toStartOf="@+id/religionTextFieldId"
                     app:layout_constraintTop_toBottomOf="@+id/presentAddressTextFieldId">
@@ -183,6 +194,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Nationality"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="@+id/religionTextFieldId"
                     app:layout_constraintStart_toStartOf="@+id/religionTextFieldId"
                     app:layout_constraintTop_toBottomOf="@+id/studentPhoneTextFieldId">
@@ -190,7 +204,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="1" />
+                        android:maxLines="2" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -201,6 +215,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Specific Health Problem"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="@+id/religionTextFieldId"
                     app:layout_constraintStart_toStartOf="@+id/religionTextFieldId"
                     app:layout_constraintTop_toBottomOf="@+id/nationalityTextFieldId">
@@ -221,6 +238,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:hint="Gender"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@id/studentProfileBgViewId">
@@ -228,6 +248,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxEms="10"
                         android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -239,6 +260,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Blood Group"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="@+id/genderTextFieldId"
                     app:layout_constraintStart_toStartOf="@+id/genderTextFieldId"
                     app:layout_constraintTop_toBottomOf="@+id/genderTextFieldId">
@@ -257,6 +281,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Permanent address"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="@+id/genderTextFieldId"
                     app:layout_constraintStart_toStartOf="@+id/genderTextFieldId"
                     app:layout_constraintTop_toBottomOf="@+id/bloodGroupTextFieldId">
@@ -264,7 +291,6 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPostalAddress"
                         android:maxLines="3" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -276,6 +302,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Email"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="@+id/genderTextFieldId"
                     app:layout_constraintStart_toStartOf="@+id/genderTextFieldId"
                     app:layout_constraintTop_toBottomOf="@+id/permanentAddressTextFieldId">
@@ -295,6 +324,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Previous School"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="@+id/genderTextFieldId"
                     app:layout_constraintStart_toStartOf="@+id/genderTextFieldId"
                     app:layout_constraintTop_toBottomOf="@+id/emailTextFieldId">
@@ -313,6 +345,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Identification Mark"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintEnd_toEndOf="@+id/genderTextFieldId"
                     app:layout_constraintStart_toStartOf="@+id/genderTextFieldId"
                     app:layout_constraintTop_toBottomOf="@+id/previousSchoolTextFieldId">

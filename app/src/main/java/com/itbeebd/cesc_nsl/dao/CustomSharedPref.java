@@ -20,6 +20,16 @@ public class CustomSharedPref {
         return customSharedPref;
     }
 
+    public void setStudentLoggedInOrNot(boolean flag){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("StudentLoggedInOrNot", flag);
+        editor.apply();
+    }
+
+    public boolean getStudentLoggedInOrNot(){
+        return sharedPreferences.getBoolean("StudentLoggedInOrNot", false);
+    }
+
     public String getUserId() {
         return sharedPreferences.getString("UserId", "");
     }

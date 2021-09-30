@@ -22,15 +22,16 @@
         android:theme="@style/Theme.CESC_nsl"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-
-        <activity android:name=".activities.teacher.TeacherDashboardActivity"/>
+        <activity
+            android:name=".activities.WebViwerActivity"
+            android:exported="true" />
+        <activity android:name=".activities.teacher.TeacherDashboardActivity" />
         <activity android:name=".activities.student.LibraryBookActivity" />
         <activity android:name=".activities.student.DuePaymentCheckOutActivity" />
         <activity android:name=".activities.student.EditStudentProfileActivity" />
         <activity android:name=".activities.student.PaymentHistoryActivity" />
         <activity android:name=".activities.student.LessonPlanActivity" />
         <activity android:name=".activities.student.StudentAllNotificationActivity" />
-
         <activity
             android:name=".activities.student.StudentDashboardActivity"
             android:screenOrientation="portrait" />
@@ -59,18 +60,6 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.itbeebd.cesc_nsl.sugarClass" />
-
-
-<!--        <provider-->
-<!--            android:name="androidx.core.content.FileProvider"-->
-<!--            android:authorities="com.com.itbeebd.cesc_nsl.fileprovider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true">-->
-<!--            <meta-data-->
-<!--            android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--            android:resource="@xml/file_paths" />-->
-<!--        </provider>-->
-
     </application>
 
 </manifest>

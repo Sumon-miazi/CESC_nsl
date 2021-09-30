@@ -21,6 +21,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -54,7 +55,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class StudentDashboardFragment extends Fragment implements OnRecyclerObjectClickListener<NotificationObj>, View.OnClickListener {
+public class StudentDashboardFragment extends Fragment implements OnRecyclerObjectClickListener<NotificationObj>, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private CardView quizBlock;
     private TextView quizBlockNumber;
@@ -118,10 +119,12 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private CardView quizArchiveLinkBtnId;
     private CardView onlineClassLinkBtnId;
     private CardView logoutId;
+    private SwipeRefreshLayout refreshLayout;
 
-    public StudentDashboardFragment(){
+    public StudentDashboardFragment() {
 
     }
+
     public StudentDashboardFragment(FragmentToActivity fragmentToActivity) {
         this.fragmentToActivity = fragmentToActivity;
     }
@@ -138,6 +141,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_student_dashboard, container, false);
         // Find our drawer view
+
         studentDrawerId = view.findViewById(R.id.studentDrawerId);
         d_studentProfileViewId = view.findViewById(R.id.studentNavId).findViewById(R.id.d_studentProfileViewId);
         d_studentNameViewId = view.findViewById(R.id.studentNavId).findViewById(R.id.d_studentNameViewId);
@@ -152,7 +156,11 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         onlineClassLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.onlineClassLinkBtnId);
         logoutId = view.findViewById(R.id.studentNavId).findViewById(R.id.logoutId);
 
-       // studentDrawerId.openDrawer(GravityCompat.START);
+        refreshLayout = view.findViewById(R.id.refreshLayoutId);
+        refreshLayout.setOnRefreshListener(this);
+
+
+        // studentDrawerId.openDrawer(GravityCompat.START);
         studentAllMenuViewId = view.findViewById(R.id.studentAllMenuViewId);
         studentProfileViewId = view.findViewById(R.id.studentProfileViewId);
         userNameViewId = view.findViewById(R.id.userNameViewId);
@@ -221,9 +229,9 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         filterClassRoutineBtnId.setOnClickListener(this::filterClassRoutine);
         filterAttendanceBtnId.setOnClickListener(this::filterAttendance);
 
-   //     notificationSeeAll.setOnClickListener(this);
+        //     notificationSeeAll.setOnClickListener(this);
         studentProfileViewId.setOnClickListener(view1 -> {
-            fragmentToActivity.call(studentDrawerId,"4");
+            fragmentToActivity.call(studentDrawerId, "4");
         });
         studentNotificationAlarmViewId.setOnClickListener(this);
         lessonPlanSeeAll.setOnClickListener(this);
@@ -233,13 +241,11 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void changeFragment(View view) {
-        if(view.getId() == R.id.profileLinkBtnId){
+        if (view.getId() == R.id.profileLinkBtnId) {
             fragmentToActivity.call(studentDrawerId, "4");
-        }
-        else if(view.getId() == R.id.resultLinkBtnId){
+        } else if (view.getId() == R.id.resultLinkBtnId) {
             fragmentToActivity.call(studentDrawerId, "1");
-        }
-        else if(view.getId() == R.id.dueLinkBtnId){
+        } else if (view.getId() == R.id.dueLinkBtnId) {
             fragmentToActivity.call(studentDrawerId, "3");
         }
     }
@@ -248,28 +254,23 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         new LoginApi(getContext(), "Logging out...").logout(
                 CustomSharedPref.getInstance(getContext()).getAuthToken(),
                 (isSuccess, message) -> {
-                    if(isSuccess){
+                    if (isSuccess) {
                         fragmentToActivity.call(studentDrawerId, message);
-                    }
-                    else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
         );
     }
 
     private void changeActivity(View view) {
-        if(view.getId() == R.id.paymentHistoryLinkBtnId){
+        if (view.getId() == R.id.paymentHistoryLinkBtnId) {
             getActivity().startActivity(new Intent(getActivity(), PaymentHistoryActivity.class));
-        }
-        else if(view.getId() == R.id.libraryLinkBtnId){
+        } else if (view.getId() == R.id.libraryLinkBtnId) {
             gotoLibraryBookView(view);
-        }
-        else if(view.getId() == R.id.lessonPlanLinkBtnId){
-          onClick(view);
-        }
-        else if(view.getId() == R.id.quizArchiveLinkBtnId){
+        } else if (view.getId() == R.id.lessonPlanLinkBtnId) {
+            onClick(view);
+        } else if (view.getId() == R.id.quizArchiveLinkBtnId) {
 
-        }
-        else if(view.getId() == R.id.onlineClassLinkBtnId){
+        } else if (view.getId() == R.id.onlineClassLinkBtnId) {
 
         }
     }
@@ -277,21 +278,20 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     @Override
     public void onStart() {
         super.onStart();
-        if(studentDrawerId.isDrawerOpen(GravityCompat.START)){
+        if (studentDrawerId.isDrawerOpen(GravityCompat.START)) {
             studentDrawerId.closeDrawer(GravityCompat.START);
         }
 
         try {
             fragmentToActivity.call(studentDrawerId, "closeDrawer");
+        } catch (Exception ignore) {
         }
-        catch (Exception ignore){}
     }
 
     private void toggleStudentDrawerMenu(View view) {
-        if(studentDrawerId.isDrawerOpen(GravityCompat.START)){
+        if (studentDrawerId.isDrawerOpen(GravityCompat.START)) {
             studentDrawerId.closeDrawer(GravityCompat.START);
-        }
-        else studentDrawerId.openDrawer(GravityCompat.START);
+        } else studentDrawerId.openDrawer(GravityCompat.START);
     }
 
 
@@ -305,18 +305,18 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         Date date = new Date();
         todayDateViewId.setText(SimpleDateKt.toDateEMY(date));
 
-        userNameViewId.setText(stdObj.getName().substring(stdObj.getName().lastIndexOf(" ")+1));
+        userNameViewId.setText(stdObj.getName().substring(stdObj.getName().lastIndexOf(" ") + 1));
         d_studentNameViewId.setText(stdObj.getName());
         d_studentIdViewId.setText(String.format("Student ID: %d", stdObj.getStudentId()));
 
-        if( imageUrl != null){
+        if (imageUrl != null) {
             setProfileImage(studentProfileViewId, imageUrl);
             setProfileImage(d_studentProfileViewId, imageUrl);
 
         }
     }
 
-    private void setProfileImage(ImageView imageView, String imageUrl){
+    private void setProfileImage(ImageView imageView, String imageUrl) {
         Glide.with(this)
                 .load(ApiUrls.BASE_IMAGE_URL + imageUrl)
                 .placeholder(R.drawable.default_male)
@@ -326,34 +326,34 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void setDashboardComponentValues() {
-        if(dashboardHeaderObj == null){
+        if (dashboardHeaderObj == null) {
             new DashboardApi(getContext()).getDashboardHeaderInfo(
                     CustomSharedPref.getInstance(getContext()).getAuthToken(),
                     (object, message) -> {
-                        if(object != null){
+                        if (object != null) {
                             this.dashboardHeaderObj = (DashboardHeaderObj) object;
                             setDashboardData(dashboardHeaderObj);
-                        }
-                        else {
-                            try { Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show(); }catch (Exception ignore){}
+                        } else {
+                            try {
+                                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                            } catch (Exception ignore) {
+                            }
                         }
                     }
             );
-        }
-        else setDashboardData(dashboardHeaderObj);
+        } else setDashboardData(dashboardHeaderObj);
     }
 
-    private void setDashboardData(DashboardHeaderObj object){
+    private void setDashboardData(DashboardHeaderObj object) {
         quizBlockNumber.setText(object.getTotalQuiz());
         quizArchiveBlockNumber.setText(object.getTotalQuizArchive());
         libraryBlockNumber.setText(object.getLibraryBookTotal());
         onlineClassBlockNumber.setText(object.getTotalOnlineClass());
         System.out.println("<><><><><><><> " + object.getTotalOnlineClass());
 
-        if(object.getTotalNotifications().equals("0")){
+        if (object.getTotalNotifications().equals("0")) {
             totalNotificationHindId.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             totalNotificationHindId.setVisibility(View.VISIBLE);
             String total = object.getTotalNotifications();
             if (total.length() == 1) {
@@ -363,25 +363,25 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         }
 
 
-        if(object.getNotificationObjArrayList().size() != 0){
+        if (object.getNotificationObjArrayList().size() != 0) {
             notificationObjs = object.getNotificationObjArrayList();
-         //   setNotificationAdapter();
+            //   setNotificationAdapter();
         }
 
-        if(object.getLessonPlanArrayList() != null){
+        if (object.getLessonPlanArrayList() != null) {
             lessonPlans = object.getLessonPlanArrayList();
             setLessonPlanAdapter();
         }
 
-        if(object.getAttendance() != null){
+        if (object.getAttendance() != null) {
             setAttendanceGraph(object.getAttendance());
         }
 
-        if(object.getClassRoutineArrayList() != null){
+        if (object.getClassRoutineArrayList() != null) {
             setClassRoutineAdapter(object.getClassRoutineArrayList());
         }
 
-        if(object.getBookArrayList() != null){
+        if (object.getBookArrayList() != null) {
             this.bookArrayList = object.getBookArrayList();
         }
     }
@@ -399,37 +399,36 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         System.out.println("++++++ " + absent);
         System.out.println("++++++ " + sum);
 
-        if(sum == 0 || present == absent) {
+        if (sum == 0 || present == absent) {
             guideline.setGuidelinePercent(0.5f);
             return;
         }
 
-        if(present == 0) {
+        if (present == 0) {
             guideline.setGuidelinePercent(0.0f);
             return;
-        }
-        else if(absent == 0) {
+        } else if (absent == 0) {
             guideline.setGuidelinePercent(1.0f);
             return;
         }
 
         float onePercentage = (float) sum / 10;
-        float presentPercentage = (float)present * onePercentage;
-        float absentPercentage = (float)absent * onePercentage;
+        float presentPercentage = (float) present * onePercentage;
+        float absentPercentage = (float) absent * onePercentage;
 
-        if(presentPercentage > absentPercentage) guideline.setGuidelinePercent(presentPercentage);
+        if (presentPercentage > absentPercentage) guideline.setGuidelinePercent(presentPercentage);
         else guideline.setGuidelinePercent(1 - absentPercentage);
 
 
     }
 
-    private void setNotificationAdapter(){
+    private void setNotificationAdapter() {
         String notificationSize = "See All(" + notificationObjs.size() + ")";
         notificationHint.setVisibility(View.VISIBLE);
         notificationSeeAll.setText(notificationSize);
 
         StudentNotificationAdapter notificationAdapter = new StudentNotificationAdapter(getContext());
-        notificationAdapter.setItems(notificationObjs.subList(0,2));
+        notificationAdapter.setItems(notificationObjs.subList(0, 2));
         studentNotificationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //    studentNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         studentNotificationRecyclerView.setAdapter(notificationAdapter);
@@ -438,7 +437,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private void setLessonPlanAdapter() {
 
         LessonPlanAdapter lessonPlanAdapter = new LessonPlanAdapter(getContext());
-        lessonPlanAdapter.setItems(lessonPlans.size() > 2 ? lessonPlans.subList(0,2): lessonPlans);
+        lessonPlanAdapter.setItems(lessonPlans.size() > 2 ? lessonPlans.subList(0, 2) : lessonPlans);
         lessonPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         lessonPlanRecyclerView.setAdapter(lessonPlanAdapter);
 
@@ -451,8 +450,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
             lessonPlanCountHint.setVisibility(View.VISIBLE);
             lessonPlanSeeAll.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             lessonPlanSeeAll.setVisibility(View.GONE);
             lessonPlanMainViewId.setVisibility(View.GONE);
             lessonPlanNotFoundId.setVisibility(View.VISIBLE);
@@ -466,11 +464,10 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         classRoutineRecyclerView.setAdapter(classRoutineAdapter);
 
         if (classRoutineArrayList.size() != 0) {
-       //     routineHindId.setVisibility(View.VISIBLE);
+            //     routineHindId.setVisibility(View.VISIBLE);
             routingNotFoundId.setVisibility(View.GONE);
-        }
-        else {
-        //    routineHindId.setVisibility(View.GONE);
+        } else {
+            //    routineHindId.setVisibility(View.GONE);
             routingNotFoundId.setVisibility(View.VISIBLE);
         }
     }
@@ -483,25 +480,24 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     @Override
     public void onClick(View view) {
         Intent intent = null;
-        if(view.getId() == R.id.notificationSeeAllId || view.getId() == R.id.studentNotificationAlarmViewId){
-            if(notificationObjs == null || notificationObjs.size() == 0){
+        if (view.getId() == R.id.notificationSeeAllId || view.getId() == R.id.studentNotificationAlarmViewId) {
+            if (notificationObjs == null || notificationObjs.size() == 0) {
                 Toast.makeText(getContext(), "No notification found", Toast.LENGTH_SHORT).show();
                 return;
             }
             intent = new Intent(getActivity(), StudentAllNotificationActivity.class);
             intent.putExtra("notifications", notificationObjs);
             totalNotificationHindId.setVisibility(View.GONE);
-        }
-        else if(view.getId() == R.id.lessonPlanSeeAllId || view.getId() == R.id.lessonPlanLinkBtnId){
+        } else if (view.getId() == R.id.lessonPlanSeeAllId || view.getId() == R.id.lessonPlanLinkBtnId) {
             intent = new Intent(getActivity(), LessonPlanActivity.class);
-            intent.putExtra("lessonPlan",  lessonPlans);
+            intent.putExtra("lessonPlan", lessonPlans);
         }
 
         getActivity().startActivity(intent);
     }
 
 
-    private void gotoQuizView(View view){
+    private void gotoQuizView(View view) {
         System.out.println(">>>>>. " + view.getId());
     }
 
@@ -510,10 +506,10 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void gotoLibraryBookView(View view) {
-        if(bookArrayList == null || bookArrayList.size() == 0) return;
+        if (bookArrayList == null || bookArrayList.size() == 0) return;
         System.out.println(">>>>>. " + view.getId());
         Intent intent = new Intent(getActivity(), LibraryBookActivity.class);
-        intent.putExtra("books",  bookArrayList);
+        intent.putExtra("books", bookArrayList);
         getActivity().startActivity(intent);
     }
 
@@ -533,44 +529,61 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         TextView thursdayId = bottomSheetDialog.findViewById(R.id.thursdayId);
 
         assert saturdayId != null;
-        saturdayId.setOnClickListener(view -> { getClassRoutineByDayName("Sat");bottomSheetDialog.dismiss(); });
+        saturdayId.setOnClickListener(view -> {
+            getClassRoutineByDayName("Sat");
+            bottomSheetDialog.dismiss();
+        });
 
         assert sundayId != null;
-        sundayId.setOnClickListener(view -> { getClassRoutineByDayName("Sun");bottomSheetDialog.dismiss(); });
+        sundayId.setOnClickListener(view -> {
+            getClassRoutineByDayName("Sun");
+            bottomSheetDialog.dismiss();
+        });
 
         assert mondayId != null;
-        mondayId.setOnClickListener(view -> { getClassRoutineByDayName("Mon");bottomSheetDialog.dismiss(); });
+        mondayId.setOnClickListener(view -> {
+            getClassRoutineByDayName("Mon");
+            bottomSheetDialog.dismiss();
+        });
 
         assert tuesdayId != null;
-        tuesdayId.setOnClickListener(view -> { getClassRoutineByDayName("Tue"); bottomSheetDialog.dismiss(); });
+        tuesdayId.setOnClickListener(view -> {
+            getClassRoutineByDayName("Tue");
+            bottomSheetDialog.dismiss();
+        });
 
         assert wednesdayId != null;
-        wednesdayId.setOnClickListener(view -> { getClassRoutineByDayName("Wed"); bottomSheetDialog.dismiss(); });
+        wednesdayId.setOnClickListener(view -> {
+            getClassRoutineByDayName("Wed");
+            bottomSheetDialog.dismiss();
+        });
 
         assert thursdayId != null;
-        thursdayId.setOnClickListener(view -> { getClassRoutineByDayName("Thu"); bottomSheetDialog.dismiss(); });
+        thursdayId.setOnClickListener(view -> {
+            getClassRoutineByDayName("Thu");
+            bottomSheetDialog.dismiss();
+        });
 
         bottomSheetDialog.show();
     }
 
-    private void getClassRoutineByDayName(String name){
+    private void getClassRoutineByDayName(String name) {
 //        if(classRoutines == null){
-            new ClassRoutineApi(getContext()).getClassRoutine(
-                    name,
-                    CustomSharedPref.getInstance(getContext()).getAuthToken(),
-                    (object, message) -> {
-                        try {
-                            if(object != null){
-                                this.classRoutines = (ArrayList<ClassRoutine>) object;
-                                setClassRoutineAdapter(classRoutines);
-                            }
-                            else{
-                                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                            }
+        new ClassRoutineApi(getContext()).getClassRoutine(
+                name,
+                CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                (object, message) -> {
+                    try {
+                        if (object != null) {
+                            this.classRoutines = (ArrayList<ClassRoutine>) object;
+                            setClassRoutineAdapter(classRoutines);
+                        } else {
+                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                         }
-                        catch (Exception ignore){ }
+                    } catch (Exception ignore) {
                     }
-            );
+                }
+        );
 //        }
 //        else setClassRoutineAdapter(classRoutines);
     }
@@ -593,63 +606,120 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         TextView decemberId = bottomSheetDialog.findViewById(R.id.decemberId);
 
         assert januaryId != null;
-        januaryId.setOnClickListener(view -> { getAttendanceByMonthName("01");bottomSheetDialog.dismiss(); });
+        januaryId.setOnClickListener(view -> {
+            getAttendanceByMonthName("01");
+            bottomSheetDialog.dismiss();
+        });
 
         assert februaryId != null;
-        februaryId.setOnClickListener(view -> { getAttendanceByMonthName("02");bottomSheetDialog.dismiss(); });
+        februaryId.setOnClickListener(view -> {
+            getAttendanceByMonthName("02");
+            bottomSheetDialog.dismiss();
+        });
 
         assert marchId != null;
-        marchId.setOnClickListener(view -> { getAttendanceByMonthName("03");bottomSheetDialog.dismiss(); });
+        marchId.setOnClickListener(view -> {
+            getAttendanceByMonthName("03");
+            bottomSheetDialog.dismiss();
+        });
 
         assert aprilId != null;
-        aprilId.setOnClickListener(view -> { getAttendanceByMonthName("04"); bottomSheetDialog.dismiss(); });
+        aprilId.setOnClickListener(view -> {
+            getAttendanceByMonthName("04");
+            bottomSheetDialog.dismiss();
+        });
 
         assert mayId != null;
-        mayId.setOnClickListener(view -> { getAttendanceByMonthName("05"); bottomSheetDialog.dismiss(); });
+        mayId.setOnClickListener(view -> {
+            getAttendanceByMonthName("05");
+            bottomSheetDialog.dismiss();
+        });
 
         assert juneId != null;
-        juneId.setOnClickListener(view -> { getAttendanceByMonthName("06"); bottomSheetDialog.dismiss(); });
+        juneId.setOnClickListener(view -> {
+            getAttendanceByMonthName("06");
+            bottomSheetDialog.dismiss();
+        });
 
         assert julyId != null;
-        julyId.setOnClickListener(view -> { getAttendanceByMonthName("07"); bottomSheetDialog.dismiss(); });
+        julyId.setOnClickListener(view -> {
+            getAttendanceByMonthName("07");
+            bottomSheetDialog.dismiss();
+        });
 
         assert augustId != null;
-        augustId.setOnClickListener(view -> { getAttendanceByMonthName("08"); bottomSheetDialog.dismiss(); });
+        augustId.setOnClickListener(view -> {
+            getAttendanceByMonthName("08");
+            bottomSheetDialog.dismiss();
+        });
 
         assert septemberId != null;
-        septemberId.setOnClickListener(view -> { getAttendanceByMonthName("09"); bottomSheetDialog.dismiss(); });
+        septemberId.setOnClickListener(view -> {
+            getAttendanceByMonthName("09");
+            bottomSheetDialog.dismiss();
+        });
 
         assert octoberId != null;
-        octoberId.setOnClickListener(view -> { getAttendanceByMonthName("10"); bottomSheetDialog.dismiss(); });
+        octoberId.setOnClickListener(view -> {
+            getAttendanceByMonthName("10");
+            bottomSheetDialog.dismiss();
+        });
 
         assert novemberId != null;
-        novemberId.setOnClickListener(view -> { getAttendanceByMonthName("11"); bottomSheetDialog.dismiss(); });
+        novemberId.setOnClickListener(view -> {
+            getAttendanceByMonthName("11");
+            bottomSheetDialog.dismiss();
+        });
 
         assert decemberId != null;
-        decemberId.setOnClickListener(view -> { getAttendanceByMonthName("12"); bottomSheetDialog.dismiss(); });
+        decemberId.setOnClickListener(view -> {
+            getAttendanceByMonthName("12");
+            bottomSheetDialog.dismiss();
+        });
 
         bottomSheetDialog.show();
     }
 
-    private void getAttendanceByMonthName(String name){
+    private void getAttendanceByMonthName(String name) {
 //        if(attendance == null){
-            new AttendanceApi(getContext()).getAttendanceByMonthName(
-                    name,
-                    CustomSharedPref.getInstance(getContext()).getAuthToken(),
-                    (object, message) -> {
-                        try {
-                            if(object != null){
-                                this.attendance = (Attendance) object;
-                                setAttendanceGraph(attendance);
-                            }
-                            else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                        }
-                        catch (Exception ignore){}
+        new AttendanceApi(getContext()).getAttendanceByMonthName(
+                name,
+                CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                (object, message) -> {
+                    try {
+                        if (object != null) {
+                            this.attendance = (Attendance) object;
+                            setAttendanceGraph(attendance);
+                        } else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    } catch (Exception ignore) {
                     }
-            );
+                }
+        );
 //        }
 //        else setAttendanceGraph(attendance);
 
     }
 
+    @Override
+    public void onRefresh() {
+        new DashboardApi(getContext()).getDashboardHeaderInfo(
+                CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                (object, message) -> {
+                    if (object != null) {
+                        this.dashboardHeaderObj = (DashboardHeaderObj) object;
+                        setDashboardData(dashboardHeaderObj);
+                    } else {
+                        try {
+                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        } catch (Exception ignore) {
+                        }
+                    }
+
+                    try {
+                        refreshLayout.setRefreshing(false);
+                    } catch (Exception ignore) {
+                    }
+                }
+        );
+    }
 }

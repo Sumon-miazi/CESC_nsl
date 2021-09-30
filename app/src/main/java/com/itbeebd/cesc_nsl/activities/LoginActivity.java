@@ -12,6 +12,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.StudentDashboardActivity;
 import com.itbeebd.cesc_nsl.api.studentApi.LoginApi;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private void login(String userId, String password) {
         new LoginApi(this, "Signing in...").studentLogin(userId, password, "123456", ((isSuccess, message) -> {
             if(isSuccess){
+                CustomSharedPref.getInstance(this).setStudentLoggedInOrNot(true);
                 this.startActivity(new Intent(this, StudentDashboardActivity.class));
                 finish();
             }
