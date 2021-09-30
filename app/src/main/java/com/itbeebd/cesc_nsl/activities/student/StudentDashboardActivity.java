@@ -139,6 +139,10 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
 
     private void changeFragmentInDashBoard(Fragment fragment ){
         // get fragment manager
+        if(studentDrawerId != null){
+            try { studentDrawerId.closeDrawer(GravityCompat.START); }
+            catch (Exception ignore){}
+        }
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerId, fragment);

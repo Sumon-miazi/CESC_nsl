@@ -272,7 +272,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         } else if (view.getId() == R.id.quizArchiveLinkBtnId) {
 
         } else if (view.getId() == R.id.onlineClassLinkBtnId) {
-
+            gotoOnlineView(view);
         }
     }
 

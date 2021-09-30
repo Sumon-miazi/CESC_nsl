@@ -31,7 +31,9 @@
         <activity android:name=".activities.teacher.TeacherDashboardActivity" />
         <activity android:name=".activities.student.LibraryBookActivity" />
         <activity android:name=".activities.student.DuePaymentCheckOutActivity" />
-        <activity android:name=".activities.student.EditStudentProfileActivity" />
+        <activity android:name=".activities.student.EditStudentProfileActivity"/>
+<!--            android:windowSoftInputMode="stateVisible|adjustResize" -->
+
         <activity android:name=".activities.student.PaymentHistoryActivity" />
         <activity android:name=".activities.student.LessonPlanActivity" />
         <activity android:name=".activities.student.StudentAllNotificationActivity" />
