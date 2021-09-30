@@ -49,26 +49,19 @@ public class ClassRoutineApi extends BaseService {
                         ArrayList<ClassRoutine> classRoutineArrayList = new ArrayList<>();
                         for (int i = 0; i < data.length(); i++){
                             JSONObject object = data.getJSONObject(i);
+                            JSONObject durationObj = new JSONObject(object.optString("duration"));
 
-//                            if(object.optInt("status") == 0){
-//                                JSONObject duration = new JSONObject(object.optString("duration"));
-//                                System.out.println(">>>>>>>>>> durarion " +  duration);
-//                                ClassRoutine classRoutine = new ClassRoutine(
-//                                        object.optString("subject"),
-//                                        object.optString("teacher"),
-//                                        duration.optString("winter_start") + " " + object.getJSONObject("duration").optString("winter_end"),
-//                                        duration.optString("start") + " " + object.getJSONObject("duration").optString("end")
-//                                );
-//
-//                                classRoutineArrayList.add(classRoutine);
-//                            }
+                            System.out.println(">>>>>>>>>> durationObj " + durationObj);
+
 
                             if(object.optInt("status") == 1){
                                 ClassRoutine classRoutine = new ClassRoutine(
                                         object.optString("subject"),
                                         object.optString("teacher"),
-                                        object.getJSONObject("duration").optString("winter_start") + " " + object.getJSONObject("duration").optString("winter_end"),
-                                        object.getJSONObject("duration").optString("start") + " " + object.getJSONObject("duration").optString("end")
+                                        durationObj.optString("winter_start") + " " + durationObj.optString("winter_end"),
+                                        durationObj.optString("start") + " " + durationObj.optString("end")
+                                        //  object.getJSONObject("duration").optString("winter_start") + " " + object.getJSONObject("duration").optString("winter_end"),
+                                        //  object.getJSONObject("duration").optString("start") + " " + object.getJSONObject("duration").optString("end")
                                 );
                                 classRoutineArrayList.add(classRoutine);
                             }

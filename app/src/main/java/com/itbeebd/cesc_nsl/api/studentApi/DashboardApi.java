@@ -78,11 +78,14 @@ public class DashboardApi extends BaseService {
                             JSONObject object = classRoutineJsonArray.getJSONObject(i);
 
                             if(object.optInt("status") == 1){
+                                JSONObject durationObj = new JSONObject(object.optString("duration"));
                                 ClassRoutine classRoutine = new ClassRoutine(
                                         object.optString("subject"),
                                         object.optString("teacher"),
-                                        object.getJSONObject("duration").optString("winter_start") + " " + object.getJSONObject("duration").optString("winter_end"),
-                                        object.getJSONObject("duration").optString("start") + " " + object.getJSONObject("duration").optString("end")
+                                        durationObj.optString("winter_start") + " " + durationObj.optString("winter_end"),
+                                        durationObj.optString("start") + " " + durationObj.optString("end")
+                                      //  object.getJSONObject("duration").optString("winter_start") + " " + object.getJSONObject("duration").optString("winter_end"),
+                                      //  object.getJSONObject("duration").optString("start") + " " + object.getJSONObject("duration").optString("end")
                                 );
 
                                 classRoutineArrayList.add(classRoutine);
