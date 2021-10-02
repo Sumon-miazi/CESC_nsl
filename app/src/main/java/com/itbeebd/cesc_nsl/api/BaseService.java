@@ -10,14 +10,19 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class BaseService  {
 
-    Retrofit retrofit = new Retrofit.Builder()
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-          //  .baseUrl("https://cesc.edu.bd/api/")
-            .baseUrl("http://192.168.1.251/cescms/api/")
-            .build();
+    Retrofit retrofit;
+    protected final RetrofitService service;
 
-    protected final RetrofitService service = retrofit.create(RetrofitService.class);
+    public BaseService() {
+      //  this.BASE_URL = "https://cesc.edu.bd/api/";
+        retrofit = new Retrofit.Builder()
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(ApiUrls.BASE_URL_API)
+                //   .baseUrl("http://192.168.1.251/cescms/api/")
+                .build();
+        service = retrofit.create(RetrofitService.class);
+    }
 
     protected MultipartBody.Part getImageFile(String imageFilePath, String name){
         if(imageFilePath == null || imageFilePath.isEmpty())

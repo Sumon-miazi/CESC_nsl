@@ -52,7 +52,7 @@ public class DuePaymentCheckOutActivity extends AppCompatActivity {
 
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-                    if(url.contains(ApiUrls.BASE_URL)) return false;
+                    if(url.contains(ApiUrls.IP_ADDRESS)) return false;
                     openExternalLinkInBrowser(url);
                     return true;
                 }

@@ -80,6 +80,8 @@ dependencies {
 
     // file Downloader
     implementation "com.tonyodev.fetch2:fetch2:3.0.12"
+    implementation "com.tonyodev.fetch2okhttp:fetch2okhttp:3.0.12"
+
 
     // Drawer menu
     implementation 'com.czerwii:SlidingdrawerMenu:1.0.1'

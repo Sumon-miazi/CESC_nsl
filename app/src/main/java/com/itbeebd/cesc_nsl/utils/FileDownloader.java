@@ -18,24 +18,30 @@ import com.tonyodev.fetch2.NetworkType;
 import com.tonyodev.fetch2.Priority;
 import com.tonyodev.fetch2.Request;
 import com.tonyodev.fetch2core.DownloadBlock;
+import com.tonyodev.fetch2okhttp.OkHttpDownloader;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
 
 public class FileDownloader{
     private Fetch fetch;
     private Context context;
     private final NotificationReminder notificationReminder;
     private String fileName;
-    private String fileUrl;
+    private String fileDownloadPathWithFileName;
     FetchListener fetchListener;
 
     public FileDownloader(Context context) {
         this.context = context;
         notificationReminder = new NotificationReminder(context);
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+
         FetchConfiguration fetchConfiguration = new FetchConfiguration.Builder(context)
-                .setDownloadConcurrentLimit(3)
+                .setDownloadConcurrentLimit(20)
+                .setHttpDownloader(new OkHttpDownloader(okHttpClient))
                 .build();
 
         fetch= Fetch.Impl.getInstance(fetchConfiguration);
@@ -43,37 +49,41 @@ public class FileDownloader{
         fetchListener = new FetchListener() {
             @Override
             public void onWaitingNetwork(@NonNull Download download) {
-
+                Toast.makeText(context, "onWaitingNetwork", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onStarted(@NonNull Download download, @NonNull List<? extends DownloadBlock> list, int i) {
-
+                Toast.makeText(context, "Downloading", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onResumed(@NonNull Download download) {
-
+                Toast.makeText(context, "onResumed", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRemoved(@NonNull Download download) {
-
+                Toast.makeText(context, "onRemoved", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onQueued(@NonNull Download download, boolean b) {
-
+                Toast.makeText(context, "onQueued", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onProgress(@NonNull Download download, long l, long l1) {
-
+                Toast.makeText(context, "onProgress", Toast.LENGTH_SHORT).show();
+//                if (request.getId() == download.getId()) {
+//                    updateDownload(download, l);
+//                }
+//                int progress = download.getProgress();
             }
 
             @Override
             public void onPaused(@NonNull Download download) {
-
+                Toast.makeText(context, "onPaused", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -81,19 +91,19 @@ public class FileDownloader{
                 try {
                     //Remove listener when done.
                     //  if(fetch != null) fetch.removeListener(fetchListener);
-                    Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "error " + error.toString(), Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception ignore){}
             }
 
             @Override
             public void onDownloadBlockUpdated(@NonNull Download download, @NonNull DownloadBlock downloadBlock, int i) {
-
+                Toast.makeText(context, "onDownloadBlockUpdated", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDeleted(@NonNull Download download) {
-
+                Toast.makeText(context, "onDeleted", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -102,23 +112,26 @@ public class FileDownloader{
                     //Remove listener when done.
                     //  if(fetch != null) fetch.removeListener(fetchListener);
                     Toast.makeText(context, "Download complete", Toast.LENGTH_SHORT).show();
-                   System.out.println(">>>>>>> file url " + fileUrl);
-                    notificationReminder.sendNotification(fileName, "Download Complete ", fileUrl);
+                    System.out.println(">>>>>>> file url " + fileDownloadPathWithFileName);
+                    notificationReminder.sendNotification(fileName, "Download Complete ", fileDownloadPathWithFileName);
                 }
-                catch (Exception ignore){}
+                catch (Exception ignore){
+                    ignore.printStackTrace();
+                }
             }
 
             @Override
             public void onCancelled(@NonNull Download download) {
-
+                Toast.makeText(context, "onCancelled", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAdded(@NonNull Download download) {
-
+                Toast.makeText(context, "onAdded", Toast.LENGTH_SHORT).show();
             }
         };
 
+        fetch.addListener(fetchListener);
     }
 
 
@@ -126,9 +139,9 @@ public class FileDownloader{
     public void downloadFile(String url, String fileName, String dirPath, BooleanResponse booleanResponse){
 
         this.fileName = fileName;
-        this.fileUrl = getDownloadPath(fileName, dirPath);
+        this.fileDownloadPathWithFileName = getDownloadPath(fileName, dirPath);
 
-        Request request = new Request(url, fileUrl);
+        Request request = new Request(url, fileDownloadPathWithFileName);
         request.setPriority(Priority.HIGH);
         request.setNetworkType(NetworkType.ALL);
         // request.addHeader("clientKey", "SD78DF93_3947&MVNGHE1WONG");
@@ -137,6 +150,7 @@ public class FileDownloader{
 
         fetch.enqueue(request, updatedRequest -> {
             //Request was successfully enqueued for download.
+         //   new NotificationReminder(context).sendNotification("hello", "ji", download.getUrl());
             booleanResponse.response(true, "Downloading");
         }, error -> {
             //An error occurred enqueuing the request.
@@ -145,8 +159,6 @@ public class FileDownloader{
             System.out.println("<><><><> request " + error.getHttpResponse());
             System.out.println("<><><><> request " + error.toString());
         });
-
-        fetch.addListener(fetchListener);
 
     }
 
@@ -205,5 +217,11 @@ public class FileDownloader{
 //        System.out.println(">>>>>> path " + path);
 //        System.out.println(">>>>>> path " + fullPath + "/" + path);
         return fullPath + "/" + path;
+    }
+
+    public void releaseDownloader(){
+        fetch.close();
+        //Remove listener when done.
+        fetch.removeListener(fetchListener);
     }
 }

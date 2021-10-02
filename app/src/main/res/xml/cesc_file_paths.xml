@@ -1,3 +1,5 @@
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <files-path name="cesc_file" path="/CSEC/LessonPlanFiles/"/>
+    <external-path
+        name="cesc"
+        path="." />
 </paths>

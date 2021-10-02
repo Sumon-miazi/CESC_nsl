@@ -66,6 +66,22 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.itbeebd.cesc_nsl.sugarClass" />
+
+
+
+        <!--file provider settings-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.itbeebd.cesc_nsl.utils.NotificationReminder"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/cesc_file_paths"
+                tools:replace="android:resource"/>
+        </provider>
+
     </application>
 
 </manifest>

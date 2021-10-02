@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">CESC_nsl</string>
+    <string name="notification_channel_name">CESC_nsl</string>
+    <string name="notification_channel_id">CESC_nsl</string>
+    <string name="notification_channel_description">CESC_nsl</string>
     <string name="sharedPrefName">CESC_nsl_suman</string>
     <string name="home">Home</string>
     <string name="search">Search</string>

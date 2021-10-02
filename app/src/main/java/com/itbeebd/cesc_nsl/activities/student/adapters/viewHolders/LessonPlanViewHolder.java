@@ -32,7 +32,7 @@ public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerO
     private final TextView lastUpdated;
     private final ImageView lessonFileDownloaderBtnId;
 
-    private Context context;
+    private final Context context;
 
     public LessonPlanViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
@@ -75,7 +75,8 @@ public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerO
 
     private void downloadLessonFiles(ArrayList<LessonFile> lessonFileArrayList){
 
-        if(lessonFileArrayList.size() == 1){
+     //   if(lessonFileArrayList.size() == 1){
+        if(false){
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(lessonFileArrayList.get(0).getFileUrl()));
                 context.startActivity(intent);

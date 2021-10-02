@@ -9,17 +9,19 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.FileProvider;
 
 import com.itbeebd.cesc_nsl.R;
 
 import java.io.File;
 import java.util.Random;
 
-public class NotificationReminder  {
+public class NotificationReminder extends FileProvider  {
     private final String TAG = "NotificationReminder";
     private final Context context;
 
@@ -29,21 +31,17 @@ public class NotificationReminder  {
 
     public void sendNotification(String title, String messageBody, String fileUrl) {
 
-        if(fileUrl == null){
-            fileUrl = "/storage/emulated/0/CESC/LessonPlanFiles/fother.jpg";
-        }
         System.out.println("file url>>> " + fileUrl);
         File file = new File((Uri.parse("content://" + fileUrl )).getPath());
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, openFile(file), PendingIntent.FLAG_CANCEL_CURRENT);
-        String channelId = "cesc_app";
-        String channelName ="CESC_APP";
+        String channelId = context.getResources().getString(R.string.notification_channel_id);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "String")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.drawable.ic_happy)
-                .setContentTitle("My notification")
-                .setContentText("Hello World!")
+                .setContentTitle(title)
+                .setContentText(messageBody)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // Set the intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
@@ -58,42 +56,28 @@ public class NotificationReminder  {
         int id= new Random(System.currentTimeMillis()).nextInt(1000);
         notificationManager.notify(id, builder.build());
     }
+
     private Intent openFile(File file) {
-        String fileName = file.getName();
-
-        String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-
-
-//        String type = "application/" + extension;
-
-//        if (getMimeType(file) == Attachmets) {
-//            type = "image/*";
-//        }
-//        } else if (getAttachmentType(fileName) == AttachmentType.AUDIO) {
-//            type = "audio/*";
-//        } else if (getAttachmentType(fileName) == AttachmentType.VIDEO) {
-//            type = "video/*";
-//        } else if (getAttachmentType(fileName) == AttachmentType.WORD) {
-//            type = "application/msword";
-//        } else if (getAttachmentType(fileName) == AttachmentType.EXCEL) {
-//            type = "application/vnd.ms-excel";
-//        } else if (getAttachmentType(fileName) == AttachmentType.POWERPOINT) {
-//            type = "application/vnd.ms-powerpoint";
-//        } else if (getAttachmentType(fileName) == AttachmentType.TXT) {
-//            type = "text/*";
-//        }
 
         String type = getMimeType(file);
-      //  System.out.println(">>>>>>>>>>>>>>> mime type " + type);
         Uri path = Uri.fromFile(file);
+        String u_path = path.toString();
+
+        File cesc_file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/", "CESC/");
+        File newFile = new File(cesc_file, path.toString().substring(u_path.lastIndexOf("CESC/") + 5));
+    //    System.out.println(">>>>>>>>>>>>>>> newFile" + newFile);
+
+        Uri contentUri = getUriForFile(context, "com.itbeebd.cesc_nsl.utils.NotificationReminder", newFile);
+
+    //    System.out.println(">>>>>>>>>>>>>>> contentUri" + contentUri);
+
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Intent chooser = Intent.createChooser(intent, "Open file with");
-        intent.setDataAndType(path, type);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setDataAndType(contentUri, type);
 
-        System.out.println(">>>>>>>>>>>>>>> path type " + path + " " + type);
+     //   System.out.println(">>>>>>>>>>>>>>> path type " + path + " " + type);
 
-        return chooser;
+        return intent;
     }
 
     private String getMimeType(File file) {
@@ -113,10 +97,11 @@ public class NotificationReminder  {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "CESC";
-            String description = "APp";
+            String channelId = context.getResources().getString(R.string.notification_channel_id);
+            String channelName = context.getResources().getString(R.string.notification_channel_name);
+            String description = context.getResources().getString(R.string.notification_channel_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("String", name, importance);
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
