@@ -56,7 +56,7 @@
         <entry key="app/src/main/res/layout/content_student_nav.xml" value="0.18" />
         <entry key="app/src/main/res/layout/drawer_layout.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_result_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.33" />

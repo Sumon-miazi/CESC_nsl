@@ -16,9 +16,18 @@ public class ApiUrls {
     public static final String DUE_HISTORY =  "dueHistory";
     public static final String PAYMENT_HISTORY =  "paymentHistory";
     public static final String ADD_PAYMENT =  "addPayment";
+    public static final String DBBL =  "dbblcheckout";
     public static final String DASHBOARD_HEADER_INFO =  "dashboard-header-info";
     public static final String RESULT =  "result";
     public static final String LOGOUT =  "logout";
     public static final String ONLINE_CLASS =  "online-class";
     public static final String QUIZ_ARCHIVE =  "quiz-archive";
+
+
+
+
+    // Bank account details
+    public static final String TBL_API_URL = "https://ibanking.tblbd.com/checkout/checkout_payment.aspx";
+    public static final String MERCHANT ="CESC";
+    public static final String SUCCESS_URL = "https://cesc.edu.bd/api/student/payment_success";
 }

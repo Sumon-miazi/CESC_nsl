@@ -23,6 +23,9 @@ import com.itbeebd.cesc_nsl.activities.student.adapters.DuePaymentAdapter;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.studentApi.PaymentApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
+import com.itbeebd.cesc_nsl.dao.StudentDao;
+import com.itbeebd.cesc_nsl.sugarClass.Student;
+import com.itbeebd.cesc_nsl.utils.DBBL;
 import com.itbeebd.cesc_nsl.utils.dummy.Due;
 import com.itbeebd.cesc_nsl.utils.dummy.DueHistory;
 
@@ -38,21 +41,24 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     private LinearLayout no_Due_history_foundId;
     private ConstraintLayout dueRecordHeaderId;
     private Due due;
+    private Student student;
+
+    private String TBL_API_URL;
+    private String MERCHANT;
+    private String SUCCESS_URL;
 
     public PaymentFragment() {
         // Required empty public constructor
     }
 
-    public static PaymentFragment newInstance(String param1, String param2) {
-        PaymentFragment fragment = new PaymentFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.student = new StudentDao().getStudent(getContext());
+        this.TBL_API_URL = ApiUrls.TBL_API_URL;
+        this.MERCHANT = ApiUrls.MERCHANT;
+        this.SUCCESS_URL = ApiUrls.SUCCESS_URL;
     }
 
 
@@ -139,11 +145,28 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
           if(view.getId() == R.id.checkOutBtn){
             new PaymentApi(getContext()).getInvoiceForCheckout(
                     CustomSharedPref.getInstance(getContext()).getAuthToken(),
-                    (isSuccess, message) -> {
+                    (isSuccess, message, transactionID, account_id) -> {
                         if(isSuccess){
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setData(Uri.parse(ApiUrls.INVOICE_URL + message));
-                            getActivity().startActivity(intent);
+                            System.out.println(" account_id " + account_id);
+//                            if(account_id != null){
+//                                dbblPayment(account_id);
+//                            }
+                            if(transactionID != null){
+                                tblPayment(transactionID);
+                            }
+                            else {
+                                Toast.makeText(getContext(), "Transaction id is null.", Toast.LENGTH_SHORT).show();
+                            }
+
+
+
+
+
+
+
+//                            Intent intent = new Intent(Intent.ACTION_VIEW);
+//                            intent.setData(Uri.parse(ApiUrls.INVOICE_URL + message));
+//                            getActivity().startActivity(intent);
 
                             //this code is previous working code
 //                            Intent intent = new Intent(getActivity(), DuePaymentCheckOutActivity.class);
@@ -154,5 +177,46 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                     }
             );
         }
+    }
+
+    private void tblPayment(String transactionID){
+        String uri = Uri.parse(TBL_API_URL)
+                .buildUpon()
+                .appendQueryParameter("OrderID", transactionID)
+                .appendQueryParameter("Amount", String.valueOf(due.getTotalDue()))
+                .appendQueryParameter("FullName", /* StudentId */ String.valueOf(student.getStudentId()))
+                .appendQueryParameter("Email", student.getEmail())
+                .appendQueryParameter("MerchantID", this.MERCHANT )
+                .appendQueryParameter("PaymentSuccessUrl", this.SUCCESS_URL)
+                .build().toString();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        startActivity(browserIntent);
+    }
+
+    private void dbblPayment(String account_id){
+
+        DBBL dbbl = new DBBL(
+                String.valueOf(due.getTotalDue()),
+                "NEXUS Debit. Card",
+                String.valueOf( student.getStudentId()),
+                account_id
+        );
+
+        new PaymentApi(getContext()).getDbblUrl(
+                CustomSharedPref.getInstance(getContext()).getAuthToken(),
+                dbbl,
+                (isSuccess, message) -> {
+                    if(isSuccess){
+                        if(message != null){
+                            String uri = Uri.parse(message)
+                                    .buildUpon()
+                                    .build().toString();
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                            startActivity(browserIntent);
+                        }
+                    }
+                    else  Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                }
+        );
     }
 }

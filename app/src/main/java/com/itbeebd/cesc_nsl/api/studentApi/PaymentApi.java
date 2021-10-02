@@ -9,7 +9,9 @@ import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.interfaces.DueHistoryResponse;
 import com.itbeebd.cesc_nsl.interfaces.PaymentHistoryResponse;
+import com.itbeebd.cesc_nsl.interfaces.PaymentResponse;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
+import com.itbeebd.cesc_nsl.utils.DBBL;
 import com.itbeebd.cesc_nsl.utils.dummy.Due;
 import com.itbeebd.cesc_nsl.utils.dummy.DueHistory;
 import com.itbeebd.cesc_nsl.utils.dummy.Payment;
@@ -173,7 +175,7 @@ public class PaymentApi extends BaseService {
         });
     }
 
-    public void getInvoiceForCheckout(String token, BooleanResponse booleanResponse){
+    public void getInvoiceForCheckout(String token, PaymentResponse booleanResponse){
         progressDialog.show();
         Call<ResponseBody> invoiceForCheckout = service.postRequestPath(token, ApiUrls.ADD_PAYMENT);
         invoiceForCheckout.enqueue(new Callback<ResponseBody>(){
@@ -186,30 +188,108 @@ public class PaymentApi extends BaseService {
                     try {
 
                         JSONObject jsonObject =  new JSONObject(response.body().string());
-
-                        booleanResponse.response(true, jsonObject.optString("voucher_no"));
+                        System.out.println(">>>>>>>>>> payment jsonObject " + jsonObject);
+                        booleanResponse.response(
+                                jsonObject.optString("status").equals("200"),
+                                jsonObject.optString("voucher_no"),
+                                jsonObject.optString("transactionID"),
+                                jsonObject.optString("account_id")
+                        );
 
                     } catch (Exception e) {
                         e.printStackTrace();
                         System.out.println(">>>>>>>>>> payment catch " + e.fillInStackTrace());
 
-                        booleanResponse.response(false, e.getLocalizedMessage());
+                        booleanResponse.response(
+                                false,
+                                e.getLocalizedMessage(),
+                                null,
+                                null);
                     }
 
 
                 }
                 else {
-                    booleanResponse.response(false,  response.message());
-                    System.out.println(">>>>>>>>>> payment " + response.isSuccessful());
-                    System.out.println(">>>>>>>>>> payment " + response);
+                    booleanResponse.response(
+                            false,
+                            response.message(),
+                            null,
+                            null);
+
+                    System.out.println(">>>>>>>>>> payment else" + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> payment else " + response);
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 progressDialog.dismiss();
-                System.out.println(">>>>>>>>>> payment " + t.getLocalizedMessage());
-                booleanResponse.response(false,  t.getLocalizedMessage());
+                System.out.println(">>>>>>>>>> payment onFailure " + t.getLocalizedMessage());
+                booleanResponse.response(
+                        false,
+                        t.getLocalizedMessage(),
+                        null,
+                        null);
+            }
+        });
+    }
+
+    public void getDbblUrl(String token, DBBL dbbl, BooleanResponse booleanResponse){
+        System.out.println(" getDbblUrl called ");
+        progressDialog.show();
+        Call<ResponseBody> invoiceForCheckout = service.getDbblUrl(token,requestBody.getDbblUrl(dbbl));
+        invoiceForCheckout.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> getDbblUrl " + response.body());
+                    try {
+
+                        JSONObject jsonObject =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> getDbblUrl jsonObject " + jsonObject);
+                        if(jsonObject.optString("is_true").equals("true")){
+                            booleanResponse.response(
+                                    jsonObject.optString("isSuccessful").equals("true"),
+                                    jsonObject.optString("url")
+                            );
+                        }
+                        else {
+                            System.out.println(">>>>>>>>>> getDbblUrl jsonObject else " + jsonObject);
+                            booleanResponse.response(
+                                    false,
+                                    "Something goes wrong");
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> getDbblUrl catch " + e.fillInStackTrace());
+
+                        booleanResponse.response(
+                                false,
+                                e.getLocalizedMessage());
+                    }
+
+
+                }
+                else {
+                    System.out.println(">>>>>>>>>> getDbblUrl " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> getDbblUrl " + response);
+
+                    booleanResponse.response(
+                            false,
+                            response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> getDbblUrl " + t.getLocalizedMessage());
+                booleanResponse.response(
+                        false,
+                        t.getLocalizedMessage());
             }
         });
     }

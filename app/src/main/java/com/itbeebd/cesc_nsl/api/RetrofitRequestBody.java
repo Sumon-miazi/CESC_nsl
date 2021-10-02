@@ -1,5 +1,7 @@
 package com.itbeebd.cesc_nsl.api;
 
+import com.itbeebd.cesc_nsl.utils.DBBL;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,16 @@ public class RetrofitRequestBody {
     public RetrofitRequestBody(){
 
     }
+
+    public Map<String, Object> getDbblUrl(DBBL dbbl){
+        Map<String, Object> map = new HashMap<>();
+        map.put("amount", dbbl.getAmount());
+        map.put("cardtype", dbbl.getCardtype());
+        map.put("txnrefnum", dbbl.getTxnrefnum());
+        map.put("account_id", dbbl.getAccount_id());
+        return map;
+    }
+
 
     public Map<String, Object> getResult(int examId){
         Map<String, Object> map = new HashMap<>();
