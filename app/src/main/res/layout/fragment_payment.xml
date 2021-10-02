@@ -11,108 +11,67 @@
         tools:context=".activities.student.fragments.PaymentFragment"
         android:background="#F3F5F9">
 
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView2"
-            style="@style/CustomCardViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:backgroundTint="@color/blue_primary_dark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.card.MaterialCardView
-                style="@style/CustomCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="50dp"
-                app:layout_constraintBottom_toBottomOf="@+id/materialCardView2"
-                app:layout_constraintEnd_toEndOf="@+id/materialCardView2"
-                app:layout_constraintStart_toStartOf="@+id/materialCardView2"
-                app:layout_constraintTop_toTopOf="@+id/materialCardView2">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:minHeight="110dp">
-
-                    <ImageView
-                        android:id="@+id/imageView5"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_taka"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@+id/totolDueAmountHintId"
-                        app:layout_constraintEnd_toStartOf="@+id/totolDueAmountHintId"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/totolDueAmountHintId" />
-
-                    <TextView
-                        android:id="@+id/totolDueAmountHintId"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/textView3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/imageView5"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_chainStyle="packed" />
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Total Due Amount"
-                        android:textColor="@color/black"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toTopOf="@+id/checkOutBtn"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/totolDueAmountHintId" />
-
-                    <Button
-                        android:id="@+id/checkOutBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white_green"
-                        android:minHeight="50dp"
-                        android:text="CHECK OUT"
-                        android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-        </com.google.android.material.card.MaterialCardView>
-
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="14dp"
             android:text="Due History"
+            android:background="@drawable/round_corner_bottom_bg"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView2" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/materialCardView2"-->
+<!--            style="@style/CustomCardViewStyle"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:visibility="visible"-->
+<!--            android:backgroundTint="@color/blue_primary_dark"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/paymentHistoryBtnId"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="10dp"-->
+<!--                android:textAlignment="center"-->
+<!--                android:background="@drawable/attendance_bg"-->
+<!--                android:backgroundTint="@color/blue_inactive"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:visibility="gone"-->
+<!--                android:text="Click here to view payment history"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/textView4"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="Due History"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/materialCardView2" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dueRecordHeaderId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -234,7 +193,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/paymentHistoryBtnId"
+            app:layout_constraintBottom_toTopOf="@+id/materialCardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dueRecordHeaderId" />
@@ -246,7 +205,7 @@
             android:layout_marginTop="1dp"
             android:orientation="vertical"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/paymentHistoryBtnId"
+            app:layout_constraintBottom_toBottomOf="@+id/paymentRecyclerViewId"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
@@ -268,7 +227,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/blue_primary"
                 android:textSize="30sp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -277,11 +236,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_margin="10dp"
                 android:fontFamily="@font/heebo_extra_bold"
                 android:text="no data found"
                 android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:textColor="@color/white_inactive_2"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -290,21 +250,77 @@
                 app:layout_constraintTop_toBottomOf="@+id/sectionRecyclerViewId" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/paymentHistoryBtnId"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            style="@style/CustomCardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textAlignment="center"
-            android:background="@drawable/attendance_bg"
-            android:backgroundTint="@color/blue_inactive"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/white"
             android:layout_margin="10dp"
-            android:text="Click here to view payment history"
+            app:cardCornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_bg_active"
+                android:padding="10dp">
+
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/imageView5"-->
+                <!--                    android:layout_width="20dp"-->
+                <!--                    android:layout_height="20dp"-->
+                <!--                    android:src="@drawable/ic_taka"-->
+                <!--                    android:visibility="gone"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@+id/totolDueAmountHintId"-->
+                <!--                    app:layout_constraintEnd_toStartOf="@+id/totolDueAmountHintId"-->
+                <!--                    app:layout_constraintHorizontal_bias="0.5"-->
+                <!--                    app:layout_constraintHorizontal_chainStyle="packed"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="@+id/totolDueAmountHintId" />-->
+
+                <TextView
+                    android:id="@+id/totolDueAmountHintId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/textView3"
+                    app:layout_constraintEnd_toStartOf="@+id/checkOutBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Due Amount"
+                    android:textColor="@color/white_inactive_2"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/checkOutBtn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/checkOutBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/primary_active"
+                    android:minHeight="50dp"
+                    android:text="CHECK OUT"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

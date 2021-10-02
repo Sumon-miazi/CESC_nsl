@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.activities.student.PaymentHistoryActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.DuePaymentAdapter;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.studentApi.PaymentApi;
@@ -71,10 +70,10 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
         dueRecordHeaderId = view.findViewById(R.id.dueRecordHeaderId);
         no_Due_history_foundId = view.findViewById(R.id.no_Due_history_foundId);
-        paymentHistoryBtn = view.findViewById(R.id.paymentHistoryBtnId);
+    //    paymentHistoryBtn = view.findViewById(R.id.paymentHistoryBtnId);
 
         checkOutBtn.setOnClickListener(this);
-        paymentHistoryBtn.setOnClickListener(this);
+     //   paymentHistoryBtn.setOnClickListener(this);
 
         return view;
     }
@@ -133,10 +132,11 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.paymentHistoryBtnId){
-            getActivity().startActivity(new Intent(getActivity(), PaymentHistoryActivity.class));
-        }
-        else if(view.getId() == R.id.checkOutBtn){
+//        if(view.getId() == R.id.paymentHistoryBtnId){
+//            getActivity().startActivity(new Intent(getActivity(), PaymentHistoryActivity.class));
+//        }
+//        else
+          if(view.getId() == R.id.checkOutBtn){
             new PaymentApi(getContext()).getInvoiceForCheckout(
                     CustomSharedPref.getInstance(getContext()).getAuthToken(),
                     (isSuccess, message) -> {
