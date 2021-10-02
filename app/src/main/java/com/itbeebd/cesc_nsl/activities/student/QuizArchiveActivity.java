@@ -1,5 +1,6 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,6 +79,12 @@ public class QuizArchiveActivity extends AppCompatActivity implements OnRecycler
 
     @Override
     public void onItemClicked(QuizArchive item, View view) {
-        System.out.println(">>>>>>>>>QuizArchive " + item.getSubjectName());
+        if(item.getQuizArrayList() != null){
+            if(item.getQuizArrayList().size() != 0){
+                Intent intent = new Intent(this, QuizActivity.class);
+                intent.putExtra("quiz", item.getQuizArrayList());
+                startActivity(intent);
+            }
+        }
     }
 }

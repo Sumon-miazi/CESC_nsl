@@ -1,6 +1,8 @@
 package com.itbeebd.cesc_nsl.utils.dummy;
 
-public class Quiz {
+import java.io.Serializable;
+
+public class Quiz implements Serializable {
     private String question;
     private String option1;
     private String option2;

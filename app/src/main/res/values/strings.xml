@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CESC_nsl</string>
+    <string name="app_name">CESC</string>
     <string name="notification_channel_name">CESC_nsl</string>
     <string name="notification_channel_id">CESC_nsl</string>
     <string name="notification_channel_description">CESC_nsl</string>
