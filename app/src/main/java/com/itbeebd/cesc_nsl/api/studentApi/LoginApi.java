@@ -52,6 +52,10 @@ public class LoginApi extends BaseService {
                         jsonObject =  new JSONObject(response.body().string());
                         System.out.println(">>>>>>>>>> " + jsonObject);
 
+                        if(!jsonObject.optBoolean("issuccessful")){
+                            booleanResponse.response(false, jsonObject.optString("message"));
+                            return;
+                        }
                         Student student = gson.fromJson(jsonObject.getJSONObject("user").toString(), Student.class);
                         student.setClassName(jsonObject.getJSONObject("user").getJSONObject("stdclass").optString("name"));
                         student.setSectionName(jsonObject.getJSONObject("user").getJSONObject("section").optString("name"));

@@ -328,7 +328,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
 
         if (mother != null) {
             motherDummy = new GuardianDummy(
-                    student.getStudentId(),
+                    Integer.parseInt(String.valueOf(student.getId())),
                     Integer.parseInt(String.valueOf(mother.getId())),
                     mother.getRelation(),
                     motherNameTextFieldId.getEditText().getText().toString(),
@@ -343,7 +343,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         }
         if (father != null) {
             fatherDummy = new GuardianDummy(
-                    student.getStudentId(),
+                    Integer.parseInt(String.valueOf(student.getId())),
                     Integer.parseInt(String.valueOf(father.getId())),
                     father.getRelation(),
                     fatherNameTextFieldId.getEditText().getText().toString(),
@@ -369,12 +369,17 @@ public class EditStudentProfileActivity extends AppCompatActivity {
                     //  System.out.println(">>>>>>>.. " + isSuccess + " " + message);
                     try {
                         if (isSuccess) {
-                            Toast.makeText(this, "Request submitted successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            CustomSharedPref.getInstance(getApplicationContext()).setUpdateRequest(1);
+                            Intent resultIntent = new Intent();
+                            setResult(RESULT_OK, resultIntent);
                             finish();
+                            System.out.println(">>>>>");
                         } else {
                             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception ignore) {
+                        ignore.printStackTrace();
                     }
                 });
     }

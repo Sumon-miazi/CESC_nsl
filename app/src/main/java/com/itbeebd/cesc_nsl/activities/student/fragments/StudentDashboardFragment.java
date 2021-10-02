@@ -336,10 +336,17 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                             this.dashboardHeaderObj = (DashboardHeaderObj) object;
                             setDashboardData(dashboardHeaderObj);
                         } else {
-                            try {
-                                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                            } catch (Exception ignore) {
+                            if(message.equals("logout")){
+                                CustomSharedPref.getInstance(getContext()).setStudentLoggedInOrNot(false);
+                                fragmentToActivity.call(studentDrawerId, message);
                             }
+                            else {
+                                try {
+                                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                                } catch (Exception ignore) {
+                                }
+                            }
+
                         }
                     }
             );
@@ -713,9 +720,19 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                         this.dashboardHeaderObj = (DashboardHeaderObj) object;
                         setDashboardData(dashboardHeaderObj);
                     } else {
-                        try {
-                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                        } catch (Exception ignore) {
+                        if(message.equals("logout")){
+                            try {
+                                refreshLayout.setRefreshing(false);
+                            } catch (Exception ignore) {
+                            }
+                            CustomSharedPref.getInstance(getContext()).setStudentLoggedInOrNot(false);
+                            fragmentToActivity.call(studentDrawerId, message);
+                        }
+                        else {
+                            try {
+                                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                            } catch (Exception ignore) {
+                            }
                         }
                     }
 

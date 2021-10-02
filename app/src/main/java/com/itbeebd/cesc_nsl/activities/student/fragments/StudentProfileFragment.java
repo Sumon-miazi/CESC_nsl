@@ -1,6 +1,5 @@
 package com.itbeebd.cesc_nsl.activities.student.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +14,9 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.activities.student.EditStudentProfileActivity;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.dao.StudentDao;
+import com.itbeebd.cesc_nsl.interfaces.FragmentToActivity;
 import com.itbeebd.cesc_nsl.sugarClass.Guardian;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.sugarClass.Transport;
@@ -60,6 +59,11 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
 
     private LinearLayout guardianInfoLayout;
     private LinearLayout transportInfoLayoutId;
+    private FragmentToActivity fragmentToActivity;
+
+    public StudentProfileFragment(FragmentToActivity fragmentToActivity) {
+        this.fragmentToActivity = fragmentToActivity;
+    }
 
     public StudentProfileFragment() {
         // Required empty public constructor
@@ -132,9 +136,11 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(getActivity(), EditStudentProfileActivity.class);
-        // intent.putExtra("studentId", student.getId());
-        getActivity().startActivity(intent);
+//        Intent intent = new Intent(getActivity(), EditStudentProfileActivity.class);
+//        // intent.putExtra("studentId", student.getId());
+//        getActivity().startActivityFor(intent);
+
+        fragmentToActivity.changeActivity("EditStudentProfileActivity");
     }
 
     @Override

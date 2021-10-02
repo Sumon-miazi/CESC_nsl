@@ -1,5 +1,6 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
@@ -19,11 +22,13 @@ import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.activities.LoginActivity;
 import com.itbeebd.cesc_nsl.activities.student.fragments.PaymentFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.ResultBoardFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.StudentDashboardFragment;
 import com.itbeebd.cesc_nsl.activities.student.fragments.StudentProfileFragment;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
+import com.itbeebd.cesc_nsl.interfaces.FragmentToActivity;
 
 
 public class StudentDashboardActivity extends AppCompatActivity  implements BubbleNavigationChangeListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -38,32 +43,68 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
     private static final int REQUEST_WRITE_PERMISSION = 786;
     private String currentFragment = "dashboardFragment";
     private DrawerLayout studentDrawerId;
+    private ActivityResultLauncher<Intent> someActivityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_dashboard);
 
+        // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
+        someActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        Intent data = result.getData();
+                        //  doSomeOperations();
+                    }
+                });
+
         navigationLinearView = findViewById(R.id.bottom_navigation_view_linear);
         navigationLinearView.setCurrentActiveItem(0);
         navigationLinearView.setNavigationChangeListener(this);
 
 
-        dashboardFragment = new StudentDashboardFragment((drawerLayout, data) -> {
-            this.studentDrawerId = drawerLayout;
+        dashboardFragment = new StudentDashboardFragment(new FragmentToActivity() {
+            @Override
+            public void call(DrawerLayout drawerLayout, String data) {
+                studentDrawerId = drawerLayout;
 
-            if(data.equals("Successfully logged out.")){
-                CustomSharedPref.getInstance(this).setStudentLoggedInOrNot(false);
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
+                if(data.equals("Successfully logged out.")){
+                    CustomSharedPref.getInstance(getApplicationContext()).setStudentLoggedInOrNot(false);
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+                else if(data.equals("logout")){
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    finish();
+                }
+                else {
+                    navigationLinearView.setCurrentActiveItem(Integer.parseInt(data));
+                    onNavigationChanged(null, Integer.parseInt(data));
+                }
             }
-            else {
-                navigationLinearView.setCurrentActiveItem(Integer.parseInt(data));
-                onNavigationChanged(null, Integer.parseInt(data));
+
+            @Override
+            public void changeActivity(String message) {
+
             }
         });
 
-        profileFragment = new StudentProfileFragment();
+        profileFragment = new StudentProfileFragment(new FragmentToActivity() {
+            @Override
+            public void call(DrawerLayout drawerLayout, String data) {
+
+            }
+
+            @Override
+            public void changeActivity(String message) {
+                if(message.equals("EditStudentProfileActivity")){
+                    someActivityResultLauncher.launch(new Intent(getApplicationContext(), EditStudentProfileActivity.class));
+                }
+            }
+        });
         paymentFragment = new PaymentFragment();
         resultBoardFragment = new ResultBoardFragment();
 

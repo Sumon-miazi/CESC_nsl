@@ -49,4 +49,14 @@ public class CustomSharedPref {
         editor.putString("AuthToken", flag);
         editor.apply();
     }
+
+    public int getUpdateRequest() {
+        return sharedPreferences.getInt("UpdateRequest", 0);
+    }
+
+    public void setUpdateRequest(int flag) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("UpdateRequest", flag);
+        editor.apply();
+    }
 }

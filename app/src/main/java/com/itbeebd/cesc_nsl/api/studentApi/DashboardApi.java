@@ -5,6 +5,7 @@ import android.content.Context;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.NotificationDao;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.sugarClass.Book;
@@ -62,6 +63,14 @@ public class DashboardApi extends BaseService {
                         JSONArray notificationJsonArray =  notificationJsonObj.getJSONArray("notification");
                         JSONArray classRoutineJsonArray =  data.getJSONArray("classRoutine");
                         JSONArray libraryBookJsonArray =  data.getJSONArray("libraryBooks");
+
+                        int updateRequest =  data.optInt("update_request");
+
+                        if(updateRequest == 0 && CustomSharedPref.getInstance(context).getUpdateRequest() == 1){
+                            //Todo: Set a pop up about server sync
+                            CustomSharedPref.getInstance(context).setUpdateRequest(0);
+                            responseObj.data(null, "logout");
+                        }
 
                         System.out.println(">>>>>>>>>> dashboardHeaderInfo " + data.optInt("totalOnlineClass"));
 
