@@ -1,24 +1,75 @@
 package com.itbeebd.cesc_nsl;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.androidstudy.networkmanager.Tovuti;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.appcheck.FirebaseAppCheck;
+import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory;
 import com.itbeebd.cesc_nsl.activities.LoginActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentDashboardActivity;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
+import com.itbeebd.cesc_nsl.utils.CheckNetworkConnection;
 
 public class MainActivity extends AppCompatActivity {
 
+    private CheckNetworkConnection networkConnection;
+    private Button tryAgainBtn;
+    private boolean flag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        boolean flag = CustomSharedPref.getInstance(this).getStudentLoggedInOrNot();
-        if(flag) this.startActivity(new Intent(this, StudentDashboardActivity.class));
-        else this.startActivity(new Intent(this, LoginActivity.class));
-        finish();
+        networkConnection = new CheckNetworkConnection(this);
+        flag = CustomSharedPref.getInstance(this).getStudentLoggedInOrNot();
+
+        FirebaseApp.initializeApp(MainActivity.this);
+        FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
+        firebaseAppCheck.installAppCheckProviderFactory(
+                DebugAppCheckProviderFactory.getInstance());
+
+        checkInternet();
+    }
+
+    private void checkInternet() {
+            takeActionOnInternetStatus(networkConnection.haveNetworkConnection());
+    }
+
+    private void takeActionOnInternetStatus(boolean isConnected){
+        if (!isConnected) {
+            Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(true);
+            dialog.setContentView(R.layout.no_internet);
+
+            tryAgainBtn = dialog.findViewById(R.id.tryAgainId);
+
+            tryAgainBtn.setOnClickListener(view -> {
+                checkInternet();
+                dialog.dismiss();
+            });
+
+            dialog.show();
+        } else {
+            if(flag) this.startActivity(new Intent(this, StudentDashboardActivity.class));
+            else this.startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
+    }
+
+    @Override
+    protected void onStop(){
+        try {
+            Tovuti.from(this).stop();
+        } catch (Exception ignore) {
+        }
+        super.onStop();
     }
 }
