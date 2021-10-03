@@ -24,30 +24,26 @@
         tools:ignore="LockedOrientationActivity">
         <activity
             android:name=".activities.student.ChangePasswordActivity"
-            android:exported="true" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.student.CheckoutActivity"
-            android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.student.QuizActivity"
-            android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.student.QuizArchiveActivity"
-            android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.student.OnlineClassActivity"
-            android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.WebViwerActivity"
-            android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

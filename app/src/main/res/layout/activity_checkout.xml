@@ -176,7 +176,7 @@
                         android:id="@+id/dbblNexusId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic__rocket"
+                        android:drawableLeft="@drawable/ic_dbbl"
                         android:text="  NEXUS Debit. Card"
                         android:textSize="@dimen/dbbl_card_txt" />
 
@@ -184,7 +184,7 @@
                         android:id="@+id/dbblMarterDebitBtnId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic__rocket"
+                        android:drawableLeft="@drawable/ic_dbbl"
                         android:text="  DBBL Master Debit Card"
                         android:textSize="@dimen/dbbl_card_txt" />
 
@@ -192,7 +192,7 @@
                         android:id="@+id/dbblVisaDebitBtnId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic__rocket"
+                        android:drawableLeft="@drawable/ic_dbbl"
                         android:text="  DBBL VISA Debit Card"
                         android:textSize="@dimen/dbbl_card_txt" />
 
@@ -200,7 +200,7 @@
                         android:id="@+id/anyBVisaBtnId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic__rocket"
+                        android:drawableLeft="@drawable/ic_visa"
                         android:text="  Any Bank VISA Credit Card"
                         android:textSize="@dimen/dbbl_card_txt" />
 
@@ -208,7 +208,7 @@
                         android:id="@+id/anyBMasterBtnId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic__rocket"
+                        android:drawableLeft="@drawable/ic_master"
                         android:text="  Any Bank Master Credit Card"
                         android:textSize="@dimen/dbbl_card_txt" />
 
@@ -216,7 +216,7 @@
                         android:id="@+id/dbblRocketBtnId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic__rocket"
+                        android:drawableLeft="@drawable/ic_rocket"
                         android:text="  Rocket Mobile Banking"
                         android:textSize="@dimen/dbbl_card_txt" />
 

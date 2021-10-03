@@ -297,7 +297,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
             setImageInImageView(imageView, imageUrl);
         }
     }
-    
+
     private void setImageInImageView(ImageView imageView, String url) {
         if (url != null) {
             //  System.out.println(">>>>>> " + ApiUrls.BASE_IMAGE_URL + student.getImage());
