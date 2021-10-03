@@ -123,6 +123,9 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private CardView logoutId;
     private SwipeRefreshLayout refreshLayout;
 
+    private int totalQuizArchive = 0;
+    private int totalOnlineClass = 0;
+
     public StudentDashboardFragment() {
 
     }
@@ -354,6 +357,9 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void setDashboardData(DashboardHeaderObj object) {
+        totalQuizArchive = Integer.parseInt(object.getTotalQuiz());
+        totalOnlineClass = Integer.parseInt(object.getTotalOnlineClass());
+
         quizBlockNumber.setText(object.getTotalQuiz());
         quizArchiveBlockNumber.setText(object.getTotalQuizArchive());
         libraryBlockNumber.setText(object.getLibraryBookTotal());
@@ -511,6 +517,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void gotoOnlineView(View view) {
+        if(totalOnlineClass == 0) return;
         System.out.println(">>>>>. " + view.getId());
         getContext().startActivity(new Intent(getContext(), OnlineClassActivity.class));
     }
@@ -524,6 +531,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void gotoQuizArchiveView(View view) {
+        if(totalQuizArchive == 0) return;
         System.out.println(">>>>>. " + view.getId());
         startActivity(new Intent(getContext(), QuizArchiveActivity.class));
     }

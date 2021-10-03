@@ -59,4 +59,14 @@ public class CustomSharedPref {
         editor.putInt("UpdateRequest", flag);
         editor.apply();
     }
+
+    public boolean getPayNowClicked() {
+        return sharedPreferences.getBoolean("PayNowClicked", false);
+    }
+
+    public void setPayNowClicked(boolean flag) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("PayNowClicked", flag);
+        editor.apply();
+    }
 }

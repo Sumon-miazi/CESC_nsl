@@ -61,6 +61,7 @@ public class PaymentApi extends BaseService {
                                 data.optInt("ind_fee"),
                                 data.optInt("waiver"),
                                 data.optInt("paid_amount"),
+                                jsonObject.optString("payment_on_off").equals("true"),
                                 jsonObject.optString("payment_category"),
                                 jsonObject.optString("invoice"));
 

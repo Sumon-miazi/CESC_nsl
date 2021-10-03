@@ -23,4 +23,6 @@
 
 
     <dimen name="t_dashboard_menu_expendable_margin_top">8dp</dimen>
+
+    <dimen name="dbbl_card_txt">10dp</dimen>
 </resources>

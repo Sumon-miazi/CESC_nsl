@@ -99,9 +99,9 @@ public class LoginApi extends BaseService {
 
                 }
                 else {
-                    booleanResponse.response(response.isSuccessful(), response.toString());
                     System.out.println(">>>>>>>>>> " + response.isSuccessful());
                     System.out.println(">>>>>>>>>> " + response);
+                    booleanResponse.response(response.isSuccessful(), response.toString());
                 }
             }
 
@@ -109,6 +109,8 @@ public class LoginApi extends BaseService {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 progressDialog.dismiss();
                 System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
+                booleanResponse.response(false, t.getLocalizedMessage());
+
             }
         });
     }

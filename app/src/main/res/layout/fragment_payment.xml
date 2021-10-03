@@ -315,6 +315,7 @@
                     android:backgroundTint="@color/primary_active"
                     android:minHeight="50dp"
                     android:text="CHECK OUT"
+                    android:visibility="gone"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

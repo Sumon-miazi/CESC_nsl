@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.student.CheckoutActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/checkout_ToolbarId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_primary"
+        android:minWidth="?actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkout_ToolbarId">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkout_ToolbarId">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:background="@drawable/attendance_bg"
+                android:backgroundTint="@color/white_green"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/studentId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/heebo_extra_bold"
+                    android:padding="6dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/dateId"
+                    app:layout_constraintTop_toBottomOf="@+id/studentNameId"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <TextView
+                    android:id="@+id/studentNameId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/heebo_extra_bold"
+                    android:padding="6dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/studentId"
+                    app:layout_constraintTop_toBottomOf="@+id/totalAmountId"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <TextView
+                    android:id="@+id/invoiceNoId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/heebo_extra_bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue_primary"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/totalAmountId"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:layout_editor_absoluteX="-16dp" />
+
+                <TextView
+                    android:id="@+id/totalAmountId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/heebo_extra_bold"
+                    android:padding="6dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/orange_active"
+                    android:textSize="26sp"
+                    app:layout_constraintBottom_toTopOf="@+id/studentNameId"
+                    app:layout_constraintTop_toBottomOf="@+id/invoiceNoId"
+                    tools:layout_editor_absoluteX="-16dp" />
+
+                <TextView
+                    android:id="@+id/dateId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/heebo_extra_bold"
+                    android:padding="6dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white_inactive_5"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/studentId"
+                    tools:layout_editor_absoluteX="0dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/attendance_bg"
+                android:backgroundTint="@color/white_green"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+
+                <TextView
+                    android:id="@+id/textView51"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/heebo_extra_bold"
+                    android:text="Select a payment option"
+                    android:textColor="@color/blue_primary"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:layout_editor_absoluteX="20dp" />
+
+                <RadioGroup
+                    android:id="@+id/bankOpId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView51">
+
+                    <RadioButton
+                        android:id="@+id/tblBtnId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Trust Bank Ltd" />
+
+                    <RadioButton
+                        android:id="@+id/dbblBtnId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dutch Bangla Bank Ltd" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/dbblCardOptionId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bankOpId">
+
+                    <RadioButton
+                        android:id="@+id/dbblNexusId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic__rocket"
+                        android:text="  NEXUS Debit. Card"
+                        android:textSize="@dimen/dbbl_card_txt" />
+
+                    <RadioButton
+                        android:id="@+id/dbblMarterDebitBtnId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic__rocket"
+                        android:text="  DBBL Master Debit Card"
+                        android:textSize="@dimen/dbbl_card_txt" />
+
+                    <RadioButton
+                        android:id="@+id/dbblVisaDebitBtnId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic__rocket"
+                        android:text="  DBBL VISA Debit Card"
+                        android:textSize="@dimen/dbbl_card_txt" />
+
+                    <RadioButton
+                        android:id="@+id/anyBVisaBtnId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic__rocket"
+                        android:text="  Any Bank VISA Credit Card"
+                        android:textSize="@dimen/dbbl_card_txt" />
+
+                    <RadioButton
+                        android:id="@+id/anyBMasterBtnId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic__rocket"
+                        android:text="  Any Bank Master Credit Card"
+                        android:textSize="@dimen/dbbl_card_txt" />
+
+                    <RadioButton
+                        android:id="@+id/dbblRocketBtnId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic__rocket"
+                        android:text="  Rocket Mobile Banking"
+                        android:textSize="@dimen/dbbl_card_txt" />
+
+                </RadioGroup>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/payNowId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="@color/green_active"
+                android:text="PAY NOW"
+                android:padding="10dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
