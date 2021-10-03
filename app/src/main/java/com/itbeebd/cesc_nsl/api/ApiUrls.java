@@ -3,7 +3,7 @@ package com.itbeebd.cesc_nsl.api;
 public class ApiUrls {
 
     // Local Server
-    public static final String IP_ADDRESS = "http://192.168.0.103";
+    public static final String IP_ADDRESS = "http://192.168.0.109";
     public static final String BASE_IMAGE_URL = IP_ADDRESS + "/cescms";
     public static final String BASE_URL_API = BASE_IMAGE_URL + "/api/";
 

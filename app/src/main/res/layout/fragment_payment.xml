@@ -16,7 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="14dp"
-            android:text="Due History"
+            android:text="DUE HISTORY"
+            android:fontFamily="@font/heebo_light"
+            android:letterSpacing="0.5"
             android:background="@drawable/round_corner_bottom_bg"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -73,7 +75,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -205,57 +207,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dueRecordHeaderId" />
 
-        <LinearLayout
-            android:id="@+id/no_Due_history_foundId"
+        <include
+            android:id="@+id/noDataFound"
+            layout="@layout/no_data_found"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:orientation="vertical"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/paymentRecyclerViewId"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            app:layout_constraintVertical_bias="0.41000003">
-
-            <ImageView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_no_data_found" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="@font/heebo_extra_bold"
-                android:text="Oops!"
-                android:textAlignment="center"
-                android:textColor="@color/blue_primary"
-                android:textSize="30sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sectionRecyclerViewId" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/heebo_extra_bold"
-                android:text="no data found"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/white_inactive_2"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sectionRecyclerViewId" />
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
@@ -266,6 +226,7 @@
             android:backgroundTint="@color/white"
             android:layout_margin="10dp"
             app:cardCornerRadius="50dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

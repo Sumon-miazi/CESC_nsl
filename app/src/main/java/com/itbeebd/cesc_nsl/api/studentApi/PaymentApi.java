@@ -191,7 +191,7 @@ public class PaymentApi extends BaseService {
                         JSONObject jsonObject =  new JSONObject(response.body().string());
                         System.out.println(">>>>>>>>>> payment jsonObject " + jsonObject);
                         booleanResponse.response(
-                                jsonObject.optString("status").equals("200"),
+                                jsonObject.optBoolean("isSuccessful"),
                                 jsonObject.optString("voucher_no"),
                                 jsonObject.optString("transactionID"),
                                 jsonObject.optString("account_id")
@@ -252,15 +252,15 @@ public class PaymentApi extends BaseService {
                         System.out.println(">>>>>>>>>> getDbblUrl jsonObject " + jsonObject);
                         if(jsonObject.optString("is_true").equals("true")){
                             booleanResponse.response(
-                                    jsonObject.optString("isSuccessful").equals("true"),
+                                    jsonObject.optBoolean("isSuccessful"),
                                     jsonObject.optString("url")
                             );
                         }
                         else {
                             System.out.println(">>>>>>>>>> getDbblUrl jsonObject else " + jsonObject);
                             booleanResponse.response(
-                                    false,
-                                    "Something goes wrong");
+                                    jsonObject.optBoolean("isSuccessful"),
+                                    jsonObject.optString("message"));
                         }
 
                     } catch (Exception e) {

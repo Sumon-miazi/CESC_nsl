@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.CheckoutActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.DuePaymentAdapter;
@@ -34,10 +34,11 @@ import java.util.ArrayList;
 public class PaymentFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView paymentRecyclerView;
+    private MaterialCardView materialCardView;
     private TextView totolDueAmountHintId;
     private Button checkOutBtn;
     private TextView paymentHistoryBtn;
-    private LinearLayout no_Due_history_foundId;
+    private ConstraintLayout no_Due_history_foundId;
     private ConstraintLayout dueRecordHeaderId;
     private Due due;
     private Student student;
@@ -68,13 +69,14 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
         View view = inflater.inflate(R.layout.fragment_payment, container, false);
 
+        materialCardView = view.findViewById(R.id.materialCardView);
         totolDueAmountHintId = view.findViewById(R.id.totolDueAmountHintId);
         checkOutBtn = view.findViewById(R.id.checkOutBtn);
 
         paymentRecyclerView = view.findViewById(R.id.paymentRecyclerViewId);
 
         dueRecordHeaderId = view.findViewById(R.id.dueRecordHeaderId);
-        no_Due_history_foundId = view.findViewById(R.id.no_Due_history_foundId);
+        no_Due_history_foundId = view.findViewById(R.id.noDataFound);
     //    paymentHistoryBtn = view.findViewById(R.id.paymentHistoryBtnId);
 
         checkOutBtn.setOnClickListener(this);
@@ -130,11 +132,15 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         checkOutBtn.setVisibility(due.isPayment_on_off()? View.VISIBLE : View.GONE);
 
         if(due.getDueHistoryArrayList() != null) {
-            dueRecordHeaderId.setVisibility(View.VISIBLE);
+            if(due.getDueHistoryArrayList().size() != 0){
+                materialCardView.setVisibility(View.VISIBLE);
+                dueRecordHeaderId.setVisibility(View.VISIBLE);
+                setDuePaymentAdapter(due.getDueHistoryArrayList());
+            }
             no_Due_history_foundId.setVisibility(due.getDueHistoryArrayList().size() == 0? View.VISIBLE : View.GONE);
-            setDuePaymentAdapter(due.getDueHistoryArrayList());
         }
         else {
+            materialCardView.setVisibility(View.GONE);
             dueRecordHeaderId.setVisibility(View.GONE);
             no_Due_history_foundId.setVisibility(View.VISIBLE);
         }

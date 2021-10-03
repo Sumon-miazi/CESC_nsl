@@ -52,7 +52,7 @@ public class LoginApi extends BaseService {
                         jsonObject =  new JSONObject(response.body().string());
                         System.out.println(">>>>>>>>>> " + jsonObject);
 
-                        if(!jsonObject.optBoolean("issuccessful")){
+                        if(!jsonObject.optString("isSuccessful").equals("true")){
                             booleanResponse.response(false, jsonObject.optString("message"));
                             return;
                         }
@@ -87,7 +87,7 @@ public class LoginApi extends BaseService {
                      //   CustomSharedPref.getInstance(context).setAuthToken(jsonObject.optString("token"));
                         CustomSharedPref.getInstance(context).setUserId(studentId);
 
-                        booleanResponse.response(jsonObject.optBoolean("issuccessful"), "Login");
+                        booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -149,6 +149,7 @@ public class LoginApi extends BaseService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 progressDialog.dismiss();
+                booleanResponse.response(false, t.getLocalizedMessage());
                 System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
             }
         });

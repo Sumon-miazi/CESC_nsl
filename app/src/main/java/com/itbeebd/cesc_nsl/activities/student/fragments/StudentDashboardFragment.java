@@ -357,7 +357,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void setDashboardData(DashboardHeaderObj object) {
-        totalQuizArchive = Integer.parseInt(object.getTotalQuiz());
+        totalQuizArchive = Integer.parseInt(object.getTotalQuizArchive());
         totalOnlineClass = Integer.parseInt(object.getTotalOnlineClass());
 
         quizBlockNumber.setText(object.getTotalQuiz());
@@ -466,8 +466,9 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
             lessonPlanCountHint.setVisibility(View.VISIBLE);
             lessonPlanSeeAll.setVisibility(View.VISIBLE);
         } else {
+            lessonPlanCountHint.setVisibility(View.VISIBLE);
             lessonPlanSeeAll.setVisibility(View.GONE);
-            lessonPlanMainViewId.setVisibility(View.GONE);
+          //  lessonPlanMainViewId.setVisibility(View.GONE);
             lessonPlanNotFoundId.setVisibility(View.VISIBLE);
         }
     }

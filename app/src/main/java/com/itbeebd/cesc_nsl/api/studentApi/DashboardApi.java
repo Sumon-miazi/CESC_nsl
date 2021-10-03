@@ -56,6 +56,11 @@ public class DashboardApi extends BaseService {
 
                         System.out.println(">>>>>>>>>> data " + data);
 
+                        if(!data.optBoolean("isSuccessful")){
+                            responseObj.data(null, data.optString("message"));
+                            return;
+                        }
+
                         JSONObject attendanceJsonObj =  data.getJSONObject("attendance");
                         JSONObject lessonPlanJsonObj =  data.getJSONObject("lessonPlan");
                         JSONArray lessonPlanJsonArray =  lessonPlanJsonObj.getJSONArray("lessonPlan");
@@ -170,7 +175,7 @@ public class DashboardApi extends BaseService {
                         headerObj.setLessonPlanArrayList(lessonPlanArrayList);
                         headerObj.setNotificationObjArrayList(notificationObjArrayList);
                         headerObj.setBookArrayList(bookArrayList);
-                        responseObj.data(headerObj, "successful");
+                        responseObj.data(headerObj, data.optString("message"));
 
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/noDataFound"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/noDataImageId"
+        android:layout_width="@dimen/no_data_found_image"
+        android:layout_height="@dimen/no_data_found_image"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_no_data_found"
+        app:layout_constraintBottom_toTopOf="@+id/noDataTitleId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/noDataTitleId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/heebo_extra_bold"
+        android:text="Oops!"
+        android:textAlignment="center"
+        android:textColor="@color/white_inactive_4"
+        android:textSize="30sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/noDataBodyId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noDataImageId" />
+
+    <TextView
+        android:id="@+id/noDataBodyId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/heebo_light"
+        android:letterSpacing="0.5"
+        android:text="no data available"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white_inactive_2"
+        android:textSize="14sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noDataTitleId" />
+</androidx.constraintlayout.widget.ConstraintLayout>
