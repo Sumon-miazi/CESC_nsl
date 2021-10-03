@@ -269,12 +269,15 @@ public class EditStudentProfileActivity extends AppCompatActivity {
 
         if (imageOwner.equals("student")) {
             studentImageUrl = image.getPath();
+            student.setImage(studentImageUrl);
             setProfileImage(userProfileViewId, image);
         } else if (imageOwner.equals("mother")) {
             motherImageUrl = image.getPath();
+            if(mother != null) mother.setProfileImage(motherImageUrl);
             setProfileImage(motherProfileViewId, image);
         } else if (imageOwner.equals("father")) {
             fatherImageUrl = image.getPath();
+            if(father != null) father.setProfileImage(fatherImageUrl);
             setProfileImage(fatherProfileViewId, image);
         }
     }
@@ -294,8 +297,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
             setImageInImageView(imageView, imageUrl);
         }
     }
-
-
+    
     private void setImageInImageView(ImageView imageView, String url) {
         if (url != null) {
             //  System.out.println(">>>>>> " + ApiUrls.BASE_IMAGE_URL + student.getImage());
@@ -316,25 +318,9 @@ public class EditStudentProfileActivity extends AppCompatActivity {
       //  System.out.println("religionTextFieldId.getEditText().getText() " + religionTextFieldId.getEditText().getText().toString());
 
         if(student != null){
-            if(student.getImage().isEmpty() || student.getImage() == null){
+            if(student.getImage() == null || student.getImage().isEmpty() ){
                 validationSuccessful = false;
                 Toast.makeText(this, "Choose your profile picture", Toast.LENGTH_SHORT).show();
-                return validationSuccessful;
-            }
-        }
-
-        if(mother != null){
-            if(mother.getProfileImage().isEmpty() || mother.getProfileImage() == null){
-                validationSuccessful = false;
-                Toast.makeText(this, "Choose your mother profile picture", Toast.LENGTH_SHORT).show();
-                return validationSuccessful;
-            }
-        }
-
-        if(father != null){
-            if(father.getProfileImage().isEmpty() || father.getProfileImage() == null){
-                validationSuccessful = false;
-                Toast.makeText(this, "Choose your father profile picture", Toast.LENGTH_SHORT).show();
                 return validationSuccessful;
             }
         }
@@ -350,7 +336,17 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         showErrorMessage(studentPhoneTextFieldId, "Enter your phone number");
         showErrorMessage(nationalityTextFieldId, "Enter your nationality");
 
+        if(!validationSuccessful) return validationSuccessful;
+
         // mother info validation
+        if(mother != null){
+            if(mother.getProfileImage() == null || mother.getProfileImage().isEmpty() ){
+                validationSuccessful = false;
+                Toast.makeText(this, "Choose your mother profile picture", Toast.LENGTH_SHORT).show();
+                return validationSuccessful;
+            }
+        }
+
         showErrorMessage(motherNameTextFieldId, "Enter your mother name");
         showErrorMessage(m_occupationTextFieldId, "Enter your mother occupation");
         showErrorMessage(m_phoneTextFieldId, "Enter your mother phone number");
@@ -360,7 +356,17 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         showErrorMessage(m_parentOrganizationFieldId, "Enter your mother working organization");
         showErrorMessage(m_parentEmailTextFieldId, "Enter your mother email address");
 
+        if(!validationSuccessful) return validationSuccessful;
+
         // father info validation
+
+        if(father != null){
+            if(father.getProfileImage() == null || father.getProfileImage().isEmpty() ){
+                validationSuccessful = false;
+                Toast.makeText(this, "Choose your father profile picture", Toast.LENGTH_SHORT).show();
+                return validationSuccessful;
+            }
+        }
         showErrorMessage(fatherNameTextFieldId, "Enter your father name");
         showErrorMessage(f_occupationTextFieldId, "Enter your father occupation");
         showErrorMessage(f_phoneTextFieldId, "Enter your father phone number");

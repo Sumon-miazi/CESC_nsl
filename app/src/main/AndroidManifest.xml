@@ -23,10 +23,13 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".activities.student.ChangePasswordActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.student.CheckoutActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.student.QuizActivity"
             android:exported="true"
