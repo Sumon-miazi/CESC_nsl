@@ -98,6 +98,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
 
     private String imageOwner;
     public static final int PICK_IMAGE = 1;
+    private boolean validationSuccessful;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -309,7 +310,85 @@ public class EditStudentProfileActivity extends AppCompatActivity {
         }
     }
 
+    private boolean validData(){
+        validationSuccessful = true;
+
+      //  System.out.println("religionTextFieldId.getEditText().getText() " + religionTextFieldId.getEditText().getText().toString());
+
+        if(student != null){
+            if(student.getImage().isEmpty() || student.getImage() == null){
+                validationSuccessful = false;
+                Toast.makeText(this, "Choose your profile picture", Toast.LENGTH_SHORT).show();
+                return validationSuccessful;
+            }
+        }
+
+        if(mother != null){
+            if(mother.getProfileImage().isEmpty() || mother.getProfileImage() == null){
+                validationSuccessful = false;
+                Toast.makeText(this, "Choose your mother profile picture", Toast.LENGTH_SHORT).show();
+                return validationSuccessful;
+            }
+        }
+
+        if(father != null){
+            if(father.getProfileImage().isEmpty() || father.getProfileImage() == null){
+                validationSuccessful = false;
+                Toast.makeText(this, "Choose your father profile picture", Toast.LENGTH_SHORT).show();
+                return validationSuccessful;
+            }
+        }
+
+        showErrorMessage(religionTextFieldId, "Enter your religion");
+        showErrorMessage(bloodGroupTextFieldId, "Enter your blood group");
+        showErrorMessage(birthDayTextFieldId, "Enter your birthday");
+        showErrorMessage(genderTextFieldId, "Enter your gender");
+        showErrorMessage(genderTextFieldId, "Enter your gender");
+        showErrorMessage(presentAddressTextFieldId, "Enter your present address");
+        showErrorMessage(permanentAddressTextFieldId, "Enter your permanent address");
+        showErrorMessage(emailTextFieldId, "Enter your email");
+        showErrorMessage(studentPhoneTextFieldId, "Enter your phone number");
+        showErrorMessage(nationalityTextFieldId, "Enter your nationality");
+
+        // mother info validation
+        showErrorMessage(motherNameTextFieldId, "Enter your mother name");
+        showErrorMessage(m_occupationTextFieldId, "Enter your mother occupation");
+        showErrorMessage(m_phoneTextFieldId, "Enter your mother phone number");
+        showErrorMessage(m_addressTextFieldId, "Enter your mother present address");
+        showErrorMessage(m_parentBloodGroupTextFieldId, "Enter your mother blood group");
+        showErrorMessage(m_designationTextFieldId, "Enter your mother designation");
+        showErrorMessage(m_parentOrganizationFieldId, "Enter your mother working organization");
+        showErrorMessage(m_parentEmailTextFieldId, "Enter your mother email address");
+
+        // father info validation
+        showErrorMessage(fatherNameTextFieldId, "Enter your father name");
+        showErrorMessage(f_occupationTextFieldId, "Enter your father occupation");
+        showErrorMessage(f_phoneTextFieldId, "Enter your father phone number");
+        showErrorMessage(f_addressTextFieldId, "Enter your father present address");
+        showErrorMessage(f_parentBloodGroupTextFieldId, "Enter your father blood group");
+        showErrorMessage(f_designationTextFieldId, "Enter your father designation");
+        showErrorMessage(f_parentOrganizationFieldId, "Enter your father working organization");
+        showErrorMessage(f_parentEmailTextFieldId, "Enter your father email address");
+
+
+        return validationSuccessful;
+    }
+
+    private void showErrorMessage(TextInputLayout textInputLayout, String errorMessage){
+        System.out.println(errorMessage);
+        if(textInputLayout.getEditText().getText().toString().isEmpty()) {
+            textInputLayout.setError(errorMessage);
+            validationSuccessful = false;
+        }
+        else textInputLayout.setErrorEnabled(false);
+    }
+
     private void getAllEditedData() {
+
+        if(!validData()){
+            System.out.println(">>>>>>>> " + validData() );
+            return;
+        }
 
         studentDummy = new StudentDummy(
                 religionTextFieldId.getEditText().getText().toString(),
@@ -376,7 +455,7 @@ public class EditStudentProfileActivity extends AppCompatActivity {
                             finish();
                             System.out.println(">>>>>");
                         } else {
-                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception ignore) {
                         ignore.printStackTrace();
