@@ -250,16 +250,17 @@ public class PaymentApi extends BaseService {
 
                         JSONObject jsonObject =  new JSONObject(response.body().string());
                         System.out.println(">>>>>>>>>> getDbblUrl jsonObject " + jsonObject);
-                        if(jsonObject.optString("is_true").equals("true")){
+
+                        if(jsonObject.optBoolean("is_true")){
                             booleanResponse.response(
-                                    jsonObject.optBoolean("isSuccessful"),
+                                    jsonObject.optBoolean("is_true"),
                                     jsonObject.optString("url")
                             );
                         }
                         else {
                             System.out.println(">>>>>>>>>> getDbblUrl jsonObject else " + jsonObject);
                             booleanResponse.response(
-                                    jsonObject.optBoolean("isSuccessful"),
+                                    jsonObject.optBoolean("is_true"),
                                     jsonObject.optString("message"));
                         }
 
@@ -275,8 +276,8 @@ public class PaymentApi extends BaseService {
 
                 }
                 else {
-                    System.out.println(">>>>>>>>>> getDbblUrl " + response.isSuccessful());
-                    System.out.println(">>>>>>>>>> getDbblUrl " + response);
+                    System.out.println(">>>>>>>>>> getDbblUrl else " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> getDbblUrl else " + response);
 
                     booleanResponse.response(
                             false,
@@ -287,7 +288,7 @@ public class PaymentApi extends BaseService {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 progressDialog.dismiss();
-                System.out.println(">>>>>>>>>> getDbblUrl " + t.getLocalizedMessage());
+                System.out.println(">>>>>>>>>> getDbblUrl onFailure " + t.getLocalizedMessage());
                 booleanResponse.response(
                         false,
                         t.getLocalizedMessage());
