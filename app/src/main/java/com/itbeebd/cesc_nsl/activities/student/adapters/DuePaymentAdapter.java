@@ -23,7 +23,7 @@ public class DuePaymentAdapter extends GenericRecyclerAdapter<DueHistory, OnRecy
     @NonNull
     @Override
     public DuePaymentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new DuePaymentViewHolder(inflate(R.layout.single_due_amount_view, parent), context);
+        return new DuePaymentViewHolder(inflate(R.layout.single_due_history_view, parent), context);
     }
 
 }

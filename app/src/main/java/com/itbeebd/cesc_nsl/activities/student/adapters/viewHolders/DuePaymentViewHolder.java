@@ -20,9 +20,9 @@ public class DuePaymentViewHolder extends BaseViewHolder<DueHistory, OnRecyclerO
     private final ConstraintLayout due_row;
     private final TextView dueNoId;
     private final TextView dueTitleId;
- //   private final TextView dueMonth;
+    private final TextView dueMonth;
     private final TextView totalDueAmountId;
-    private final TextView paidAmountId;
+  //  private final TextView paidAmountId;
     private final TextView waiverId;
     private final TextView totalRemainingDueId;
 
@@ -35,9 +35,9 @@ public class DuePaymentViewHolder extends BaseViewHolder<DueHistory, OnRecyclerO
         due_row = itemView.findViewById(R.id.due_row);
         dueNoId = itemView.findViewById(R.id.dueNoId);
         dueTitleId = itemView.findViewById(R.id.dueTitleId);
-     //   dueMonth = itemView.findViewById(R.id.dueTitleId);
+        dueMonth = itemView.findViewById(R.id.monthNameId);
         totalDueAmountId = itemView.findViewById(R.id.totalDueAmountId);
-        paidAmountId = itemView.findViewById(R.id.paidAmountId);
+      //  paidAmountId = itemView.findViewById(R.id.paidAmountId);
         waiverId = itemView.findViewById(R.id.waiverId);
         totalRemainingDueId = itemView.findViewById(R.id.totalRemainingDueId);
     }
@@ -54,16 +54,16 @@ public class DuePaymentViewHolder extends BaseViewHolder<DueHistory, OnRecyclerO
         dueNoId.setText(String.valueOf(this.getPosition() + 1));
         dueTitleId.setText(item.getAccount_head_name());
 
-//        String date = "" ;
-//        if(item.getCollected_month() <= 6 && item.getClassType().equals("College")){
-//            date = item.getMonth() + " " + (item.getAcademic_year() + 1);
-//        }
-//        else date = item.getMonth() + " " + item.getAcademic_year();
+        String date = "" ;
+        if(item.getCollected_month() <= 6 && item.getClassType().equals("College")){
+            date = item.getMonth() + " " + (item.getAcademic_year() + 1);
+        }
+        else date = item.getMonth() + " " + item.getAcademic_year();
 
-    //    dueMonth.setText(date);
+        dueMonth.setText(date);
      //   System.out.println("++++++++ " + item.getDue_amount());
         totalDueAmountId.setText(String.valueOf(item.getAmount()));
-        paidAmountId.setText(String.valueOf(item.getPaidAmount()));
+     //   paidAmountId.setText(String.valueOf(item.getPaidAmount()));
         totalRemainingDueId.setText(String.valueOf(item.getDue_amount()));
         waiverId.setText(String.valueOf(item.getWeiber()));
     }
