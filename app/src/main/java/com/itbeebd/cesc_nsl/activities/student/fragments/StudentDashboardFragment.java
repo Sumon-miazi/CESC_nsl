@@ -35,7 +35,7 @@ import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.ClassRoutineAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.StudentNotificationAdapter;
-import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
+import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.studentApi.AttendanceApi;
 import com.itbeebd.cesc_nsl.api.studentApi.ClassRoutineApi;

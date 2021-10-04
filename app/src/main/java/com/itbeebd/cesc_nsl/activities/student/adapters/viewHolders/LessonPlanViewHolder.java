@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.BaseViewHolder;
-import com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses.OnRecyclerObjectClickListener;
+import com.itbeebd.cesc_nsl.activities.genericClasses.BaseViewHolder;
+import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.utils.FileDownloader;
 import com.itbeebd.cesc_nsl.utils.dummy.LessonFile;
 import com.itbeebd.cesc_nsl.utils.dummy.LessonPlan;

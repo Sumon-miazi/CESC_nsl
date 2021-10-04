@@ -1,4 +1,4 @@
-package com.itbeebd.cesc_nsl.activities.student.adapters.genericClasses;
+package com.itbeebd.cesc_nsl.activities.genericClasses;
 
 import android.content.Context;
 import android.view.LayoutInflater;
