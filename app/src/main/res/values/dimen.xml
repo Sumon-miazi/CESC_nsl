@@ -26,4 +26,8 @@
 
     <dimen name="dbbl_card_txt">10dp</dimen>
     <dimen name="no_data_found_image">120dp</dimen>
+
+    <dimen name="a_header_card_margin">10dp</dimen>
+
+
 </resources>

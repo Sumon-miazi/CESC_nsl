@@ -28,6 +28,14 @@ public interface RetrofitService {
             @Field("fcm_token") String fcm_token
     );
 
+    @FormUrlEncoded
+    @POST("auth/teacher-login")
+    Call<ResponseBody> teacherLogin(
+            @Field("email") String studentId,
+            @Field("password") String password,
+            @Field("fcm_token") String fcm_token
+    );
+
     @Multipart
     @POST("auth/profile/update-request")
     Call<ResponseBody> editStudentProfile(

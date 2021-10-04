@@ -12,8 +12,7 @@ import com.androidstudy.networkmanager.Tovuti;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.appcheck.FirebaseAppCheck;
 import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory;
-import com.itbeebd.cesc_nsl.activities.LoginActivity;
-import com.itbeebd.cesc_nsl.activities.student.StudentDashboardActivity;
+import com.itbeebd.cesc_nsl.activities.teacher.TeacherLoginActivity;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.utils.CheckNetworkConnection;
 
@@ -58,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
             dialog.show();
         } else {
-            if(flag) this.startActivity(new Intent(this, StudentDashboardActivity.class));
-            else this.startActivity(new Intent(this, LoginActivity.class));
+//            if(flag) this.startActivity(new Intent(this, StudentDashboardActivity.class));
+//            else this.startActivity(new Intent(this, LoginActivity.class));
+            this.startActivity(new Intent(this, TeacherLoginActivity.class));
             finish();
         }
     }
