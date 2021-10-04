@@ -1,5 +1,6 @@
 package com.itbeebd.cesc_nsl.api;
 
+import com.google.gson.JsonObject;
 import com.itbeebd.cesc_nsl.utils.dummy.GuardianDummy;
 import com.itbeebd.cesc_nsl.utils.dummy.StudentDummy;
 
@@ -24,14 +25,6 @@ public interface RetrofitService {
     @POST("auth/login")
     Call<ResponseBody> studentLogin(
             @Field("studentid") String studentId,
-            @Field("password") String password,
-            @Field("fcm_token") String fcm_token
-    );
-
-    @FormUrlEncoded
-    @POST("auth/teacher-login")
-    Call<ResponseBody> teacherLogin(
-            @Field("email") String studentId,
             @Field("password") String password,
             @Field("fcm_token") String fcm_token
     );
@@ -89,6 +82,23 @@ public interface RetrofitService {
     Call<ResponseBody> getAttendanceByMonthName(
             @Header("Authorization") String authorization,
             @Body Map<String, Object> body
+    );
+
+
+
+    @FormUrlEncoded
+    @POST("auth/teacher-login")
+    Call<ResponseBody> teacherLogin(
+            @Field("email") String studentId,
+            @Field("password") String password,
+            @Field("fcm_token") String fcm_token
+    );
+
+  //  @FormUrlEncoded
+    @POST("auth/student-attendance")
+    Call<ResponseBody> attendance(
+            @Header("Authorization") String authorization,
+            @Body JsonObject attendances
     );
 
 }

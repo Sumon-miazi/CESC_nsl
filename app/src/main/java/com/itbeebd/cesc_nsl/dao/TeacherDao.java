@@ -62,6 +62,37 @@ public class TeacherDao {
 
     }
 
+    public String[] getAllClasses(){
+
+        List<TeacherClass> classes = TeacherClass.listAll(TeacherClass.class);
+
+        String[] classList = new String[classes.size()];
+
+        for(int i = 0; i < classes.size(); i++){
+            classList[i] = classes.get(i).getName();
+        }
+
+        return classList;
+    }
+
+    public int getClassIdByName(String name){
+        List<TeacherClass> classes = TeacherClass.find(TeacherClass.class, "NAME = ?", name);
+        return classes == null? 0 : classes.size() == 0? 0 : Integer.parseInt(String.valueOf(classes.get(0).getId()));
+    }
+
+    public String[] getAllSectionByClassName(String className){
+
+        List<TeacherSections> sections = TeacherSections.find(TeacherSections.class, "CLASS_ID = ?", String.valueOf(getClassIdByName(className)));
+
+        String[] sectionList = new String[sections.size()];
+
+        for(int i = 0; i < sections.size(); i++){
+            sectionList[i] = sections.get(i).getName();
+        }
+
+        return sectionList;
+    }
+
     public void saveTeacherSubjects(ArrayList<TeacherSubjects> teacherSubjects){
         try {
             TeacherSubjects.deleteAll(TeacherSubjects.class);
