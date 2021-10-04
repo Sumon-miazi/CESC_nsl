@@ -2,7 +2,6 @@ package com.itbeebd.cesc_nsl.api.studentApi;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
@@ -126,11 +125,17 @@ public class PaymentApi extends BaseService {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 progressDialog.dismiss();
                 JSONArray jsonArray = null;
+                JSONObject data = null;
                 if(response.isSuccessful() && response != null){
-                    System.out.println(">>>>>>>>>> payment " + response.body());
                     try {
-                        Gson gson = new Gson();
-                        jsonArray =  new JSONArray(response.body().string());
+                        data =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> payment " + data);
+
+                        jsonArray = data.getJSONArray("data");
+
+                        if(!data.optBoolean("isSuccessful")){
+                            paymentHistoryResponse.data(null, data.optString("message"));
+                        }
                         System.out.println(">>>>>>>>>> payment " + jsonArray);
 
                         ArrayList<Payment> payments = new ArrayList<>();
