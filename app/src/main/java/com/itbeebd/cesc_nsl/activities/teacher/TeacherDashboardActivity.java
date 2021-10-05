@@ -36,6 +36,9 @@ public class TeacherDashboardActivity extends AppCompatActivity {
         else if(view.getId() == R.id.studentCardId){
             studentExpandableLayout.toggle();
         }
+        else if(view.getId() == R.id.lessonPlanCardId){
+            startActivity(new Intent(this, TeacherLessonPlanActivity.class));
+        }
         else if(view.getId() == R.id.resultCardId){
             resultExpandableLayout.toggle();
         }

@@ -55,9 +55,11 @@
         <entry key="app/src/main/res/layout/activity_student_dashboard.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_student_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_teacher_dashboard.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_teacher_lesson_plan2.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_teacher_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_top_bar.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_web_viwer.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/add_file_view.xml" value="0.18" />
         <entry key="app/src/main/res/layout/attendance_graph_block.xml" value="0.33" />
         <entry key="app/src/main/res/layout/card_view_item.xml" value="0.15" />
         <entry key="app/src/main/res/layout/class_routine_block.xml" value="0.33" />
