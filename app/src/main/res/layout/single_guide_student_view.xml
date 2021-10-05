@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/first_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@color/first_row">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/resultRecordId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/slId"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/red_inactive"
+            android:text="999"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/studentRollViewId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/studentRollViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="12345"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toEndOf="@+id/slId"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/studentNameViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:textColor="@color/quiz_number"
+            android:textSize="14sp"
+            android:fontFamily="@font/heebo_medium"
+            android:text="Md. Suman Miazi"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/studentRollViewId"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/studentIDid"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:text="3210099999"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textColor="@color/primary_active"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/studentNameViewId"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.22" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.76" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/expandable_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:el_duration="300"
+        app:el_expanded="false"
+        app:el_parallax="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultRecordId">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/white_green"
+            android:background="@drawable/attendance_bg">
+
+            <TextView
+                android:id="@+id/motherNameId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_inactive"
+                android:paddingTop="@dimen/g_expendable_guardian_padding_top"
+                android:paddingBottom="@dimen/g_expendable_guardian_padding_bottom"
+                android:paddingStart="@dimen/g_expendable_guardian_padding_start"
+                android:paddingEnd="@dimen/g_expendable_guardian_padding_end"
+                android:textColor="@color/white"
+                android:textSize="@dimen/g_expendable_guardian_info_text_size"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/motherPhoneId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/motherPhoneId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/g_expendable_guardian_padding_top"
+                android:paddingBottom="@dimen/g_expendable_guardian_padding_bottom"
+                android:paddingStart="@dimen/g_expendable_guardian_padding_start"
+                android:paddingEnd="@dimen/g_expendable_guardian_padding_end"
+                android:textSize="@dimen/g_expendable_guardian_info_text_size"
+                app:layout_constraintBottom_toTopOf="@+id/addressViewId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/motherNameId" />
+
+            <TextView
+                android:id="@+id/addressViewId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/g_expendable_guardian_padding_top"
+                android:paddingBottom="20dp"
+                android:paddingStart="@dimen/g_expendable_guardian_padding_start"
+                android:paddingEnd="@dimen/g_expendable_guardian_padding_end"
+                android:textSize="@dimen/g_expendable_guardian_info_text_size"
+                app:layout_constraintBottom_toTopOf="@+id/practicalMarkViewId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/motherPhoneId" />
+
+        </LinearLayout>
+
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

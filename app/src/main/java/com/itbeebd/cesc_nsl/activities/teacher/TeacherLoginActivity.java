@@ -53,7 +53,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
         new LoginApi(this, "Signing in...").teacherLogin(userId, password, "123456", ((isSuccess, message) -> {
             if(isSuccess){
                 CustomSharedPref.getInstance(this).setStudentLoggedInOrNot(true);
-                this.startActivity(new Intent(this, AttendanceActivity.class));
+                this.startActivity(new Intent(this, TeacherDashboardActivity.class));
                 finish();
             }
             else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

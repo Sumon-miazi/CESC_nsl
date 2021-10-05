@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.teacher.AttendanceActivity">
+    tools:context=".activities.teacher.GuideStudentListActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/attendance_ToolbarId"
+        android:id="@+id/guideStudentListToolbarId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/blue_primary"
@@ -18,13 +18,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@color/white" />
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout7"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/attendance_ToolbarId">
+        app:layout_constraintTop_toBottomOf="@+id/guideStudentListToolbarId">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/a_classCardId"
@@ -54,9 +55,6 @@
                     android:textAlignment="center"
                     android:text="Select"
                     android:gravity="center"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:maxLines="1"
                     android:textColor="@color/orange_active"
                     android:textSize="30sp"
                     app:autoSizeMaxTextSize="30sp"
@@ -80,7 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/a_header_card_margin"
-            android:layout_marginEnd="@dimen/a_header_card_margin"
+            android:layout_marginEnd="@dimen/a_header_card_margin_end"
             android:layout_marginTop="@dimen/a_header_card_margin_top"
             android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
             android:backgroundTint="@color/green_bg_light"
@@ -101,8 +99,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:gravity="center"
                     android:text="Select"
+                    android:gravity="center"
                     android:textColor="@color/green_active"
                     android:textSize="30sp"
                     app:autoSizeMaxTextSize="30sp"
@@ -125,10 +123,8 @@
             android:id="@+id/a_dateCardId"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/a_header_card_margin"
-            android:layout_marginEnd="@dimen/a_header_card_margin_end"
-            android:layout_marginTop="@dimen/a_header_card_margin_top"
-            android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
+            android:visibility="gone"
+            android:layout_margin="@dimen/a_header_card_margin"
             android:backgroundTint="@color/blue_bg_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -146,22 +142,16 @@
                     android:id="@+id/a_dateViewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:text="10"
                     android:textAlignment="center"
                     android:textColor="@color/blue_active"
                     android:textSize="30sp"
-                    app:autoSizeMaxTextSize="30sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeTextType="uniform"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/monthNameViewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:autoSizeMaxTextSize="14sp"
-                    app:autoSizeMinTextSize="10sp"
-                    app:autoSizeTextType="uniform"
+                    android:text="DATE"
                     android:textAlignment="center"
                     android:textColor="@color/blue_active" />
 
@@ -236,10 +226,10 @@
             android:id="@+id/attendanceTxt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/orange_active"
+            android:background="@color/green_active"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="Attendance"
+            android:text="ID"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="10dp"
@@ -253,35 +243,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.27" />
+            app:layout_constraintGuide_percent="0.22" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.83" />
+            app:layout_constraintGuide_percent="0.76" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/attendanceRecyclerViewId"
+        android:id="@+id/studentListRecyclerViewId"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/attendanceSubmitBtnId"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/attendanceHeaderInfoId" />
 
-    <Button
-        android:id="@+id/attendanceSubmitBtnId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

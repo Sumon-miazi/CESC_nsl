@@ -23,6 +23,8 @@ public class Student extends SugarRecord implements Serializable {
 
     private String sectionName;
 
+    private String motherName;
+
     @SerializedName("guide_teacher_id")
     private String guide_teacher_id;
 
@@ -140,6 +142,14 @@ public class Student extends SugarRecord implements Serializable {
 
     public Student(){
 
+    }
+
+    public String getMotherName() {
+        return motherName;
+    }
+
+    public void setMotherName(String motherName) {
+        this.motherName = motherName;
     }
 
     public String getClassName() {

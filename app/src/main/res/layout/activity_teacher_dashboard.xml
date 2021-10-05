@@ -147,10 +147,10 @@
                 android:id="@+id/academic_expandable_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
-                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
-                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
-                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:layout_marginStart="@dimen/t_dashboard_menu_expandable_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_expandable_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_expandable_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_expandable_margin_bottom"
                 android:background="@color/white"
                 app:el_duration="500"
                 app:el_expanded="false"
@@ -160,9 +160,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/academicCardId">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <Button
                         android:id="@+id/t_onlineClassViewId"
@@ -230,7 +231,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/t_teacherRoutineViewId"
                         tools:layout_editor_absoluteX="0dp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
 
             </net.cachapa.expandablelayout.ExpandableLayout>
@@ -289,10 +290,10 @@
                 android:id="@+id/student_expandable_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
-                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
-                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
-                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:layout_marginStart="@dimen/t_dashboard_menu_expandable_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_expandable_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_expandable_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_expandable_margin_bottom"
                 android:background="@color/white"
                 app:el_duration="500"
                 app:el_expanded="false"
@@ -431,10 +432,10 @@
                 android:id="@+id/result_expandable_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
-                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
-                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
-                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:layout_marginStart="@dimen/t_dashboard_menu_expandable_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_expandable_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_expandable_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_expandable_margin_bottom"
                 android:background="@color/white"
                 app:el_duration="500"
                 app:el_expanded="false"
@@ -657,10 +658,10 @@
                 android:id="@+id/report_expandable_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
-                android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
-                android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
-                android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
+                android:layout_marginStart="@dimen/t_dashboard_menu_expandable_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_expandable_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_expandable_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_expandable_margin_bottom"
                 android:background="@color/white"
                 app:el_duration="500"
                 app:el_expanded="false"

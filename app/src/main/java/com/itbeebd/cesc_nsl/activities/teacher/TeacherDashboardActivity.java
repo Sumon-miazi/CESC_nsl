@@ -1,5 +1,6 @@
 package com.itbeebd.cesc_nsl.activities.teacher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -29,7 +30,8 @@ public class TeacherDashboardActivity extends AppCompatActivity {
 
     public void cardViewClicked(View view) {
         if(view.getId() == R.id.academicCardId){
-            academicExpandableLayout.toggle();
+          //  academicExpandableLayout.toggle();
+            startActivity(new Intent(this, AttendanceActivity.class));
         }
         else if(view.getId() == R.id.studentCardId){
             studentExpandableLayout.toggle();
@@ -39,6 +41,9 @@ public class TeacherDashboardActivity extends AppCompatActivity {
         }
         else if(view.getId() == R.id.reportCardId){
             reportExpandableLayout.toggle();
+        }
+        else if(view.getId() == R.id.guidedStudentCardId){
+            startActivity(new Intent(this, GuideStudentListActivity.class));
         }
     }
 }

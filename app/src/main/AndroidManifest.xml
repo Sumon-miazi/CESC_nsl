@@ -23,6 +23,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".activities.teacher.GuideStudentListActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.teacher.AttendanceActivity"
             android:exported="true" />
         <activity

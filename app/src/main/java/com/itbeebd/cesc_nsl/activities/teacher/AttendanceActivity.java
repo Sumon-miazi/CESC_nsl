@@ -1,5 +1,6 @@
 package com.itbeebd.cesc_nsl.activities.teacher;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AttendanceActivity extends AppCompatActivity implements OnRecyclerObjectClickListener<ClassAttendance> {
 
@@ -39,6 +41,8 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
 
     private TextView a_classViewId;
     private TextView a_sectionViewId;
+    private TextView a_dateViewId;
+    private TextView monthNameViewId;
 
     private Button attendanceSubmitBtnId;
 
@@ -67,8 +71,12 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         a_classViewId = findViewById(R.id.a_classViewId);
         a_sectionCardId = findViewById(R.id.a_sectionCardId);
         a_sectionViewId = findViewById(R.id.a_sectionViewId);
+        monthNameViewId = findViewById(R.id.monthNameViewId);
+        a_dateViewId = findViewById(R.id.a_dateViewId);
         a_dateCardId = findViewById(R.id.a_dateCardId);
         attendanceSubmitBtnId = findViewById(R.id.attendanceSubmitBtnId);
+
+        setCurrentDate();
 
         attendanceAdapter = new AttendanceAdapter(this);
         attendanceAdapter.setListener(this);
@@ -104,6 +112,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
             }
         });
 
+        a_dateCardId.setOnClickListener(view -> datePicker());
         attendanceSubmitBtnId.setOnClickListener(view -> callAttendanceApi());
 
     }
@@ -159,7 +168,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         b.setItems(classes, (dialog, which) -> {
             selectedClass = classes[which];
             a_classViewId.setText(selectedClass);
-            a_sectionViewId.setText("");
+            a_sectionViewId.setText("Select");
 
             sections = teacherDao.getAllSectionByClassName(selectedClass);
             attendanceSubmitBtnId.setVisibility(View.GONE);
@@ -186,7 +195,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         b.setItems(sections, (dialog, which) -> {
             System.out.println(">>>>>> section " + which);
             selectedSection = sections[which];
-            a_sectionViewId.setText(selectedSection);
+            a_sectionViewId.setText(selectedSection.substring(selectedSection.lastIndexOf("-") + 1));
 
             attendances = new ArrayList<>();
             attendances.add(new ClassAttendance("Arif", "1234"));
@@ -200,6 +209,37 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         });
 
         b.show();
+    }
+
+    private void datePicker(){
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, year, monthOfYear, dayOfMonth) -> {
+
+                //    a_dateViewId.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                    a_dateViewId.setText(String.valueOf(dayOfMonth));
+                    monthNameViewId.setText(String.format("%s, %d", getMonth(monthOfYear), year));
+
+                }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+       // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
+    }
+
+    private void setCurrentDate(){
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        a_dateViewId.setText(String.valueOf(mDay));
+        monthNameViewId.setText(String.format("%s, %d", getMonth(mMonth), mYear));
     }
 
     @Override
@@ -222,5 +262,25 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
                 break;
             }
         }
+    }
+
+    private String getMonth(int index){
+
+        String[] month = {
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+        };
+
+        return month[index];
     }
 }

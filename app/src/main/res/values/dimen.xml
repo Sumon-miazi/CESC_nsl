@@ -16,8 +16,13 @@
 
     <dimen name="t_dashboard_menu_card_margin_top">10dp</dimen>
     <dimen name="t_dashboard_menu_card_margin_bottom">10dp</dimen>
-    <dimen name="t_dashboard_menu_card_margin_start">20dp</dimen>
-    <dimen name="t_dashboard_menu_card_margin_end">20dp</dimen>
+    <dimen name="t_dashboard_menu_card_margin_start">10dp</dimen>
+    <dimen name="t_dashboard_menu_card_margin_end">10dp</dimen>
+
+    <dimen name="t_dashboard_menu_expandable_margin_top">0dp</dimen>
+    <dimen name="t_dashboard_menu_expandable_margin_bottom">0dp</dimen>
+    <dimen name="t_dashboard_menu_expandable_margin_start">10dp</dimen>
+    <dimen name="t_dashboard_menu_expandable_margin_end">10dp</dimen>
 
     <dimen name="t_submenu_padding">4dp</dimen>
 
@@ -27,7 +32,18 @@
     <dimen name="dbbl_card_txt">10dp</dimen>
     <dimen name="no_data_found_image">120dp</dimen>
 
-    <dimen name="a_header_card_margin">10dp</dimen>
+    <dimen name="a_header_card_margin_start">10dp</dimen>
+    <dimen name="a_header_card_margin">5dp</dimen>
+    <dimen name="a_header_card_margin_end">10dp</dimen>
+    <dimen name="a_header_card_margin_top">10dp</dimen>
+    <dimen name="a_header_card_margin_bottom">10dp</dimen>
+
+    <dimen name="g_expendable_guardian_padding_start">20dp</dimen>
+    <dimen name="g_expendable_guardian_padding_top">4dp</dimen>
+    <dimen name="g_expendable_guardian_padding_bottom">4dp</dimen>
+    <dimen name="g_expendable_guardian_padding_end">20dp</dimen>
+
+    <dimen name="g_expendable_guardian_info_text_size">14sp</dimen>
 
 
 </resources>
