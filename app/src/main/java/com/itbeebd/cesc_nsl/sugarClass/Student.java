@@ -1,7 +1,9 @@
 package com.itbeebd.cesc_nsl.sugarClass;
 
 import com.google.gson.annotations.SerializedName;
+import com.itbeebd.cesc_nsl.dao.StudentDao;
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 
 import java.io.Serializable;
 
@@ -23,7 +25,11 @@ public class Student extends SugarRecord implements Serializable {
 
     private String sectionName;
 
-    private String motherName;
+    @Ignore
+    private Guardian mother;
+
+    @Ignore
+    private Guardian father;
 
     @SerializedName("guide_teacher_id")
     private String guide_teacher_id;
@@ -144,12 +150,14 @@ public class Student extends SugarRecord implements Serializable {
 
     }
 
-    public String getMotherName() {
-        return motherName;
+    public Guardian getMother() {
+        if(mother == null) mother = new StudentDao().getGuardian(this, "Mother");
+        return mother;
     }
 
-    public void setMotherName(String motherName) {
-        this.motherName = motherName;
+    public Guardian getFather() {
+        if(father == null) father =  new StudentDao().getGuardian(this, "Father");
+        return father;
     }
 
     public String getClassName() {

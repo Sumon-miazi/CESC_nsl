@@ -3,6 +3,7 @@ package com.itbeebd.cesc_nsl.dao;
 import android.content.Context;
 
 import com.itbeebd.cesc_nsl.sugarClass.Coordinator;
+import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.sugarClass.Teacher;
 import com.itbeebd.cesc_nsl.sugarClass.TeacherClass;
 import com.itbeebd.cesc_nsl.sugarClass.TeacherSections;
@@ -22,6 +23,7 @@ public class TeacherDao {
         teacher.save();
 
     }
+
 
     public Teacher getTeacher(Context context) {
         List<Teacher> teachers = Teacher.find(Teacher.class, "TEACHER_ID = ?", CustomSharedPref.getInstance(context).getUserId());
@@ -80,6 +82,11 @@ public class TeacherDao {
         return classes == null? 0 : classes.size() == 0? 0 : Integer.parseInt(String.valueOf(classes.get(0).getId()));
     }
 
+    public int getSectionIdByName(String name){
+        List<TeacherSections> sections = TeacherSections.find(TeacherSections.class, "NAME = ?", name);
+        return sections == null? 0 : sections.size() == 0? 0 : Integer.parseInt(String.valueOf(sections.get(0).getId()));
+    }
+
     public String[] getAllSectionByClassName(String className){
 
         List<TeacherSections> sections = TeacherSections.find(TeacherSections.class, "CLASS_ID = ?", String.valueOf(getClassIdByName(className)));
@@ -92,6 +99,11 @@ public class TeacherDao {
 
         return sectionList;
     }
+
+    public ArrayList<Student> getAllGuidedStudentByClassSectionId(int classId, int sectionId){
+        return (ArrayList<Student>) Student.find(Student.class, "STDCLASSID = ? and SECTIONID = ?", String.valueOf(classId), String.valueOf(sectionId));
+    }
+
 
     public void saveTeacherSubjects(ArrayList<TeacherSubjects> teacherSubjects){
         try {

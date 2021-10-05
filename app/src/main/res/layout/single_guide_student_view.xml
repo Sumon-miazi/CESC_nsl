@@ -48,7 +48,7 @@
             android:id="@+id/studentNameViewId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
+            android:paddingStart="0dp"
             android:textColor="@color/quiz_number"
             android:textSize="14sp"
             android:fontFamily="@font/heebo_medium"
@@ -65,7 +65,8 @@
             android:layout_height="20dp"
             android:text="3210099999"
             android:textAlignment="center"
-            android:textSize="12sp"
+            android:textSize="14sp"
+            android:textStyle="bold"
             android:textColor="@color/primary_active"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/studentNameViewId"
@@ -111,7 +112,7 @@
                 android:id="@+id/motherNameId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/blue_inactive"
+                android:background="@color/default_inactive"
                 android:paddingTop="@dimen/g_expendable_guardian_padding_top"
                 android:paddingBottom="@dimen/g_expendable_guardian_padding_bottom"
                 android:paddingStart="@dimen/g_expendable_guardian_padding_start"
@@ -155,6 +156,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/motherPhoneId" />
 
+            <TextView
+                android:id="@+id/viewStudentProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:background="@drawable/round_corner_bottom_bg"
+                android:backgroundTint="@color/blue_inactive"
+                android:text="view profile"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:letterSpacing="0.2"
+                android:textColor="@color/white"/>
         </LinearLayout>
 
     </net.cachapa.expandablelayout.ExpandableLayout>

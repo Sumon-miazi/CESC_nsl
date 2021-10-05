@@ -230,15 +230,19 @@
         android:id="@+id/constraintLayout8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userId">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lesson Files"
             android:fontFamily="@font/heebo_extra_bold"
+            android:text="Lesson Files"
             android:textColor="@color/primary_active"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -265,8 +269,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add more"
-                android:visibility="gone"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -280,9 +284,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
 
-        <include layout="@layout/add_file_view"/>
-        <include layout="@layout/add_file_view"/>
-        <include layout="@layout/add_file_view"/>
         <include layout="@layout/add_file_view"/>
 
     </LinearLayout>

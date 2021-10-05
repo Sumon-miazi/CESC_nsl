@@ -32,9 +32,9 @@ public class StudentDao {
 
     public Guardian getGuardian(Student student, String relation) {
         List<Guardian> guardians = Guardian.find(Guardian.class, "RELATION = ? and STUDENT = ?", relation, String.valueOf(student.getId()));
-//        System.out.println("<<<<<<<<<< " + student.getStudentId());
+//        System.out.println("<<<<<<<<<< " + student.getId());
 //        System.out.println("<<<<<<<<<< " + relation);
-//        System.out.println("<<<<<<<<<< " + guardians);
+//        System.out.println("<<<<<<<<<< " + guardians.size());
         return guardians == null? null : guardians.size() == 0? null : guardians.get(0);
     }
 

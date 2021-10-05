@@ -1,6 +1,7 @@
 package com.itbeebd.cesc_nsl.activities.teacher.viewHolders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.BaseViewHolder;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
+import com.itbeebd.cesc_nsl.activities.teacher.GuidedStudentProfileActivity;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -27,6 +29,8 @@ public class GuideStudentListViewHolder extends BaseViewHolder<Student, OnRecycl
     private final TextView motherNameId;
     private final TextView motherPhoneId;
     private final TextView addressViewId;
+    private final TextView viewStudentProfile;
+    public static ExpandableLayout previousNode;
 
     public GuideStudentListViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
@@ -41,6 +45,7 @@ public class GuideStudentListViewHolder extends BaseViewHolder<Student, OnRecycl
         this.motherNameId = itemView.findViewById(R.id.motherNameId);
         this.motherPhoneId = itemView.findViewById(R.id.motherPhoneId);
         this.addressViewId = itemView.findViewById(R.id.addressViewId);
+        this.viewStudentProfile = itemView.findViewById(R.id.viewStudentProfile);
     }
 
     @Override
@@ -56,12 +61,28 @@ public class GuideStudentListViewHolder extends BaseViewHolder<Student, OnRecycl
         studentNameViewId.setText(item.getName());
         studentID.setText(String.valueOf(item.getStudentId()));
 
-        motherNameId.setText(String.format("Mother name: %s", item.getMotherName()));
-        motherPhoneId.setText(String.format("Mother phone: %s", item.getMobile()));
+        motherNameId.setText(String.format("Mother name: %s", item.getMother().getName()));
+        motherPhoneId.setText(String.format("Mother phone: %s", item.getMother().getMobile()));
         addressViewId.setText(String.format("Present address: %s", item.getPresent_address()));
 
+        item.getFather();
+
         attendanceRow.setOnClickListener(view -> {
+            if(previousNode != null && previousNode != expandableLayout){
+                previousNode.collapse();
+            }
             expandableLayout.toggle();
+
+            previousNode = this.expandableLayout;
+        });
+
+        viewStudentProfile.setOnClickListener(view -> {
+            System.out.println(">>>>>>> student name " + item.getName());
+            Intent intent = new Intent(context, GuidedStudentProfileActivity.class);
+            intent.putExtra("student", item);
+            context.startActivity(intent);
+//            assert listener != null;
+//            listener.onItemClicked(item, view);
         });
 
     }

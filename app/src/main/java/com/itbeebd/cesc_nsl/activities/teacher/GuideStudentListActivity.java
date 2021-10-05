@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.teacher.adapters.GuideStudentListAdapter;
+import com.itbeebd.cesc_nsl.api.teacherApi.GuidedStudentApi;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 
@@ -34,8 +36,9 @@ public class GuideStudentListActivity extends AppCompatActivity {
     private String selectedSection;
     private String selectedClass;
     private TeacherDao teacherDao;
-    private ArrayList<Student> students =  new ArrayList<>();
+    private ArrayList<Student> students;
     private GuideStudentListAdapter studentListAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,8 @@ public class GuideStudentListActivity extends AppCompatActivity {
     }
 
     private void setAdapter(){
+        if(students == null) return;
+
         studentListAdapter.setItems(students);
         studentListRecyclerViewId.setLayoutManager(new LinearLayoutManager(this));
         studentListRecyclerViewId.setAdapter(studentListAdapter);
@@ -109,7 +114,7 @@ public class GuideStudentListActivity extends AppCompatActivity {
 
             sections = teacherDao.getAllSectionByClassName(selectedClass);
 
-            students.clear();
+            if(students != null) students.clear();
             setAdapter();
 
             System.out.println(">>>>>> class " + which);
@@ -130,29 +135,39 @@ public class GuideStudentListActivity extends AppCompatActivity {
             selectedSection = sections[which];
             a_sectionViewId.setText(selectedSection.substring(selectedSection.lastIndexOf("-") + 1));
 
-            students = new ArrayList<>();
-            Student student = new Student();
-            student.setName("Suman");
-            student.setRoll(123);
-            student.setStudentId(2345678);
-            student.setMotherName("Jesmin");
-            student.setMobile("098765432");
-            student.setPresent_address("kjdflka dfljal fdlajkfla dslfakjdsfl aldf al flaksjdflaksdjf");
+            System.out.println("ClassId " + teacherDao.getClassIdByName(selectedClass));
+            System.out.println("SectionId " + teacherDao.getSectionIdByName(selectedSection));
 
+             students = teacherDao.getAllGuidedStudentByClassSectionId(
+                    teacherDao.getClassIdByName(selectedClass),
+                    teacherDao.getSectionIdByName(selectedSection)
+                    );
 
-            students.add(student);
-            students.add(student);
-            students.add(student);
-            students.add(student);
-            students.add(student);
-            students.add(student);
-            students.add(student);
-
-            setAdapter();
+          //   if(students == null || students.isEmpty()){
+             if(students == null){
+                 callGetGuidedStudentApi();
+             }
+             else setAdapter();
 
         });
 
         b.show();
+    }
+
+    private void callGetGuidedStudentApi(){
+        new GuidedStudentApi(this, "Loading...").getGuidedStudent(
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                (isSuccess, message) -> {
+                    if(isSuccess){
+                        students = teacherDao.getAllGuidedStudentByClassSectionId(
+                                teacherDao.getClassIdByName(selectedClass),
+                                teacherDao.getSectionIdByName(selectedSection)
+                        );
+                        setAdapter();
+                    }
+                    else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                }
+        );
     }
 
     @Override
