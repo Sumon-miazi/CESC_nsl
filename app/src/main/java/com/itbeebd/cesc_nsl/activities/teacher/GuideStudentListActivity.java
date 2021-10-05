@@ -38,6 +38,7 @@ public class GuideStudentListActivity extends AppCompatActivity {
     private TeacherDao teacherDao;
     private ArrayList<Student> students;
     private GuideStudentListAdapter studentListAdapter;
+    private boolean apiAlreadyCalled = false;
 
 
     @Override
@@ -143,9 +144,13 @@ public class GuideStudentListActivity extends AppCompatActivity {
                     teacherDao.getSectionIdByName(selectedSection)
                     );
 
-          //   if(students == null || students.isEmpty()){
-             if(students == null){
+             if((students == null || students.isEmpty()) && !apiAlreadyCalled){
+         //    if(students == null){
                  callGetGuidedStudentApi();
+             }
+             else if(students.isEmpty()){
+                 Toast.makeText(this, "No student found", Toast.LENGTH_SHORT).show();
+                 setAdapter();
              }
              else setAdapter();
 
@@ -159,6 +164,7 @@ public class GuideStudentListActivity extends AppCompatActivity {
                 CustomSharedPref.getInstance(this).getAuthToken(),
                 (isSuccess, message) -> {
                     if(isSuccess){
+                        apiAlreadyCalled = true;
                         students = teacherDao.getAllGuidedStudentByClassSectionId(
                                 teacherDao.getClassIdByName(selectedClass),
                                 teacherDao.getSectionIdByName(selectedSection)

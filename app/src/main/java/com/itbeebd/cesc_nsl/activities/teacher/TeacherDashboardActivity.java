@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.dao.TeacherDao;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -26,6 +27,8 @@ public class TeacherDashboardActivity extends AppCompatActivity {
         studentExpandableLayout = findViewById(R.id.student_expandable_layout);
         resultExpandableLayout = findViewById(R.id.result_expandable_layout);
         reportExpandableLayout = findViewById(R.id.report_expandable_layout);
+
+        new TeacherDao().clearGuidedStudentDetails();
     }
 
     public void cardViewClicked(View view) {

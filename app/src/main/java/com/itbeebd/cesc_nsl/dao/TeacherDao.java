@@ -3,6 +3,7 @@ package com.itbeebd.cesc_nsl.dao;
 import android.content.Context;
 
 import com.itbeebd.cesc_nsl.sugarClass.Coordinator;
+import com.itbeebd.cesc_nsl.sugarClass.Guardian;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.sugarClass.Teacher;
 import com.itbeebd.cesc_nsl.sugarClass.TeacherClass;
@@ -138,4 +139,13 @@ public class TeacherDao {
         }
 
     }
+
+    public void clearGuidedStudentDetails(){
+        try {
+            Student.deleteAll(Student.class);
+            Guardian.deleteAll(Guardian.class);
+        }
+        catch (Exception ignore){}
+    }
+
 }
