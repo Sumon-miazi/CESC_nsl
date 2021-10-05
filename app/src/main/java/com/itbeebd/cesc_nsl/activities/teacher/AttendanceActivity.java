@@ -2,6 +2,7 @@ package com.itbeebd.cesc_nsl.activities.teacher;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
 public class AttendanceActivity extends AppCompatActivity implements OnRecyclerObjectClickListener<ClassAttendance> {
 
@@ -77,6 +80,8 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         attendanceSubmitBtnId = findViewById(R.id.attendanceSubmitBtnId);
 
         setCurrentDate();
+
+        setToolTip(a_classCardId, "Select a class");
 
         attendanceAdapter = new AttendanceAdapter(this);
         attendanceAdapter.setListener(this);
@@ -176,6 +181,8 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
             setAdapter();
 
             System.out.println(">>>>>> class " + which);
+
+            setToolTip(a_sectionCardId, "Select a section");
         });
 
         b.show();
@@ -257,8 +264,8 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         for(int i = 0; i < attendances.size(); i++){
             if(item.getStudentId() == attendances.get(i).getStudentId()){
                 attendances.get(i).setPresent();
-                Toast.makeText(this, item.getRoll(), Toast.LENGTH_SHORT).show();
-                System.out.println("Roll " + attendances.get(i).getRoll());
+              //  Toast.makeText(this, item.getRoll(), Toast.LENGTH_SHORT).show();
+             //   System.out.println("Roll " + attendances.get(i).getRoll());
                 break;
             }
         }
@@ -282,5 +289,16 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         };
 
         return month[index];
+    }
+
+    private void setToolTip(CardView view, String tip){
+        new SimpleTooltip.Builder(this)
+                .anchorView(view)
+                .text(tip)
+                .gravity(Gravity.BOTTOM)
+                .animated(true)
+                .transparentOverlay(false)
+                .build()
+                .show();
     }
 }

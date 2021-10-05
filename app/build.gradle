@@ -102,4 +102,6 @@ dependencies {
     // lottie animation
     implementation 'com.airbnb.android:lottie:4.1.0'
 
+    // tooltip library
+    implementation 'com.github.douglasjunior:android-simple-tooltip:1.0.0-rc.0'
 }

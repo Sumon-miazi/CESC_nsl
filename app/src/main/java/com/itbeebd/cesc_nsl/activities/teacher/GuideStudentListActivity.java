@@ -1,6 +1,7 @@
 package com.itbeebd.cesc_nsl.activities.teacher;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,8 @@ import com.itbeebd.cesc_nsl.dao.TeacherDao;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 
 import java.util.ArrayList;
+
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
 public class GuideStudentListActivity extends AppCompatActivity {
 
@@ -49,6 +52,8 @@ public class GuideStudentListActivity extends AppCompatActivity {
         a_classViewId = findViewById(R.id.a_classViewId);
         a_sectionCardId = findViewById(R.id.a_sectionCardId);
         a_sectionViewId = findViewById(R.id.a_sectionViewId);
+
+        setToolTip(a_classCardId, "Select a class");
 
         studentListAdapter = new GuideStudentListAdapter(this);
      //   studentListAdapter.setListener(this);
@@ -108,6 +113,8 @@ public class GuideStudentListActivity extends AppCompatActivity {
             setAdapter();
 
             System.out.println(">>>>>> class " + which);
+
+            setToolTip(a_sectionCardId, "Select a section");
         });
 
         b.show();
@@ -156,5 +163,16 @@ public class GuideStudentListActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setToolTip(CardView view, String tip){
+        new SimpleTooltip.Builder(this)
+                .anchorView(view)
+                .text(tip)
+                .gravity(Gravity.BOTTOM)
+                .animated(true)
+                .transparentOverlay(false)
+                .build()
+                .show();
     }
 }

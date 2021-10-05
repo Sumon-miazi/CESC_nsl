@@ -131,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/heebo_extra_bold"
-                        android:text="Academic"
+                        android:text="Attendance"
                         android:textAllCaps="true"
                         android:textColor="@color/academic_txt"
                         android:textSize="@dimen/t_dashboard_menu_txt_size"
