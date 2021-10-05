@@ -8,10 +8,8 @@ import androidx.annotation.NonNull;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.GenericRecyclerAdapter;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
-import com.itbeebd.cesc_nsl.activities.teacher.viewHolders.AttendanceViewHolder;
 import com.itbeebd.cesc_nsl.activities.teacher.viewHolders.GuideStudentListViewHolder;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
-import com.itbeebd.cesc_nsl.utils.dummy.ClassAttendance;
 
 public class GuideStudentListAdapter extends GenericRecyclerAdapter<Student, OnRecyclerObjectClickListener<Student>, GuideStudentListViewHolder> {
 
