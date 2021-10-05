@@ -177,7 +177,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
 
             sections = teacherDao.getAllSectionByClassName(selectedClass);
             attendanceSubmitBtnId.setVisibility(View.GONE);
-            attendances.clear();
+            if(attendances != null) attendances.clear();
             setAdapter();
 
             System.out.println(">>>>>> class " + which);
@@ -204,20 +204,28 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
             selectedSection = sections[which];
             a_sectionViewId.setText(selectedSection.substring(selectedSection.lastIndexOf("-") + 1));
 
-            attendances = new ArrayList<>();
-            attendances.add(new ClassAttendance("Arif", "1234"));
-            attendances.add(new ClassAttendance("Suman", "32"));
-            attendances.add(new ClassAttendance("Shawon", "234"));
-            attendances.add(new ClassAttendance("Borhan", "876"));
-
-            attendanceSubmitBtnId.setVisibility(View.VISIBLE);
-            setAdapter();
+            getStudents();
 
         });
 
         b.show();
     }
 
+    private void getStudents(){
+        new AttendanceApi(this, "Loading...").getStudentByClassSectionId(
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                teacherDao.getClassIdByName(selectedClass),
+                teacherDao.getSectionIdByName(selectedSection),
+                (object, message) -> {
+                    if(object != null){
+                        this.attendances = (ArrayList<ClassAttendance>) object;
+                        attendanceSubmitBtnId.setVisibility(View.VISIBLE);
+                        setAdapter();
+                    }
+                }
+
+        );
+    }
     private void datePicker(){
         // Get Current Date
         final Calendar c = Calendar.getInstance();
@@ -262,7 +270,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
     @Override
     public void onItemClicked(ClassAttendance item, View view) {
         for(int i = 0; i < attendances.size(); i++){
-            if(item.getStudentId() == attendances.get(i).getStudentId()){
+            if(item.getStudentid() == attendances.get(i).getStudentid()){
                 attendances.get(i).setPresent();
               //  Toast.makeText(this, item.getRoll(), Toast.LENGTH_SHORT).show();
              //   System.out.println("Roll " + attendances.get(i).getRoll());

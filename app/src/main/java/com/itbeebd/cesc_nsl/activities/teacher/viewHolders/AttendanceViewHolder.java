@@ -42,7 +42,7 @@ public class AttendanceViewHolder extends BaseViewHolder<ClassAttendance, OnRecy
         else attendanceRow.setBackgroundColor(context.getResources().getColor(R.color.second_row));
 
         slId.setText(String.valueOf(this.getPosition() + 1));
-        studentRollViewId.setText(item.getRoll());
+        studentRollViewId.setText(String.valueOf(item.getRoll()));
         studentNameViewId.setText(item.getName());
 
         isPresent.setOnCheckedChangeListener((compoundButton, b) -> {
