@@ -27,7 +27,7 @@ public class TeacherDao {
 
 
     public Teacher getTeacher(Context context) {
-        List<Teacher> teachers = Teacher.find(Teacher.class, "TEACHER_ID = ?", CustomSharedPref.getInstance(context).getUserId());
+        List<Teacher> teachers = Teacher.find(Teacher.class, "EMAIL = ?", CustomSharedPref.getInstance(context).getUserId());
         return teachers == null? null : teachers.size() == 0? null : teachers.get(0);
     }
 

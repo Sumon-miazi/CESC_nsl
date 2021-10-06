@@ -169,6 +169,8 @@ public class GuideStudentListActivity extends AppCompatActivity {
                                 teacherDao.getClassIdByName(selectedClass),
                                 teacherDao.getSectionIdByName(selectedSection)
                         );
+                        if(students != null && students.isEmpty())
+                            Toast.makeText(this, "No student found!", Toast.LENGTH_SHORT).show();
                         setAdapter();
                     }
                     else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

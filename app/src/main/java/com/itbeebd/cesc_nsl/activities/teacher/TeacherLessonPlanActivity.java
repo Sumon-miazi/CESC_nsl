@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -61,7 +62,7 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
 
         Toolbar mToolBar =  findViewById(R.id.guideStudentListToolbarId);
         setSupportActionBar(mToolBar);
-        getSupportActionBar().setTitle("GUIDE STUDENT LIST");
+        getSupportActionBar().setTitle("LESSON PLAN");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         a_subjectCardId = findViewById(R.id.a_subjectCardId);
@@ -77,7 +78,7 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
         teacherDao = new TeacherDao();
         classes = teacherDao.getAllClasses();
 
-      //  lessonPlanSubmitBtnId.setVisibility(View.GONE);
+        lessonPlanSubmitBtnId.setVisibility(View.GONE);
 
         a_classCardId.setOnClickListener(view -> {
             if(classes == null){
