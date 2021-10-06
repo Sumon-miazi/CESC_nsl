@@ -3,12 +3,14 @@ package com.itbeebd.cesc_nsl.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.StudentDashboardActivity;
 import com.itbeebd.cesc_nsl.api.studentApi.LoginApi;
@@ -20,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout userPassword;
     private Button loginBtn;
     private RadioGroup userCategoryRadioId;
+    private ImageView signInBackBtnId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         userId = findViewById(R.id.userId);
         userPassword = findViewById(R.id.userPasswordId);
         loginBtn = findViewById(R.id.loginBtnId);
+        signInBackBtnId = findViewById(R.id.signInBackBtnId);
 
         userCategoryRadioId = findViewById(R.id.userCategoryRadioId);
 
@@ -38,6 +42,11 @@ public class LoginActivity extends AppCompatActivity {
 
         loginBtn.setOnClickListener(view -> {
             loginCredentialValidate(userId.getEditText().getText().toString().trim(), userPassword.getEditText().getText().toString().trim());
+        });
+
+        signInBackBtnId.setOnClickListener(view -> {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         });
 
     //    new NotificationReminder(this).sendNotification("Hee", "hi", "/storage/emulated/0/CESC/LessonPlanFiles/fother.jpg");

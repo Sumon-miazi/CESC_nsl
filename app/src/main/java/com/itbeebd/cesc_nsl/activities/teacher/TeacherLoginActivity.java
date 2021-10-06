@@ -3,12 +3,14 @@ package com.itbeebd.cesc_nsl.activities.teacher;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.api.teacherApi.LoginApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
@@ -19,6 +21,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
     private TextInputLayout userPassword;
     private Button loginBtn;
     private RadioGroup userCategoryRadioId;
+    private ImageView signInBackBtnId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
         loginBtn = findViewById(R.id.loginBtnId);
 
         userCategoryRadioId = findViewById(R.id.userCategoryRadioId);
+        signInBackBtnId = findViewById(R.id.signInBackBtnId);
 
         userCategoryRadioId.setOnCheckedChangeListener((radioGroup, i) -> {
             System.out.println(">>>>> radio group i " + i);
@@ -37,6 +41,11 @@ public class TeacherLoginActivity extends AppCompatActivity {
 
         loginBtn.setOnClickListener(view -> {
             loginCredentialValidate(userId.getEditText().getText().toString().trim(), userPassword.getEditText().getText().toString().trim());
+        });
+
+        signInBackBtnId.setOnClickListener(view -> {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         });
 
         //    new NotificationReminder(this).sendNotification("Hee", "hi", "/storage/emulated/0/CESC/LessonPlanFiles/fother.jpg");
