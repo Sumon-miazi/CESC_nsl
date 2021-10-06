@@ -38,6 +38,7 @@
         <entry key="app/src/main/res/drawable/weekly_days_bg.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/weekly_days_main_bg.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/layout/activity_attendance.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_attendance_list.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_edit_student_profile.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_equal_bottom_bar.xml" value="0.1" />
@@ -76,6 +77,7 @@
         <entry key="app/src/main/res/layout/month_name_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/no_data_found.xml" value="0.18" />
         <entry key="app/src/main/res/layout/no_internet.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/single_attendance_list_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_attendance_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_class_routine.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_dashboard_component.xml" value="0.15" />

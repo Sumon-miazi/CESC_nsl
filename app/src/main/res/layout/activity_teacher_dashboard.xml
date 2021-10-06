@@ -131,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/heebo_extra_bold"
-                        android:text="Attendance"
+                        android:text="Academic"
                         android:textAllCaps="true"
                         android:textColor="@color/academic_txt"
                         android:textSize="@dimen/t_dashboard_menu_txt_size"
@@ -308,13 +308,13 @@
                     android:layout_height="wrap_content">
 
                     <Button
-                        android:id="@+id/t_promotionViewId"
+                        android:id="@+id/t_addAttendanceViewId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/zic"
                         android:fontFamily="@font/heebo_extra_bold"
                         android:padding="@dimen/t_dashboard_menu_padding"
-                        android:text="Manual Promotion"
+                        android:text="ADD Attendance"
                         android:textColor="@color/menu_text_color"
                         android:textSize="@dimen/t_dashboard_submenu_txt_size"
                         android:textStyle="bold"
@@ -337,7 +337,7 @@
                         android:textSize="@dimen/t_dashboard_submenu_txt_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/t_absentFeeViewId"
-                        app:layout_constraintTop_toBottomOf="@+id/t_promotionViewId"
+                        app:layout_constraintTop_toBottomOf="@+id/t_addAttendanceViewId"
                         tools:layout_editor_absoluteX="0dp" />
 
                     <Button

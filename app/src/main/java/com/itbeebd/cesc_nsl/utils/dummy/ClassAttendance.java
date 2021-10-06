@@ -27,7 +27,7 @@ public class ClassAttendance implements Serializable {
     private boolean isPresent;
 
     public ClassAttendance() {
-        this.isPresent = true;
+
     }
 
     public int getId() {

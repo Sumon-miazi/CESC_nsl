@@ -45,19 +45,6 @@ public class AttendanceViewHolder extends BaseViewHolder<ClassAttendance, OnRecy
         studentRollViewId.setText(String.valueOf(item.getRoll()));
         studentNameViewId.setText(item.getName());
 
-//        isPresent.setOnCheckedChangeListener((compoundButton, b) -> {
-////            System.out.println("check >>>>> " + b);
-////            System.out.println("student_id >>>>> " + item.getStudentid());
-////
-////            isPresent.setChecked(b);
-////            isPresent.setText(b? "P" : "A");
-////            isPresent.setTextColor(context.getResources().getColor(b? R.color.green_active : R.color.red_active));
-////
-////            item.setPresent();
-//            assert listener != null;
-//            listener.onItemClicked(item, compoundButton);
-//        });
-
         isPresent.setChecked(item.isPresent());
         isPresent.setText(item.isPresent()? "P" : "A");
         isPresent.setTextColor(context.getResources().getColor(item.isPresent()? R.color.green_active : R.color.red_active));

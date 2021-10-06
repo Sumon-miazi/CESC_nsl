@@ -53,6 +53,14 @@ public interface RetrofitService {
             @Path("path") String path
     );
 
+    @POST("auth/{path}")
+    Call<ResponseBody> getRequestPath(
+            @Header("Authorization") String authorization,
+            @Path("path") String path,
+            @Body Map<String, Object> body
+    );
+
+
     @GET("auth/get-students/{classId}/{sectionId}")
     Call<ResponseBody> getStudentForAttendance(
             @Header("Authorization") String authorization,

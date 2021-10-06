@@ -4,12 +4,14 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
+import com.itbeebd.cesc_nsl.utils.dummy.AttendanceList;
 import com.itbeebd.cesc_nsl.utils.dummy.ClassAttendance;
 
 import org.json.JSONArray;
@@ -77,7 +79,6 @@ public class AttendanceApi extends BaseService {
         });
     }
 
-
     public void getStudentByClassSectionId(String token, int classId, int sectionId, ResponseObj responseObj){
         progressDialog.show();
         Call<ResponseBody> studentByClassSectionCall = service.getStudentForAttendance(token, classId, sectionId);
@@ -106,6 +107,62 @@ public class AttendanceApi extends BaseService {
 
                         responseObj.data(classAttendances, "Successful");
                       //  booleanResponse.response(true, jsonObject.toString());
+                        //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+
+                        responseObj.data(null, e.getLocalizedMessage());
+                    }
+                }
+                else {
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                    responseObj.data(null, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> studentAttendance " + t.getLocalizedMessage());
+                responseObj.data(null, t.getLocalizedMessage());
+
+            }
+        });
+    }
+
+    public void getAttendanceList(String token, int classId, int sectionId, ResponseObj responseObj){
+        progressDialog.show();
+        Call<ResponseBody> attendanceListCall = service.getRequestPath(token, ApiUrls.ATTENDANCE_LIST, requestBody.attendanceList( classId, sectionId));
+        attendanceListCall.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONArray jsonArray = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
+                    try {
+                        jsonArray =  new JSONArray(response.body().string());
+                        System.out.println(">>>>>>>>>> " + jsonArray);
+
+                        if(jsonArray.length() == 0){
+                            responseObj.data(null, "No attendance found!");
+                            return;
+                        }
+
+                        Gson gson = new Gson();
+                        ArrayList<AttendanceList> attendanceLists = new ArrayList<>();
+
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            AttendanceList attendanceList = gson.fromJson(jsonArray.getJSONObject(i).toString(), AttendanceList.class);
+                            attendanceLists.add(attendanceList);
+                        }
+
+                        responseObj.data(attendanceLists, "Successful");
+                        //  booleanResponse.response(true, jsonObject.toString());
                         //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
 
                     } catch (Exception e) {

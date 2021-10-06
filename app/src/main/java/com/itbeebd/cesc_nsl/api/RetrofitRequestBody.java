@@ -33,4 +33,10 @@ public class RetrofitRequestBody {
         return map;
     }
 
+    public Map<String, Object> attendanceList(int classId, int sectionId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("std_class_id", classId);
+        map.put("section_id", sectionId);
+        return map;
+    }
 }
