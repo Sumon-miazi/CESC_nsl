@@ -189,7 +189,6 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
 
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         b.setTitle("Select a class");
-
         b.setItems(classes, (dialog, which) -> {
             selectedClass = classes[which];
             a_classViewId.setText(selectedClass);
@@ -206,12 +205,6 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         });
 
         b.show();
-    }
-
-    private void clearAttendanceArrayListAndRefreshAdapter(){
-        if(attendances != null) attendances.clear();
-
-        attendanceAdapter.notifyDataSetChanged();
     }
 
     private void initSectionSpinner(){

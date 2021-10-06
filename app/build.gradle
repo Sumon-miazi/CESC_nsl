@@ -104,4 +104,6 @@ dependencies {
 
     // tooltip library
     implementation 'com.github.douglasjunior:android-simple-tooltip:1.0.0-rc.0'
+
+    implementation 'com.github.abhishekti7:UnicornFilePicker:1.0.2'
 }

@@ -101,6 +101,20 @@ public class TeacherDao {
         return sectionList;
     }
 
+    public String[] getAllSubjectByClassName(String className){
+
+        List<TeacherSubjects> sections = TeacherSubjects.find(TeacherSubjects.class, "CLASS_ID = ?", String.valueOf(getClassIdByName(className)));
+
+        String[] sectionList = new String[sections.size()];
+
+        for(int i = 0; i < sections.size(); i++){
+            sectionList[i] = sections.get(i).getName();
+        }
+
+        return sectionList;
+    }
+
+
     public ArrayList<Student> getAllGuidedStudentByClassSectionId(int classId, int sectionId){
         return (ArrayList<Student>) Student.find(Student.class, "STDCLASSID = ? and SECTIONID = ?", String.valueOf(classId), String.valueOf(sectionId));
     }
