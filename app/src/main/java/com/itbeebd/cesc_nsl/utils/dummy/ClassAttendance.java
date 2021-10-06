@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class ClassAttendance implements Serializable {
+
+    @SerializedName("id")
+    private int id;
+
     @SerializedName("studentid")
     private int studentid;
 
@@ -22,8 +26,16 @@ public class ClassAttendance implements Serializable {
 
     private boolean isPresent;
 
-    public ClassAttendance(){
-        isPresent = true;
+    public ClassAttendance() {
+        this.isPresent = true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isPresent() {
@@ -72,5 +84,9 @@ public class ClassAttendance implements Serializable {
 
     public void setPresent() {
         isPresent = !isPresent;
+    }
+
+    public void setPresent(boolean b) {
+        isPresent = b;
     }
 }

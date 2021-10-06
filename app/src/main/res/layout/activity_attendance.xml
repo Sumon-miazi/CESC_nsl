@@ -171,7 +171,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userId"
+        android:id="@+id/remarksId"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userId">
+        app:layout_constraintTop_toBottomOf="@+id/remarksId">
 
         <TextView
             android:id="@+id/slId"
@@ -294,7 +294,7 @@
             android:id="@+id/attendanceTxt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/orange_active"
+            android:background="@color/teal_200"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="Attendance"

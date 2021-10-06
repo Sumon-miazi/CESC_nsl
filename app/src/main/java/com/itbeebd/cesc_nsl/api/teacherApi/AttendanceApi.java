@@ -100,6 +100,7 @@ public class AttendanceApi extends BaseService {
 
                         for(int i = 0; i < jsonArray.length(); i++){
                             ClassAttendance classAttendance = gson.fromJson(jsonArray.getJSONObject(i).toString(), ClassAttendance.class);
+                            classAttendance.setPresent(true);
                             classAttendances.add(classAttendance);
                         }
 

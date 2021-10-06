@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.itbeebd.cesc_nsl.R;
@@ -46,6 +47,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
     private TextView a_sectionViewId;
     private TextView a_dateViewId;
     private TextView monthNameViewId;
+    private TextInputLayout remarksId;
 
     private Button attendanceSubmitBtnId;
 
@@ -56,8 +58,12 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
     private String selectedClass;
 
     private TeacherDao teacherDao;
-    private ArrayList<ClassAttendance> attendances =  new ArrayList<>();
+    private ArrayList<ClassAttendance> attendances ;
     private AttendanceAdapter attendanceAdapter;
+
+    private int mYear;
+    private int mMonth;
+    private int mDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,8 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         getSupportActionBar().setTitle("ATTENDANCE");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        attendances =  new ArrayList<>();
+
         attendanceRecyclerView = findViewById(R.id.attendanceRecyclerViewId);
         a_classCardId = findViewById(R.id.a_classCardId);
         a_classViewId = findViewById(R.id.a_classViewId);
@@ -77,14 +85,12 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         monthNameViewId = findViewById(R.id.monthNameViewId);
         a_dateViewId = findViewById(R.id.a_dateViewId);
         a_dateCardId = findViewById(R.id.a_dateCardId);
+        remarksId = findViewById(R.id.remarksId);
         attendanceSubmitBtnId = findViewById(R.id.attendanceSubmitBtnId);
 
         setCurrentDate();
 
         setToolTip(a_classCardId, "Select a class");
-
-        attendanceAdapter = new AttendanceAdapter(this);
-        attendanceAdapter.setListener(this);
 
         teacherDao = new TeacherDao();
         classes = teacherDao.getAllClasses();
@@ -118,6 +124,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         });
 
         a_dateCardId.setOnClickListener(view -> datePicker());
+
         attendanceSubmitBtnId.setOnClickListener(view -> callAttendanceApi());
 
     }
@@ -140,8 +147,9 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
             ClassAttendance attendance = attendances.get(i);
             try {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("roll", attendance.getRoll());
-                jsonObject.put("name", attendance.getName());
+                jsonObject.put("id", attendance.getId());
+                jsonObject.put("present", attendance.isPresent());
+//                jsonObject.put("name", attendance.getName());
                 jsonArray.put(jsonObject);
 
             } catch (JSONException e) {
@@ -150,7 +158,11 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         }
         JSONObject temp = new JSONObject();
         try {
-            temp.put("data", jsonArray);
+            temp.put("std_class_id", teacherDao.getClassIdByName(selectedClass));
+            temp.put("section_id", teacherDao.getSectionIdByName(selectedSection));
+            temp.put("attendance_date", mYear + "-" + mMonth + "-" + mDay);
+            temp.put("remarks", remarksId.getEditText().getText().toString().trim());
+            temp.put("student_has_attendance", jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -160,6 +172,8 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
     }
 
     private void setAdapter(){
+        attendanceAdapter = new AttendanceAdapter(this);
+        attendanceAdapter.setListener(this);
         attendanceAdapter.setItems(attendances);
         attendanceRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         attendanceRecyclerView.setAdapter(attendanceAdapter);
@@ -226,18 +240,21 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
 
         );
     }
+
     private void datePicker(){
         // Get Current Date
-        final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
+//        final Calendar c = Calendar.getInstance();
+//        mYear = c.get(Calendar.YEAR);
+//        mMonth = c.get(Calendar.MONTH);
+//        mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, year, monthOfYear, dayOfMonth) -> {
+                    this.mDay = dayOfMonth;
+                    this.mMonth = monthOfYear;
+                    this.mYear = year;
 
-                //    a_dateViewId.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                     a_dateViewId.setText(String.valueOf(dayOfMonth));
                     monthNameViewId.setText(String.format("%s, %d", getMonth(monthOfYear), year));
 
@@ -249,9 +266,9 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
 
     private void setCurrentDate(){
         final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
 
         a_dateViewId.setText(String.valueOf(mDay));
         monthNameViewId.setText(String.format("%s, %d", getMonth(mMonth), mYear));
@@ -271,12 +288,24 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
     public void onItemClicked(ClassAttendance item, View view) {
         for(int i = 0; i < attendances.size(); i++){
             if(item.getStudentid() == attendances.get(i).getStudentid()){
-                attendances.get(i).setPresent();
+                ClassAttendance classAttendance = attendances.get(i);
+                classAttendance.setPresent();
+
+                attendances.set(i,classAttendance);
+            //    attendanceAdapter.notifyItemChanged(i);
+                refreshAdapter(i);
+
               //  Toast.makeText(this, item.getRoll(), Toast.LENGTH_SHORT).show();
              //   System.out.println("Roll " + attendances.get(i).getRoll());
                 break;
             }
         }
+    }
+
+    private void refreshAdapter(int i){
+        attendanceRecyclerView.post(() -> {
+            attendanceAdapter.notifyItemChanged(i);
+        });
     }
 
     private String getMonth(int index){
