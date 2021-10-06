@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.BaseViewHolder;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.utils.dummy.ClassAttendance;
 
 public class AttendanceViewHolder extends BaseViewHolder<ClassAttendance, OnRecyclerObjectClickListener<ClassAttendance>> {
@@ -48,6 +49,14 @@ public class AttendanceViewHolder extends BaseViewHolder<ClassAttendance, OnRecy
         isPresent.setChecked(item.isPresent());
         isPresent.setText(item.isPresent()? "P" : "A");
         isPresent.setTextColor(context.getResources().getColor(item.isPresent()? R.color.green_active : R.color.red_active));
+
+        /*
+        UserModeNo = 1 [user viewing attendance]
+        UserModeNo = 2 [user editing attendance]
+         */
+
+        int userMode = CustomSharedPref.getInstance(context).getUserModeNo();
+        if(userMode == 1)  isPresent.setEnabled(false);
 
         isPresent.setOnClickListener(view -> {
             assert listener != null;

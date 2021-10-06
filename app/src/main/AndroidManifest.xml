@@ -23,11 +23,17 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".activities.teacher.AttendanceViewOrEditActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.teacher.AttendanceListActivity"
-            android:exported="true" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.teacher.GuidedStudentProfileActivity"
-            android:exported="true" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.teacher.TeacherLessonPlanActivity"
             android:launchMode="singleTask"

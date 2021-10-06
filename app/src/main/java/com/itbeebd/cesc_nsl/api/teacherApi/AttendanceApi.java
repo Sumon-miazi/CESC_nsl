@@ -47,10 +47,10 @@ public class AttendanceApi extends BaseService {
                 progressDialog.dismiss();
                 JSONObject jsonObject = null;
                 if(response.isSuccessful() && response != null){
-                    System.out.println(">>>>>>>>>> " + response.body());
+                    System.out.println(">>>>>>>>>> studentAttendance " + response.body());
                     try {
                         jsonObject =  new JSONObject(response.body().string());
-                        System.out.println(">>>>>>>>>> " + jsonObject);
+                        System.out.println(">>>>>>>>>> studentAttendance " + jsonObject);
 
                         booleanResponse.response(true, jsonObject.toString());
                      //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
@@ -162,6 +162,63 @@ public class AttendanceApi extends BaseService {
                         }
 
                         responseObj.data(attendanceLists, "Successful");
+                        //  booleanResponse.response(true, jsonObject.toString());
+                        //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+
+                        responseObj.data(null, e.getLocalizedMessage());
+                    }
+                }
+                else {
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                    responseObj.data(null, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> studentAttendance " + t.getLocalizedMessage());
+                responseObj.data(null, t.getLocalizedMessage());
+
+            }
+        });
+    }
+
+    public void getAttendanceByAttendanceId(String token, int attendanceId, ResponseObj responseObj){
+        progressDialog.show();
+        Call<ResponseBody> studentByClassSectionCall = service.getAttendanceByAttendanceId(token, attendanceId);
+        studentByClassSectionCall.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONObject data = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
+                    try {
+
+                        data =  new JSONObject(response.body().string());
+                        JSONArray jsonArray =  data.getJSONArray("student_has_attendance");
+                        System.out.println(">>>>>>>>>> " + jsonArray);
+
+                        if(jsonArray.length() == 0) return;
+
+                        Gson gson = new Gson();
+                        ArrayList<ClassAttendance> classAttendances = new ArrayList<>();
+
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            ClassAttendance classAttendance = gson.fromJson(jsonArray.getJSONObject(i).toString(), ClassAttendance.class);
+                            classAttendance.setPresent(jsonArray.getJSONObject(i).optInt("present"));
+                            System.out.println("present >>>>>>  " + jsonArray.getJSONObject(i).optBoolean("present"));
+                            classAttendances.add(classAttendance);
+                        }
+
+                        responseObj.data(classAttendances, "Successful");
                         //  booleanResponse.response(true, jsonObject.toString());
                         //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
 

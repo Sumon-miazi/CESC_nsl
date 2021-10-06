@@ -69,4 +69,19 @@ public class CustomSharedPref {
         editor.putBoolean("PayNowClicked", flag);
         editor.apply();
     }
+
+
+    public int getUserModeNo() {
+        return sharedPreferences.getInt("UserModeNo", 1);
+    }
+
+    public void setUserModeNo(int flag) {
+        /*
+        UserModeNo = 1 [user viewing attendance]
+        UserModeNo = 2 [user editing attendance]
+         */
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("UserModeNo", flag);
+        editor.apply();
+    }
 }

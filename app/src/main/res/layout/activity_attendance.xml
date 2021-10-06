@@ -16,7 +16,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/white">
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/attendanceEditId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:text="Edit"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/attendance_ToolbarId"
+        app:layout_constraintEnd_toEndOf="@+id/attendance_ToolbarId"
+        app:layout_constraintTop_toTopOf="@+id/attendance_ToolbarId" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout7"
@@ -31,8 +45,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/a_header_card_margin_start"
-            android:layout_marginEnd="@dimen/a_header_card_margin"
             android:layout_marginTop="@dimen/a_header_card_margin_top"
+            android:layout_marginEnd="@dimen/a_header_card_margin"
             android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
             android:backgroundTint="@color/orange_bg_light"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -51,18 +65,18 @@
                     android:id="@+id/a_classViewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:text="Select"
                     android:gravity="center"
+                    android:maxLines="1"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:maxLines="1"
+                    android:text="Select"
+                    android:textAlignment="center"
                     android:textColor="@color/orange_active"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     app:autoSizeMaxTextSize="30sp"
                     app:autoSizeMinTextSize="12sp"
-                    app:autoSizeTextType="uniform"
-                    android:textStyle="bold" />
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -80,8 +94,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/a_header_card_margin"
-            android:layout_marginEnd="@dimen/a_header_card_margin"
             android:layout_marginTop="@dimen/a_header_card_margin_top"
+            android:layout_marginEnd="@dimen/a_header_card_margin"
             android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
             android:backgroundTint="@color/green_bg_light"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -100,15 +114,15 @@
                     android:id="@+id/a_sectionViewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:gravity="center"
                     android:text="Select"
+                    android:textAlignment="center"
                     android:textColor="@color/green_active"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     app:autoSizeMaxTextSize="30sp"
                     app:autoSizeMinTextSize="12sp"
-                    app:autoSizeTextType="uniform"
-                    android:textStyle="bold" />
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -126,8 +140,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/a_header_card_margin"
-            android:layout_marginEnd="@dimen/a_header_card_margin_end"
             android:layout_marginTop="@dimen/a_header_card_margin_top"
+            android:layout_marginEnd="@dimen/a_header_card_margin_end"
             android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
             android:backgroundTint="@color/blue_bg_light"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -150,20 +164,20 @@
                     android:textAlignment="center"
                     android:textColor="@color/blue_active"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     app:autoSizeMaxTextSize="30sp"
                     app:autoSizeMinTextSize="12sp"
-                    app:autoSizeTextType="uniform"
-                    android:textStyle="bold" />
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/monthNameViewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue_active"
                     app:autoSizeMaxTextSize="14sp"
                     app:autoSizeMinTextSize="10sp"
-                    app:autoSizeTextType="uniform"
-                    android:textAlignment="center"
-                    android:textColor="@color/blue_active" />
+                    app:autoSizeTextType="uniform" />
 
 
             </LinearLayout>
@@ -335,9 +349,9 @@
         android:id="@+id/attendanceSubmitBtnId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
         android:layout_margin="10dp"
         android:padding="10dp"
+        android:text="Submit"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

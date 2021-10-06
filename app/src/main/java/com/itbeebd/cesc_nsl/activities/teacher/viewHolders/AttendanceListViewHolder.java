@@ -39,10 +39,15 @@ public class AttendanceListViewHolder extends BaseViewHolder<AttendanceList, OnR
     public void onBind(AttendanceList item, @Nullable OnRecyclerObjectClickListener<AttendanceList> listener) {
 
         attendanceListDateId.setText(SimpleDateKt.toDateStandard(getDateFromString(item.getDate())));
-        remarkViewId.setText(String.format("Remarks: %s", item.getRemarks()));
+        if(item.getRemarks() == null) remarkViewId.setVisibility(View.GONE);
+        else {
+            remarkViewId.setVisibility(View.VISIBLE);
+            remarkViewId.setText(String.format("Remarks: %s", item.getRemarks()));
+        }
 
         attendanceCardViewId.setOnClickListener(view -> {
-
+            assert listener != null;
+            listener.onItemClicked(item, view);
         });
     }
 

@@ -2,7 +2,9 @@ package com.itbeebd.cesc_nsl.utils.dummy;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AttendanceList {
+import java.io.Serializable;
+
+public class AttendanceList implements Serializable {
 
     @SerializedName("id")
     private int id;
@@ -12,6 +14,44 @@ public class AttendanceList {
 
     @SerializedName("remarks")
     private String remarks;
+
+    private String className;
+    private String sectionName;
+
+    private int classId;
+    private int sectionId;
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getSectionName() {
+        return sectionName;
+    }
+
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
+    }
+
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
+
+    public int getSectionId() {
+        return sectionId;
+    }
+
+    public void setSectionId(int sectionId) {
+        this.sectionId = sectionId;
+    }
 
     public int getId() {
         return id;

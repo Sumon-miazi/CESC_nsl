@@ -89,4 +89,8 @@ public class ClassAttendance implements Serializable {
     public void setPresent(boolean b) {
         isPresent = b;
     }
+
+    public void setPresent(int b) {
+        isPresent = b == 1;
+    }
 }

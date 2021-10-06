@@ -75,6 +75,8 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         getSupportActionBar().setTitle("ATTENDANCE");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        CustomSharedPref.getInstance(this).setUserModeNo(2);
+
         attendances =  new ArrayList<>();
 
         attendanceRecyclerView = findViewById(R.id.attendanceRecyclerViewId);
@@ -134,7 +136,11 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
                 CustomSharedPref.getInstance(this).getAuthToken(),
                 generateJson(),
                 (isSuccess, message) -> {
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                    if(isSuccess){
+                        Toast.makeText(this, "Attendance added successfully", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                 }
         );
     }
