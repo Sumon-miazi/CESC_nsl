@@ -278,23 +278,14 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/lessonPlanFileBlockId"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lessonFileRecyclerViewId"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/lessonPlanSubmitBtnId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
-
-
-        <TextView
-            android:id="@+id/fileNamesId"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
     <Button
         android:id="@+id/lessonPlanSubmitBtnId"

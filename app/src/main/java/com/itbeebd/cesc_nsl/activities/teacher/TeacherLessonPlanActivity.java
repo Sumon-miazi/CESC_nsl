@@ -17,8 +17,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
+import com.itbeebd.cesc_nsl.activities.teacher.adapters.TeacherLessonPlanAdapter;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 
 import java.util.ArrayList;
@@ -28,7 +32,7 @@ import abhishekti7.unicorn.filepicker.UnicornFilePicker;
 import abhishekti7.unicorn.filepicker.utils.Constants;
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
-public class TeacherLessonPlanActivity extends AppCompatActivity {
+public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRecyclerObjectClickListener<String> {
 
     private CardView a_classCardId;
     private CardView a_sectionCardId;
@@ -37,7 +41,8 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
     private TextView a_subjectViewId;
     private TextView a_classViewId;
     private TextView a_sectionViewId;
-    private TextView fileNamesId;
+
+    private RecyclerView lessonFileRecyclerViewId;
 
     private LinearLayout addMoreLessonFileBtnId;
     private Button  lessonPlanSubmitBtnId;
@@ -54,6 +59,7 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_PERMISSION = 786;
 
     private ArrayList<String> mSelected_files;
+    private TeacherLessonPlanAdapter lessonPlanAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +71,15 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("LESSON PLAN");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mSelected_files = new ArrayList<>();
+
         a_subjectCardId = findViewById(R.id.a_subjectCardId);
         a_subjectViewId = findViewById(R.id.a_subjectViewId);
         a_classCardId = findViewById(R.id.a_classCardId);
         a_classViewId = findViewById(R.id.a_classViewId);
         a_sectionCardId = findViewById(R.id.a_sectionCardId);
         a_sectionViewId = findViewById(R.id.a_sectionViewId);
-        fileNamesId = findViewById(R.id.fileNamesId);
+        lessonFileRecyclerViewId = findViewById(R.id.lessonFileRecyclerViewId);
         addMoreLessonFileBtnId = findViewById(R.id.addMoreLessonFileBtnId);
         lessonPlanSubmitBtnId = findViewById(R.id.lessonPlanSubmitBtnId);
 
@@ -109,7 +117,11 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
         });
 
         a_subjectCardId.setOnClickListener(view -> {
-            if(subjects == null){
+            if(selectedClass == null){
+                setToolTip(a_classCardId, "Select a class");
+                return;
+            }
+            else if(subjects == null){
                 Toast.makeText(this, "No subject found", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -129,6 +141,8 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
 
         setToolTip(a_classCardId, "Select a class");
 
+        setAdapter();
+
     }
 
     @Override
@@ -136,15 +150,18 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
       //  int REQUEST_CODE_CHOOSE = 100;
         if (resultCode == RESULT_OK) {
-            mSelected_files = data.getStringArrayListExtra("filePaths");
+            ArrayList<String> files = data.getStringArrayListExtra("filePaths");
 
-            String fileNames = "";
-            if(mSelected_files != null)
-            for(int i = 0; i < mSelected_files.size(); i++){
-                System.out.println(">>>>>>> " + mSelected_files.get(i));
-                fileNames += mSelected_files.get(i) + "\n";
+            int lastItemPosition = mSelected_files.size();
+
+            for(int i = 0; i < files.size(); i++){
+                System.out.println(">>>>>>> " + files.get(i));
+                mSelected_files.add(files.get(i));
+            //    fileNames += mSelected_files.get(i) + "\n";
             }
-            fileNamesId.setText(fileNames);
+
+            setAdapter();
+         //   itemRangeInserted(lastItemPosition,files.size());
 
         }
     }
@@ -181,7 +198,7 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
         b.setTitle("Select a subject");
         b.setItems(subjects, (dialog, which) -> {
             selectedSubject = subjects[which];
-            a_subjectViewId.setText(selectedSubject);
+            a_subjectViewId.setText(selectedSubject.substring(selectedSubject.lastIndexOf("-") + 1));
         });
 
         b.show();
@@ -206,7 +223,9 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
             }
         }
 
-        return selectedItems.substring(0, selectedItems.length() >= 2? selectedItems.length()-2 : 0);
+        String selectedSectionStr = selectedItems.substring(0, selectedItems.length() >= 2? selectedItems.length()-2 : 0);
+        if(selectedSectionStr.isEmpty()) return "SELECT";
+        else return selectedSectionStr;
     }
 
     private void initSectionSpinner(){
@@ -278,5 +297,40 @@ public class TeacherLessonPlanActivity extends AppCompatActivity {
                 .theme(R.style.UnicornFilePicker_Dracula)
                 .build()
                 .forResult(Constants.REQ_UNICORN_FILE);
+    }
+
+    private void setAdapter(){
+        lessonPlanSubmitBtnId.setVisibility(mSelected_files.isEmpty()? View.GONE : View.VISIBLE);
+        lessonPlanAdapter = new TeacherLessonPlanAdapter(this);
+        lessonPlanAdapter.setListener(this);
+        lessonPlanAdapter.setItems(mSelected_files);
+        lessonFileRecyclerViewId.setLayoutManager(new LinearLayoutManager(this));
+        lessonFileRecyclerViewId.setAdapter(lessonPlanAdapter);
+    }
+
+    @Override
+    public void onItemClicked(String item, View view) {
+        for(int i = 0; i < mSelected_files.size(); i++){
+            if(mSelected_files.get(i).equalsIgnoreCase(item)){
+                mSelected_files.remove(item);
+             //   lessonPlanAdapter.remove(item);
+            //    itemRemoved(i);
+                setAdapter();
+                break;
+            }
+        }
+    }
+
+    private void itemRangeInserted(int startPosition, int total) {
+        lessonFileRecyclerViewId.post(() -> {
+            lessonPlanAdapter.notifyItemRangeInserted(startPosition, total);
+        });
+    }
+
+    private void itemRemoved(int position) {
+        lessonFileRecyclerViewId.post(() -> {
+            System.out.println("size >>>>>>>>>>. " + mSelected_files.size());
+            lessonPlanAdapter.notifyItemRemoved(position);
+        });
     }
 }

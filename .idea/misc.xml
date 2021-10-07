@@ -86,6 +86,7 @@
         <entry key="app/src/main/res/layout/single_guardian_info_edit_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/single_guardian_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_guide_student_view.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/single_lesson_plan_file_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_lesson_plan_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_library_book_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_menu_layout.xml" value="0.15" />

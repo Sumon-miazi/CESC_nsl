@@ -45,5 +45,6 @@
 
     <dimen name="g_expendable_guardian_info_text_size">14sp</dimen>
 
+    <dimen name="lesson_plan_file_text">14sp</dimen>
 
 </resources>
