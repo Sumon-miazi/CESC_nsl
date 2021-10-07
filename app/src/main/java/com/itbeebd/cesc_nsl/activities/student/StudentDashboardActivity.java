@@ -171,6 +171,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
 
     private void closeApp(){
         if (time + 2000 > System.currentTimeMillis()) {
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         } else {
             time = System.currentTimeMillis();

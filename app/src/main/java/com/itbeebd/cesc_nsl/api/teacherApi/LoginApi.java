@@ -69,12 +69,17 @@ public class LoginApi extends BaseService {
                         if(! jsonObject.getJSONObject("user").getJSONArray("coordinator").equals("null")){
                      //       JSONArray coordinatorJsonArray = jsonObject.getJSONObject("user").getJSONArray("coordinator");
 
-                            ArrayList<Coordinator> coordinatorList = gson.fromJson(
-                                    jsonObject.getJSONObject("user").getJSONArray("coordinator").toString(),
-                                    new TypeToken<List<Coordinator>>(){}.getType()
-                            );
+                            try {
+                                ArrayList<Coordinator> coordinatorList = gson.fromJson(
+                                        jsonObject.getJSONObject("user").getJSONArray("coordinator").toString(),
+                                        new TypeToken<List<Coordinator>>(){}.getType()
+                                );
 
-                            teacherDao.saveCoordinator(coordinatorList);
+                                teacherDao.saveCoordinator(coordinatorList);
+                            }
+                            catch (Exception ignore){
+                                ignore.printStackTrace();
+                            }
                         }
 
                         if(! jsonObject.getJSONObject("user").getJSONArray("teacher_class").equals("null")){

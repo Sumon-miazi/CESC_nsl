@@ -6,10 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
@@ -34,6 +36,7 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
     private TextView userNameViewId;
     private ImageView teacherProfileViewId;
     private TeacherDao teacherDao;
+    private long time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,5 +116,17 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
                 .error(R.drawable.default_male)
                 .fallback(R.drawable.default_male)
                 .into(imageView);
+    }
+
+    @Override
+    public void onBackPressed() {
+      //  super.onBackPressed();
+        if (time + 2000 > System.currentTimeMillis()) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        } else {
+            time = System.currentTimeMillis();
+            Toast.makeText(this, "press again to exit", Toast.LENGTH_SHORT).show();
+        }
     }
 }

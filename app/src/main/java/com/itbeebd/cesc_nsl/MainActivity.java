@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckNetworkConnection networkConnection;
     private Button tryAgainBtn;
     private boolean flag;
+    private long time;
 
     private Button studentLoginBtnId;
     private Button teacherLoginBtnId;
@@ -81,5 +83,17 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception ignore) {
         }
         super.onStop();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        if (time + 2000 > System.currentTimeMillis()) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        } else {
+            time = System.currentTimeMillis();
+            Toast.makeText(this, "press again to exit", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -18,4 +18,5 @@ public class Coordinator extends SugarRecord implements Serializable {
         this.name = name;
     }
 
+
 }
