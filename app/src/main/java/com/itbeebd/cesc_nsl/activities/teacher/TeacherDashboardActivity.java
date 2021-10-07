@@ -28,9 +28,13 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
     private ExpandableLayout studentExpandableLayout;
     private ExpandableLayout resultExpandableLayout;
     private ExpandableLayout reportExpandableLayout;
+    private ExpandableLayout lessonPlan_expandable_layout;
 
     private Button t_addAttendanceViewId;
     private Button t_attendanceListViewId;
+
+    private Button t_lessonPlanListId;
+    private Button t_addLessonPlanId;
 
     private TextView todayDateViewId;
     private TextView userNameViewId;
@@ -46,9 +50,13 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
         studentExpandableLayout = findViewById(R.id.student_expandable_layout);
         resultExpandableLayout = findViewById(R.id.result_expandable_layout);
         reportExpandableLayout = findViewById(R.id.report_expandable_layout);
+        lessonPlan_expandable_layout = findViewById(R.id.lessonPlan_expandable_layout);
 
         t_addAttendanceViewId = findViewById(R.id.t_addAttendanceViewId);
         t_attendanceListViewId = findViewById(R.id.t_attendanceListViewId);
+
+        t_lessonPlanListId = findViewById(R.id.t_lessonPlanListId);
+        t_addLessonPlanId = findViewById(R.id.t_addLessonPlanId);
 
         todayDateViewId = findViewById(R.id.todayDateViewId);
         userNameViewId = findViewById(R.id.userNameViewId);
@@ -61,8 +69,20 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
         t_addAttendanceViewId.setOnClickListener(this);
         t_attendanceListViewId.setOnClickListener(this);
 
+        t_addLessonPlanId.setOnClickListener(this::teacherLessonPlan);
+        t_lessonPlanListId.setOnClickListener(this::teacherLessonPlan);
+
         setupTeacherProfile();
 
+    }
+
+    private void teacherLessonPlan(View view) {
+        if(view.getId() == R.id.t_addLessonPlanId){
+            startActivity(new Intent(this, TeacherLessonPlanActivity.class));
+        }
+        else if(view.getId() == R.id.t_lessonPlanListId){
+            startActivity(new Intent(this, TeacherLessonPlanListActivity.class));
+        }
     }
 
     private void setupTeacherProfile() {
@@ -85,7 +105,8 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
             studentExpandableLayout.toggle();
         }
         else if(view.getId() == R.id.lessonPlanCardId){
-            startActivity(new Intent(this, TeacherLessonPlanActivity.class));
+            lessonPlan_expandable_layout.toggle();
+           // startActivity(new Intent(this, TeacherLessonPlanActivity.class));
         }
         else if(view.getId() == R.id.resultCardId){
             resultExpandableLayout.toggle();

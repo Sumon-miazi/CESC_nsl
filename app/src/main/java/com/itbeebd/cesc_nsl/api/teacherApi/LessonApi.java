@@ -2,15 +2,23 @@ package com.itbeebd.cesc_nsl.api.teacherApi;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
+import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
+import com.itbeebd.cesc_nsl.sugarClass.TeacherSections;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
+import com.itbeebd.cesc_nsl.utils.dummy.LessonFile;
+import com.itbeebd.cesc_nsl.utils.dummy.TeacherLessonPlan;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -68,6 +76,86 @@ public class LessonApi extends BaseService {
                 progressDialog.dismiss();
                 System.out.println(">>>>>>>>>> insertLessonPlan " + t.getLocalizedMessage());
                 booleanResponse.response(false, t.getLocalizedMessage());
+
+            }
+        });
+    }
+
+    public void getTeacherLessonPlan(String token, int classId, int sectionId, ResponseObj responseObj){
+        progressDialog.show();
+        Call<ResponseBody> studentByClassSectionCall = service.getRequestPath(token, ApiUrls.TEACHER_LESSON_PLAN, requestBody.attendanceList(classId, sectionId));
+        studentByClassSectionCall.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONArray jsonArray = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
+                    try {
+                        jsonArray =  new JSONArray(response.body().string());
+                        System.out.println(">>>>>>>>>> " + jsonArray);
+
+                        if(jsonArray.length() == 0){
+                            responseObj.data(null, "No data found");
+                            return;
+                        }
+
+
+                        Gson gson = new Gson();
+                        ArrayList<TeacherLessonPlan> teacherLessonPlans = new ArrayList<>();
+
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            TeacherLessonPlan teacherLessonPlan = gson.fromJson(jsonArray.getJSONObject(i).toString(), TeacherLessonPlan.class);
+                            JSONArray teacher_upload_file_sections = jsonArray.getJSONObject(i).getJSONArray("teacher_upload_file_sections");
+                            JSONArray teacher_upload_file_details = jsonArray.getJSONObject(i).getJSONArray("teacher_upload_file_details");
+
+                            ArrayList<TeacherSections> teacherSections = new ArrayList<>();
+                            for(int j = 0; j < teacher_upload_file_sections.length(); j++ ){
+                                TeacherSections sections = new TeacherSections();
+                                sections.setName(teacher_upload_file_sections.getJSONObject(j).optString("name"));
+                                sections.setSectionId(teacher_upload_file_sections.getJSONObject(j).optInt("section_id"));
+                                teacherSections.add(sections);
+                            }
+                            teacherLessonPlan.setSections(teacherSections);
+
+                            ArrayList<LessonFile> lessonFiles = new ArrayList<>();
+                            for(int k = 0; k < teacher_upload_file_details.length(); k++ ){
+                                LessonFile file = new LessonFile(
+                                        teacher_upload_file_details.getJSONObject(k).optString("file"),
+                                        teacher_upload_file_details.getJSONObject(k).optString("original_name")
+                                );
+
+                                lessonFiles.add(file);
+                            }
+                            teacherLessonPlan.setFiles(lessonFiles);
+
+                            teacherLessonPlans.add(teacherLessonPlan);
+                        }
+
+                        responseObj.data(teacherLessonPlans, "Successful");
+                        //  booleanResponse.response(true, jsonObject.toString());
+                        //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+
+                        responseObj.data(null, e.getLocalizedMessage());
+                    }
+                }
+                else {
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                    responseObj.data(null, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> studentAttendance " + t.getLocalizedMessage());
+                responseObj.data(null, t.getLocalizedMessage());
 
             }
         });

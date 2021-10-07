@@ -83,6 +83,16 @@ public class TeacherDao {
         return classes == null? 0 : classes.size() == 0? 0 : Integer.parseInt(String.valueOf(classes.get(0).getId()));
     }
 
+    public String getClassNameById(int id){
+        List<TeacherClass> classes = TeacherClass.find(TeacherClass.class, "ID = ?", String.valueOf(id));
+        return classes == null? "" : classes.size() == 0? "" : classes.get(0).getName();
+    }
+
+    public String getSubjectNameById(int id){
+        List<TeacherSubjects> subjects = TeacherSubjects.find(TeacherSubjects.class, "ID = ?", String.valueOf(id));
+        return subjects == null? "" : subjects.size() == 0? "" : subjects.get(0).getName();
+    }
+
     public int getSectionIdByName(String name){
         List<TeacherSections> sections = TeacherSections.find(TeacherSections.class, "NAME = ?", name);
         return sections == null? 0 : sections.size() == 0? 0 : Integer.parseInt(String.valueOf(sections.get(0).getId()));

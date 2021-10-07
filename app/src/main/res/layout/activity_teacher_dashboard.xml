@@ -555,6 +555,67 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/lessonPlan_expandable_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/t_dashboard_menu_expandable_margin_start"
+                android:layout_marginTop="@dimen/t_dashboard_menu_expandable_margin_top"
+                android:layout_marginEnd="@dimen/t_dashboard_menu_expandable_margin_end"
+                android:layout_marginBottom="@dimen/t_dashboard_menu_expandable_margin_bottom"
+                android:background="@color/white"
+                app:el_duration="500"
+                app:el_expanded="false"
+                app:el_parallax="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lessonPlanCardId">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/t_lessonPlanListId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zic"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:paddingStart="@dimen/t_submenu_padding"
+                        android:paddingEnd="@dimen/t_submenu_padding"
+                        android:text="Lesson Plan List"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_classRoutineViewId"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <Button
+                        android:id="@+id/t_addLessonPlanId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/zac"
+                        android:fontFamily="@font/heebo_extra_bold"
+                        android:padding="@dimen/t_dashboard_menu_padding"
+                        android:text="Add lesson plan"
+                        android:textColor="@color/menu_text_color"
+                        android:textSize="@dimen/t_dashboard_submenu_txt_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/t_teacherRoutineViewId"
+                        app:layout_constraintTop_toBottomOf="@+id/t_onlineClassViewId"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                </LinearLayout>
+
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/guidedStudentCardId"
                 android:layout_width="match_parent"
@@ -571,7 +632,7 @@
                 app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lessonPlanCardId"
+                app:layout_constraintTop_toBottomOf="@+id/lessonPlan_expandable_layout"
                 tools:ignore="UsingOnClickInXml">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
