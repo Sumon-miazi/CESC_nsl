@@ -116,9 +116,10 @@ public interface RetrofitService {
     );
 
   //  @FormUrlEncoded
-    @POST("auth/student-attendance")
-    Call<ResponseBody> attendance(
+    @POST("auth/{path}")
+    Call<ResponseBody> serviceWithJsonObject(
             @Header("Authorization") String authorization,
+            @Path("path") String path,
             @Body JsonObject attendances
     );
 

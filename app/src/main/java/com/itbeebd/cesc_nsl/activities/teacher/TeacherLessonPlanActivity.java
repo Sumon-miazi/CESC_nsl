@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.teacher.adapters.TeacherLessonPlanAdapter;
+import com.itbeebd.cesc_nsl.api.teacherApi.LessonApi;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 
 import java.util.ArrayList;
@@ -88,6 +90,8 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
 
         lessonPlanSubmitBtnId.setVisibility(View.GONE);
 
+        lessonPlanSubmitBtnId.setOnClickListener(this::submitLessonPlan);
+
         a_classCardId.setOnClickListener(view -> {
             if(classes == null){
                 Toast.makeText(this, "No class found", Toast.LENGTH_SHORT).show();
@@ -143,6 +147,20 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
 
         setAdapter();
 
+    }
+
+    private void submitLessonPlan(View view) {
+        new LessonApi(this, "Inserting...").insertLessonPlan(
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                null,
+                (isSuccess, message) -> {
+                    if(isSuccess){
+                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                }
+        );
     }
 
     @Override
@@ -320,6 +338,38 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
             }
         }
     }
+
+//    private JsonObject generateJson() {
+//
+//        JSONArray jsonArray = new JSONArray();
+//
+//        for(int i = 0; i < mSelected_files.size(); i++){
+//            ClassAttendance attendance = attendances.get(i);
+//            try {
+//                JSONObject jsonObject = new JSONObject();
+//                jsonObject.put("id", attendance.getId());
+//                jsonObject.put("present", attendance.isPresent());
+////                jsonObject.put("name", attendance.getName());
+//                jsonArray.put(jsonObject);
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        JSONObject temp = new JSONObject();
+//        try {
+//            temp.put("std_class_id", teacherDao.getClassIdByName(selectedClass));
+//            temp.put("section_id", teacherDao.getSectionIdByName(selectedSection));
+//            temp.put("attendance_date", mYear + "-" + mMonth + "-" + mDay);
+//            temp.put("remarks", remarksId.getEditText().getText().toString().trim());
+//            temp.put("student_has_attendance", jsonArray);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        JsonParser jsonParser = new JsonParser();
+//        JsonObject gsonObject = (JsonObject) jsonParser.parse(temp.toString());
+//        return gsonObject;
+//    }
 
     private void itemRangeInserted(int startPosition, int total) {
         lessonFileRecyclerViewId.post(() -> {

@@ -23,6 +23,12 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".activities.teacher.TeacherLessonPlanViewOrEditActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.teacher.TeacherLessonPlanListActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.teacher.AttendanceViewOrEditActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />

@@ -24,6 +24,8 @@ public class ApiUrls {
     public static final String QUIZ_ARCHIVE =  "quiz-archive";
     public static final String GUIDED_STUDENT =  "guided-Student";
     public static final String ATTENDANCE_LIST =  "attendance-list";
+    public static final String STUDENT_ATTENDANCE =  "student-attendance";
+    public static final String ADD_LESSON_PLAN =  "lesson-plan";
 
 
 

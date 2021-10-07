@@ -39,7 +39,7 @@ public class AttendanceApi extends BaseService {
 
     public void studentAttendance(String token, JsonObject attendances, BooleanResponse booleanResponse){
         progressDialog.show();
-        Call<ResponseBody> attendanceCall = service.attendance(token, attendances);
+        Call<ResponseBody> attendanceCall = service.serviceWithJsonObject(token, ApiUrls.STUDENT_ATTENDANCE ,attendances);
         attendanceCall.enqueue(new Callback<ResponseBody>(){
 
             @Override
@@ -52,7 +52,7 @@ public class AttendanceApi extends BaseService {
                         jsonObject =  new JSONObject(response.body().string());
                         System.out.println(">>>>>>>>>> studentAttendance " + jsonObject);
 
-                        booleanResponse.response(true, jsonObject.toString());
+                        booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
                      //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
 
                     } catch (Exception e) {
