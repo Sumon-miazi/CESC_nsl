@@ -55,15 +55,32 @@
             app:layout_constraintStart_toEndOf="@+id/studentRollViewId"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <CheckBox
-            android:id="@+id/absentOrPresentCheckId"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/studentNameViewId"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <CheckBox
+                android:id="@+id/absentOrPresentCheckId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/studentNameViewId"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+        </LinearLayout>
+
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"

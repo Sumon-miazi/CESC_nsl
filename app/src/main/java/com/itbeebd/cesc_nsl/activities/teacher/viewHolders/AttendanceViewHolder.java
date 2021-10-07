@@ -56,7 +56,10 @@ public class AttendanceViewHolder extends BaseViewHolder<ClassAttendance, OnRecy
          */
 
         int userMode = CustomSharedPref.getInstance(context).getUserModeNo();
-        if(userMode == 1)  isPresent.setEnabled(false);
+        if(userMode == 1)  {
+            isPresent.setButtonDrawable(null);
+            isPresent.setEnabled(false);
+        }
 
         isPresent.setOnClickListener(view -> {
             assert listener != null;
