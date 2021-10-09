@@ -126,7 +126,7 @@
   <component name="jsonEditor">
     <option name="stateMap">
       <map>
-        <entry key="CESC_nsl" value="{&#10;  &quot;teacher_id&quot;: 84,&#10;  &quot;std_class_id&quot;: 3,&#10;  &quot;subject_id&quot;: 52,&#10;  &quot;title&quot;: &quot;gggg&quot;,&#10;  &quot;teacher_upload_file_sections&quot;: [&#10;    {&#10;      &quot;id&quot;: 11,&#10;      &quot;name&quot;: &quot;3-A&quot;&#10;    }&#10;  ],&#10;  &quot;teacher_upload_file_details&quot;: [&#10;    {&#10;      &quot;file&quot;: &quot;okhttp3.MultipartBody$Part@d65e58c&quot;&#10;    },&#10;    {&#10;      &quot;file&quot;: &quot;okhttp3.MultipartBody$Part@69b94d5&quot;&#10;    }&#10;  ]&#10;}&#10;" />
+        <entry key="CESC_nsl" value="{&#10;  &quot;teacher_id&quot;: 84,&#10;  &quot;std_class_id&quot;: 11,&#10;  &quot;subject_id&quot;: 108,&#10;  &quot;title&quot;: &quot;yyyy&quot;,&#10;  &quot;teacher_upload_file_sections&quot;: [&#10;    {&#10;      &quot;id&quot;: 35,&#10;      &quot;name&quot;: &quot;9-A&quot;&#10;    },&#10;    {&#10;      &quot;id&quot;: 36,&#10;      &quot;name&quot;: &quot;9-B&quot;&#10;    },&#10;    {&#10;      &quot;id&quot;: 37,&#10;      &quot;name&quot;: &quot;9-C&quot;&#10;    },&#10;    {&#10;      &quot;id&quot;: 38,&#10;      &quot;name&quot;: &quot;9-D&quot;&#10;    },&#10;    {&#10;      &quot;id&quot;: 39,&#10;      &quot;name&quot;: &quot;9-E&quot;&#10;    }&#10;  ],&#10;  &quot;teacher_upload_file_details&quot;: {}&#10;}&#10;" />
       </map>
     </option>
   </component>

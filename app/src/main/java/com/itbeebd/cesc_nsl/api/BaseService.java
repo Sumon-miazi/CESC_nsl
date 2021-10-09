@@ -31,10 +31,11 @@ public class BaseService  {
         File file = new File(imageFilePath); // initialize file here
         //   System.out.println(">>>>>>>>> file " + file.toString());
         String imageName = imageFilePath.substring(imageFilePath.lastIndexOf("/")+1);
-        return MultipartBody.Part.createFormData(name, imageName, RequestBody.create(file, MediaType.parse(("image/*"))));
+        return MultipartBody.Part.createFormData(name, imageName, RequestBody.create(MediaType.parse("image/*"), file));
 
         // RequestBody.create(MediaType.parse("image/*"), file)
     }
+
 
     protected MultipartBody.Part getImageFile(String imageFilePath, String name, String mimeType){
         if(imageFilePath == null || imageFilePath.isEmpty())
@@ -42,7 +43,9 @@ public class BaseService  {
         File file = new File(imageFilePath); // initialize file here
         //   System.out.println(">>>>>>>>> file " + file.toString());
         String imageName = imageFilePath.substring(imageFilePath.lastIndexOf("/")+1);
-        return MultipartBody.Part.createFormData(name, imageName, RequestBody.create(file, MediaType.parse(mimeType)));
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse(mimeType), file);
+        return MultipartBody.Part.createFormData(name, imageName, requestBody);
 
         // RequestBody.create(MediaType.parse("image/*"), file)
     }

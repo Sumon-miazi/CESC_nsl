@@ -124,14 +124,27 @@ public interface RetrofitService {
             @Body JsonObject attendances
     );
 
+//    @Multipart
+//    @POST("auth/{path}")
+//    Call<ResponseBody> serviceWithJsonObjectAndFile(
+//            @Header("Authorization") String authorization,
+//            @Path("path") String path,
+//           // @Part MultipartBody.Part image,
+//            @Part("data") JsonObject attendances,
+//            @Part MultipartBody.Part file1,
+//            @Part MultipartBody.Part file2,
+//            @Part MultipartBody.Part file3,
+//            @Part MultipartBody.Part file4,
+//            @Part MultipartBody.Part file5
+//    );
+
     @Multipart
     @POST("auth/{path}")
     Call<ResponseBody> serviceWithJsonObjectAndFile(
             @Header("Authorization") String authorization,
             @Path("path") String path,
-           // @Part MultipartBody.Part image,
-            @Part("json") JsonObject attendances,
-            @Part List<MultipartBody.Part> file
+            @Part("data") JsonObject attendances,
+            @Part List<MultipartBody.Part> file1
     );
 
 //    @Multipart

@@ -23,7 +23,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -48,12 +47,18 @@ public class LessonApi extends BaseService {
     public void insertLessonPlan(String token, JsonObject attendances, ArrayList<String> selectedFiles, BooleanResponse booleanResponse){
         progressDialog.show();
 
-        List<MultipartBody.Part> parts = new ArrayList<>();
+        ArrayList<MultipartBody.Part> parts = new ArrayList<>();
+
         for (int i=0; i < selectedFiles.size(); i++){
+            System.out.println("File Type " +  getMimeType(new File(selectedFiles.get(i))));
             parts.add(getImageFile(selectedFiles.get(i), "teacher_upload_file_details["+i+"]", getMimeType(new File(selectedFiles.get(i)))));
         }
 
-        Call<ResponseBody> attendanceCall = service.serviceWithJsonObjectAndFile(token, ApiUrls.ADD_LESSON_PLAN, attendances, parts);
+        Call<ResponseBody> attendanceCall = service.serviceWithJsonObjectAndFile(token,
+                ApiUrls.ADD_LESSON_PLAN,
+                attendances,
+                parts
+                );
         attendanceCall.enqueue(new Callback<ResponseBody>(){
 
             @Override

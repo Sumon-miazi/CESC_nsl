@@ -396,7 +396,7 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
 
             try {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id", teacherDao.getSectionIdByName(selectedSection[i]));
+                jsonObject.put("section_id", teacherDao.getSectionIdByName(selectedSection[i]));
                 jsonObject.put("name",selectedSection[i]);
                 sectionArray.put(jsonObject);
 
