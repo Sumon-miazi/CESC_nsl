@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.itbeebd.cesc_nsl.utils.dummy.GuardianDummy;
 import com.itbeebd.cesc_nsl.utils.dummy.StudentDummy;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -122,5 +123,24 @@ public interface RetrofitService {
             @Path("path") String path,
             @Body JsonObject attendances
     );
+
+    @Multipart
+    @POST("auth/{path}")
+    Call<ResponseBody> serviceWithJsonObjectAndFile(
+            @Header("Authorization") String authorization,
+            @Path("path") String path,
+           // @Part MultipartBody.Part image,
+            @Part("json") JsonObject attendances,
+            @Part List<MultipartBody.Part> file
+    );
+
+//    @Multipart
+//    @POST("auth/{path}")
+//    Call<ResponseBody> serviceWithJsonObjectAndFile(
+//            @Header("Authorization") String authorization,
+//            @Path("path") String path,
+//           // @Part MultipartBody.Part image,
+//            @Part("json") JsonObject attendances
+//    );
 
 }

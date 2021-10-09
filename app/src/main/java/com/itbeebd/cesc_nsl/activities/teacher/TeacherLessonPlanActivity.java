@@ -20,6 +20,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.teacher.adapters.TeacherLessonPlanAdapter;
@@ -27,12 +30,19 @@ import com.itbeebd.cesc_nsl.api.teacherApi.LessonApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import abhishekti7.unicorn.filepicker.UnicornFilePicker;
 import abhishekti7.unicorn.filepicker.utils.Constants;
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 
 public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRecyclerObjectClickListener<String> {
 
@@ -43,6 +53,7 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
     private TextView a_subjectViewId;
     private TextView a_classViewId;
     private TextView a_sectionViewId;
+    private TextInputLayout lessonTitleId;
 
     private RecyclerView lessonFileRecyclerViewId;
 
@@ -81,6 +92,7 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
         a_classViewId = findViewById(R.id.a_classViewId);
         a_sectionCardId = findViewById(R.id.a_sectionCardId);
         a_sectionViewId = findViewById(R.id.a_sectionViewId);
+        lessonTitleId = findViewById(R.id.lessonTitleId);
         lessonFileRecyclerViewId = findViewById(R.id.lessonFileRecyclerViewId);
         addMoreLessonFileBtnId = findViewById(R.id.addMoreLessonFileBtnId);
         lessonPlanSubmitBtnId = findViewById(R.id.lessonPlanSubmitBtnId);
@@ -150,9 +162,31 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
     }
 
     private void submitLessonPlan(View view) {
+        String title = lessonTitleId.getEditText().getText().toString();
+        if(title.isEmpty()){
+            lessonTitleId.setError("Enter a title");
+            return;
+        }
+
+        if(selectedClass == null){
+            showToast("Select a class please");
+            return;
+        }
+
+        if(selectedSection.length == 0){
+            showToast("Select a section please");
+            return;
+        }
+
+        if(selectedSubject == null){
+            showToast("Select a subject please");
+            return;
+        }
+
         new LessonApi(this, "Inserting...").insertLessonPlan(
                 CustomSharedPref.getInstance(this).getAuthToken(),
-                null,
+                generateJson(),
+                mSelected_files,
                 (isSuccess, message) -> {
                     if(isSuccess){
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -161,6 +195,22 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
                     else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                 }
         );
+
+//        new LessonApi(this, "Inserting...").insertLessonPlan(
+//                CustomSharedPref.getInstance(this).getAuthToken(),
+//                generateJson(),
+//                (isSuccess, message) -> {
+//                    if(isSuccess){
+//                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+//                        finish();
+//                    }
+//                    else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+//                }
+//        );
+    }
+
+    private void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -339,37 +389,59 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
         }
     }
 
-//    private JsonObject generateJson() {
-//
-//        JSONArray jsonArray = new JSONArray();
-//
-//        for(int i = 0; i < mSelected_files.size(); i++){
-//            ClassAttendance attendance = attendances.get(i);
-//            try {
-//                JSONObject jsonObject = new JSONObject();
-//                jsonObject.put("id", attendance.getId());
-//                jsonObject.put("present", attendance.isPresent());
-////                jsonObject.put("name", attendance.getName());
-//                jsonArray.put(jsonObject);
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        JSONObject temp = new JSONObject();
-//        try {
-//            temp.put("std_class_id", teacherDao.getClassIdByName(selectedClass));
-//            temp.put("section_id", teacherDao.getSectionIdByName(selectedSection));
-//            temp.put("attendance_date", mYear + "-" + mMonth + "-" + mDay);
-//            temp.put("remarks", remarksId.getEditText().getText().toString().trim());
-//            temp.put("student_has_attendance", jsonArray);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        JsonParser jsonParser = new JsonParser();
-//        JsonObject gsonObject = (JsonObject) jsonParser.parse(temp.toString());
-//        return gsonObject;
-//    }
+    private JsonObject generateJson() {
+
+        JSONArray sectionArray = new JSONArray();
+        for(int i = 0; i < selectedSection.length; i++){
+
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", teacherDao.getSectionIdByName(selectedSection[i]));
+                jsonObject.put("name",selectedSection[i]);
+                sectionArray.put(jsonObject);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        JSONArray fileArray = new JSONArray();
+        for(int i = 0; i < mSelected_files.size(); i++){
+
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("file", getFile(mSelected_files.get(i)));
+                fileArray.put(jsonObject);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        JSONObject temp = new JSONObject();
+        try {
+            temp.put("teacher_id", teacherDao.getTeacher(this).getId());
+            temp.put("std_class_id", teacherDao.getClassIdByName(selectedClass));
+            temp.put("subject_id", teacherDao.getSubjectIdByName(selectedSubject));
+            temp.put("title",lessonTitleId.getEditText().getText().toString().trim());
+            temp.put("teacher_upload_file_sections", sectionArray);
+       //     temp.put("teacher_upload_file_details", fileArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonParser jsonParser = new JsonParser();
+        JsonObject gsonObject = (JsonObject) jsonParser.parse(temp.toString());
+        return gsonObject;
+    }
+
+    private MultipartBody.Part getFile(String imageFilePath){
+        if(imageFilePath == null || imageFilePath.isEmpty())
+            return null;
+        File file = new File(imageFilePath); // initialize file here
+        //   System.out.println(">>>>>>>>> file " + file.toString());
+        String imageName = imageFilePath.substring(imageFilePath.lastIndexOf("/")+1);
+        return MultipartBody.Part.createFormData("file", imageName, okhttp3.RequestBody.create(MediaType.parse("image/*"), file));
+    }
 
     private void itemRangeInserted(int startPosition, int total) {
         lessonFileRecyclerViewId.post(() -> {

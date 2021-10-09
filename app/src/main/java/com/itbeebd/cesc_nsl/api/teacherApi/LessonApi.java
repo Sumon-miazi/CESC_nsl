@@ -1,6 +1,9 @@
 package com.itbeebd.cesc_nsl.api.teacherApi;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
+import android.webkit.MimeTypeMap;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -18,8 +21,11 @@ import com.itbeebd.cesc_nsl.utils.dummy.TeacherLessonPlan;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,9 +45,15 @@ public class LessonApi extends BaseService {
     }
     
     
-    public void insertLessonPlan(String token, JsonObject attendances, BooleanResponse booleanResponse){
+    public void insertLessonPlan(String token, JsonObject attendances, ArrayList<String> selectedFiles, BooleanResponse booleanResponse){
         progressDialog.show();
-        Call<ResponseBody> attendanceCall = service.serviceWithJsonObject(token, ApiUrls.ADD_LESSON_PLAN, attendances);
+
+        List<MultipartBody.Part> parts = new ArrayList<>();
+        for (int i=0; i < selectedFiles.size(); i++){
+            parts.add(getImageFile(selectedFiles.get(i), "teacher_upload_file_details["+i+"]", getMimeType(new File(selectedFiles.get(i)))));
+        }
+
+        Call<ResponseBody> attendanceCall = service.serviceWithJsonObjectAndFile(token, ApiUrls.ADD_LESSON_PLAN, attendances, parts);
         attendanceCall.enqueue(new Callback<ResponseBody>(){
 
             @Override
@@ -53,20 +65,21 @@ public class LessonApi extends BaseService {
                     try {
                         jsonObject =  new JSONObject(response.body().string());
                         System.out.println(">>>>>>>>>> insertLessonPlan " + jsonObject);
+                        System.out.println(">>>>>>>>>> insertLessonPlan response");
 
                         booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
                         //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
 
                     } catch (Exception e) {
                         e.printStackTrace();
-                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+                        System.out.println(">>>>>>>>>> insertLessonPlan catch " + e.fillInStackTrace());
 
                         booleanResponse.response(false, e.getLocalizedMessage());
                     }
                 }
                 else {
-                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
-                    System.out.println(">>>>>>>>>> " + response);
+                    System.out.println(">>>>>>>>>> insertLessonPlan " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> insertLessonPlan " + response);
                     booleanResponse.response(response.isSuccessful(), response.toString());
                 }
             }
@@ -80,6 +93,53 @@ public class LessonApi extends BaseService {
             }
         });
     }
+
+
+    /*
+        public void insertLessonPlan(String token, JsonObject attendances, BooleanResponse booleanResponse){
+        progressDialog.show();
+        Call<ResponseBody> attendanceCall = service.serviceWithJsonObjectAndFile(token, ApiUrls.ADD_LESSON_PLAN, attendances);
+        attendanceCall.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONObject jsonObject = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> insertLessonPlan " + response.body());
+                    try {
+                        jsonObject =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> insertLessonPlan " + jsonObject);
+                        System.out.println(">>>>>>>>>> insertLessonPlan response");
+
+                        booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+                        //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> insertLessonPlan catch " + e.fillInStackTrace());
+
+                        booleanResponse.response(false, e.getLocalizedMessage());
+                    }
+                }
+                else {
+                    System.out.println(">>>>>>>>>> insertLessonPlan " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> insertLessonPlan " + response);
+                    booleanResponse.response(response.isSuccessful(), response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> insertLessonPlan " + t.getLocalizedMessage());
+                booleanResponse.response(false, t.getLocalizedMessage());
+
+            }
+        });
+    }
+     */
+
 
     public void getTeacherLessonPlan(String token, int classId, int sectionId, ResponseObj responseObj){
         progressDialog.show();
@@ -161,4 +221,17 @@ public class LessonApi extends BaseService {
         });
     }
 
+
+    protected String getMimeType(File file) {
+        Uri uri = Uri.fromFile(file);
+        String mimeType = null;
+        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+            ContentResolver cr = context.getContentResolver();
+            mimeType = cr.getType(uri);
+        } else {
+            String fileExtension = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+            mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.toLowerCase());
+        }
+        return mimeType;
+    }
 }

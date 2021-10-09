@@ -4,6 +4,7 @@ import java.io.File;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -30,7 +31,33 @@ public class BaseService  {
         File file = new File(imageFilePath); // initialize file here
         //   System.out.println(">>>>>>>>> file " + file.toString());
         String imageName = imageFilePath.substring(imageFilePath.lastIndexOf("/")+1);
-        return MultipartBody.Part.createFormData(name, imageName, okhttp3.RequestBody.create(MediaType.parse("image/*"), file));
+        return MultipartBody.Part.createFormData(name, imageName, RequestBody.create(file, MediaType.parse(("image/*"))));
+
+        // RequestBody.create(MediaType.parse("image/*"), file)
     }
 
+    protected MultipartBody.Part getImageFile(String imageFilePath, String name, String mimeType){
+        if(imageFilePath == null || imageFilePath.isEmpty())
+            return null;
+        File file = new File(imageFilePath); // initialize file here
+        //   System.out.println(">>>>>>>>> file " + file.toString());
+        String imageName = imageFilePath.substring(imageFilePath.lastIndexOf("/")+1);
+        return MultipartBody.Part.createFormData(name, imageName, RequestBody.create(file, MediaType.parse(mimeType)));
+
+        // RequestBody.create(MediaType.parse("image/*"), file)
+    }
+
+//
+//    protected String getMimeType(File file) {
+//        Uri uri = Uri.fromFile(file);
+//        String mimeType = null;
+//        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+//            ContentResolver cr = context.getContentResolver();
+//            mimeType = cr.getType(uri);
+//        } else {
+//            String fileExtension = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+//            mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.toLowerCase());
+//        }
+//        return mimeType;
+//    }
 }

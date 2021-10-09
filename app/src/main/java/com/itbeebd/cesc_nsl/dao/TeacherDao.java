@@ -78,6 +78,11 @@ public class TeacherDao {
         return classList;
     }
 
+    public int getSubjectIdByName(String name){
+        List<TeacherSubjects> subjects = TeacherSubjects.find(TeacherSubjects.class, "NAME = ?", name);
+        return subjects == null? 0 : subjects.size() == 0? 0 : Integer.parseInt(String.valueOf(subjects.get(0).getId()));
+    }
+
     public int getClassIdByName(String name){
         List<TeacherClass> classes = TeacherClass.find(TeacherClass.class, "NAME = ?", name);
         return classes == null? 0 : classes.size() == 0? 0 : Integer.parseInt(String.valueOf(classes.get(0).getId()));
