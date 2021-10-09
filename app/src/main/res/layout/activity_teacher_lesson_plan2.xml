@@ -18,6 +18,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@color/white" />
 
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/lessonPlanEditId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:text="Edit"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/guideStudentListToolbarId"
+        app:layout_constraintEnd_toEndOf="@+id/guideStudentListToolbarId"
+        app:layout_constraintTop_toTopOf="@+id/guideStudentListToolbarId" />
+
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout7"
         android:layout_width="match_parent"

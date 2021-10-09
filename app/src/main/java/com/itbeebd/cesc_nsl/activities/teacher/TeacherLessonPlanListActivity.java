@@ -1,8 +1,10 @@
 package com.itbeebd.cesc_nsl.activities.teacher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.teacher.adapters.TeacherLessonPlanListAdapter;
 import com.itbeebd.cesc_nsl.api.teacherApi.LessonApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
-public class TeacherLessonPlanListActivity extends AppCompatActivity {
+public class TeacherLessonPlanListActivity extends AppCompatActivity implements OnRecyclerObjectClickListener<TeacherLessonPlan> {
 
     private CardView a_classCardId;
     private CardView a_sectionCardId;
@@ -122,7 +125,7 @@ public class TeacherLessonPlanListActivity extends AppCompatActivity {
         if(teacherLessonPlans == null) return;
 
         planListAdapter = new TeacherLessonPlanListAdapter(this);
-      //  planListAdapter.setListener(this);
+        planListAdapter.setListener(this);
         planListAdapter.setItems(teacherLessonPlans);
         lessonPlanListRecyclerViewId.setLayoutManager(new LinearLayoutManager(this));
         lessonPlanListRecyclerViewId.setAdapter(planListAdapter);
@@ -168,6 +171,13 @@ public class TeacherLessonPlanListActivity extends AppCompatActivity {
         b.show();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(selectedClass != null && selectedSection != null) getTeacherLessonPlanList();
+    }
+
     private void setToolTip(CardView view, String tip){
         new SimpleTooltip.Builder(this)
                 .anchorView(view)
@@ -189,4 +199,10 @@ public class TeacherLessonPlanListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onItemClicked(TeacherLessonPlan item, View view) {
+        Intent intent = new Intent(this, TeacherLessonPlanViewOrEditActivity.class);
+        intent.putExtra("TeacherLessonPlan", item);
+        startActivity(intent);
+    }
 }

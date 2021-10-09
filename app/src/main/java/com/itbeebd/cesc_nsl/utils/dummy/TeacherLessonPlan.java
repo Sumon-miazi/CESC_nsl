@@ -4,9 +4,10 @@ import com.google.gson.annotations.SerializedName;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 import com.itbeebd.cesc_nsl.sugarClass.TeacherSections;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TeacherLessonPlan {
+public class TeacherLessonPlan implements Serializable {
     @SerializedName("id")
     private int id;
 
@@ -19,9 +20,43 @@ public class TeacherLessonPlan {
     @SerializedName("subject_id")
     private int subjectId;
 
+    private int teacher_upload_file_id;
+    private ArrayList<String> lessonFiles;
+    private ArrayList<String> strSection;
+
+
     private ArrayList<TeacherSections> sections;
 
     private ArrayList<LessonFile> files;
+
+    public String[] getStrSection() {
+        String[] sectionList = new String[strSection.size()];
+
+        for(int i = 0; i < sections.size(); i++){
+            sectionList[i] = sections.get(i).getName();
+        }
+        return sectionList;
+    }
+
+    public void setStrSection(ArrayList<String> strSection) {
+        this.strSection = strSection;
+    }
+
+    public int getTeacher_upload_file_id() {
+        return teacher_upload_file_id;
+    }
+
+    public void setTeacher_upload_file_id(int teacher_upload_file_id) {
+        this.teacher_upload_file_id = teacher_upload_file_id;
+    }
+
+    public ArrayList<String> getLessonFiles() {
+        return lessonFiles;
+    }
+
+    public void setLessonFiles(ArrayList<String> lessonFiles) {
+        this.lessonFiles = lessonFiles;
+    }
 
     public int getId() {
         return id;
@@ -83,9 +118,20 @@ public class TeacherLessonPlan {
        String sectionName = "";
 
        for(int i = 0; i < this.sections.size(); i++){
-           sectionName += sections.get(i).getName() + "\n";
+           String[] data = sections.get(i).getName().split("-");
+           sectionName += data[1] + "\n";
        }
 
        return sectionName.substring(0, sectionName.length() > 1?  sectionName.length() - 1 : sectionName.length());
+    }
+
+    public String getSectionsNameHorizontal() {
+        String sectionName = "";
+
+        for(int i = 0; i < this.sections.size(); i++){
+            sectionName += sections.get(i).getName() + ", ";
+        }
+
+        return sectionName.substring(0, sectionName.length() > 2?  sectionName.length() - 2 : sectionName.length());
     }
 }

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.BaseViewHolder;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 
 public class TeacherLessonPlanViewHolder extends BaseViewHolder<String, OnRecyclerObjectClickListener<String>> {
 
@@ -35,6 +36,12 @@ public class TeacherLessonPlanViewHolder extends BaseViewHolder<String, OnRecycl
 
         fileTypeId.setText(typeAndName[0]);
         fileName_id.setText(typeAndName[1]);
+
+        int userMode = CustomSharedPref.getInstance(context).getUserModeNo();
+        if(userMode == 1)  {
+            removeFileBtnId.setVisibility(View.GONE);
+        }
+
 
         removeFileBtnId.setOnClickListener(view -> {
             assert listener != null;

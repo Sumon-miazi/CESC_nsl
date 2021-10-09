@@ -103,6 +103,11 @@ public class TeacherDao {
         return sections == null? 0 : sections.size() == 0? 0 : Integer.parseInt(String.valueOf(sections.get(0).getId()));
     }
 
+    public String getSectionNameById(int id){
+        List<TeacherSections> sections = TeacherSections.find(TeacherSections.class, "ID = ?", String.valueOf(id));
+        return sections == null? "" : sections.size() == 0? "" : sections.get(0).getName();
+    }
+
     public String[] getAllSectionByClassName(String className){
 
         List<TeacherSections> sections = TeacherSections.find(TeacherSections.class, "CLASS_ID = ?", String.valueOf(getClassIdByName(className)));

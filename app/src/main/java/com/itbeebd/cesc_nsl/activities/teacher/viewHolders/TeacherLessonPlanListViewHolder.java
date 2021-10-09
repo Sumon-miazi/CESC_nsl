@@ -50,8 +50,8 @@ public class TeacherLessonPlanListViewHolder  extends BaseViewHolder<TeacherLess
         sectionNameId.setText(item.getSectionsName());
 
         resultRowId.setOnClickListener(view -> {
-          //  assert listener != null;
-         //   listener.onItemClicked(item, view);
+                assert listener != null;
+                listener.onItemClicked(item, view);
         });
     }
 

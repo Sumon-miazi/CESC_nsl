@@ -171,30 +171,55 @@ public class LessonApi extends BaseService {
                         ArrayList<TeacherLessonPlan> teacherLessonPlans = new ArrayList<>();
 
                         for(int i = 0; i < jsonArray.length(); i++){
+
                             TeacherLessonPlan teacherLessonPlan = gson.fromJson(jsonArray.getJSONObject(i).toString(), TeacherLessonPlan.class);
+                            String className = teacherDao.getClassNameById(teacherLessonPlan.getClassId());
+
                             JSONArray teacher_upload_file_sections = jsonArray.getJSONObject(i).getJSONArray("teacher_upload_file_sections");
                             JSONArray teacher_upload_file_details = jsonArray.getJSONObject(i).getJSONArray("teacher_upload_file_details");
 
+                            ArrayList<String> strTeacherSections = new ArrayList<>();
+
                             ArrayList<TeacherSections> teacherSections = new ArrayList<>();
                             for(int j = 0; j < teacher_upload_file_sections.length(); j++ ){
+
+                                strTeacherSections.add(className + "-" + teacher_upload_file_sections.getJSONObject(j).optString("name"));
+
                                 TeacherSections sections = new TeacherSections();
-                                sections.setName(teacher_upload_file_sections.getJSONObject(j).optString("name"));
+                                sections.setName(className + "-" + teacher_upload_file_sections.getJSONObject(j).optString("name"));
                                 sections.setSectionId(teacher_upload_file_sections.getJSONObject(j).optInt("section_id"));
                                 teacherSections.add(sections);
                             }
+                            teacherLessonPlan.setStrSection(strTeacherSections);
                             teacherLessonPlan.setSections(teacherSections);
 
                             ArrayList<LessonFile> lessonFiles = new ArrayList<>();
                             for(int k = 0; k < teacher_upload_file_details.length(); k++ ){
                                 LessonFile file = new LessonFile(
+                                        teacher_upload_file_details.getJSONObject(k).optInt("id"),
+                                        teacher_upload_file_details.getJSONObject(k).optInt("teacher_upload_file_id"),
                                         teacher_upload_file_details.getJSONObject(k).optString("file"),
+                                        teacher_upload_file_details.getJSONObject(k).optString("FullUrl") + teacher_upload_file_details.getJSONObject(k).optString("file"),
                                         teacher_upload_file_details.getJSONObject(k).optString("original_name")
                                 );
 
                                 lessonFiles.add(file);
                             }
-                            teacherLessonPlan.setFiles(lessonFiles);
 
+                            ArrayList<String > strLessonFiles = new ArrayList<>();
+                            for(int k = 0; k < teacher_upload_file_details.length(); k++ ){
+                                strLessonFiles.add(teacher_upload_file_details.getJSONObject(k).optString("FullUrl")
+                                        + teacher_upload_file_details.getJSONObject(k).optString("file"));
+                            }
+
+                            teacherLessonPlan.setTeacher_upload_file_id(
+                                    teacher_upload_file_details
+                                    .getJSONObject(0)
+                                    .optInt("teacher_upload_file_id")
+                            );
+
+                            teacherLessonPlan.setLessonFiles(strLessonFiles);
+                            teacherLessonPlan.setFiles(lessonFiles);
                             teacherLessonPlans.add(teacherLessonPlan);
                         }
 
