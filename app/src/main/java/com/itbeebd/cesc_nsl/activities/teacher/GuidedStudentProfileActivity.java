@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
-import com.itbeebd.cesc_nsl.interfaces.FragmentToActivity;
 import com.itbeebd.cesc_nsl.sugarClass.Guardian;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 
@@ -42,10 +41,8 @@ public class GuidedStudentProfileActivity extends AppCompatActivity {
     private TextView emailViewId;
     private TextView nationalityViewId;
 
-
     private LinearLayout guardianInfoLayout;
-    private LinearLayout transportInfoLayoutId;
-    private FragmentToActivity fragmentToActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +69,22 @@ public class GuidedStudentProfileActivity extends AppCompatActivity {
         emailViewId = findViewById(R.id.emailViewId);
         nationalityViewId = findViewById(R.id.nationalityViewId);
 
-
-        transportInfoLayoutId = findViewById(R.id.transportInfoLayoutId);
         guardianInfoLayout = findViewById(R.id.guardianInfoSectionLayoutId);
 
         if(getIntent().hasExtra("student")){
             this.student = (Student) getIntent().getSerializableExtra("student");
             this.mother = this.student.getMother();
             this.father = this.student.getFather();
+
+            System.out.println("mother name >>> " + mother.getName());
+            System.out.println("father name >>> " + father.getName());
+            setStudentProfileData();
+        }
+
+        if(getIntent().hasExtra("student2")){
+            this.student = (Student) getIntent().getSerializableExtra("student2");
+            this.mother = this.student.getMotherObject();
+            this.father = this.student.getFatherObject();
 
             System.out.println("mother name >>> " + mother.getName());
             System.out.println("father name >>> " + father.getName());

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/blue_bg_light"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="1dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:minWidth="200dp">
+
+        <TextView
+            android:id="@+id/tr_classNameId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Md. Suman Miazi"
+            android:textColor="@color/blue_primary_dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tr_subjectNameId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="English"
+            android:textColor="@color/purple_inactive"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tr_classNameId"
+            app:layout_constraintStart_toStartOf="@+id/tr_classNameId"
+            app:layout_constraintTop_toBottomOf="@+id/tr_classNameId" />
+
+        <TextView
+            android:id="@+id/cl_winterTimeViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="English"
+            android:textColor="@color/orange_active"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tr_classNameId"
+            app:layout_constraintStart_toStartOf="@+id/tr_classNameId"
+            app:layout_constraintTop_toBottomOf="@+id/tr_subjectNameId" />
+
+        <TextView
+            android:id="@+id/cl_summerTimeViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="English"
+            android:textColor="@color/orange_active"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tr_classNameId"
+            app:layout_constraintStart_toStartOf="@+id/tr_classNameId"
+            app:layout_constraintTop_toBottomOf="@+id/cl_winterTimeViewId" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
