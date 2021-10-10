@@ -166,7 +166,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnRecyclerO
         try {
             temp.put("std_class_id", teacherDao.getClassIdByName(selectedClass));
             temp.put("section_id", teacherDao.getSectionIdByName(selectedSection));
-            temp.put("attendance_date", mYear + "-" + mMonth + "-" + mDay);
+            temp.put("attendance_date", mYear + "-" + (mMonth + 1) + "-" + mDay);
             temp.put("remarks", remarksId.getEditText().getText().toString().trim());
             temp.put("student_has_attendance", jsonArray);
         } catch (JSONException e) {

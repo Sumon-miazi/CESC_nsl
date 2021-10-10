@@ -11,6 +11,7 @@ import com.itbeebd.cesc_nsl.dao.TeacherDao;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
+import com.itbeebd.cesc_nsl.utils.dummy.AbsentFeeObject;
 import com.itbeebd.cesc_nsl.utils.dummy.AttendanceList;
 import com.itbeebd.cesc_nsl.utils.dummy.ClassAttendance;
 
@@ -245,4 +246,114 @@ public class AttendanceApi extends BaseService {
             }
         });
     }
+
+    public void getAttendanceSummery(String token,
+                                     int classId,
+                                     int sectionId,
+                                     String fromDate,
+                                     String toDate,
+                                     ResponseObj responseObj){
+        progressDialog.show();
+        Call<ResponseBody> callObject = service.getRequestPath(
+                token,
+                ApiUrls.ABSENT_FEE,
+                requestBody.attendanceSummery( classId, sectionId, fromDate, toDate)
+        );
+
+        callObject.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONArray jsonArray = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
+                    try {
+                        jsonArray =  new JSONArray(response.body().string());
+                        System.out.println(">>>>>>>>>> " + jsonArray);
+                        System.out.println(">>>>>>>>>> length " + jsonArray.length());
+
+                        if(jsonArray.length() == 0){
+                            responseObj.data(null, "No data found!");
+                            return;
+                        }
+
+                        Gson gson = new Gson();
+                        ArrayList<AbsentFeeObject> absentFeeObjects = new ArrayList<>();
+
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            AbsentFeeObject absentObj = gson.fromJson(jsonArray.getJSONObject(i).toString(), AbsentFeeObject.class);
+                            absentFeeObjects.add(absentObj);
+                        }
+
+                        responseObj.data(absentFeeObjects, "Successful");
+                        //  booleanResponse.response(true, jsonObject.toString());
+                        //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+
+                        responseObj.data(null, e.getLocalizedMessage());
+                    }
+                }
+                else {
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                    responseObj.data(null, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> studentAttendance " + t.getLocalizedMessage());
+                responseObj.data(null, t.getLocalizedMessage());
+
+            }
+        });
+    }
+
+    public void attendanceFeeApproved(String token, JsonObject absents, BooleanResponse booleanResponse){
+        progressDialog.show();
+        Call<ResponseBody> attendanceCall = service.serviceWithJsonObject(token, ApiUrls.ABSENT_FEE_APPROVED ,absents);
+        attendanceCall.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONObject jsonObject = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> attendanceFeeApproved " + response.body());
+                    try {
+                        jsonObject =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> attendanceFeeApproved " + jsonObject);
+
+                        booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+                        //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+
+                        booleanResponse.response(false, e.getLocalizedMessage());
+                    }
+                }
+                else {
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                    booleanResponse.response(response.isSuccessful(), response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> studentAttendance " + t.getLocalizedMessage());
+                booleanResponse.response(false, t.getLocalizedMessage());
+
+            }
+        });
+    }
+
 }

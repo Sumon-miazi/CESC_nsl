@@ -25,6 +25,8 @@ public class ApiUrls {
     public static final String GUIDED_STUDENT =  "guided-Student";
     public static final String STUDENT_LIST =  "student-list";
     public static final String ATTENDANCE_LIST =  "attendance-list";
+    public static final String ABSENT_FEE =  "absentFee";
+    public static final String ABSENT_FEE_APPROVED =  "absentFee-create";
     public static final String STUDENT_ATTENDANCE =  "student-attendance";
     public static final String TEACHER_LESSON_PLAN =  "teacher-lesson-plan";
     public static final String ADD_LESSON_PLAN =  "store-update-lesson-plan";

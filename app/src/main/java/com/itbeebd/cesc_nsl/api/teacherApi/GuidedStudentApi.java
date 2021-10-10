@@ -164,6 +164,8 @@ public class GuidedStudentApi extends BaseService {
 
                         for(int i = 0; i < jsonArray.length(); i++){
                             JSONObject object = jsonArray.getJSONObject(i);
+
+                            System.out.println(">>>>>>>> student >> " + object);
                             Student student = gson.fromJson(object.toString(), Student.class);
                             student.setClassName(object.getJSONObject("stdclass").optString("name"));
                             student.setSectionName(object.getJSONObject("section").optString("name"));
