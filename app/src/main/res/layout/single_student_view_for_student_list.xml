@@ -1,6 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/lesson_plan_tint2"
+    android:layout_marginStart="@dimen/a_header_card_margin_start"
+    android:layout_marginEnd="@dimen/a_header_card_margin_start"
+    android:layout_marginBottom="@dimen/a_header_card_margin"
+    android:layout_marginTop="@dimen/a_header_card_margin"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="1dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/studentProfileViewId"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/default_male"
+            app:civ_border_width="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sl_motherPhoneId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/studentNameViewId" />
+
+        <TextView
+            android:id="@+id/listNoId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corner_right_side_bg"
+            android:backgroundTint="@color/student_txt"
+            android:paddingLeft="10dp"
+            android:paddingTop="6dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="6dp"
+            android:text="12345"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/studentNameViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="@dimen/padding_left"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/std_idViewId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/studentProfileViewId"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+
+        <TextView
+            android:id="@+id/std_idViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:paddingStart="@dimen/padding_left"
+            app:layout_constraintBottom_toTopOf="@+id/rollViewId"
+            app:layout_constraintEnd_toEndOf="@+id/studentNameViewId"
+            app:layout_constraintStart_toStartOf="@+id/studentNameViewId"
+            app:layout_constraintTop_toBottomOf="@+id/studentNameViewId" />
+
+        <TextView
+            android:id="@+id/rollViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:paddingStart="@dimen/padding_left"
+            app:layout_constraintBottom_toTopOf="@+id/categoryId"
+            app:layout_constraintEnd_toEndOf="@+id/studentNameViewId"
+            app:layout_constraintStart_toStartOf="@+id/studentNameViewId"
+            app:layout_constraintTop_toBottomOf="@+id/std_idViewId" />
+
+        <TextView
+            android:id="@+id/categoryId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:paddingStart="@dimen/padding_left"
+            app:layout_constraintBottom_toTopOf="@+id/sl_motherNameId"
+            app:layout_constraintEnd_toEndOf="@+id/studentNameViewId"
+            app:layout_constraintStart_toStartOf="@+id/studentNameViewId"
+            app:layout_constraintTop_toBottomOf="@+id/rollViewId" />
+
+        <TextView
+            android:id="@+id/sl_motherNameId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:textColor="@color/student_txt"
+            android:paddingStart="@dimen/padding_left"
+            app:layout_constraintBottom_toTopOf="@+id/sl_motherPhoneId"
+            app:layout_constraintEnd_toEndOf="@+id/studentNameViewId"
+            app:layout_constraintStart_toStartOf="@+id/studentNameViewId"
+            app:layout_constraintTop_toBottomOf="@+id/categoryId" />
+
+        <TextView
+            android:id="@+id/sl_motherPhoneId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textSize="12dp"
+            android:textColor="@color/student_txt"
+            android:paddingStart="@dimen/padding_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/studentNameViewId"
+            app:layout_constraintStart_toStartOf="@+id/studentNameViewId"
+            app:layout_constraintTop_toBottomOf="@+id/sl_motherNameId" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

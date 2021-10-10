@@ -150,6 +150,23 @@ public class Student extends SugarRecord implements Serializable {
 
     }
 
+    public void setMother(Guardian mother) {
+        this.mother = mother;
+    }
+
+    public void setFather(Guardian father) {
+        this.father = father;
+    }
+
+    public Guardian getMotherObject() {
+        return mother;
+    }
+
+    public Guardian getFatherObject() {
+        return father;
+    }
+
+
     public Guardian getMother() {
         if(mother == null) mother = new StudentDao().getGuardian(this, "Mother");
         return mother;

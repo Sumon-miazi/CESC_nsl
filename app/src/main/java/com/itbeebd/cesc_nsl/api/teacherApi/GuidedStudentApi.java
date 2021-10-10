@@ -9,12 +9,15 @@ import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
 import com.itbeebd.cesc_nsl.api.studentApi.LoginApi;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
+import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.sugarClass.Guardian;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -109,6 +112,102 @@ public class GuidedStudentApi extends BaseService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public  void getStudentList(String token,
+                                String year,
+                                int classId,
+                                int sectionId,
+                                String status,
+                                String filter_name,
+                                String filter_value,
+                                ResponseObj responseObj){
+        progressDialog.show();
+        Call<ResponseBody> studentCall = service.getRequestPath(token, ApiUrls.STUDENT_LIST, requestBody.studentList(
+                year,
+                classId,
+                sectionId,
+                status,
+                filter_name,
+                filter_value
+        ));
+        studentCall.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONObject data = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
+                    try {
+                        Gson gson = new Gson();
+                        data =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> " + data);
+
+                        if(!data.optBoolean("isSuccessful")){
+                            responseObj.data(null, data.optString("message"));
+                            return;
+                        }
+
+                        JSONArray jsonArray = data.getJSONArray("data");
+
+                        System.out.println(">>>>>>>>>> length " + jsonArray.length());
+
+                        if(jsonArray.length() == 0){
+                            responseObj.data(null, "No student found!");
+                            return;
+                        }
+
+                        System.out.println(">>>>>>>>>> passed length " );
+
+                        ArrayList<Student> students = new ArrayList<>();
+
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            Student student = gson.fromJson(object.toString(), Student.class);
+                            student.setClassName(object.getJSONObject("stdclass").optString("name"));
+                            student.setSectionName(object.getJSONObject("section").optString("name"));
+
+                            if(!object.optString("mother").equals("null")){
+                                Guardian mother = gson.fromJson(object.getJSONObject("mother").toString(), Guardian.class);
+                                mother.setStudent(student);
+                                student.setMother(mother);
+                            }
+
+                            if(!object.optString("father").equals("null")) {
+                                Guardian father = gson.fromJson(object.getJSONObject("father").toString(), Guardian.class);
+                                father.setStudent(student);
+                                student.setFather(father);
+                            }
+
+                            students.add(student);
+                        }
+
+                        responseObj.data(students, data.optString("message"));
+                        //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+
+                        responseObj.data(null, e.getLocalizedMessage());
+                    }
+                }
+                else {
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                    responseObj.data(null, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> getStudentList " + t.getLocalizedMessage());
+                responseObj.data(null, t.getLocalizedMessage());
+
+            }
+        });
     }
 
 }

@@ -32,6 +32,8 @@
     <dimen name="dbbl_card_txt">10dp</dimen>
     <dimen name="no_data_found_image">120dp</dimen>
 
+    <dimen name="a_header_card_margin_2">1dp</dimen>
+
     <dimen name="a_header_card_margin_start">10dp</dimen>
     <dimen name="a_header_card_margin">5dp</dimen>
     <dimen name="a_header_card_margin_end">10dp</dimen>
@@ -46,5 +48,12 @@
     <dimen name="g_expendable_guardian_info_text_size">14sp</dimen>
 
     <dimen name="lesson_plan_file_text">14sp</dimen>
+
+    <dimen name="student_list_card_txt">20sp</dimen>
+    <dimen name="student_list_sub_card_txt">12sp</dimen>
+
+    <dimen name="padding_left">10dp</dimen>
+
+
 
 </resources>

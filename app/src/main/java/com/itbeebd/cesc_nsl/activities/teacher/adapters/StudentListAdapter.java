@@ -23,7 +23,7 @@ public class StudentListAdapter  extends GenericRecyclerAdapter<Student, OnRecyc
     @NonNull
     @Override
     public StudentListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new StudentListViewHolder(inflate(R.layout.single_guide_student_view, parent), context);
+        return new StudentListViewHolder(inflate(R.layout.single_student_view_for_student_list, parent), context);
     }
 
 }

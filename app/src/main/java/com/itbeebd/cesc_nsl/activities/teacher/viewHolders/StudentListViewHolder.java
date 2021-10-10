@@ -1,89 +1,70 @@
 package com.itbeebd.cesc_nsl.activities.teacher.viewHolders;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.BaseViewHolder;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
-import com.itbeebd.cesc_nsl.activities.teacher.GuidedStudentProfileActivity;
+import com.itbeebd.cesc_nsl.api.ApiUrls;
+import com.itbeebd.cesc_nsl.sugarClass.Guardian;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
-
-import net.cachapa.expandablelayout.ExpandableLayout;
 
 public class StudentListViewHolder  extends BaseViewHolder<Student, OnRecyclerObjectClickListener<Student>> {
 
     private final Context context;
-    private final TextView studentID;
-    private final TextView slId;
-    private final TextView studentRollViewId;
+    private final TextView listNoId;
     private final TextView studentNameViewId;
-    private final ConstraintLayout attendanceRow;
-    private final ExpandableLayout expandableLayout;
-    private final TextView motherNameId;
-    private final TextView motherPhoneId;
-    private final TextView addressViewId;
-    private final TextView viewStudentProfile;
-    public static ExpandableLayout previousNode;
+    private final TextView std_idViewId;
+    private final TextView rollViewId;
+    private final TextView categoryId;
+    private final TextView sl_motherNameId;
+    private final TextView sl_motherPhoneId;
+    private final ImageView studentProfile;
+
 
     public StudentListViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         this.context = context;
-        this.studentID = itemView.findViewById(R.id.studentIDid);
-        this.attendanceRow = itemView.findViewById(R.id.first_row);
-        this.slId = itemView.findViewById(R.id.slId);
-        this.studentRollViewId = itemView.findViewById(R.id.studentRollViewId);
+        this.listNoId = itemView.findViewById(R.id.listNoId);
+        this.studentProfile = itemView.findViewById(R.id.studentProfileViewId);
         this.studentNameViewId = itemView.findViewById(R.id.studentNameViewId);
-
-        this.expandableLayout = itemView.findViewById(R.id.expandable_layout);
-        this.motherNameId = itemView.findViewById(R.id.motherNameId);
-        this.motherPhoneId = itemView.findViewById(R.id.motherPhoneId);
-        this.addressViewId = itemView.findViewById(R.id.addressViewId);
-        this.viewStudentProfile = itemView.findViewById(R.id.viewStudentProfile);
+        this.std_idViewId = itemView.findViewById(R.id.std_idViewId);
+        this.rollViewId = itemView.findViewById(R.id.rollViewId);
+        this.categoryId = itemView.findViewById(R.id.categoryId);
+        this.sl_motherNameId = itemView.findViewById(R.id.sl_motherNameId);
+        this.sl_motherPhoneId = itemView.findViewById(R.id.sl_motherPhoneId);
     }
 
     @Override
     public void onBind(Student item, @Nullable OnRecyclerObjectClickListener<Student> listener) {
 
-        if(this.getPosition() % 2 == 0){
-            attendanceRow.setBackgroundColor(context.getResources().getColor(R.color.first_row));
-        }
-        else attendanceRow.setBackgroundColor(context.getResources().getColor(R.color.second_row));
-
-        slId.setText(String.valueOf(this.getPosition() + 1));
-        studentRollViewId.setText(String.valueOf(item.getRoll()));
+        listNoId.setText(String.format("SN: %d", this.getPosition() + 1));
+        System.out.println("image >>> " + item.getImage());
+        if(item.getImage() != null) setProfileImage(studentProfile, item.getImage());
         studentNameViewId.setText(item.getName());
-        studentID.setText(String.valueOf(item.getStudentId()));
+        std_idViewId.setText(String.format("Student ID : %d", item.getStudentId()));
+        rollViewId.setText(String.format("Roll No : %d", item.getRoll()));
+        categoryId.setText(String.format("Category : %s", item.getCategory()));
+        Guardian mother = item.getMother();
+        if(mother != null){
+            sl_motherNameId.setText(String.format("Mother : %s", mother.getName()));
+            sl_motherPhoneId.setText(String.format("Phone : %s", mother.getMobile()));
+        }
+    }
 
-        motherNameId.setText(String.format("Mother name: %s", item.getMother().getName()));
-        motherPhoneId.setText(String.format("Mother phone: %s", item.getMother().getMobile()));
-        addressViewId.setText(String.format("Present address: %s", item.getPresent_address()));
-
-        item.getFather();
-
-        attendanceRow.setOnClickListener(view -> {
-            if(previousNode != null && previousNode != expandableLayout){
-                previousNode.collapse();
-            }
-            expandableLayout.toggle();
-
-            previousNode = this.expandableLayout;
-        });
-
-        viewStudentProfile.setOnClickListener(view -> {
-            System.out.println(">>>>>>> student name " + item.getName());
-            Intent intent = new Intent(context, GuidedStudentProfileActivity.class);
-            intent.putExtra("student", item);
-            context.startActivity(intent);
-//            assert listener != null;
-//            listener.onItemClicked(item, view);
-        });
-
+    private void setProfileImage(ImageView imageView, String imageUrl) {
+        Glide.with(context)
+                .load(ApiUrls.BASE_IMAGE_URL + imageUrl)
+                .placeholder(R.drawable.default_male)
+                .error(R.drawable.default_male)
+                .fallback(R.drawable.default_male)
+                .into(imageView);
     }
 }

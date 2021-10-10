@@ -92,6 +92,7 @@
     <color name="academic_tint">#79C9F1</color>
     <color name="student_tint">#84ECCE</color>
     <color name="result_tint">#EDBE79</color>
+    <color name="lesson_plan_tint2">#E0FFF0</color>
     <color name="lesson_plan_tint">#81F1BD</color>
     <color name="guided_student_tint">#B998F6</color>
     <color name="report_tint">#F68C83</color>

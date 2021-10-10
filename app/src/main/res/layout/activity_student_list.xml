@@ -6,4 +6,330 @@
     android:layout_height="match_parent"
     tools:context=".activities.teacher.StudentListActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/studentList_ToolbarId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_primary"
+        android:minWidth="?actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white">
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/studentList_ToolbarId">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/a_yearCardId"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/blue_bg_light"
+            android:layout_marginStart="@dimen/a_header_card_margin_start"
+            android:layout_marginTop="@dimen/a_header_card_margin_top"
+            android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
+            android:layout_marginEnd="@dimen/a_header_card_margin_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/a_classCardId"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/a_yearViewId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="2021"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue_active"
+                    android:textSize="@dimen/student_list_card_txt"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="@dimen/student_list_card_txt"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="YEAR"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue_active"
+                    app:autoSizeMaxTextSize="@dimen/student_list_sub_card_txt"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform" />
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/a_classCardId"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/orange_bg_light"
+            android:layout_marginStart="@dimen/a_header_card_margin_2"
+            android:layout_marginTop="@dimen/a_header_card_margin_top"
+            android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
+            android:layout_marginEnd="@dimen/a_header_card_margin_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/a_sectionCardId"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/a_yearCardId"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/a_classViewId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Nursary"
+                    android:textAlignment="center"
+                    android:textColor="@color/orange_active"
+                    android:textSize="@dimen/student_list_card_txt"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="@dimen/student_list_card_txt"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CLASS"
+                    android:textAlignment="center"
+                    android:textColor="@color/orange_active"
+                    app:autoSizeMaxTextSize="@dimen/student_list_sub_card_txt"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform" />
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/a_sectionCardId"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/blue_bg_light"
+            android:layout_marginStart="@dimen/a_header_card_margin_2"
+            android:layout_marginTop="@dimen/a_header_card_margin_top"
+            android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
+            android:layout_marginEnd="@dimen/a_header_card_margin_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/statusCardId"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/a_classCardId"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/a_sectionViewId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="A"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue_active"
+                    android:textSize="@dimen/student_list_card_txt"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="@dimen/student_list_card_txt"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SECTION"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue_active"
+                    app:autoSizeMaxTextSize="@dimen/student_list_sub_card_txt"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform" />
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/statusCardId"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/orange_bg_light"
+            android:layout_marginStart="@dimen/a_header_card_margin_2"
+            android:layout_marginTop="@dimen/a_header_card_margin_top"
+            android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
+            android:layout_marginEnd="@dimen/a_header_card_margin_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/a_filterCardId"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/a_sectionCardId"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/a_statusViewId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Active"
+                    android:textAlignment="center"
+                    android:textColor="@color/orange_active"
+                    android:textSize="@dimen/student_list_card_txt"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="@dimen/student_list_card_txt"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:id="@+id/monthNameViewId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="STATUS"
+                    android:textAlignment="center"
+                    android:textColor="@color/orange_active"
+                    app:autoSizeMaxTextSize="@dimen/student_list_sub_card_txt"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform" />
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/a_filterCardId"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/blue_bg_light"
+            android:layout_marginStart="@dimen/a_header_card_margin_2"
+            android:layout_marginTop="@dimen/a_header_card_margin_top"
+            android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
+            android:layout_marginEnd="@dimen/a_header_card_margin_end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/statusCardId"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/a_filterViewId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Name"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue_active"
+                    android:textSize="@dimen/student_list_card_txt"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="@dimen/student_list_card_txt"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:id="@+id/a_statusHintViewId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="FILTER"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue_active"
+                    app:autoSizeMaxTextSize="@dimen/student_list_sub_card_txt"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform" />
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filterBoxId"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/a_header_card_margin_start"
+        android:layout_marginEnd="8dp"
+        android:hint="Enter Student Name"
+        app:layout_constraintEnd_toStartOf="@+id/searchBtnId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/searchBtnId"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/a_header_card_margin_start"
+        android:text="Search"
+        app:layout_constraintBottom_toBottomOf="@+id/filterBoxId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/a_studentListRecyclerViewId"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterBoxId" />
+    
 </androidx.constraintlayout.widget.ConstraintLayout>

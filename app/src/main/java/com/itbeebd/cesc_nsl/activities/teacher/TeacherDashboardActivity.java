@@ -32,6 +32,7 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
 
     private Button t_addAttendanceViewId;
     private Button t_attendanceListViewId;
+    private Button t_studentListViewId;
 
     private Button t_lessonPlanListId;
     private Button t_addLessonPlanId;
@@ -54,6 +55,7 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
 
         t_addAttendanceViewId = findViewById(R.id.t_addAttendanceViewId);
         t_attendanceListViewId = findViewById(R.id.t_attendanceListViewId);
+        t_studentListViewId = findViewById(R.id.t_studentListViewId);
 
         t_lessonPlanListId = findViewById(R.id.t_lessonPlanListId);
         t_addLessonPlanId = findViewById(R.id.t_addLessonPlanId);
@@ -68,6 +70,7 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
 
         t_addAttendanceViewId.setOnClickListener(this);
         t_attendanceListViewId.setOnClickListener(this);
+        t_studentListViewId.setOnClickListener(this);
 
         t_addLessonPlanId.setOnClickListener(this::teacherLessonPlan);
         t_lessonPlanListId.setOnClickListener(this::teacherLessonPlan);
@@ -127,6 +130,9 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
         }
         else if(view.getId() == R.id.t_attendanceListViewId){
             startActivity(new Intent(this, AttendanceListActivity.class));
+        }
+        else if(view.getId() == R.id.t_studentListViewId){
+            startActivity(new Intent(this, StudentListActivity.class));
         }
     }
 
