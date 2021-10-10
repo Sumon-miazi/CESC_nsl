@@ -286,7 +286,7 @@ public class StudentListActivity extends AppCompatActivity implements OnRecycler
                 selectedFilter,
                 filterBoxId.getEditText().getText().toString(),
                 (object, message) -> {
-                    
+
                     if(students != null) students.clear();
 
                     if(object != null){
