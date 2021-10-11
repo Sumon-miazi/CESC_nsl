@@ -136,7 +136,8 @@ public class TeacherDao {
 
 
     public ArrayList<Student> getAllGuidedStudentByClassSectionId(int classId, int sectionId){
-        return (ArrayList<Student>) Student.find(Student.class, "STDCLASSID = ? and SECTIONID = ?", String.valueOf(classId), String.valueOf(sectionId));
+     //   return (ArrayList<Student>) Student.find(Student.class, "STDCLASSID = ? and SECTIONID = ?", String.valueOf(classId), String.valueOf(sectionId));
+        return (ArrayList<Student>)  Student.findWithQuery(Student.class, "SELECT * FROM STUDENT WHERE STDCLASSID = ? and SECTIONID = ? ORDER BY ROLL", String.valueOf(classId), String.valueOf(sectionId));
     }
 
 
