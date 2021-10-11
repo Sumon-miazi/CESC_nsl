@@ -11,11 +11,12 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <color name="black">#FFFFFF</color>
     <color name="oops">#7E8397</color>
-    <color name="blue_primary">#0B2D51</color>
+    <color name="blue_primary">#0C0C0C</color>
 
-    <color name="primary_active">#144A84</color>
+    <color name="primary_active">#212121</color>
+    <color name="primary_active_2">#282828</color>
     <color name="primary_bg_active">#D7E9FB</color>
     <color name="primary_inactive">#407EBC</color>
     <color name="blue_primary_dark">#0B2D51</color>
@@ -23,10 +24,10 @@
     <color name="white">#101010</color>
     <color name="filter_color">#545454</color>
     <color name="black_100">#868686</color>
-    <color name="white_2">#F4F4F4</color>
+    <color name="white_2">#191919</color>
     <color name="white_green">#E6F6F5</color>
     <color name="white_inactive">#EEFEFF</color>
-    <color name="white_inactive_2">#AEAEAE</color>
+    <color name="white_inactive_2">#EDEDED</color>
     <color name="white_inactive_3">#F3FDFF</color>
     <color name="white_inactive_4">#999999</color>
     <color name="white_inactive_5">#5B5B5B</color>
@@ -63,7 +64,7 @@
     <color name="purple_bg_light">#f3e5f5</color>
     <color name="blue_bg_light">#e3f2fd</color>
     <color name="green_bg_light">#e8f5e9</color>
-    <color name="blue_grey_bg_light">#eceff1</color>
+    <color name="blue_grey_bg_light">#2A2A2A</color>
     <color name="yellow_bg_light">#fffde7</color>
     <color name="orange_bg_light">#fff3e0</color>
     <color name="grey_bg_light">#fafafa</color>
@@ -103,6 +104,9 @@
     <color name="guided_student_txt">#9167DE</color>
     <color name="report_txt">#C85249</color>
 
-
+    <color name="text_color_white">#D7D7D7</color>
+    <color name="text_color_black">#FFFFFF</color>
+    <color name="bg_white">#101010</color>
+    <color name="bg_black">#FFFFFF</color>
 
 </resources>

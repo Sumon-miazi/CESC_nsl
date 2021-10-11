@@ -26,16 +26,6 @@ public class Invoice implements Serializable {
     @SerializedName("account_head_name")
     private String account_head_name;
 
-    @SerializedName("class_type")
-    private String classType;
-
-    public String getClassType() {
-        return classType;
-    }
-
-    public void setClassType(String classType) {
-        this.classType = classType;
-    }
 
     public int getAmount() {
         return amount;

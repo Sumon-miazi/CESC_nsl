@@ -331,6 +331,7 @@ public class PaymentApi extends BaseService {
 
                         InvoiceHeader invoiceHeader = gson.fromJson(data.toString(), InvoiceHeader.class);
                         invoiceHeader.setDate(data.getJSONObject("account").getString("date"));
+                        invoiceHeader.setClassType(data.getJSONObject("std_class").getString("type"));
 
                         if(jsonArray.length() == 0){
                             responseObj.data(null, "No data found!");

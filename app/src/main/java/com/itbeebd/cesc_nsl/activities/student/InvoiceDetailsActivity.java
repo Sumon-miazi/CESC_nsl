@@ -85,12 +85,12 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         descriptionViewId.setText(item.getAccount_head_name());
 
         String date = "" ;
-//        if(item.getCollected_month() <= 6 && item.getClassType().equals("College")){
-//            date = item.getCollected_month() + " " + (item.getAcademic_year() + 1);
-//        }
-//        else date = item.getCollected_month() + " " + item.getAcademic_year();
+        if(item.getCollected_month() <= 6 && invoiceHeader.getClassType().equals("College")){
+            date = item.month() + " " + (item.getAcademic_year() + 1);
+        }
+        else date = item.month() + " " + item.getAcademic_year();
 
-        date = item.month() + " " + item.getAcademic_year();
+     //   date = item.month() + " " + item.getAcademic_year();
 
         monthNameViewId.setText(date);
 

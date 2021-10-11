@@ -16,6 +16,17 @@ public class InvoiceHeader implements Serializable {
 
     ArrayList<Invoice> invoices;
 
+    private String classType;
+
+    public String getClassType() {
+        return classType;
+    }
+
+    public void setClassType(String classType) {
+        this.classType = classType;
+    }
+
+
     public String getDate() {
         return date;
     }

@@ -16,6 +16,7 @@
     <color name="blue_primary">#0B2D51</color>
 
     <color name="primary_active">#144A84</color>
+    <color name="primary_active_2">#4B6CD6</color>
     <color name="primary_bg_active">#D7E9FB</color>
     <color name="primary_inactive">#407EBC</color>
     <color name="blue_primary_dark">#0B2D51</color>
@@ -104,6 +105,9 @@
     <color name="guided_student_txt">#9167DE</color>
     <color name="report_txt">#C85249</color>
 
-
+    <color name="text_color_white">#FFFFFFFF</color>
+    <color name="text_color_black">#000000</color>
+    <color name="bg_white">#FFFFFF</color>
+    <color name="bg_black">#101010</color>
 
 </resources>

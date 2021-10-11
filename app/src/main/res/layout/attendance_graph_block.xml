@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
-        android:text="Attandance Status"
+        android:text="Attendance Status"
         android:textAllCaps="true"
         android:textColor="@color/white_inactive_2"
         android:textSize="20sp"
