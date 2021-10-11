@@ -1,7 +1,6 @@
 package com.itbeebd.cesc_nsl.activities.teacher.viewHolders;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,7 +11,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.BaseViewHolder;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
-import com.itbeebd.cesc_nsl.activities.teacher.GuidedStudentProfileActivity;
 import com.itbeebd.cesc_nsl.sugarClass.Student;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -77,12 +75,8 @@ public class GuideStudentListViewHolder extends BaseViewHolder<Student, OnRecycl
         });
 
         viewStudentProfile.setOnClickListener(view -> {
-            System.out.println(">>>>>>> student name " + item.getName());
-            Intent intent = new Intent(context, GuidedStudentProfileActivity.class);
-            intent.putExtra("student", item);
-            context.startActivity(intent);
-//            assert listener != null;
-//            listener.onItemClicked(item, view);
+            assert listener != null;
+            listener.onItemClicked(item, view);
         });
 
     }

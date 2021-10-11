@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
-import com.itbeebd.cesc_nsl.api.studentApi.LoginApi;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
@@ -54,7 +53,7 @@ public class GuidedStudentApi extends BaseService {
                         data =  new JSONArray(response.body().string());
                         System.out.println(">>>>>>>>>> " + data);
 
-                        LoginApi studentLoginApi = new LoginApi(context, "");
+                   //     LoginApi studentLoginApi = new LoginApi(context, "");
 
                         boolean flag = true;
 
@@ -176,16 +175,82 @@ public class GuidedStudentApi extends BaseService {
                                 student.setMother(mother);
                             }
 
-                            if(!object.optString("father").equals("null")) {
-                                Guardian father = gson.fromJson(object.getJSONObject("father").toString(), Guardian.class);
-                                father.setStudent(student);
-                                student.setFather(father);
-                            }
+//                            if(!object.optString("father").equals("null")) {
+//                                Guardian father = gson.fromJson(object.getJSONObject("father").toString(), Guardian.class);
+//                                father.setStudent(student);
+//                                student.setFather(father);
+//                            }
 
                             students.add(student);
                         }
 
                         responseObj.data(students, data.optString("message"));
+                        //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+
+                        responseObj.data(null, e.getLocalizedMessage());
+                    }
+                }
+                else {
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                    responseObj.data(null, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> getStudentList " + t.getLocalizedMessage());
+                responseObj.data(null, t.getLocalizedMessage());
+
+            }
+        });
+    }
+
+    public void getStudentById(String token, int stdId, ResponseObj responseObj){
+        progressDialog.show();
+        Call<ResponseBody> studentCall = service.getRequestPath(token, ApiUrls.STUDENT_DETAILS, requestBody.studentDetails(stdId));
+        studentCall.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONObject data = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
+                    try {
+                        Gson gson = new Gson();
+                        data =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> " + data);
+
+                        if(!data.optBoolean("isSuccessful")){
+                            responseObj.data(null, data.optString("message"));
+                            return;
+                        }
+
+                        JSONObject studentObj = data.getJSONObject("data");
+
+                            Student student = gson.fromJson(studentObj.toString(), Student.class);
+                            student.setClassName(studentObj.getJSONObject("stdclass").optString("name"));
+                            student.setSectionName(studentObj.getJSONObject("stdclass").optString("name"));
+
+                            if(!studentObj.optString("mother").equals("null")){
+                                Guardian mother = gson.fromJson(studentObj.getJSONObject("mother").toString(), Guardian.class);
+                                mother.setStudent(student);
+                                student.setMother(mother);
+                            }
+
+                            if(!studentObj.optString("father").equals("null")) {
+                                Guardian father = gson.fromJson(studentObj.getJSONObject("father").toString(), Guardian.class);
+                                father.setStudent(student);
+                                student.setFather(father);
+                            }
+
+                        responseObj.data(student, data.optString("message"));
                         //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
 
                     } catch (Exception e) {

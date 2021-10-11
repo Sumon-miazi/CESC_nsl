@@ -1,6 +1,7 @@
 package com.itbeebd.cesc_nsl.activities.teacher;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -253,9 +254,9 @@ public class StudentListActivity extends AppCompatActivity implements OnRecycler
                     break;
             }
 
-            a_filterViewId.setText(selectedFilter);
+            a_filterViewId.setText(filter[which]);
 
-            filterBoxId.setHint("Enter " + selectedFilter);
+            filterBoxId.setHint("Enter " + filter[which]);
         });
 
         b.show();
@@ -353,6 +354,18 @@ public class StudentListActivity extends AppCompatActivity implements OnRecycler
 
     @Override
     public void onItemClicked(Student item, View view) {
-
+        new GuidedStudentApi(this, "Loading...").getStudentById(
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                item.getStudentId(),
+                (object, message) -> {
+                    if(object != null){
+                        System.out.println(">>>>>>> student name " + item.getName());
+                        Intent intent = new Intent(this, GuidedStudentProfileActivity.class);
+                        intent.putExtra("student", (Student)object);
+                        startActivity(intent);
+                    }
+                    else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                }
+        );
     }
 }

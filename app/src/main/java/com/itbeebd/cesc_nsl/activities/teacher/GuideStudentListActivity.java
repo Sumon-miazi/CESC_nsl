@@ -1,8 +1,10 @@
 package com.itbeebd.cesc_nsl.activities.teacher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.teacher.adapters.GuideStudentListAdapter;
 import com.itbeebd.cesc_nsl.api.teacherApi.GuidedStudentApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
-public class GuideStudentListActivity extends AppCompatActivity {
+public class GuideStudentListActivity extends AppCompatActivity implements OnRecyclerObjectClickListener<Student> {
 
     private RecyclerView studentListRecyclerViewId;
     private CardView a_classCardId;
@@ -60,7 +63,7 @@ public class GuideStudentListActivity extends AppCompatActivity {
         setToolTip(a_classCardId, "Select a class");
 
         studentListAdapter = new GuideStudentListAdapter(this);
-     //   studentListAdapter.setListener(this);
+        studentListAdapter.setListener(this);
 
         teacherDao = new TeacherDao();
         classes = teacherDao.getAllClasses();
@@ -197,5 +200,24 @@ public class GuideStudentListActivity extends AppCompatActivity {
                 .transparentOverlay(false)
                 .build()
                 .show();
+    }
+
+    @Override
+    public void onItemClicked(Student item, View view) {
+
+        new GuidedStudentApi(this, "Loading...").getStudentById(
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                item.getStudentId(),
+                (object, message) -> {
+                    if(object != null){
+                        System.out.println(">>>>>>> student name " + item.getName());
+                        Intent intent = new Intent(this, GuidedStudentProfileActivity.class);
+                        intent.putExtra("student", (Student)object);
+                        startActivity(intent);
+                    }
+                    else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                }
+        );
+
     }
 }

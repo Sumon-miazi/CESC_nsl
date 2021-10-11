@@ -150,6 +150,7 @@ public class Student extends SugarRecord implements Serializable {
 
     }
 
+
     public void setMother(Guardian mother) {
         this.mother = mother;
     }

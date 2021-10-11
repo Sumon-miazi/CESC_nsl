@@ -52,6 +52,12 @@ public class RetrofitRequestBody {
         return map;
     }
 
+    public Map<String, Object> studentDetails(int id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("studentid", id);
+        return map;
+    }
+
     public Map<String, Object> attendanceSummery(int classId, int sectionId, String fromDate, String toDate) {
         Map<String, Object> map = new HashMap<>();
         map.put("std_class_id", classId);
