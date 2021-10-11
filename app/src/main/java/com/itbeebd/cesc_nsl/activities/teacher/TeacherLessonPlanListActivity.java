@@ -109,14 +109,16 @@ public class TeacherLessonPlanListActivity extends AppCompatActivity implements 
                 teacherDao.getClassIdByName(selectedClass),
                 teacherDao.getSectionIdByName(selectedSection),
                 (object, message) -> {
+                    if(this.teacherLessonPlans != null) this.teacherLessonPlans.clear();
+
                     if(object != null){
                         this.teacherLessonPlans = (ArrayList<TeacherLessonPlan>) object;
-                        setAdapter();
 
                         if(teacherLessonPlans != null && this.teacherLessonPlans.isEmpty())
                             Toast.makeText(this, "No lesson plan found", Toast.LENGTH_SHORT).show();
                     }
                     else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                    setAdapter();
                 }
         );
     }
