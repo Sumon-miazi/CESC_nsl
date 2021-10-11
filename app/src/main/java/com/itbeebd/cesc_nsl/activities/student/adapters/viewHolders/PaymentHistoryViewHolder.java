@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.BaseViewHolder;
@@ -16,6 +17,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.Payment;
 public class PaymentHistoryViewHolder  extends BaseViewHolder<Payment, OnRecyclerObjectClickListener<Payment>> {
 
     private Dialog dialog;
+    private final CardView paymentHistoryViewId;
     private final TextView voucherNoViewId;
     private final TextView paymentMonthId;
     private final TextView paidAmountId;
@@ -26,6 +28,7 @@ public class PaymentHistoryViewHolder  extends BaseViewHolder<Payment, OnRecycle
         super(itemView);
         this.context = context;
 
+        paymentHistoryViewId = itemView.findViewById(R.id.paymentHistoryViewId);
         voucherNoViewId = itemView.findViewById(R.id.voucherNoViewId);
         paymentMonthId = itemView.findViewById(R.id.paymentMonthId);
         paidAmountId = itemView.findViewById(R.id.paidAmountId);
@@ -37,7 +40,7 @@ public class PaymentHistoryViewHolder  extends BaseViewHolder<Payment, OnRecycle
         paymentMonthId.setText(item.getDate());
         paidAmountId.setText(item.getAmount());
 
-        voucherNoViewId.setOnClickListener(view -> {
+        paymentHistoryViewId.setOnClickListener(view -> {
             System.out.println("voucherNoViewId Clicked " + item.getVoucher_no() + " " + listener);
 
             assert listener != null;

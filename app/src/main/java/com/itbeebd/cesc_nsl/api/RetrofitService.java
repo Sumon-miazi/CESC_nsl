@@ -69,6 +69,12 @@ public interface RetrofitService {
             @Path("sectionId") int sectionId
     );
 
+    @GET("auth/invoiceDetails/{invoice}")
+    Call<ResponseBody> getInvoiceDetails(
+            @Header("Authorization") String authorization,
+            @Path("invoice") String invoice
+    );
+
     @GET("auth/attendance/{id}")
     Call<ResponseBody> getAttendanceByAttendanceId(
             @Header("Authorization") String authorization,

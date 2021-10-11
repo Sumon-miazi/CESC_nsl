@@ -10,6 +10,7 @@
     android:layout_marginTop="2dp"
     android:clickable="true"
     android:focusable="true"
+    android:id="@+id/paymentHistoryViewId"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"

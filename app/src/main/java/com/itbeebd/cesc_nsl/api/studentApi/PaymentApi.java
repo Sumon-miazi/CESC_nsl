@@ -2,6 +2,7 @@ package com.itbeebd.cesc_nsl.api.studentApi;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
@@ -9,10 +10,13 @@ import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.interfaces.DueHistoryResponse;
 import com.itbeebd.cesc_nsl.interfaces.PaymentHistoryResponse;
 import com.itbeebd.cesc_nsl.interfaces.PaymentResponse;
+import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 import com.itbeebd.cesc_nsl.utils.DBBL;
 import com.itbeebd.cesc_nsl.utils.dummy.Due;
 import com.itbeebd.cesc_nsl.utils.dummy.DueHistory;
+import com.itbeebd.cesc_nsl.utils.dummy.Invoice;
+import com.itbeebd.cesc_nsl.utils.dummy.InvoiceHeader;
 import com.itbeebd.cesc_nsl.utils.dummy.Payment;
 
 import org.json.JSONArray;
@@ -297,6 +301,76 @@ public class PaymentApi extends BaseService {
                 booleanResponse.response(
                         false,
                         t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public  void getInvoiceDetails(String token, String invoice, ResponseObj responseObj){
+        progressDialog.show();
+        Call<ResponseBody> studentCall = service.getInvoiceDetails(token, invoice);
+        studentCall.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONObject data = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
+                    try {
+                        Gson gson = new Gson();
+                        data =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> " + data);
+
+                        if(!data.optBoolean("isSuccessful")){
+                            responseObj.data(null, data.optString("message"));
+                            return;
+                        }
+                        JSONArray jsonArray = data.getJSONObject("account").getJSONArray("account_detail");
+
+                        System.out.println(">>>>>>>>>> length " + jsonArray.length());
+
+                        InvoiceHeader invoiceHeader = gson.fromJson(data.toString(), InvoiceHeader.class);
+                        invoiceHeader.setDate(data.getJSONObject("account").getString("date"));
+
+                        if(jsonArray.length() == 0){
+                            responseObj.data(null, "No data found!");
+                            return;
+                        }
+
+                        System.out.println(">>>>>>>>>> passed length " );
+
+                        ArrayList<Invoice> invoices = new ArrayList<>();
+
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            Invoice invoice = gson.fromJson(object.toString(), Invoice.class);
+                            System.out.println(invoice.getAccount_head_name() + " >>>>>>>>>>>>");
+                            invoices.add(invoice);
+                        }
+                        invoiceHeader.setInvoices(invoices);
+                        responseObj.data(invoiceHeader, data.optString("message"));
+                        //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+
+                        responseObj.data(null, e.getLocalizedMessage());
+                    }
+                }
+                else {
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                    responseObj.data(null, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                System.out.println(">>>>>>>>>> getStudentList " + t.getLocalizedMessage());
+                responseObj.data(null, t.getLocalizedMessage());
+
             }
         });
     }

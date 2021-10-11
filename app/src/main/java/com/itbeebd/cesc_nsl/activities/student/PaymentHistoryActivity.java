@@ -2,6 +2,7 @@ package com.itbeebd.cesc_nsl.activities.student;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListe
 import com.itbeebd.cesc_nsl.activities.student.adapters.PaymentHistoryAdapter;
 import com.itbeebd.cesc_nsl.api.studentApi.PaymentApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
+import com.itbeebd.cesc_nsl.utils.dummy.InvoiceHeader;
 import com.itbeebd.cesc_nsl.utils.dummy.Payment;
 
 import java.util.ArrayList;
@@ -88,7 +90,19 @@ public class PaymentHistoryActivity extends AppCompatActivity implements OnRecyc
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onItemClicked(Payment item, View view){
-
+        new PaymentApi(this).getInvoiceDetails(
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                item.getVoucher_no(),
+                (object, message) -> {
+                    if(object != null){
+                        InvoiceHeader invoiceHeader = (InvoiceHeader) object;
+                        Intent intent = new Intent(this, InvoiceDetailsActivity.class);
+                        intent.putExtra("invoiceDetails", invoiceHeader);
+                        startActivity(intent);
+                    }
+                    else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                }
+        );
     }
 //    public void onItemClicked(Payment item, View view) {
 //
