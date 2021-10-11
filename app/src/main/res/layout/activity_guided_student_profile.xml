@@ -18,24 +18,38 @@
             <View
                 android:id="@+id/studentProfileBgViewId"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="0dp"
                 android:background="@drawable/round_corner_bottom_bg"
                 android:minHeight="90dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/studentProfileViewId"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/studentProfileCardViewId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                app:civ_border_width="1dp"
-                android:src="@drawable/default_male"
-                app:layout_constraintBottom_toBottomOf="@+id/studentProfileBgViewId"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/blue_primary_dark"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/studentProfileBgViewId" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/studentProfileViewId"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/default_male"
+                    app:civ_border_width="1dp" />
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
                 android:id="@+id/studentNameViewId"
@@ -48,8 +62,9 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/classNameViewId"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/studentProfileViewId"
-                app:layout_constraintTop_toTopOf="@+id/studentProfileViewId" />
+                app:layout_constraintStart_toEndOf="@+id/studentProfileCardViewId"
+                app:layout_constraintTop_toTopOf="@+id/studentProfileCardViewId"
+                app:layout_constraintVertical_chainStyle="packed" />
 
 
             <TextView
@@ -82,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/studentProfileViewId"
+                app:layout_constraintBottom_toBottomOf="@+id/studentProfileCardViewId"
                 app:layout_constraintEnd_toEndOf="@+id/studentNameViewId"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/studentNameViewId"
