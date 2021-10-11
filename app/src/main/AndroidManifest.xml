@@ -24,22 +24,28 @@
         tools:ignore="LockedOrientationActivity">
         <activity
             android:name=".activities.student.InvoiceDetailsActivity"
-            android:exported="true" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.teacher.AbsentFeeActivity"
-            android:exported="true" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.teacher.TeacherRoutineActivity"
-            android:exported="true" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.teacher.StudentListActivity"
-            android:exported="true" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.teacher.TeacherLessonPlanViewOrEditActivity"
-            android:exported="true" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.teacher.TeacherLessonPlanListActivity"
-            android:exported="true" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.teacher.AttendanceViewOrEditActivity"
             android:launchMode="singleTask"
