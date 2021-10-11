@@ -40,6 +40,8 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
 
     private TextView todayDateViewId;
     private TextView userNameViewId;
+    private TextView designationViewId;
+    private TextView deptViewId;
     private ImageView teacherProfileViewId;
     private TeacherDao teacherDao;
     private long time;
@@ -64,6 +66,8 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
 
         todayDateViewId = findViewById(R.id.todayDateViewId);
         userNameViewId = findViewById(R.id.userNameViewId);
+        designationViewId = findViewById(R.id.designationViewId);
+        deptViewId = findViewById(R.id.deptViewId);
         teacherProfileViewId = findViewById(R.id.teacherProfileViewId);
 
         teacherDao = new TeacherDao();
@@ -95,8 +99,10 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
         Date date = new Date();
         todayDateViewId.setText(SimpleDateKt.toDateEMY(date));
         Teacher teacher = teacherDao.getTeacher(this);
-
-        userNameViewId.setText(teacher.getName().substring(teacher.getName().lastIndexOf(" ") + 1));
+        String greetings = "Hello, " + teacher.getName().substring(teacher.getName().lastIndexOf(" ") + 1);
+        userNameViewId.setText(greetings);
+        designationViewId.setText(teacher.getDesignation());
+        deptViewId.setText(String.format("Department: %s", teacher.getDepartment()));
 
         if (teacher.getImage() != null) {
             setProfileImage(teacherProfileViewId, teacher.getImage());

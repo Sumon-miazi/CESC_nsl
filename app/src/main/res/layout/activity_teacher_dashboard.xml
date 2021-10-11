@@ -18,7 +18,7 @@
         <View
             android:id="@+id/studentProfileBgViewId"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="0dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/round_corner_bottom_bg"
             android:minHeight="90dp"
@@ -32,12 +32,13 @@
             android:id="@+id/teacherProfileViewId"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:src="@drawable/default_male"
             app:civ_border_width="0dp"
             app:civ_shadow="true"
             app:civ_shadow_color="@color/blue_primary_dark"
-            app:civ_shadow_radius="6dp"
+            app:civ_shadow_radius="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />"
 
@@ -48,11 +49,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="23 September, 2021"
             android:textColor="@color/white_inactive"
             android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/userNameViewId"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/textView"
@@ -62,6 +64,7 @@
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/todayDateViewId"
             app:layout_constraintTop_toBottomOf="@+id/todayDateViewId" />
 
@@ -69,14 +72,39 @@
             android:id="@+id/userNameViewId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="There"
+            android:layout_marginTop="8dp"
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:autoSizeMaxTextSize="30sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@+id/designationViewId"
             app:layout_constraintEnd_toStartOf="@+id/teacherProfileViewId"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/todayDateViewId" />
+
+        <TextView
+            android:id="@+id/designationViewId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/deptViewId"
+            app:layout_constraintStart_toStartOf="@+id/userNameViewId"
+            app:layout_constraintTop_toBottomOf="@+id/userNameViewId" />
+
+        <TextView
+            android:id="@+id/deptViewId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/designationViewId"
+            app:layout_constraintTop_toBottomOf="@+id/designationViewId"
             app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
