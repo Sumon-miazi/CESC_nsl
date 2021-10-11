@@ -309,8 +309,8 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
         Date date = new Date();
         todayDateViewId.setText(SimpleDateKt.toDateEMY(date));
-
-        userNameViewId.setText(stdObj.getName().substring(stdObj.getName().lastIndexOf(" ") + 1));
+        String greetings = "Hello, " + stdObj.getName().substring(stdObj.getName().lastIndexOf(" ") + 1);
+        userNameViewId.setText(greetings);
         d_studentNameViewId.setText(stdObj.getName());
         d_studentIdViewId.setText(String.format("Student ID: %d", stdObj.getStudentId()));
 

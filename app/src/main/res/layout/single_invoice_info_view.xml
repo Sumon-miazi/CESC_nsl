@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="14dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintStart_toEndOf="@+id/dueNoId"
             app:layout_constraintTop_toTopOf="parent" />

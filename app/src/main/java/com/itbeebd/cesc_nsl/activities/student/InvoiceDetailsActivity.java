@@ -86,7 +86,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
 
         String date = "" ;
         if(item.getCollected_month() <= 6 && invoiceHeader.getClassType().equals("College")){
-            date = item.month() + " " + (item.getAcademic_year() + 1);
+            date = item.month() + " " + (Integer.parseInt(item.getAcademic_year()) + 1);
         }
         else date = item.month() + " " + item.getAcademic_year();
 
