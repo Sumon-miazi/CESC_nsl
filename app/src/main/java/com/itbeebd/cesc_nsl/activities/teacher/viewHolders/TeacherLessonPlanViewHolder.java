@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.BaseViewHolder;
@@ -16,6 +17,7 @@ import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 public class TeacherLessonPlanViewHolder extends BaseViewHolder<String, OnRecyclerObjectClickListener<String>> {
 
     private final Context context;
+    private final CardView lessonPlanCardViewId;
     private final TextView fileTypeId;
     private final TextView fileName_id;
     private final ImageView removeFileBtnId;
@@ -23,10 +25,10 @@ public class TeacherLessonPlanViewHolder extends BaseViewHolder<String, OnRecycl
     public TeacherLessonPlanViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         this.context = context;
+        this.lessonPlanCardViewId = itemView.findViewById(R.id.lessonPlanCardViewId);
         this.fileTypeId = itemView.findViewById(R.id.fileTypeId);
         this.fileName_id = itemView.findViewById(R.id.fileName_id);
         this.removeFileBtnId = itemView.findViewById(R.id.removeFileBtnId);
-
     }
 
     @Override
@@ -42,6 +44,10 @@ public class TeacherLessonPlanViewHolder extends BaseViewHolder<String, OnRecycl
             removeFileBtnId.setVisibility(View.GONE);
         }
 
+        lessonPlanCardViewId.setOnClickListener(view -> {
+            assert listener != null;
+            listener.onItemClicked(item, view);
+        });
 
         removeFileBtnId.setOnClickListener(view -> {
             assert listener != null;

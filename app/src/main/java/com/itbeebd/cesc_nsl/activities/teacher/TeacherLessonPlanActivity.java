@@ -2,9 +2,11 @@ package com.itbeebd.cesc_nsl.activities.teacher;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +31,7 @@ import com.itbeebd.cesc_nsl.activities.teacher.adapters.TeacherLessonPlanAdapter
 import com.itbeebd.cesc_nsl.api.teacherApi.LessonApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
+import com.itbeebd.cesc_nsl.utils.NotificationReminder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -158,6 +161,9 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
         setToolTip(a_classCardId, "Select a class");
 
         setAdapter();
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
 
     }
 
@@ -378,13 +384,32 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
 
     @Override
     public void onItemClicked(String item, View view) {
-        for(int i = 0; i < mSelected_files.size(); i++){
-            if(mSelected_files.get(i).equalsIgnoreCase(item)){
-                mSelected_files.remove(item);
-             //   lessonPlanAdapter.remove(item);
-            //    itemRemoved(i);
-                setAdapter();
-                break;
+
+        if (view.getId() == R.id.removeFileBtnId){
+            for(int i = 0; i < mSelected_files.size(); i++){
+                if(mSelected_files.get(i).equalsIgnoreCase(item)){
+                    mSelected_files.remove(item);
+                    //   lessonPlanAdapter.remove(item);
+                    //    itemRemoved(i);
+                    setAdapter();
+                    break;
+                }
+            }
+        }
+        else if(view.getId() == R.id.lessonPlanCardViewId){
+            System.out.println("item >>>>>>> " + item);
+            try {
+                if(item.startsWith("http")){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(item));
+                    startActivity(intent);
+                }
+                else {
+                    startActivity(new NotificationReminder(this).openFile(item));;
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
             }
         }
     }

@@ -80,7 +80,34 @@ public class NotificationReminder extends FileProvider  {
         return intent;
     }
 
-    private String getMimeType(File file) {
+    public Intent openFile(String fileUrl) {
+
+        File file = new File((Uri.parse("content://" + fileUrl )).getPath());
+//        System.out.println(">>>>>>>>>>>>>>> file" + file);
+        String type = getMimeType(file);
+ //       Uri path = Uri.fromFile(file);
+
+ //       File cesc_file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/", "");
+//        File newFile = new File(cesc_file, path.toString());
+//            System.out.println(">>>>>>>>>>>>>>> path" + path);
+//            System.out.println(">>>>>>>>>>>>>>> cesc_file" + cesc_file);
+//            System.out.println(">>>>>>>>>>>>>>> newFile" + newFile);
+//            System.out.println(">>>>>>>>>>>>>>> type" + type);
+
+        Uri contentUri = getUriForFile(context, "com.itbeebd.cesc_nsl.utils.NotificationReminder", file);
+
+            System.out.println(">>>>>>>>>>>>>>> contentUri" + contentUri);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setDataAndType(contentUri, type);
+
+       //    System.out.println(">>>>>>>>>>>>>>> path type " + path + " " + type);
+
+        return intent;
+    }
+
+    public String getMimeType(File file) {
         Uri uri = Uri.fromFile(file);
         String mimeType = null;
         if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
