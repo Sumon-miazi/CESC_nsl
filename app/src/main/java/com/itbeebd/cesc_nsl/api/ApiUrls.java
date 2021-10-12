@@ -3,14 +3,14 @@ package com.itbeebd.cesc_nsl.api;
 public class ApiUrls {
 
     // Local Server
-//    public static final String IP_ADDRESS = "http://192.168.0.109";
-//    public static final String BASE_IMAGE_URL = IP_ADDRESS + "/cescms";
-//    public static final String BASE_URL_API = BASE_IMAGE_URL + "/api/";
+    public static final String IP_ADDRESS = "http://192.168.0.109";
+    public static final String BASE_IMAGE_URL = IP_ADDRESS + "/cescms";
+    public static final String BASE_URL_API = BASE_IMAGE_URL + "/api/";
 
     // live server
-    public static final String IP_ADDRESS = "https://cesc.edu.bd";
-    public static final String BASE_IMAGE_URL = IP_ADDRESS;
-    public static final String BASE_URL_API = IP_ADDRESS + "/api/";
+//    public static final String IP_ADDRESS = "https://cesc.edu.bd";
+//    public static final String BASE_IMAGE_URL = IP_ADDRESS;
+//    public static final String BASE_URL_API = IP_ADDRESS + "/api/";
 
     public static final String INVOICE_URL =  BASE_IMAGE_URL + "/invoiceDetails/";
     public static final String DUE_HISTORY =  "dueHistory";
@@ -32,6 +32,9 @@ public class ApiUrls {
     public static final String TEACHER_LESSON_PLAN =  "teacher-lesson-plan";
     public static final String ADD_LESSON_PLAN =  "store-update-lesson-plan";
     public static final String TEACHER_ROUTINE =  "teacher-routine";
+
+
+    public static final String MAIN =  "cesc-home";
 
 
 

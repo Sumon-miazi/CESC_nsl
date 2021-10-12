@@ -106,4 +106,9 @@ dependencies {
     implementation 'com.github.douglasjunior:android-simple-tooltip:1.0.0-rc.0'
 
     implementation 'com.github.abhishekti7:UnicornFilePicker:1.0.2'
+
+    //Slider library
+    // Circle Indicator (To fix the xml preview "Missing classes" error)
+    implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.5'
 }

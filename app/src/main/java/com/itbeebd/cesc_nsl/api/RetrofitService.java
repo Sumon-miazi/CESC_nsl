@@ -50,6 +50,14 @@ public interface RetrofitService {
 
     @GET("auth/{path}")
     Call<ResponseBody> getRequestPath(
+            @Path("path") String path
+    );
+
+    @GET(ApiUrls.MAIN)
+    Call<ResponseBody> getHomeData();
+
+    @GET("auth/{path}")
+    Call<ResponseBody> getRequestPath(
             @Header("Authorization") String authorization,
             @Path("path") String path
     );

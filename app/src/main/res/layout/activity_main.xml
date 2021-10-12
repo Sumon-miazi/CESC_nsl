@@ -6,26 +6,215 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/studentProfileBgViewId"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/round_corner_bottom_bg"
+            android:minHeight="90dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/studentProfileViewId"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/app_logo"
+            app:civ_border_width="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/studentProfileBgViewId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/studentProfileBgViewId" />
+
+        <TextView
+            android:id="@+id/studentNameViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="CANTONMENT ENGLISH SCHOOL &amp; COLLEGE"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            app:autoSizeMaxTextSize="18sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            android:maxLines="2"
+            app:layout_constraintBottom_toBottomOf="@+id/studentProfileViewId"
+            app:layout_constraintEnd_toStartOf="@+id/guideline12"
+            app:layout_constraintStart_toEndOf="@+id/studentProfileViewId"
+            app:layout_constraintTop_toTopOf="@+id/studentProfileViewId" />
+
+        <ImageView
+            android:id="@+id/profileEditBtnId"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/studentProfileBgViewId" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.84" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sliderCardId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        android:visibility="gone"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
+
+        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+            android:id="@+id/carousel"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+
+            app:autoPlay="true"
+            app:autoPlayDelay="3000"
+            app:autoWidthFixing="true"
+            app:carouselGravity="CENTER"
+
+            app:carouselType="SHOWCASE"
+            app:infiniteCarousel="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:scaleOnScroll="true"
+
+            app:scalingFactor="0.0"
+            app:showBottomShadow="false"
+            app:showNavigationButtons="false"
+            app:showTopShadow="false" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sliderCardId">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="notice"
+            android:background="@color/blue_bg_light"
+            android:textColor="@color/blue_active"
+            android:padding="10dp"
+            android:letterSpacing="0.5"
+            android:textAllCaps="true"
+            android:textAlignment="center"
+            android:gravity="center"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/studentLoginBtnId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Student login"
         app:layout_constraintBottom_toTopOf="@+id/teacherLoginBtnId"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintEnd_toEndOf="@+id/teacherLoginBtnId"
+        app:layout_constraintStart_toStartOf="@+id/teacherLoginBtnId" />
 
     <Button
         android:id="@+id/teacherLoginBtnId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
         android:text="Teacher login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/studentLoginBtnId" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+<!--
+<org.imaginativeworld.whynotimagecarousel.ImageCarousel
+    android:id="@+id/carousel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    app:showTopShadow="true"
+    app:topShadowAlpha="0.6"
+    app:topShadowHeight="32dp"
+
+    app:showBottomShadow="true"
+    app:bottomShadowAlpha="0.6"
+    app:bottomShadowHeight="64dp"
+
+    app:showCaption="true"
+    app:captionMargin="0dp"
+    app:captionTextSize="14sp"
+
+    app:showIndicator="true"
+    app:indicatorMargin="0dp"
+
+    app:imageScaleType="centerCrop"
+
+    app:carouselBackground="#00000000"
+    app:imagePlaceholder="@drawable/ic_picture"
+
+    app:carouselPadding="0dp"
+    app:carouselPaddingBottom="0dp"
+    app:carouselPaddingEnd="0dp"
+    app:carouselPaddingStart="0dp"
+    app:carouselPaddingTop="0dp"
+
+    app:showNavigationButtons="true"
+    app:previousButtonLayout="@layout/previous_button_layout"
+    app:previousButtonId="@id/btn_previous"
+    app:previousButtonMargin="4dp"
+    app:nextButtonLayout="@layout/next_button_layout"
+    app:nextButtonId="@id/btn_next"
+    app:nextButtonMargin="4dp"
+
+    app:carouselType="BLOCK"
+    app:carouselGravity="CENTER"
+
+    app:scaleOnScroll="false"
+    app:scalingFactor="0.15"
+    app:autoWidthFixing="true"
+    app:autoPlay="false"
+    app:autoPlayDelay="3000"
+    app:infiniteCarousel="true"
+    app:touchToPause="true" />
+
+-->

@@ -74,15 +74,17 @@
         <entry key="app/src/main/res/layout/content_student_nav.xml" value="0.18" />
         <entry key="app/src/main/res/layout/drawer_layout.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_notice_genera.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_result_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.17" />
         <entry key="app/src/main/res/layout/invoice_details_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/lesson_plan_block.xml" value="0.25" />
         <entry key="app/src/main/res/layout/month_name_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/no_data_found.xml" value="0.18" />
         <entry key="app/src/main/res/layout/no_internet.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/notice_board_dialog.xml" value="0.22" />
         <entry key="app/src/main/res/layout/single_absent_fee_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_attendance_list_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_attendance_view.xml" value="0.4640776699029126" />
@@ -93,6 +95,7 @@
         <entry key="app/src/main/res/layout/single_guardian_info_edit_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/single_guardian_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_guide_student_view.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/single_home_notice_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_invoice_info_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_lesson_plan_file_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_lesson_plan_view.xml" value="0.33" />
@@ -102,7 +105,7 @@
         <entry key="app/src/main/res/layout/single_payment_history_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_quiz_archive_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_quiz_view.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/single_student_notification_view.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/single_student_notification_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/single_student_view_for_student_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_subject_result_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_teacher_lesson_plan_list_view.xml" value="0.25" />
