@@ -20,6 +20,7 @@ public class ApiUrls {
     public static final String DASHBOARD_HEADER_INFO =  "dashboard-header-info";
     public static final String RESULT =  "result";
     public static final String LOGOUT =  "logout";
+    public static final String TEACHER_LOGOUT =  "teacher-logout";
     public static final String ONLINE_CLASS =  "online-class";
     public static final String QUIZ_ARCHIVE =  "quiz-archive";
     public static final String GUIDED_STUDENT =  "guided-Student";

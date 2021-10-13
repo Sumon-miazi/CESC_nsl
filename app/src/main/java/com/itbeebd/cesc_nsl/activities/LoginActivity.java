@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.student.StudentDashboardActivity;
 import com.itbeebd.cesc_nsl.api.studentApi.LoginApi;
@@ -21,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout userId;
     private TextInputLayout userPassword;
     private Button loginBtn;
-    private RadioGroup userCategoryRadioId;
+//    private RadioGroup userCategoryRadioId;
     private ImageView signInBackBtnId;
 
     @Override
@@ -34,19 +32,20 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = findViewById(R.id.loginBtnId);
         signInBackBtnId = findViewById(R.id.signInBackBtnId);
 
-        userCategoryRadioId = findViewById(R.id.userCategoryRadioId);
-
-        userCategoryRadioId.setOnCheckedChangeListener((radioGroup, i) -> {
-            System.out.println(">>>>> radio group i " + i);
-        });
+//        userCategoryRadioId = findViewById(R.id.userCategoryRadioId);
+//
+//        userCategoryRadioId.setOnCheckedChangeListener((radioGroup, i) -> {
+//            System.out.println(">>>>> radio group i " + i);
+//        });
 
         loginBtn.setOnClickListener(view -> {
             loginCredentialValidate(userId.getEditText().getText().toString().trim(), userPassword.getEditText().getText().toString().trim());
         });
 
         signInBackBtnId.setOnClickListener(view -> {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+            super.onBackPressed();
+         //   startActivity(new Intent(this, MainActivity.class));
+         //   finish();
         });
 
     //    new NotificationReminder(this).sendNotification("Hee", "hi", "/storage/emulated/0/CESC/LessonPlanFiles/fother.jpg");
@@ -63,17 +62,19 @@ public class LoginActivity extends AppCompatActivity {
         new LoginApi(this, "Signing in...").studentLogin(userId, password, "123456", ((isSuccess, message) -> {
             if(isSuccess){
                 CustomSharedPref.getInstance(this).setUserLoggedInOrNot(true);
-                this.startActivity(new Intent(this, StudentDashboardActivity.class));
+                Intent intent = new Intent(this, StudentDashboardActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                this.startActivity(intent);
                 finish();
             }
             else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }));
     }
 
-    @Override
-    public void onBackPressed() {
-        // super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        // super.onBackPressed();
+//        startActivity(new Intent(this, MainActivity.class));
+//      //  finish();
+//    }
 }

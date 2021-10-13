@@ -148,7 +148,7 @@ public class LoginApi extends BaseService {
 
     public void logout(String token, BooleanResponse booleanResponse){
         progressDialog.show();
-        Call<ResponseBody> studentLogout = service.getRequestPath(token, ApiUrls.LOGOUT);
+        Call<ResponseBody> studentLogout = service.getRequestPath(token, ApiUrls.TEACHER_LOGOUT);
         studentLogout.enqueue(new Callback<ResponseBody>(){
 
             @Override

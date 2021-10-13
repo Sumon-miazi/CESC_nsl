@@ -1,18 +1,24 @@
 package com.itbeebd.cesc_nsl.activities.teacher;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
+import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
+import com.itbeebd.cesc_nsl.api.teacherApi.LoginApi;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 import com.itbeebd.cesc_nsl.sugarClass.Teacher;
 import com.parassidhu.simpledate.SimpleDateKt;
@@ -23,6 +29,7 @@ import java.util.Date;
 
 public class TeacherDashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private LinearLayout t_dashboardLayoutId;
     private ExpandableLayout academicExpandableLayout;
     private ExpandableLayout studentExpandableLayout;
     private ExpandableLayout resultExpandableLayout;
@@ -49,6 +56,7 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_dashboard);
 
+        t_dashboardLayoutId = findViewById(R.id.t_dashboardLayoutId);
         academicExpandableLayout = findViewById(R.id.academic_expandable_layout);
         studentExpandableLayout = findViewById(R.id.student_expandable_layout);
         resultExpandableLayout = findViewById(R.id.result_expandable_layout);
@@ -82,6 +90,8 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
         t_lessonPlanListId.setOnClickListener(this::teacherLessonPlan);
 
         setupTeacherProfile();
+
+        teacherProfileViewId.setOnClickListener(this::showLogoutSnackbar);
 
     }
 
@@ -167,5 +177,33 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
             time = System.currentTimeMillis();
             Toast.makeText(this, "press again to exit", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void showLogoutSnackbar(View view){
+        Snackbar snackbar = Snackbar
+                .make(t_dashboardLayoutId, "Do you want to logout?", Snackbar.LENGTH_LONG)
+                .setAction("YES", view1 -> {
+                  //  Toast.makeText(this, "Yes clicked", Toast.LENGTH_SHORT).show();
+                    callLogoutApi();
+                });
+
+        snackbar.setActionTextColor(Color.RED);
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+        textView.setTextColor(Color.YELLOW);
+        snackbar.show();
+    }
+
+    private void callLogoutApi() {
+        new LoginApi(this, "Logging out...").logout(
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                (isSuccess, message) -> {
+                    if(isSuccess) {
+                        CustomSharedPref.getInstance(getApplicationContext()).setUserLoggedInOrNot(false);
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
+                    }else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                }
+        );
     }
 }

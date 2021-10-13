@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.api.teacherApi.LoginApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
@@ -44,8 +43,9 @@ public class TeacherLoginActivity extends AppCompatActivity {
         });
 
         signInBackBtnId.setOnClickListener(view -> {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+            super.onBackPressed();
+        //    startActivity(new Intent(this, MainActivity.class));
+         //   finish();
         });
 
         //    new NotificationReminder(this).sendNotification("Hee", "hi", "/storage/emulated/0/CESC/LessonPlanFiles/fother.jpg");
@@ -62,17 +62,19 @@ public class TeacherLoginActivity extends AppCompatActivity {
         new LoginApi(this, "Signing in...").teacherLogin(userId, password, "123456", ((isSuccess, message) -> {
             if(isSuccess){
                 CustomSharedPref.getInstance(this).setUserLoggedInOrNot(true);
-                this.startActivity(new Intent(this, TeacherDashboardActivity.class));
+                Intent intent = new Intent(this, TeacherDashboardActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                this.startActivity(intent);
                 finish();
             }
             else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }));
     }
 
-    @Override
-    public void onBackPressed() {
-        // super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        // super.onBackPressed();
+//        startActivity(new Intent(this, MainActivity.class));
+//     //   finish();
+//    }
 }

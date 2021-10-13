@@ -118,11 +118,11 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
                 if(item.getItemId() == R.id.teacher){
                     startActivity(new Intent(MainActivity.this, TeacherLoginActivity.class));
-                    finish();
+                //    finish();
                 }
                 else if(item.getItemId() == R.id.student){
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
+                //    finish();
                 }
                 return true;
             }
@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
         popup.show();//showing popup menu
     }
+
     private void setLoginOrUserProfileLink() {
         if (CustomSharedPref.getInstance(this).getUserLoggedInOrNot()) {
             if (CustomSharedPref.getInstance(this).getUserType().equals("teacher"))
@@ -221,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
 //            if(flag) this.startActivity(new Intent(this, StudentDashboardActivity.class));
 //            else this.startActivity(new Intent(this, LoginActivity.class));
+
             this.startActivity(intent);
             finish();
         }

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
+    android:id="@+id/t_dashboardLayoutId"
     tools:context=".activities.teacher.TeacherDashboardActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
