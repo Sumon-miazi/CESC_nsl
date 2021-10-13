@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.activities.VideoPlayerActivity;
 import com.itbeebd.cesc_nsl.activities.genericClasses.BaseViewHolder;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
@@ -81,9 +82,14 @@ public class OnlineClassViewHolder extends BaseViewHolder<OnlineClass, OnRecycle
         });
 
         watchBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(item.getUrl()));
+            Intent intent = new Intent(context, VideoPlayerActivity.class);
+            intent.putExtra("web_url", item.getUrl());
+       //     intent.setData(Uri.parse(item.getUrl()));
             context.startActivity(intent);
+
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setData(Uri.parse(item.getUrl()));
+//            context.startActivity(intent);
         });
     }
 

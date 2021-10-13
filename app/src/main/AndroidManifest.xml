@@ -23,6 +23,12 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".activities.VideoPlayerActivity"
+            android:exported="false"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.student.InvoiceDetailsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />

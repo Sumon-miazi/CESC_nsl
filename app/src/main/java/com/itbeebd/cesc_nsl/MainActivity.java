@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -37,6 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import devjdelasen.com.sidebubbles.SideBubbles;
+
 public class MainActivity extends AppCompatActivity {
 
     private CheckNetworkConnection networkConnection;
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private Button teacherLoginBtnId;
     private CardView sliderCardId;
     private ImageCarousel carousel;
+    private SideBubbles sideBubbles;
 
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         networkConnection = new CheckNetworkConnection(this);
         flag = CustomSharedPref.getInstance(this).getStudentLoggedInOrNot();
 
+        sideBubbles = findViewById(R.id.sideBubbles);
         sliderCardId = findViewById(R.id.sliderCardId);
         carousel = findViewById(R.id.carousel);
         studentLoginBtnId = findViewById(R.id.studentLoginBtnId);
@@ -94,6 +99,21 @@ public class MainActivity extends AppCompatActivity {
         admissionNoticeFragment = new NoticeGeneraFragment();
     //    setSlider();
         getDataFromApi();
+    }
+
+    private void setupBubbleLogin(){
+        sideBubbles.addItem("Student", R.drawable.ic_add_more, ContextCompat.getColor(this, R.color.colorAccent));
+        sideBubbles.addItem("Teacher", R.drawable.ic_add_more, ContextCompat.getColor(this, R.color.colorAccent));
+      //  sideBubbles.addItem("chat", R.drawable.ic_add_more, ContextCompat.getColor(this, R.color.colorAccent));
+
+        sideBubbles.setClickItemListener(s -> {
+            Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        });
+//        sideBubbles.setClickItemListener(object: SideBubbles.OnClickItemListener {
+//            override fun onClickItem(id: String) {
+//                Toast.makeText(this@MainActivity, id, Toast.LENGTH_SHORT).show()
+//            }
+//        })
     }
 
 
