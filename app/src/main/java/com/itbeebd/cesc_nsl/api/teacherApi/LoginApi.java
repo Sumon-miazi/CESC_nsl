@@ -114,7 +114,9 @@ public class LoginApi extends BaseService {
 
                         CustomSharedPref.getInstance(context).setAuthToken("Bearer " + jsonObject.optString("token"));
 
+                        CustomSharedPref.getInstance(context).setUserType("teacher");
                         CustomSharedPref.getInstance(context).setUserId(teacherEmail);
+                        CustomSharedPref.getInstance(context).setUserPassword(password);
 
                         booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
 

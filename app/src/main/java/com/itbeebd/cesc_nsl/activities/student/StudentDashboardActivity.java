@@ -72,7 +72,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
                 studentDrawerId = drawerLayout;
 
                 if(data.equals("Successfully logged out.")){
-                    CustomSharedPref.getInstance(getApplicationContext()).setStudentLoggedInOrNot(false);
+                    CustomSharedPref.getInstance(getApplicationContext()).setUserLoggedInOrNot(false);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
@@ -171,7 +171,7 @@ public class StudentDashboardActivity extends AppCompatActivity  implements Bubb
 
     private void closeApp(){
         if (time + 2000 > System.currentTimeMillis()) {
-            startActivity(new Intent(this, MainActivity.class));
+         //   startActivity(new Intent(this, MainActivity.class));
             finish();
         } else {
             time = System.currentTimeMillis();

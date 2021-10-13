@@ -61,7 +61,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
     private void login(String userId, String password) {
         new LoginApi(this, "Signing in...").teacherLogin(userId, password, "123456", ((isSuccess, message) -> {
             if(isSuccess){
-                CustomSharedPref.getInstance(this).setStudentLoggedInOrNot(true);
+                CustomSharedPref.getInstance(this).setUserLoggedInOrNot(true);
                 this.startActivity(new Intent(this, TeacherDashboardActivity.class));
                 finish();
             }

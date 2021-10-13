@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <devjdelasen.com.sidebubbles.SideBubbles
-        android:id="@+id/sideBubbles"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:side_bubbles_bg_color="@color/colorAccent"
-        app:side_bubbles_menu_color="@color/white" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout9"
         android:layout_width="match_parent"
@@ -27,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <View
-            android:id="@+id/studentProfileBgViewId"
+            android:id="@+id/mainHeaderBgViewId"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/round_corner_bottom_bg"
@@ -38,22 +26,22 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/studentProfileViewId"
+            android:id="@+id/appLogoViewId"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/app_logo"
             app:civ_border_width="1dp"
-            app:layout_constraintBottom_toBottomOf="@+id/studentProfileBgViewId"
+            app:layout_constraintBottom_toBottomOf="@+id/mainHeaderBgViewId"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/studentProfileBgViewId" />
+            app:layout_constraintTop_toTopOf="@+id/mainHeaderBgViewId" />
 
         <TextView
-            android:id="@+id/studentNameViewId"
+            android:id="@+id/schoolNameViewId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="CANTONMENT ENGLISH SCHOOL &amp; COLLEGE"
+            android:text="@string/school_name"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textAllCaps="true"
@@ -61,20 +49,33 @@
             app:autoSizeMinTextSize="10sp"
             app:autoSizeTextType="uniform"
             android:maxLines="2"
-            app:layout_constraintBottom_toBottomOf="@+id/studentProfileViewId"
+            app:layout_constraintBottom_toBottomOf="@+id/appLogoViewId"
             app:layout_constraintEnd_toStartOf="@+id/guideline12"
-            app:layout_constraintStart_toEndOf="@+id/studentProfileViewId"
-            app:layout_constraintTop_toTopOf="@+id/studentProfileViewId" />
+            app:layout_constraintStart_toEndOf="@+id/appLogoViewId"
+            app:layout_constraintTop_toTopOf="@+id/appLogoViewId" />
 
         <ImageView
-            android:id="@+id/profileEditBtnId"
+            android:id="@+id/loginBtnHintId"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_login"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/studentProfileBgViewId" />
+            app:layout_constraintTop_toTopOf="@+id/mainHeaderBgViewId" />
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/userProfileImageHintId"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/default_male"
+            app:civ_border_width="1dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mainHeaderBgViewId" />
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -155,25 +156,6 @@
             android:layout_weight="1" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/studentLoginBtnId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Student login"
-        app:layout_constraintBottom_toTopOf="@+id/teacherLoginBtnId"
-        app:layout_constraintEnd_toEndOf="@+id/teacherLoginBtnId"
-        app:layout_constraintStart_toStartOf="@+id/teacherLoginBtnId" />
-
-    <Button
-        android:id="@+id/teacherLoginBtnId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Teacher login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

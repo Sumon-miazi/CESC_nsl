@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
@@ -162,7 +161,7 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
     public void onBackPressed() {
       //  super.onBackPressed();
         if (time + 2000 > System.currentTimeMillis()) {
-            startActivity(new Intent(this, MainActivity.class));
+           // startActivity(new Intent(this, MainActivity.class));
             finish();
         } else {
             time = System.currentTimeMillis();

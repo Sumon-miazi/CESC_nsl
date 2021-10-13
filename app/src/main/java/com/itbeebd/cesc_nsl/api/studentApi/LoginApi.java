@@ -84,8 +84,10 @@ public class LoginApi extends BaseService {
 
                         System.out.println("+++++++++++ token " + jsonObject.optString("token"));
                         CustomSharedPref.getInstance(context).setAuthToken("Bearer " + jsonObject.optString("token"));
-                     //   CustomSharedPref.getInstance(context).setAuthToken(jsonObject.optString("token"));
+
+                        CustomSharedPref.getInstance(context).setUserType("student");
                         CustomSharedPref.getInstance(context).setUserId(studentId);
+                        CustomSharedPref.getInstance(context).setUserPassword(password);
 
                         booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
 

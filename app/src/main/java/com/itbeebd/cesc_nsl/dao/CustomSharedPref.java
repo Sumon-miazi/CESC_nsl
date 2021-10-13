@@ -20,14 +20,26 @@ public class CustomSharedPref {
         return customSharedPref;
     }
 
-    public void setStudentLoggedInOrNot(boolean flag){
+    public void setUserLoggedInOrNot(boolean flag){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("StudentLoggedInOrNot", flag);
         editor.apply();
     }
 
-    public boolean getStudentLoggedInOrNot(){
+    public boolean getUserLoggedInOrNot(){
         return sharedPreferences.getBoolean("StudentLoggedInOrNot", false);
+    }
+
+
+    // user student or teacher, id and password
+    public String getUserType() {
+        return sharedPreferences.getString("UserType", "");
+    }
+
+    public void setUserType(String flag) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("UserType", flag);
+        editor.apply();
     }
 
     public String getUserId() {
@@ -40,6 +52,19 @@ public class CustomSharedPref {
         editor.apply();
     }
 
+    public String getUserPassword() {
+        return sharedPreferences.getString("UserPassword", "");
+    }
+
+    public void setUserPassword(String flag) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("UserPassword", flag);
+        editor.apply();
+    }
+
+
+
+    // user auth token
     public String getAuthToken() {
         return sharedPreferences.getString("AuthToken", "");
     }
@@ -49,6 +74,9 @@ public class CustomSharedPref {
         editor.putString("AuthToken", flag);
         editor.apply();
     }
+
+
+
 
     public int getUpdateRequest() {
         return sharedPreferences.getInt("UpdateRequest", 0);

@@ -340,7 +340,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                             setDashboardData(dashboardHeaderObj);
                         } else {
                             if(message.equals("logout")){
-                                CustomSharedPref.getInstance(getContext()).setStudentLoggedInOrNot(false);
+                                CustomSharedPref.getInstance(getContext()).setUserLoggedInOrNot(false);
                                 fragmentToActivity.call(studentDrawerId, message);
                             }
                             else {
@@ -734,7 +734,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                                 refreshLayout.setRefreshing(false);
                             } catch (Exception ignore) {
                             }
-                            CustomSharedPref.getInstance(getContext()).setStudentLoggedInOrNot(false);
+                            CustomSharedPref.getInstance(getContext()).setUserLoggedInOrNot(false);
                             fragmentToActivity.call(studentDrawerId, message);
                         }
                         else {
