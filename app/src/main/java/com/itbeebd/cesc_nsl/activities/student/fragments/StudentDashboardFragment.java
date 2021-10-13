@@ -26,6 +26,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.activities.ChangePasswordActivity;
 import com.itbeebd.cesc_nsl.activities.student.LessonPlanActivity;
 import com.itbeebd.cesc_nsl.activities.student.LibraryBookActivity;
 import com.itbeebd.cesc_nsl.activities.student.OnlineClassActivity;
@@ -120,6 +121,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private CardView lessonPlanLinkBtnId;
     private CardView quizArchiveLinkBtnId;
     private CardView onlineClassLinkBtnId;
+    private CardView changePasswordCardId;
     private CardView logoutId;
     private SwipeRefreshLayout refreshLayout;
 
@@ -159,6 +161,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlanLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.lessonPlanLinkBtnId);
         quizArchiveLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.quizArchiveLinkBtnId);
         onlineClassLinkBtnId = view.findViewById(R.id.studentNavId).findViewById(R.id.onlineClassLinkBtnId);
+        changePasswordCardId = view.findViewById(R.id.studentNavId).findViewById(R.id.changePasswordCardId);
         logoutId = view.findViewById(R.id.studentNavId).findViewById(R.id.logoutId);
 
         refreshLayout = view.findViewById(R.id.refreshLayoutId);
@@ -223,6 +226,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         lessonPlanLinkBtnId.setOnClickListener(this::changeActivity);
         quizArchiveLinkBtnId.setOnClickListener(this::changeActivity);
         onlineClassLinkBtnId.setOnClickListener(this::changeActivity);
+        changePasswordCardId.setOnClickListener(this::changeActivity);
         logoutId.setOnClickListener(this::logout);
 
 
@@ -269,14 +273,21 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private void changeActivity(View view) {
         if (view.getId() == R.id.paymentHistoryLinkBtnId) {
             getActivity().startActivity(new Intent(getActivity(), PaymentHistoryActivity.class));
-        } else if (view.getId() == R.id.libraryLinkBtnId) {
+        }
+        else if (view.getId() == R.id.libraryLinkBtnId) {
             gotoLibraryBookView(view);
-        } else if (view.getId() == R.id.lessonPlanLinkBtnId) {
+        }
+        else if (view.getId() == R.id.lessonPlanLinkBtnId) {
             onClick(view);
-        } else if (view.getId() == R.id.quizArchiveLinkBtnId) {
+        }
+        else if (view.getId() == R.id.quizArchiveLinkBtnId) {
             gotoQuizArchiveView(view);
-        } else if (view.getId() == R.id.onlineClassLinkBtnId) {
+        }
+        else if (view.getId() == R.id.onlineClassLinkBtnId) {
             gotoOnlineView(view);
+        }
+        else if (view.getId() == R.id.changePasswordCardId) {
+            getActivity().startActivity(new Intent(getActivity(), ChangePasswordActivity.class));
         }
     }
 
@@ -339,9 +350,10 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                             this.dashboardHeaderObj = (DashboardHeaderObj) object;
                             setDashboardData(dashboardHeaderObj);
                         } else {
-                            if(message.equals("logout")){
+                            if (message.equals("Unauthorized")) {
                                 CustomSharedPref.getInstance(getContext()).setUserLoggedInOrNot(false);
-                                fragmentToActivity.call(studentDrawerId, message);
+                                Toast.makeText(getContext(), "Session Expired!", Toast.LENGTH_SHORT).show();
+                                fragmentToActivity.call(studentDrawerId, "logout");
                             }
                             else {
                                 try {
@@ -468,7 +480,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
         } else {
             lessonPlanCountHint.setVisibility(View.VISIBLE);
             lessonPlanSeeAll.setVisibility(View.GONE);
-          //  lessonPlanMainViewId.setVisibility(View.GONE);
+            //  lessonPlanMainViewId.setVisibility(View.GONE);
             lessonPlanNotFoundId.setVisibility(View.VISIBLE);
         }
     }
@@ -518,7 +530,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void gotoOnlineView(View view) {
-        if(totalOnlineClass == 0) return;
+        if (totalOnlineClass == 0) return;
         System.out.println(">>>>>. " + view.getId());
         getContext().startActivity(new Intent(getContext(), OnlineClassActivity.class));
     }
@@ -532,7 +544,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void gotoQuizArchiveView(View view) {
-        if(totalQuizArchive == 0) return;
+        if (totalQuizArchive == 0) return;
         System.out.println(">>>>>. " + view.getId());
         startActivity(new Intent(getContext(), QuizArchiveActivity.class));
     }
@@ -729,15 +741,14 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
                         this.dashboardHeaderObj = (DashboardHeaderObj) object;
                         setDashboardData(dashboardHeaderObj);
                     } else {
-                        if(message.equals("logout")){
+                        if (message.equals("logout")) {
                             try {
                                 refreshLayout.setRefreshing(false);
                             } catch (Exception ignore) {
                             }
                             CustomSharedPref.getInstance(getContext()).setUserLoggedInOrNot(false);
                             fragmentToActivity.call(studentDrawerId, message);
-                        }
-                        else {
+                        } else {
                             try {
                                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                             } catch (Exception ignore) {

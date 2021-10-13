@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:scaleY="-1"
         android:padding="0dp"
+        android:scaleY="-1"
         android:src="@drawable/ic_baseline_subdirectory"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,25 +23,27 @@
         android:id="@+id/textView39"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
         android:fontFamily="@font/heebo_extra_bold"
         android:text="Let\'s sign you in."
         android:textColor="@color/blue_primary_dark"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView40"
         app:layout_constraintStart_toStartOf="@+id/signInBackBtnId"
-        app:layout_constraintTop_toBottomOf="@+id/signInBackBtnId" />
+        app:layout_constraintTop_toBottomOf="@+id/signInBackBtnId"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/textView40"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/heebo_bold"
         android:text="Welcome back.\nYou\'ve been missed!"
         android:textColor="@color/blue_primary_dark"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
         app:layout_constraintStart_toStartOf="@+id/textView39"
         app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
@@ -51,12 +53,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:layout_marginEnd="32dp"
         android:hint="Teacher email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView39"
-        app:layout_constraintTop_toBottomOf="@+id/textView40">
+        app:layout_constraintTop_toTopOf="@+id/guideline15">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -74,10 +75,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Password"
-        app:passwordToggleEnabled="true"
         app:layout_constraintEnd_toEndOf="@+id/userId"
         app:layout_constraintStart_toStartOf="@+id/userId"
-        app:layout_constraintTop_toBottomOf="@+id/userId">
+        app:layout_constraintTop_toBottomOf="@+id/userId"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -86,35 +87,6 @@
             android:text="123456" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <RadioGroup
-        android:id="@+id/userCategoryRadioId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tooltipText="Select who you are"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/loginBtnId"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userPasswordId">
-
-        <RadioButton
-            android:id="@+id/userIsStudentId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Student    "
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <RadioButton
-            android:id="@+id/userIsTeacherId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Teacher"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </RadioGroup>
 
     <Button
         android:id="@+id/loginBtnId"
@@ -126,4 +98,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/userId"
         app:layout_constraintStart_toStartOf="@+id/userId" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

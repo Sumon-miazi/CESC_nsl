@@ -157,4 +157,44 @@ public class LoginApi extends BaseService {
         });
     }
 
+    public void changePassword(String token, String path, String newPassword, BooleanResponse booleanResponse){
+        progressDialog.show();
+        Call<ResponseBody> studentLogout = service.getRequestPath(token, path, requestBody.resetPassword(newPassword));
+        studentLogout.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONObject jsonObject = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
+                    try {
+                        jsonObject =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> " + jsonObject);
+                        booleanResponse.response(true, jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+                        booleanResponse.response(false, e.getLocalizedMessage());
+                    }
+
+
+                }
+                else {
+                    booleanResponse.response(response.isSuccessful(), response.toString());
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                booleanResponse.response(false, t.getLocalizedMessage());
+                System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
+            }
+        });
+    }
+
 }

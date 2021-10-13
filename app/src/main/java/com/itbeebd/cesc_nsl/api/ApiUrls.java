@@ -34,6 +34,8 @@ public class ApiUrls {
     public static final String ADD_LESSON_PLAN =  "store-update-lesson-plan";
     public static final String TEACHER_ROUTINE =  "teacher-routine";
 
+    public static final String S_CHANGE_PASSWORD =  "password-reset";
+    public static final String T_CHANGE_PASSWORD =  "password-reset";
 
     public static final String MAIN =  "cesc-home";
 
