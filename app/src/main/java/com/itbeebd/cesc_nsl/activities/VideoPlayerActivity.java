@@ -14,32 +14,54 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VideoPlayerActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
+public class VideoPlayerActivity extends YouTubeBaseActivity{
     // don't use it in production
     private final String api_key = "AIzaSyAuSGEB2VN1JB1Ix554pA2GXEp_5yjILvY";
 
     private AndExoPlayerView andExoPlayerView;
     // Get reference to the view of Video player
-    private YouTubePlayerView ytPlayer;
+    private YouTubePlayerView ytPlayerView;
     private YouTubePlayer youTubePlayer;
+    private YouTubePlayer ytPlayer;
+    private YouTubePlayer.OnInitializedListener onInitializedListener;;
     private String initializeFailed = "Player initialization failed";
+    private String ytVideoUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
 
         andExoPlayerView = findViewById(R.id.andExoPlayerView);
-        ytPlayer = findViewById(R.id.ytPlayer);
-        ytPlayer.initialize(api_key, this);
+        ytPlayerView = findViewById(R.id.ytPlayer);
+
+        initYT();
 
         if(getIntent().hasExtra("web_url")){
            // playVideo(getIntent().getStringExtra("web_url"));
-            youtubeSetupAndPlay(getIntent().getStringExtra("web_url"));
+          //  youtubeSetupAndPlay(getIntent().getStringExtra("web_url"));
+            ytVideoUrl = getIntent().getStringExtra("web_url");
 
         }
         else if(getIntent().hasExtra("file_url")){
 
         }
+    }
+
+    private void initYT(){
+        onInitializedListener = new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+              //  ytPlayer = youTubePlayer;
+                if(ytVideoUrl != null) youTubePlayer.cueVideo(getYouTubeId(ytVideoUrl));
+              //  youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.CHROMELESS);
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+                initializeFailed = youTubeInitializationResult.toString();
+            }
+        };
+        ytPlayerView.initialize(api_key, onInitializedListener);
     }
 
     private void playVideo(String url){
@@ -55,7 +77,13 @@ public class VideoPlayerActivity extends YouTubeBaseActivity implements YouTubeP
 //            youTubePlayer.loadVideo(getYouTubeId(url));
 //            youTubePlayer.play();
         }
-        else Toast.makeText(this, initializeFailed, Toast.LENGTH_SHORT).show();
+        else {
+            Toast.makeText(this, initializeFailed, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public String getYoutubeThumbnailUrlFromVideoUrl(String videoUrl) {
+        return "http://img.youtube.com/vi/"+ getYouTubeId(videoUrl) + "/0.jpg";
     }
 
     private String getYouTubeId (String youTubeUrl) {
@@ -71,14 +99,19 @@ public class VideoPlayerActivity extends YouTubeBaseActivity implements YouTubeP
         }
     }
 
-    @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-        this.youTubePlayer = youTubePlayer;
-    }
-
-    @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-      //  Toast.makeText(getApplicationContext(), "Video player Failed", Toast.LENGTH_SHORT).show();
-        initializeFailed = youTubeInitializationResult.toString();
-    }
+//    @Override
+//    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+//        this.youTubePlayer = youTubePlayer;
+//    }
+//
+//    @Override
+//    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+//      //  Toast.makeText(getApplicationContext(), "Video player Failed", Toast.LENGTH_SHORT).show();
+//
+//        System.out.println("YT failed >>>>>>> " + YouTubeInitializationResult.DEVELOPER_KEY_INVALID );
+//        System.out.println("YT failed >>>>>>> " + YouTubeInitializationResult.SERVICE_INVALID );
+//        System.out.println("YT failed >>>>>>> " + YouTubeInitializationResult.INVALID_APPLICATION_SIGNATURE );
+//
+//        initializeFailed = youTubeInitializationResult.toString();
+//    }
 }

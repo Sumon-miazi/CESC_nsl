@@ -41,14 +41,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:maxLines="2"
             android:text="@string/school_name"
+            android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:textAllCaps="true"
             app:autoSizeMaxTextSize="18sp"
             app:autoSizeMinTextSize="10sp"
             app:autoSizeTextType="uniform"
-            android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="@+id/appLogoViewId"
             app:layout_constraintEnd_toStartOf="@+id/guideline12"
             app:layout_constraintStart_toEndOf="@+id/appLogoViewId"
@@ -71,8 +71,8 @@
             android:layout_height="30dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/default_male"
-            app:civ_border_width="1dp"
             android:visibility="gone"
+            app:civ_border_width="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/mainHeaderBgViewId" />
@@ -87,129 +87,206 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/sliderCardId"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="0dp"
-        android:visibility="gone"
-        app:cardPreventCornerOverlap="true"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
-        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-            android:id="@+id/carousel"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            app:autoPlay="true"
-            app:autoPlayDelay="3000"
-            app:autoWidthFixing="true"
-            app:carouselGravity="CENTER"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sliderCardId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:visibility="gone"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            app:carouselType="SHOWCASE"
-            app:infiniteCarousel="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:scaleOnScroll="true"
+                <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                    android:id="@+id/carousel"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
 
-            app:scalingFactor="0.0"
-            app:showBottomShadow="false"
-            app:showNavigationButtons="false"
-            app:showTopShadow="false" />
-    </androidx.cardview.widget.CardView>
+                    app:autoPlay="true"
+                    app:autoPlayDelay="3000"
+                    app:autoWidthFixing="true"
+                    app:carouselGravity="CENTER"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sliderCardId">
+                    app:carouselType="SHOWCASE"
+                    app:infiniteCarousel="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:scaleOnScroll="true"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="notice"
-            android:background="@color/blue_bg_light"
-            android:textColor="@color/blue_active"
-            android:padding="10dp"
-            android:letterSpacing="0.5"
-            android:textAllCaps="true"
-            android:textAlignment="center"
-            android:gravity="center"/>
+                    app:scalingFactor="0.0"
+                    app:showBottomShadow="false"
+                    app:showNavigationButtons="false"
+                    app:showTopShadow="false" />
+            </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sliderCardId">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blue_bg_light"
+                    android:gravity="center"
+                    android:letterSpacing="0.5"
+                    android:padding="10dp"
+                    android:text="notice"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="#1565C0" />
 
-    </LinearLayout>
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/videoGalleryLayoutId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/attendance_bg"
+                android:layout_margin="10dp"
+                android:padding="8dp"
+                android:visibility="gone"
+                android:backgroundTint="@color/blue_bg_light">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/studentProfileCardViewId"
+                    android:layout_width="140dp"
+                    android:layout_height="85dp"
+                    android:backgroundTint="@color/blue_primary_dark"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="2dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="h,16:9"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/videoThumbId"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/default_male"
+                        app:civ_border_width="1dp" />
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:id="@+id/videoTitleId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/text_color_black"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/videoCaptionId"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/studentProfileCardViewId"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+
+                <TextView
+                    android:id="@+id/videoCaptionId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white_inactive_4"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/videoTitleId"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/videoTitleId"
+                    app:layout_constraintTop_toBottomOf="@+id/videoTitleId" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-<!--
-<org.imaginativeworld.whynotimagecarousel.ImageCarousel
-    android:id="@+id/carousel"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    app:showTopShadow="true"
-    app:topShadowAlpha="0.6"
-    app:topShadowHeight="32dp"
-
-    app:showBottomShadow="true"
-    app:bottomShadowAlpha="0.6"
-    app:bottomShadowHeight="64dp"
-
-    app:showCaption="true"
-    app:captionMargin="0dp"
-    app:captionTextSize="14sp"
-
-    app:showIndicator="true"
-    app:indicatorMargin="0dp"
-
-    app:imageScaleType="centerCrop"
-
-    app:carouselBackground="#00000000"
-    app:imagePlaceholder="@drawable/ic_picture"
-
-    app:carouselPadding="0dp"
-    app:carouselPaddingBottom="0dp"
-    app:carouselPaddingEnd="0dp"
-    app:carouselPaddingStart="0dp"
-    app:carouselPaddingTop="0dp"
-
-    app:showNavigationButtons="true"
-    app:previousButtonLayout="@layout/previous_button_layout"
-    app:previousButtonId="@id/btn_previous"
-    app:previousButtonMargin="4dp"
-    app:nextButtonLayout="@layout/next_button_layout"
-    app:nextButtonId="@id/btn_next"
-    app:nextButtonMargin="4dp"
-
-    app:carouselType="BLOCK"
-    app:carouselGravity="CENTER"
-
-    app:scaleOnScroll="false"
-    app:scalingFactor="0.15"
-    app:autoWidthFixing="true"
-    app:autoPlay="false"
-    app:autoPlayDelay="3000"
-    app:infiniteCarousel="true"
-    app:touchToPause="true" />
-
--->
+    <!--
+    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+        android:id="@+id/carousel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    
+        app:showTopShadow="true"
+        app:topShadowAlpha="0.6"
+        app:topShadowHeight="32dp"
+    
+        app:showBottomShadow="true"
+        app:bottomShadowAlpha="0.6"
+        app:bottomShadowHeight="64dp"
+    
+        app:showCaption="true"
+        app:captionMargin="0dp"
+        app:captionTextSize="14sp"
+    
+        app:showIndicator="true"
+        app:indicatorMargin="0dp"
+    
+        app:imageScaleType="centerCrop"
+    
+        app:carouselBackground="#00000000"
+        app:imagePlaceholder="@drawable/ic_picture"
+    
+        app:carouselPadding="0dp"
+        app:carouselPaddingBottom="0dp"
+        app:carouselPaddingEnd="0dp"
+        app:carouselPaddingStart="0dp"
+        app:carouselPaddingTop="0dp"
+    
+        app:showNavigationButtons="true"
+        app:previousButtonLayout="@layout/previous_button_layout"
+        app:previousButtonId="@id/btn_previous"
+        app:previousButtonMargin="4dp"
+        app:nextButtonLayout="@layout/next_button_layout"
+        app:nextButtonId="@id/btn_next"
+        app:nextButtonMargin="4dp"
+    
+        app:carouselType="BLOCK"
+        app:carouselGravity="CENTER"
+    
+        app:scaleOnScroll="false"
+        app:scalingFactor="0.15"
+        app:autoWidthFixing="true"
+        app:autoPlay="false"
+        app:autoPlayDelay="3000"
+        app:infiniteCarousel="true"
+        app:touchToPause="true" />
+    
+    -->

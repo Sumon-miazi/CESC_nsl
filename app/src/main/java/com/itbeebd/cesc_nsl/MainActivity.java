@@ -8,12 +8,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -24,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.itbeebd.cesc_nsl.activities.LoginActivity;
+import com.itbeebd.cesc_nsl.activities.VideoPlayerActivity;
 import com.itbeebd.cesc_nsl.activities.home.NoticeGeneraFragment;
 import com.itbeebd.cesc_nsl.activities.student.StudentDashboardActivity;
 import com.itbeebd.cesc_nsl.activities.teacher.TeacherDashboardActivity;
@@ -51,8 +54,13 @@ public class MainActivity extends AppCompatActivity {
     private boolean flag;
     private long time;
 
+    private ConstraintLayout videoGalleryLayoutId;
     private ImageView userProfileImageHintId;
     private ImageView loginBtnHintId;
+    
+    private ImageView videoThumbId;
+    private TextView videoTitleId;
+    private TextView videoCaptionId;
 
     private CardView sliderCardId;
     private ImageCarousel carousel;
@@ -63,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private NoticeGeneraFragment generalNoticeFragment;
     private NoticeGeneraFragment academicNoticeFragment;
     private NoticeGeneraFragment admissionNoticeFragment;
+    private Map<String, String> videoData;
 
     // tab titles
     private String[] titles = new String[]{"GENERAL", "ACADEMIC", "ADMISSION"};
@@ -107,6 +116,29 @@ public class MainActivity extends AppCompatActivity {
         getDataFromApi();
     }
 
+    private void init() {
+        videoGalleryLayoutId = findViewById(R.id.videoGalleryLayoutId);
+        videoThumbId = findViewById(R.id.videoThumbId);
+        videoTitleId = findViewById(R.id.videoTitleId);
+        videoCaptionId = findViewById(R.id.videoCaptionId);
+
+        userProfileImageHintId = findViewById(R.id.userProfileImageHintId);
+        loginBtnHintId = findViewById(R.id.loginBtnHintId);
+        sliderCardId = findViewById(R.id.sliderCardId);
+        carousel = findViewById(R.id.carousel);
+
+        viewPager = findViewById(R.id.pager);
+        tabLayout = findViewById(R.id.tab_layout);
+
+        videoThumbId.setOnClickListener(view -> {
+            if(videoData != null){
+                Intent intent = new Intent(this, VideoPlayerActivity.class);
+                intent.putExtra("web_url", videoData.get("url"));
+                startActivity(intent);
+            }
+        });
+    }
+    
     private void showLoginMenu(View view){
         //Creating the instance of PopupMenu
         PopupMenu popup = new PopupMenu(MainActivity.this, loginBtnHintId);
@@ -135,32 +167,11 @@ public class MainActivity extends AppCompatActivity {
     private void setLoginOrUserProfileLink() {
         if (CustomSharedPref.getInstance(this).getUserLoggedInOrNot()) {
             if (CustomSharedPref.getInstance(this).getUserType().equals("teacher"))
-                setUserProfileImage(new TeacherDao().getTeacher(this).getImage());
-            else setUserProfileImage(new StudentDao().getStudent(this).getImage());
+                setImageView(userProfileImageHintId, ApiUrls.BASE_IMAGE_URL +  new TeacherDao().getTeacher(this).getImage());
+            else setImageView(userProfileImageHintId, ApiUrls.BASE_IMAGE_URL +  new StudentDao().getStudent(this).getImage());
         } else {
             loginBtnHintId.setVisibility(View.VISIBLE);
         }
-    }
-
-    private void setUserProfileImage(String imageUrl) {
-        Glide.with(this)
-                .load(ApiUrls.BASE_IMAGE_URL + imageUrl)
-                .placeholder(R.drawable.default_male)
-                .error(R.drawable.default_male)
-                .fallback(R.drawable.default_male)
-                .into(userProfileImageHintId);
-
-        userProfileImageHintId.setVisibility(View.VISIBLE);
-    }
-
-    private void init() {
-        userProfileImageHintId = findViewById(R.id.userProfileImageHintId);
-        loginBtnHintId = findViewById(R.id.loginBtnHintId);
-        sliderCardId = findViewById(R.id.sliderCardId);
-        carousel = findViewById(R.id.carousel);
-
-        viewPager = findViewById(R.id.pager);
-        tabLayout = findViewById(R.id.tab_layout);
     }
 
 
@@ -169,11 +180,14 @@ public class MainActivity extends AppCompatActivity {
             if (object != null) {
                 allData = (Map<String, Object>) object;
                 setSlider((ArrayList<Map<String, String>>) allData.get("sliderImage"));
+
                 System.out.println("general >>>>> " + ((ArrayList<Notice>) allData.get("general_notice")).size());
                 generalNoticeFragment = new NoticeGeneraFragment((ArrayList<Notice>) allData.get("general_notice"));
                 academicNoticeFragment = new NoticeGeneraFragment((ArrayList<Notice>) allData.get("academic_notice"));
                 admissionNoticeFragment = new NoticeGeneraFragment((ArrayList<Notice>) allData.get("admission_notice"));
                 viewPager.setAdapter(new ViewPagerFragmentAdapter(this));
+
+                setVideoGallery((Map<String, String>) allData.get("videoData"));
             }
         });
     }
@@ -196,6 +210,27 @@ public class MainActivity extends AppCompatActivity {
 
         sliderCardId.setVisibility(View.VISIBLE);
 
+    }
+
+    private void setVideoGallery(Map<String, String> data){
+        videoData = data;
+        videoTitleId.setText(data.get("title"));
+        videoCaptionId.setText(data.get("caption"));
+        setImageView(videoThumbId, new VideoPlayerActivity().getYoutubeThumbnailUrlFromVideoUrl(data.get("url")));
+        videoGalleryLayoutId.setVisibility(View.VISIBLE);
+        System.out.println("thumb >>>>>> " + new VideoPlayerActivity().getYoutubeThumbnailUrlFromVideoUrl(data.get("url")));
+    }
+
+
+    private void setImageView(ImageView imageView, String imageUrl) {
+        Glide.with(this)
+                .load(imageUrl)
+                .placeholder(R.drawable.default_male)
+                .error(R.drawable.default_male)
+                .fallback(R.drawable.default_male)
+                .into(imageView);
+
+        imageView.setVisibility(View.VISIBLE);
     }
 
     private void checkInternet(String userType) {

@@ -26,26 +26,26 @@ public class StarterApi extends BaseService {
     final RetrofitRequestBody requestBody;
     private CustomProgressDialog progressDialog;
 
-    public StarterApi(Context context, String message){
+    public StarterApi(Context context, String message) {
         this.context = context;
         requestBody = new RetrofitRequestBody();
         this.progressDialog = new CustomProgressDialog(context, message);
     }
 
-    public  void getHomeData(ResponseObj responseObj){
+    public void getHomeData(ResponseObj responseObj) {
         progressDialog.show();
         Call<ResponseBody> studentCall = service.getHomeData();
-        studentCall.enqueue(new Callback<ResponseBody>(){
+        studentCall.enqueue(new Callback<ResponseBody>() {
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 progressDialog.dismiss();
                 JSONObject data = null;
-                if(response.isSuccessful() && response != null){
+                if (response.isSuccessful() && response != null) {
                     System.out.println(">>>>>>>>>> " + response.body());
                     try {
                         Gson gson = new Gson();
-                        data =  new JSONObject(response.body().string());
+                        data = new JSONObject(response.body().string());
                         System.out.println(">>>>>>>>>> " + data);
 
 //                        if(!data.optBoolean("isSuccessful")){
@@ -58,6 +58,7 @@ public class StarterApi extends BaseService {
                         allData.put("general_notice", extractNotice(data.getJSONObject("notice_cat").getJSONArray("general")));
                         allData.put("academic_notice", extractNotice(data.getJSONObject("notice_cat").getJSONArray("academic")));
                         allData.put("admission_notice", extractNotice(data.getJSONObject("notice_cat").getJSONArray("admission")));
+                        allData.put("videoData", videoData(data.getJSONObject("video")));
 
                         responseObj.data(allData, "data.optString(message)");
                         //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
@@ -68,8 +69,7 @@ public class StarterApi extends BaseService {
 
                         responseObj.data(null, e.getLocalizedMessage());
                     }
-                }
-                else {
+                } else {
                     System.out.println(">>>>>>>>>> " + response.isSuccessful());
                     System.out.println(">>>>>>>>>> " + response);
                     responseObj.data(null, response.toString());
@@ -86,9 +86,9 @@ public class StarterApi extends BaseService {
         });
     }
 
-    private ArrayList<Map<String, String>> sliderImage(JSONArray jsonArray){
+    private ArrayList<Map<String, String>> sliderImage(JSONArray jsonArray) {
         ArrayList<Map<String, String>> images = new ArrayList<>();
-        for(int i = 0; i < jsonArray.length(); i++){
+        for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 Map<String, String> item = new HashMap<>();
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -103,10 +103,10 @@ public class StarterApi extends BaseService {
         return images;
     }
 
-    private ArrayList<Notice> extractNotice(JSONArray jsonArray){
+    private ArrayList<Notice> extractNotice(JSONArray jsonArray) {
         ArrayList<Notice> data = new ArrayList<>();
         Gson gson = new Gson();
-        for(int i = 0; i < jsonArray.length(); i++){
+        for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 Notice notice = gson.fromJson(jsonArray.getJSONObject(i).toString(), Notice.class);
                 data.add(notice);
@@ -115,5 +115,17 @@ public class StarterApi extends BaseService {
             }
         }
         return data;
+    }
+
+    private Map<String, String> videoData(JSONObject jsonObject) {
+        Map<String, String> item = new HashMap<>();
+        try {
+            item.put("title", jsonObject.optString("title"));
+            item.put("caption", jsonObject.optString("caption"));
+            item.put("url", jsonObject.optString("youtube_url"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return item;
     }
 }
