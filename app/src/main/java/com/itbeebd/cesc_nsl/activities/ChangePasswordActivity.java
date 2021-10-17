@@ -15,6 +15,7 @@ import com.itbeebd.cesc_nsl.activities.teacher.TeacherLoginActivity;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.studentApi.LoginApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
+import com.itbeebd.cesc_nsl.dao.StudentDao;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
@@ -86,6 +87,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         new LoginApi(this, "Updating password").changePassword(
                 CustomSharedPref.getInstance(this).getAuthToken(),
                 path,
+                new StudentDao().getStudent(this).getStudentId(),
                 newPassword,
                 (isSuccess, message) -> {
                     if(isSuccess){

@@ -157,9 +157,9 @@ public class LoginApi extends BaseService {
         });
     }
 
-    public void changePassword(String token, String path, String newPassword, BooleanResponse booleanResponse){
+    public void changePassword(String token, String path, int studentid, String newPassword, BooleanResponse booleanResponse){
         progressDialog.show();
-        Call<ResponseBody> studentLogout = service.getRequestPath(token, path, requestBody.resetPassword(newPassword));
+        Call<ResponseBody> studentLogout = service.getRequestPath(token, path, requestBody.resetPassword(studentid, newPassword));
         studentLogout.enqueue(new Callback<ResponseBody>(){
 
             @Override

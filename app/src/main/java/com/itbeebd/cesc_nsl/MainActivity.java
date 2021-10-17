@@ -42,6 +42,7 @@ import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -185,7 +186,8 @@ public class MainActivity extends AppCompatActivity {
         List<CarouselItem> list = new ArrayList<>();
 
         for (int i = 0; i < images.size(); i++) {
-            if (images.get(i).get("title") != null)
+            System.out.println("title >>>>>> " + images.get(i).get("title"));
+            if (images.get(i).get("title") != null && !Objects.requireNonNull(images.get(i).get("title")).equalsIgnoreCase("null"))
                 list.add(new CarouselItem(images.get(i).get("url"), images.get(i).get("title")));
             else list.add(new CarouselItem(images.get(i).get("url")));
         }

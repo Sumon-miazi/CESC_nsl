@@ -33,8 +33,9 @@ public class RetrofitRequestBody {
         return map;
     }
 
-    public Map<String, Object> resetPassword(String password){
+    public Map<String, Object> resetPassword(int studentid, String password){
         Map<String, Object> map = new HashMap<>();
+        map.put("studentid", studentid);
         map.put("password", password);
         return map;
     }

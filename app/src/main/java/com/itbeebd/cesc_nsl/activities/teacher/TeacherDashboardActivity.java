@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.activities.LoginActivity;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.teacherApi.LoginApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
@@ -202,7 +203,13 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
                         CustomSharedPref.getInstance(getApplicationContext()).setUserLoggedInOrNot(false);
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
-                    }else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                    }
+                    else if(message.equals("Unauthorized")){
+                        CustomSharedPref.getInstance(this).setUserLoggedInOrNot(false);
+                        startActivity(new Intent(getApplicationContext(), TeacherLoginActivity.class));
+                        finish();
+                    }
+                    else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                 }
         );
     }
