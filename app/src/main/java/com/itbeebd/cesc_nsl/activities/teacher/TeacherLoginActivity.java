@@ -19,7 +19,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
     private TextInputLayout userId;
     private TextInputLayout userPassword;
     private Button loginBtn;
-    private RadioGroup userCategoryRadioId;
+ //   private RadioGroup userCategoryRadioId;
     private ImageView signInBackBtnId;
 
     @Override
@@ -31,12 +31,9 @@ public class TeacherLoginActivity extends AppCompatActivity {
         userPassword = findViewById(R.id.userPasswordId);
         loginBtn = findViewById(R.id.loginBtnId);
 
-        userCategoryRadioId = findViewById(R.id.userCategoryRadioId);
+     //   userCategoryRadioId = findViewById(R.id.userCategoryRadioId);
         signInBackBtnId = findViewById(R.id.signInBackBtnId);
 
-        userCategoryRadioId.setOnCheckedChangeListener((radioGroup, i) -> {
-            System.out.println(">>>>> radio group i " + i);
-        });
 
         loginBtn.setOnClickListener(view -> {
             loginCredentialValidate(userId.getEditText().getText().toString().trim(), userPassword.getEditText().getText().toString().trim());

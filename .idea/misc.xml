@@ -58,7 +58,7 @@
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_quiz_archive.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_student_all_notification.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/activity_student_dashboard.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_student_dashboard.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_student_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_student_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_teacher_dashboard.xml" value="0.25" />
@@ -75,7 +75,7 @@
         <entry key="app/src/main/res/layout/card_view_item.xml" value="0.15" />
         <entry key="app/src/main/res/layout/class_routine_block.xml" value="0.33" />
         <entry key="app/src/main/res/layout/content_student_nav.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/drawer_layout.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/drawer_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_notice_genera.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.18" />

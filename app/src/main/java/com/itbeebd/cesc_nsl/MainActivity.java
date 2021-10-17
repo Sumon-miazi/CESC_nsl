@@ -3,11 +3,11 @@ package com.itbeebd.cesc_nsl;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +18,8 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -82,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
     private NoticeGeneraFragment newsFragment;
     private NoticeGeneraFragment eventFragment;
 
+    private ConstraintLayout fragmentLayoutId;
+    private TextView fragmentTitleId;
+    private ImageView closeFragment;
+    private FragmentManager fragmentManager;
+    private LinearLayout principleMessageId;
+    private LinearLayout newsId;
+    private LinearLayout eventsId;
+
     private Map<String, String> videoData;
 
     // tab titles
@@ -97,9 +107,6 @@ public class MainActivity extends AppCompatActivity {
 
         networkConnection = new CheckNetworkConnection(this);
         flag = CustomSharedPref.getInstance(this).getUserLoggedInOrNot();
-
-        loginBtnHintId.setOnClickListener(this::showLoginMenu);
-        userProfileImageHintId.setOnClickListener(view -> checkInternet(CustomSharedPref.getInstance(this).getUserType()));
 
         generalNoticeFragment = new NoticeGeneraFragment();
         academicNoticeFragment = new NoticeGeneraFragment();
@@ -146,12 +153,38 @@ public class MainActivity extends AppCompatActivity {
         news_event_pager = findViewById(R.id.news_event_pager);
         news_event_tab_layout = findViewById(R.id.news_event_tab_layout);
 
+        fragmentLayoutId = findViewById(R.id.fragmentLayoutId);
+        fragmentTitleId = findViewById(R.id.fragmentTitleId);
+        closeFragment = findViewById(R.id.closeFragment);
+        principleMessageId = findViewById(R.id.principleMessageId);
+        newsId = findViewById(R.id.newsId);
+        eventsId = findViewById(R.id.eventsId);
+
+        loginBtnHintId.setOnClickListener(this::showLoginMenu);
+        userProfileImageHintId.setOnClickListener(view -> checkInternet(CustomSharedPref.getInstance(this).getUserType()));
+
         videoGalleryLayoutId.setOnClickListener(view -> {
             if(videoData != null){
                 Intent intent = new Intent(this, VideoPlayerActivity.class);
                 intent.putExtra("web_url", videoData.get("url"));
                 startActivity(intent);
             }
+        });
+
+        closeFragment.setOnClickListener(view -> {
+            fragmentLayoutId.setVisibility(View.GONE);
+        });
+
+        principleMessageId.setOnClickListener(view -> {
+            Toast.makeText(this, "No Data Available", Toast.LENGTH_SHORT).show();
+        });
+
+        newsId.setOnClickListener(view -> {
+            setupFragment(newsFragment, "News");
+        });
+
+        eventsId.setOnClickListener(view -> {
+            setupFragment(eventFragment, "Events");
         });
     }
     
@@ -162,19 +195,17 @@ public class MainActivity extends AppCompatActivity {
         popup.getMenuInflater().inflate(R.menu.login_menu, popup.getMenu());
 
         //registering popup with OnMenuItemClickListener
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                //Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                if(item.getItemId() == R.id.teacher){
-                    startActivity(new Intent(MainActivity.this, TeacherLoginActivity.class));
-                //    finish();
-                }
-                else if(item.getItemId() == R.id.student){
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                //    finish();
-                }
-                return true;
+        popup.setOnMenuItemClickListener(item -> {
+            //Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+            if(item.getItemId() == R.id.teacher){
+                startActivity(new Intent(MainActivity.this, TeacherLoginActivity.class));
+            //    finish();
             }
+            else if(item.getItemId() == R.id.student){
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            //    finish();
+            }
+            return true;
         });
 
         popup.show();//showing popup menu
@@ -311,6 +342,21 @@ public class MainActivity extends AppCompatActivity {
             time = System.currentTimeMillis();
             Toast.makeText(this, "press again to exit", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void setupFragment(Fragment fragment, String fragmentName){
+        // get fragment manager
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (fragmentManager.getFragments().size() == 0) {
+            fragmentTransaction.add(R.id.newsEventFragment, fragment, fragmentName);
+        } else {
+            fragmentTransaction.replace(R.id.newsEventFragment, fragment, fragmentName);
+        }
+        fragmentTransaction.commit();
+
+        fragmentLayoutId.setVisibility(View.VISIBLE);
+        fragmentTitleId.setText(fragmentName);
     }
 
     private class ViewPagerFragmentAdapter extends FragmentStateAdapter {

@@ -532,6 +532,13 @@
                         app:layout_constraintStart_toEndOf="@+id/imaexxgewViehw7"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/view_bg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textViedddw49" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
