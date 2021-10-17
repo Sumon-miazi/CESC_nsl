@@ -65,11 +65,11 @@
             android:id="@+id/l_item_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:bt_icon="@drawable/ic_baseline_paid"
             app:bt_colorActive="@color/green_active"
             app:bt_colorInactive="@color/green_inactive"
-            app:bt_icon="@drawable/ic_payment_24"
             app:bt_shape="@drawable/transition_background_drawable_list"
-            app:bt_title="@string/payment" />
+            app:bt_title="@string/due" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/l_item_profile"

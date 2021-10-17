@@ -121,7 +121,7 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="24dp"
                         android:scaleX="-1"
-                        android:src="@drawable/ic_edit_profile_btn"
+                        android:src="@drawable/ic_baseline_person"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -177,7 +177,8 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="24dp"
                         android:scaleX="-1"
-                        android:src="@drawable/ic_edit_profile_btn"
+                        android:src="@drawable/ic_baseline_leaderboard_24"
+                        app:tint="@color/blue_primary_dark"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -234,7 +235,8 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="24dp"
                         android:scaleX="-1"
-                        android:src="@drawable/ic_edit_profile_btn"
+                        android:src="@drawable/ic_baseline_paid"
+                        app:tint="@color/blue_primary_dark"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -290,7 +292,7 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="24dp"
                         android:scaleX="-1"
-                        android:src="@drawable/ic_edit_profile_btn"
+                        android:src="@drawable/ic_baseline_credit_card"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -347,7 +349,7 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="24dp"
                         android:scaleX="-1"
-                        android:src="@drawable/ic_edit_profile_btn"
+                        android:src="@drawable/ic_baseline_library_books"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -403,7 +405,7 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="24dp"
                         android:scaleX="-1"
-                        android:src="@drawable/ic_edit_profile_btn"
+                        android:src="@drawable/ic_baseline_article"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -460,7 +462,7 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="24dp"
                         android:scaleX="-1"
-                        android:src="@drawable/ic_edit_profile_btn"
+                        android:src="@drawable/ic_baseline_archive"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -514,7 +516,7 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="24dp"
                         android:scaleX="-1"
-                        android:src="@drawable/ic_edit_profile_btn"
+                        android:src="@drawable/ic_baseline_computer"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -567,7 +569,7 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="24dp"
                         android:scaleX="-1"
-                        android:src="@drawable/ic_edit_profile_btn"
+                        android:src="@drawable/ic_baseline_password"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

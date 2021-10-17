@@ -15,8 +15,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class VideoPlayerActivity extends YouTubeBaseActivity{
-    // don't use it in production
-    private final String api_key = "AIzaSyAuSGEB2VN1JB1Ix554pA2GXEp_5yjILvY";
+
+    private final String api_key = "AIXEp_5yjILvY";
 
     private AndExoPlayerView andExoPlayerView;
     // Get reference to the view of Video player
