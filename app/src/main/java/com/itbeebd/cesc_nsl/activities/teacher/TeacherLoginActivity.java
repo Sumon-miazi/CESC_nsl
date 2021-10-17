@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +20,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
     private TextInputLayout userPassword;
     private Button loginBtn;
  //   private RadioGroup userCategoryRadioId;
+    private TextView forgetPasswordId;
     private ImageView signInBackBtnId;
 
     @Override
@@ -29,6 +30,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
 
         userId = findViewById(R.id.userId);
         userPassword = findViewById(R.id.userPasswordId);
+        forgetPasswordId = findViewById(R.id.t_forgetPasswordId);
         loginBtn = findViewById(R.id.loginBtnId);
 
      //   userCategoryRadioId = findViewById(R.id.userCategoryRadioId);

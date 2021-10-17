@@ -45,13 +45,14 @@
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_edit_student_profile.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_equal_bottom_bar.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.14" />
         <entry key="app/src/main/res/layout/activity_guide_student_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_guided_student_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_invoice_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_lesson_plan.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_library_book.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_online_class.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_payment_history.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_payment_invoice.xml" value="0.15" />
@@ -68,6 +69,7 @@
         <entry key="app/src/main/res/layout/activity_teacher_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_teacher_routine.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_top_bar.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_verify_otp_code.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_video_player.xml" value="0.11153846153846154" />
         <entry key="app/src/main/res/layout/activity_web_viwer.xml" value="0.15" />
         <entry key="app/src/main/res/layout/add_file_view.xml" value="0.25" />

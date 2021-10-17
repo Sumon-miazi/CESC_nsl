@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout userPassword;
     private Button loginBtn;
 //    private RadioGroup userCategoryRadioId;
+    private TextView s_forgetPasswordId;
     private ImageView signInBackBtnId;
 
     @Override
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
         userId = findViewById(R.id.userId);
         userPassword = findViewById(R.id.userPasswordId);
+        s_forgetPasswordId = findViewById(R.id.s_forgetPasswordId);
         loginBtn = findViewById(R.id.loginBtnId);
         signInBackBtnId = findViewById(R.id.signInBackBtnId);
 

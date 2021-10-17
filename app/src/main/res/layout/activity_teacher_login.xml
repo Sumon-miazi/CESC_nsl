@@ -88,6 +88,17 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/t_forgetPasswordId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/forget_password"
+        android:textStyle="bold"
+        android:textColor="@color/blue_primary_dark"
+        app:layout_constraintStart_toStartOf="@+id/userPasswordId"
+        app:layout_constraintTop_toBottomOf="@+id/userPasswordId" />
+
     <Button
         android:id="@+id/loginBtnId"
         android:layout_width="0dp"

@@ -22,4 +22,5 @@
     <string name="demo_notification_body">A easy solution would be to add all the text you want into a ArrayList and you initially load the first ten lines into a StringBuilder and set the TextViews value to the StringBuilder. When ever the button is clicked, add 10 more lines from the ArrayList to the StringBuilder and again set the TextViews value to the StringBuilder. Youll want to enable scrolling on the TextView because it will quickly run out of vertical room to display the 10 lines.</string>
     <string name="result">Result</string>
     <string name="cantonment_english_school_amp_college"><![CDATA[Cantonment English School & College]]></string>
+    <string name="forget_password">Forget password</string>
 </resources>
