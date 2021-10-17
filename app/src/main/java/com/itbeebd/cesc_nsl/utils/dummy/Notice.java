@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 public class Notice implements Serializable {
 
+    private String ContentType;
+
     @SerializedName("id")
     private String id;
 
@@ -32,6 +34,14 @@ public class Notice implements Serializable {
 
     @SerializedName("FullUrl")
     private String FullUrl;
+
+    public String getContentType() {
+        return ContentType;
+    }
+
+    public void setContentType(String contentType) {
+        ContentType = contentType;
+    }
 
     public String getId() {
         return id;

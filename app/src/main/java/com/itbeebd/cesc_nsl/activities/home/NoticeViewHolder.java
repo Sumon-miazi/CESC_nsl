@@ -82,11 +82,18 @@ public class NoticeViewHolder extends BaseViewHolder<Notice, OnRecyclerObjectCli
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.notice_board_dialog);
 
+        View closeDialogId = dialog.findViewById(R.id.closeDialogId);
+        TextView contentTypeId = dialog.findViewById(R.id.contentTypeId);
         TextView noticeTitleId = dialog.findViewById(R.id.noticeTitleId);
         TextView noticeBodyId = dialog.findViewById(R.id.noticeBodyId);
+
         noticeBodyId.setMovementMethod(LinkMovementMethod.getInstance());
+
+        contentTypeId.setText(item.getContentType());
         noticeTitleId.setText(Html.fromHtml(item.getTitle()));
         noticeBodyId.setText(Html.fromHtml(item.getDescription()));
+
+        closeDialogId.setOnClickListener(view -> dialog.dismiss());
 
         dialog.show();
     }

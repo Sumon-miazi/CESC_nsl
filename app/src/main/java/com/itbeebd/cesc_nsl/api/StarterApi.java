@@ -63,6 +63,7 @@ public class StarterApi extends BaseService {
                         allData.put("events", extractEvent(data.getJSONArray("events")));
 
                         allData.put("videoData", videoData(data.getJSONObject("video")));
+                        allData.put("siteData", siteData(data.getJSONObject("site_data")));
 
                         responseObj.data(allData, "data.optString(message)");
                         //   booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
@@ -113,6 +114,7 @@ public class StarterApi extends BaseService {
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 Notice notice = gson.fromJson(jsonArray.getJSONObject(i).toString(), Notice.class);
+                notice.setContentType("NOTICE");
                 data.add(notice);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -127,6 +129,7 @@ public class StarterApi extends BaseService {
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 Notice notice = gson.fromJson(jsonArray.getJSONObject(i).toString(), Notice.class);
+                notice.setContentType("NEWS");
                 data.add(notice);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -141,6 +144,7 @@ public class StarterApi extends BaseService {
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 Notice notice = gson.fromJson(jsonArray.getJSONObject(i).toString(), Notice.class);
+                notice.setContentType("EVENT");
                 data.add(notice);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -161,4 +165,20 @@ public class StarterApi extends BaseService {
         }
         return item;
     }
+
+    private Map<String, String> siteData(JSONObject jsonObject) {
+        Map<String, String> item = new HashMap<>();
+        try {
+            item.put("title", jsonObject.optString("title"));
+            item.put("slogan", jsonObject.optString("slogan"));
+            item.put("email", jsonObject.optString("email"));
+            item.put("phone", jsonObject.optString("phone"));
+            item.put("fax", jsonObject.optString("fax"));
+            item.put("address", jsonObject.optString("address"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return item;
+    }
+
 }

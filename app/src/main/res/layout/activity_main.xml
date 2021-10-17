@@ -49,10 +49,32 @@
             app:autoSizeMaxTextSize="18sp"
             app:autoSizeMinTextSize="10sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toBottomOf="@+id/appLogoViewId"
+            app:layout_constraintBottom_toTopOf="@+id/schoolSloganViewId"
             app:layout_constraintEnd_toStartOf="@+id/guideline12"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/appLogoViewId"
-            app:layout_constraintTop_toTopOf="@+id/appLogoViewId" />
+            app:layout_constraintTop_toTopOf="@+id/mainHeaderBgViewId"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/schoolSloganViewId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:maxLines="2"
+            android:letterSpacing="0.2"
+            android:text="@string/school_slogan"
+            android:textColor="@color/yellow_active_2"
+            android:textSize="12sp"
+            app:autoSizeMaxTextSize="18sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@+id/mainHeaderBgViewId"
+            app:layout_constraintEnd_toStartOf="@+id/guideline12"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/appLogoViewId"
+            app:layout_constraintTop_toBottomOf="@+id/schoolNameViewId" />
 
         <ImageView
             android:id="@+id/loginBtnHintId"
@@ -135,10 +157,18 @@
                     app:showTopShadow="false" />
             </androidx.cardview.widget.CardView>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="1dp"
+                android:visibility="visible"
+                android:background="@color/white_2"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
-                android:layout_marginTop="16dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -151,10 +181,22 @@
                     android:gravity="center"
                     android:letterSpacing="0.5"
                     android:padding="10dp"
+                    android:visibility="visible"
                     android:text="notice"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="#1565C0" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Notice"
+                    android:paddingStart="8dp"
+                    android:visibility="gone"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white_inactive_2"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout"
@@ -172,7 +214,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:visibility="visible"
                 android:background="@color/white_2"
                 />
@@ -262,6 +305,7 @@
                 android:layout_height="260dp"
                 android:layout_marginTop="16dp"
                 android:orientation="vertical"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sliderCardId">
@@ -278,6 +322,135 @@
                     android:layout_weight="1" />
 
             </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_primary_dark"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView54"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Contact"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view7"
+                    android:layout_width="160dp"
+                    android:layout_height="2dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_location"
+                    app:layout_constraintBottom_toTopOf="@+id/imageView88"
+                    app:layout_constraintStart_toStartOf="@+id/textView54"
+                    app:layout_constraintTop_toBottomOf="@+id/view7"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/bottomAddressId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Address"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView8"
+                    app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+
+                <ImageView
+                    android:id="@+id/imageView88"
+                    android:layout_width="22dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_email"
+                    app:layout_constraintBottom_toTopOf="@+id/imageView218"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                    app:layout_constraintStart_toStartOf="@+id/textView54"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+                <TextView
+                    android:id="@+id/bottomEmailId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Address"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView88"
+                    app:layout_constraintTop_toTopOf="@+id/imageView88" />
+
+                <ImageView
+                    android:id="@+id/imageView218"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/ic_phone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                    app:layout_constraintStart_toStartOf="@+id/textView54"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView88" />
+
+                <TextView
+                    android:id="@+id/bottomPhoneId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Address"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView218"
+                    app:layout_constraintTop_toTopOf="@+id/imageView218" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_primary_dark"
+                android:textColor="@color/orange_active"
+                android:text="Developed By: Nogor Solutions Ltd."
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:padding="10dp"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

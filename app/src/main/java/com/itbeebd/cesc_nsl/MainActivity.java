@@ -62,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView videoTitleId;
     private TextView videoCaptionId;
 
+    private TextView bottomAddressId;
+    private TextView bottomEmailId;
+    private TextView bottomPhoneId;
+
     private CardView sliderCardId;
     private ImageCarousel carousel;
 
@@ -94,6 +98,19 @@ public class MainActivity extends AppCompatActivity {
         networkConnection = new CheckNetworkConnection(this);
         flag = CustomSharedPref.getInstance(this).getUserLoggedInOrNot();
 
+        loginBtnHintId.setOnClickListener(this::showLoginMenu);
+        userProfileImageHintId.setOnClickListener(view -> checkInternet(CustomSharedPref.getInstance(this).getUserType()));
+
+        generalNoticeFragment = new NoticeGeneraFragment();
+        academicNoticeFragment = new NoticeGeneraFragment();
+        admissionNoticeFragment = new NoticeGeneraFragment();
+
+        newsFragment = new NoticeGeneraFragment();
+        eventFragment = new NoticeGeneraFragment();
+
+        setLoginOrUserProfileLink();
+
+        getDataFromApi();
 
         viewPager.setAdapter(new ViewPagerFragmentAdapter(this, "notice"));
 
@@ -106,31 +123,6 @@ public class MainActivity extends AppCompatActivity {
         new TabLayoutMediator(news_event_tab_layout, news_event_pager, (tab, position) -> {
             tab.setText(newsEvent[position]);
         }).attach();
-
-//        FirebaseApp.initializeApp(MainActivity.this);
-//        FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
-//        firebaseAppCheck.installAppCheckProviderFactory(
-//                DebugAppCheckProviderFactory.getInstance());
-
-        //  studentLoginBtnId.setOnClickListener(view -> checkInternet(new Intent(this, LoginActivity.class )));
-
-        //  teacherLoginBtnId.setOnClickListener(view -> checkInternet(new Intent(this, TeacherLoginActivity.class )));
-        loginBtnHintId.setOnClickListener(this::showLoginMenu);
-        userProfileImageHintId.setOnClickListener(view -> checkInternet(CustomSharedPref.getInstance(this).getUserType()));
-
-        generalNoticeFragment = new NoticeGeneraFragment();
-        academicNoticeFragment = new NoticeGeneraFragment();
-        admissionNoticeFragment = new NoticeGeneraFragment();
-
-        newsFragment = new NoticeGeneraFragment();
-        eventFragment = new NoticeGeneraFragment();
-
-
-
-        //    setSlider();
-        setLoginOrUserProfileLink();
-
-        getDataFromApi();
     }
 
     private void init() {
@@ -143,6 +135,10 @@ public class MainActivity extends AppCompatActivity {
         loginBtnHintId = findViewById(R.id.loginBtnHintId);
         sliderCardId = findViewById(R.id.sliderCardId);
         carousel = findViewById(R.id.carousel);
+
+        bottomAddressId = findViewById(R.id.bottomAddressId);
+        bottomEmailId = findViewById(R.id.bottomEmailId);
+        bottomPhoneId = findViewById(R.id.bottomPhoneId);
 
         viewPager = findViewById(R.id.pager);
         tabLayout = findViewById(R.id.tab_layout);
@@ -212,8 +208,16 @@ public class MainActivity extends AppCompatActivity {
                 newsFragment = new NoticeGeneraFragment((ArrayList<Notice>) allData.get("news"));
                 eventFragment = new NoticeGeneraFragment((ArrayList<Notice>) allData.get("events"));
                 news_event_pager.setAdapter(new ViewPagerFragmentAdapter(this, "newsEvent"));
+
+                setSideData((Map<String, String>) allData.get("siteData"));
             }
         });
+    }
+
+    private void setSideData(Map<String, String> siteData) {
+        bottomAddressId.setText(siteData.get("address"));
+        bottomEmailId.setText(siteData.get("email"));
+        bottomPhoneId.setText(siteData.get("phone"));
     }
 
 
@@ -244,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
         videoGalleryLayoutId.setVisibility(View.VISIBLE);
         System.out.println("thumb >>>>>> " + new VideoPlayerActivity().getYoutubeThumbnailUrlFromVideoUrl(data.get("url")));
     }
-
 
     private void setImageView(ImageView imageView, String imageUrl) {
         Glide.with(this)

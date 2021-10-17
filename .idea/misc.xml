@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/ic_filter.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/ic_guided_student.xml" value="0.13796296296296295" />
         <entry key="app/src/main/res/drawable/ic_lesson_plan.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/drawable/ic_login.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/ic_master.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/ic_no_data_found.xml" value="0.16614583333333333" />
@@ -50,7 +51,7 @@
         <entry key="app/src/main/res/layout/activity_lesson_plan.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_library_book.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_online_class.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_payment_history.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_payment_invoice.xml" value="0.15" />
@@ -86,7 +87,7 @@
         <entry key="app/src/main/res/layout/month_name_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/no_data_found.xml" value="0.18" />
         <entry key="app/src/main/res/layout/no_internet.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/notice_board_dialog.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/notice_board_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_absent_fee_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_attendance_list_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_attendance_view.xml" value="0.4640776699029126" />

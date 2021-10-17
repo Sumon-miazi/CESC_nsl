@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CESC</string>
     <string name="school_name">Cantonment English School &amp; College</string>
+    <string name="school_slogan">Education for life</string>
     <string name="invoice">Student Payment Invoice</string>
     <string name="notification_channel_name">CESC_nsl</string>
     <string name="notification_channel_id">CESC_nsl</string>
