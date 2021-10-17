@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.itbeebd.cesc_nsl.R;
@@ -23,6 +24,7 @@ import java.util.Date;
 
 public class NoticeViewHolder extends BaseViewHolder<Notice, OnRecyclerObjectClickListener<Notice>> {
 
+    private final CardView mainCardLayoutId;
     private final ConstraintLayout cardLayoutId;
     private final TextView title;
     private final TextView description;
@@ -33,6 +35,7 @@ public class NoticeViewHolder extends BaseViewHolder<Notice, OnRecyclerObjectCli
         super(itemView);
         this.context = context;
 
+        mainCardLayoutId = itemView.findViewById(R.id.mainCardLayoutId);
         cardLayoutId = itemView.findViewById(R.id.cardLayoutId);
         title = itemView.findViewById(R.id.notificationTitleId);
         description = itemView.findViewById(R.id.notificationBodyId);
@@ -43,17 +46,18 @@ public class NoticeViewHolder extends BaseViewHolder<Notice, OnRecyclerObjectCli
     public void onBind(Notice item, @Nullable OnRecyclerObjectClickListener<Notice> listener) {
         title.setText(Html.fromHtml(item.getTitle()));
         description.setText(SimpleDateKt.toDateStandard(getDateFromString(item.getUpdated_at())));
-        title.setOnClickListener(view -> {
-//            assert listener != null;
-//            listener.onItemClicked(item, view);
-            showDialog(item);
-        });
 
         cardLayoutId.setOnClickListener(view -> {
 //            assert listener != null;
 //            listener.onItemClicked(item, view);
             showDialog(item);
         });
+
+//        cardLayoutId.setOnClickListener(view -> {
+////            assert listener != null;
+////            listener.onItemClicked(item, view);
+//            showDialog(item);
+//        });
     }
 
 

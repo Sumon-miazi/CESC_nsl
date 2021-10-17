@@ -12,7 +12,8 @@
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    android:id="@+id/mainCardLayoutId">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,13 +36,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:linksClickable="true"
             android:paddingTop="4dp"
             android:text="Notification Title"
             android:textColor="@color/black"
-            android:textColorLink="@color/blue_primary"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/notificationBodyId"

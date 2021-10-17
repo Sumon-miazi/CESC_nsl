@@ -67,14 +67,22 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
+
+    private ViewPager2 news_event_pager;
+    private TabLayout news_event_tab_layout;
     private Map<String, Object> allData;
     private NoticeGeneraFragment generalNoticeFragment;
     private NoticeGeneraFragment academicNoticeFragment;
     private NoticeGeneraFragment admissionNoticeFragment;
+    
+    private NoticeGeneraFragment newsFragment;
+    private NoticeGeneraFragment eventFragment;
+
     private Map<String, String> videoData;
 
     // tab titles
     private String[] titles = new String[]{"GENERAL", "ACADEMIC", "ADMISSION"};
+    private String[] newsEvent = new String[]{"NEWS", "EVENT"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +95,16 @@ public class MainActivity extends AppCompatActivity {
         flag = CustomSharedPref.getInstance(this).getUserLoggedInOrNot();
 
 
-        viewPager.setAdapter(new ViewPagerFragmentAdapter(this));
+        viewPager.setAdapter(new ViewPagerFragmentAdapter(this, "notice"));
+
+        news_event_pager.setAdapter(new ViewPagerFragmentAdapter(this, "newsEvent"));
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             tab.setText(titles[position]);
+        }).attach();
+
+        new TabLayoutMediator(news_event_tab_layout, news_event_pager, (tab, position) -> {
+            tab.setText(newsEvent[position]);
         }).attach();
 
 //        FirebaseApp.initializeApp(MainActivity.this);
@@ -107,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
         generalNoticeFragment = new NoticeGeneraFragment();
         academicNoticeFragment = new NoticeGeneraFragment();
         admissionNoticeFragment = new NoticeGeneraFragment();
+
+        newsFragment = new NoticeGeneraFragment();
+        eventFragment = new NoticeGeneraFragment();
 
 
 
@@ -130,7 +147,10 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.pager);
         tabLayout = findViewById(R.id.tab_layout);
 
-        videoThumbId.setOnClickListener(view -> {
+        news_event_pager = findViewById(R.id.news_event_pager);
+        news_event_tab_layout = findViewById(R.id.news_event_tab_layout);
+
+        videoGalleryLayoutId.setOnClickListener(view -> {
             if(videoData != null){
                 Intent intent = new Intent(this, VideoPlayerActivity.class);
                 intent.putExtra("web_url", videoData.get("url"));
@@ -185,9 +205,13 @@ public class MainActivity extends AppCompatActivity {
                 generalNoticeFragment = new NoticeGeneraFragment((ArrayList<Notice>) allData.get("general_notice"));
                 academicNoticeFragment = new NoticeGeneraFragment((ArrayList<Notice>) allData.get("academic_notice"));
                 admissionNoticeFragment = new NoticeGeneraFragment((ArrayList<Notice>) allData.get("admission_notice"));
-                viewPager.setAdapter(new ViewPagerFragmentAdapter(this));
+                viewPager.setAdapter(new ViewPagerFragmentAdapter(this, "notice"));
 
                 setVideoGallery((Map<String, String>) allData.get("videoData"));
+
+                newsFragment = new NoticeGeneraFragment((ArrayList<Notice>) allData.get("news"));
+                eventFragment = new NoticeGeneraFragment((ArrayList<Notice>) allData.get("events"));
+                news_event_pager.setAdapter(new ViewPagerFragmentAdapter(this, "newsEvent"));
             }
         });
     }
@@ -287,29 +311,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class ViewPagerFragmentAdapter extends FragmentStateAdapter {
-
-        public ViewPagerFragmentAdapter(@NonNull FragmentActivity fragmentActivity) {
+        private String type;
+        public ViewPagerFragmentAdapter(@NonNull FragmentActivity fragmentActivity, String type) {
             super(fragmentActivity);
+            this.type = type;
         }
 
         @NonNull
         @Override
         public Fragment createFragment(int position) {
             System.out.println(">>>>>>>>>>>. position " + position);
-            switch (position) {
-                case 0:
-                    return generalNoticeFragment;
-                case 1:
-                    return academicNoticeFragment;
-                case 2:
-                    return admissionNoticeFragment;
+            if(type.equals("notice")){
+                switch (position) {
+                    case 0:
+                        return generalNoticeFragment;
+                    case 1:
+                        return academicNoticeFragment;
+                    case 2:
+                        return admissionNoticeFragment;
+                }
+                return generalNoticeFragment;
             }
-            return generalNoticeFragment;
+            else {
+                switch (position) {
+                    case 0:
+                        return newsFragment;
+                    case 1:
+                        return eventFragment;
+                }
+                return newsFragment;
+            }
+
         }
 
         @Override
         public int getItemCount() {
-            return titles.length;
+            if(type.equals("notice")) return titles.length;
+            else return newsEvent.length;
         }
     }
 }

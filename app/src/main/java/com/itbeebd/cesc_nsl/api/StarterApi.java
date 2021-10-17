@@ -58,6 +58,10 @@ public class StarterApi extends BaseService {
                         allData.put("general_notice", extractNotice(data.getJSONObject("notice_cat").getJSONArray("general")));
                         allData.put("academic_notice", extractNotice(data.getJSONObject("notice_cat").getJSONArray("academic")));
                         allData.put("admission_notice", extractNotice(data.getJSONObject("notice_cat").getJSONArray("admission")));
+
+                        allData.put("news", extractNews(data.getJSONArray("news")));
+                        allData.put("events", extractEvent(data.getJSONArray("events")));
+
                         allData.put("videoData", videoData(data.getJSONObject("video")));
 
                         responseObj.data(allData, "data.optString(message)");
@@ -114,6 +118,35 @@ public class StarterApi extends BaseService {
                 e.printStackTrace();
             }
         }
+        return data;
+    }
+
+    private ArrayList<Notice> extractNews(JSONArray jsonArray) {
+        ArrayList<Notice> data = new ArrayList<>();
+        Gson gson = new Gson();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                Notice notice = gson.fromJson(jsonArray.getJSONObject(i).toString(), Notice.class);
+                data.add(notice);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return data;
+    }
+
+    private ArrayList<Notice> extractEvent(JSONArray jsonArray) {
+        ArrayList<Notice> data = new ArrayList<>();
+        Gson gson = new Gson();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                Notice notice = gson.fromJson(jsonArray.getJSONObject(i).toString(), Notice.class);
+                data.add(notice);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("event length >>>> " + data.size());
         return data;
     }
 
