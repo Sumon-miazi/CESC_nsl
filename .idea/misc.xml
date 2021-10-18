@@ -59,6 +59,7 @@
         <entry key="app/src/main/res/layout/activity_payment_invoice.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_quiz_archive.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_quiz_list.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_student_all_notification.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_student_dashboard.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_student_list.xml" value="0.33" />
@@ -83,7 +84,7 @@
         <entry key="app/src/main/res/layout/fragment_notice_genera.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_result_board.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.17" />
         <entry key="app/src/main/res/layout/invoice_details_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/lesson_plan_block.xml" value="0.25" />
@@ -110,6 +111,7 @@
         <entry key="app/src/main/res/layout/single_online_class.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_payment_history_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_quiz_archive_view.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/single_quiz_list_view.xml" value="0.5" />
         <entry key="app/src/main/res/layout/single_quiz_view.xml" value="0.2" />
         <entry key="app/src/main/res/layout/single_student_notification_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/single_student_view_for_student_list.xml" value="0.33" />

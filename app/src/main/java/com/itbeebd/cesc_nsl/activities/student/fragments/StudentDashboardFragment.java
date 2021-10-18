@@ -32,6 +32,7 @@ import com.itbeebd.cesc_nsl.activities.student.LibraryBookActivity;
 import com.itbeebd.cesc_nsl.activities.student.OnlineClassActivity;
 import com.itbeebd.cesc_nsl.activities.student.PaymentHistoryActivity;
 import com.itbeebd.cesc_nsl.activities.student.QuizArchiveActivity;
+import com.itbeebd.cesc_nsl.activities.student.QuizListActivity;
 import com.itbeebd.cesc_nsl.activities.student.StudentAllNotificationActivity;
 import com.itbeebd.cesc_nsl.activities.student.adapters.ClassRoutineAdapter;
 import com.itbeebd.cesc_nsl.activities.student.adapters.LessonPlanAdapter;
@@ -127,6 +128,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
     private int totalQuizArchive = 0;
     private int totalOnlineClass = 0;
+    private int totalOnlineQuiz = 0;
 
     public StudentDashboardFragment() {
 
@@ -371,6 +373,7 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     private void setDashboardData(DashboardHeaderObj object) {
         totalQuizArchive = Integer.parseInt(object.getTotalQuizArchive());
         totalOnlineClass = Integer.parseInt(object.getTotalOnlineClass());
+        totalOnlineQuiz = Integer.parseInt(object.getTotalQuiz());
 
         quizBlockNumber.setText(object.getTotalQuiz());
         quizArchiveBlockNumber.setText(object.getTotalQuizArchive());
@@ -527,16 +530,28 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
 
     private void gotoQuizView(View view) {
         System.out.println(">>>>>. " + view.getId());
+//        if (totalOnlineQuiz == 0){
+//            Toast.makeText(getContext(), "No quiz is available", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+        System.out.println(">>>>>. " + view.getId());
+        getContext().startActivity(new Intent(getContext(), QuizListActivity.class));
     }
 
     private void gotoOnlineView(View view) {
-        if (totalOnlineClass == 0) return;
+        if (totalOnlineClass == 0){
+            Toast.makeText(getContext(), "No online class is available", Toast.LENGTH_SHORT).show();
+            return;
+        }
         System.out.println(">>>>>. " + view.getId());
         getContext().startActivity(new Intent(getContext(), OnlineClassActivity.class));
     }
 
     private void gotoLibraryBookView(View view) {
-        if (bookArrayList == null || bookArrayList.size() == 0) return;
+        if (bookArrayList == null || bookArrayList.size() == 0) {
+            Toast.makeText(getContext(), "No book is available", Toast.LENGTH_SHORT).show();
+            return;
+        }
         System.out.println(">>>>>. " + view.getId());
         Intent intent = new Intent(getActivity(), LibraryBookActivity.class);
         intent.putExtra("books", bookArrayList);
@@ -544,7 +559,10 @@ public class StudentDashboardFragment extends Fragment implements OnRecyclerObje
     }
 
     private void gotoQuizArchiveView(View view) {
-        if (totalQuizArchive == 0) return;
+        if (totalQuizArchive == 0){
+            Toast.makeText(getContext(), "No quiz archive is available", Toast.LENGTH_SHORT).show();
+            return;
+        }
         System.out.println(">>>>>. " + view.getId());
         startActivity(new Intent(getContext(), QuizArchiveActivity.class));
     }

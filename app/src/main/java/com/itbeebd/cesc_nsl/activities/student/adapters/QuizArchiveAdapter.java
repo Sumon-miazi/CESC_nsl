@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.GenericRecyclerAdapter;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
-import com.itbeebd.cesc_nsl.activities.student.adapters.viewHolders.QuizArchiveViewHolder;
+import com.itbeebd.cesc_nsl.activities.student.viewHolders.QuizArchiveViewHolder;
 import com.itbeebd.cesc_nsl.utils.dummy.QuizArchive;
 
 public class QuizArchiveAdapter extends GenericRecyclerAdapter<QuizArchive, OnRecyclerObjectClickListener<QuizArchive>, QuizArchiveViewHolder> {

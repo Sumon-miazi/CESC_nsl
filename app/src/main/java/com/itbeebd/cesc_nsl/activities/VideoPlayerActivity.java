@@ -16,14 +16,14 @@ import java.util.regex.Pattern;
 
 public class VideoPlayerActivity extends YouTubeBaseActivity{
 
-    private final String api_key = "AIXEp_5yjILvY";
+    private final String api_key = "A2GXEp_5yjILvY";
 
     private AndExoPlayerView andExoPlayerView;
     // Get reference to the view of Video player
     private YouTubePlayerView ytPlayerView;
     private YouTubePlayer youTubePlayer;
     private YouTubePlayer ytPlayer;
-    private YouTubePlayer.OnInitializedListener onInitializedListener;;
+    private YouTubePlayer.OnInitializedListener onInitializedListener;
     private String initializeFailed = "Player initialization failed";
     private String ytVideoUrl;
     @Override

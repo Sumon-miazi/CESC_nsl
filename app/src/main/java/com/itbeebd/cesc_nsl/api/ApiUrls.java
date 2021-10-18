@@ -23,6 +23,7 @@ public class ApiUrls {
     public static final String TEACHER_LOGOUT =  "teacher-logout";
     public static final String ONLINE_CLASS =  "online-class";
     public static final String QUIZ_ARCHIVE =  "quiz-archive";
+    public static final String LIVE_QUIZ_LIST =  "live-quiz-list";
     public static final String GUIDED_STUDENT =  "guided-Student";
     public static final String STUDENT_LIST =  "student-list";
     public static final String STUDENT_DETAILS =  "student-details";
