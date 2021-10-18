@@ -70,7 +70,12 @@ public class LoginActivity extends AppCompatActivity {
                 this.startActivity(intent);
                 finish();
             }
-            else Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            else{
+                if(message.equals("Login credential dose not match.")){
+                    userPassword.getEditText().setText("");
+                }
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            }
         }));
     }
 

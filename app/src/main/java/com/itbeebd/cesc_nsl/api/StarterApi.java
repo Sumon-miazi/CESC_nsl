@@ -61,6 +61,7 @@ public class StarterApi extends BaseService {
 
                         allData.put("news", extractNews(data.getJSONArray("news")));
                         allData.put("events", extractEvent(data.getJSONArray("events")));
+                        allData.put("marque", extractMarqueNotice(data.getJSONArray("notices")));
 
                         allData.put("videoData", videoData(data.getJSONObject("video")));
                         allData.put("siteData", siteData(data.getJSONObject("site_data")));
@@ -152,6 +153,20 @@ public class StarterApi extends BaseService {
         }
         System.out.println("event length >>>> " + data.size());
         return data;
+    }
+
+    private String extractMarqueNotice(JSONArray jsonArray) {
+        String marque = "";
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+               marque += jsonArray.getJSONObject(i).getString("title") + "\t\t\t\t\t\t";
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return marque;
     }
 
     private Map<String, String> videoData(JSONObject jsonObject) {

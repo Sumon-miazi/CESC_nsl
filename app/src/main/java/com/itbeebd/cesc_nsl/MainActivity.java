@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView videoThumbId;
     private TextView videoTitleId;
     private TextView videoCaptionId;
+    private TextView marqueId;
 
     private TextView bottomAddressId;
     private TextView bottomEmailId;
@@ -142,6 +143,9 @@ public class MainActivity extends AppCompatActivity {
         loginBtnHintId = findViewById(R.id.loginBtnHintId);
         sliderCardId = findViewById(R.id.sliderCardId);
         carousel = findViewById(R.id.carousel);
+
+        marqueId = findViewById(R.id.marqueId);
+        marqueId.setSelected(true);
 
         bottomAddressId = findViewById(R.id.bottomAddressId);
         bottomEmailId = findViewById(R.id.bottomEmailId);
@@ -226,6 +230,9 @@ public class MainActivity extends AppCompatActivity {
         new StarterApi(this, "Loading...").getHomeData((object, message) -> {
             if (object != null) {
                 allData = (Map<String, Object>) object;
+
+                marqueId.setText(String.valueOf(allData.get("marque")));
+
                 setSlider((ArrayList<Map<String, String>>) allData.get("sliderImage"));
 
                 System.out.println("general >>>>> " + ((ArrayList<Notice>) allData.get("general_notice")).size());
