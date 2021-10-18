@@ -25,4 +25,6 @@
     <string name="forget_password">Forget password</string>
     <string name="due">Due</string>
     <string name="participate_in_the_quiz">participate in the quiz</string>
+    <string name="time_remaining">Time Remaining</string>
+    <string name="_0h_0m_0s">0h : 0m : 0s</string>
 </resources>

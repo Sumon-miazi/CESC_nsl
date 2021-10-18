@@ -27,6 +27,12 @@ public class RetrofitRequestBody {
         return map;
     }
 
+    public Map<String, Object> examId(int id){
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        return map;
+    }
+
     public Map<String, Object> mapBody(String name){
         Map<String, Object> map = new HashMap<>();
         map.put("name", name);

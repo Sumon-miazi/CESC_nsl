@@ -49,8 +49,8 @@ public class QuizListViewHolder  extends BaseViewHolder<LiveQuiz, OnRecyclerObje
         subjectNameViewId.setText(item.getSubjectName());
         examTitleId.setText(item.getExamTitle());
       //  timeRemainningId.setText(timeClockId.getText());
-        examDateId.setText(SimpleDateKt.toDateTimeStandardIn12Hours(getDateFromString(item.getExamDate())));
-        System.out.println("Exam time >>>>>>> " + item.getExamDate());
+        examDateId.setText(SimpleDateKt.toDateTimeStandardIn12Hours(getDateFromString(item.getExamStartDateTime())));
+        System.out.println("Exam time >>>>>>> " + item.getExamStartDateTime());
 
         participateBtnId.setOnClickListener(view -> {
             assert listener != null;

@@ -1,5 +1,6 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.itbeebd.cesc_nsl.activities.student.adapters.QuizListAdapter;
 import com.itbeebd.cesc_nsl.api.studentApi.QuizApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.utils.dummy.LiveQuiz;
+import com.itbeebd.cesc_nsl.utils.dummy.Quiz;
 
 import java.util.ArrayList;
 
@@ -94,12 +96,24 @@ public class QuizListActivity extends AppCompatActivity  implements OnRecyclerOb
 
     @Override
     public void onItemClicked(LiveQuiz item, View view) {
-//        if(item.getQuizArrayList() != null){
-//            if(item.getQuizArrayList().size() != 0){
-//                Intent intent = new Intent(this, QuizActivity.class);
-//                intent.putExtra("quiz", item.getQuizArrayList());
-//                startActivity(intent);
-//            }
-//        }
+
+        new QuizApi(this).getLiveQuizzes(
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                item.getId(),
+                (object, message) -> {
+                    if(object != null){
+                        item.setQuizArrayList((ArrayList< Quiz >) object);
+                        Intent intent = new Intent(this, QuizActivity.class);
+                        intent.putExtra("liveQuiz", item);
+                        startActivity(intent);
+                    }
+                    else {
+                        try {
+                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                        }
+                        catch (Exception ignore){}
+                    }
+                }
+        );
     }
 }

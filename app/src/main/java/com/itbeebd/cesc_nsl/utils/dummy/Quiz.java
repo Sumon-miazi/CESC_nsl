@@ -42,4 +42,8 @@ public class Quiz implements Serializable {
     public int getAnswer() {
         return answer;
     }
+
+    public void setAnswer(int answer) {
+        this.answer = answer;
+    }
 }

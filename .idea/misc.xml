@@ -57,7 +57,7 @@
         <entry key="app/src/main/res/layout/activity_online_class.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_payment_history.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_payment_invoice.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_quiz_archive.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_quiz_list.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_student_all_notification.xml" value="0.15" />

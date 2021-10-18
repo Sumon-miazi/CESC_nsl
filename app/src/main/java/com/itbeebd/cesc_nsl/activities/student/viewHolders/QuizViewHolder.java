@@ -23,10 +23,12 @@ public class QuizViewHolder extends BaseViewHolder<Quiz, OnRecyclerObjectClickLi
     private final CheckBox option4;
 
     private final Context context;
+    private final String type;
 
-    public QuizViewHolder(@NonNull View itemView, Context context) {
+    public QuizViewHolder(@NonNull View itemView, Context context, String type) {
         super(itemView);
         this.context = context;
+        this.type = type;
 
         question = itemView.findViewById(R.id.questionId);
         option1 = itemView.findViewById(R.id.op_1_ans_Id);
@@ -44,10 +46,40 @@ public class QuizViewHolder extends BaseViewHolder<Quiz, OnRecyclerObjectClickLi
         option3.setText(Html.fromHtml(item.getOption3()));
         option4.setText(Html.fromHtml(item.getOption4()));
 
-        option1.setChecked(item.getAnswer() == 1);
-        option2.setChecked(item.getAnswer() == 2);
-        option3.setChecked(item.getAnswer() == 3);
-        option4.setChecked(item.getAnswer() == 4);
+        if(type.equals("oldQuiz")){
+            option1.setChecked(item.getAnswer() == 1);
+            option2.setChecked(item.getAnswer() == 2);
+            option3.setChecked(item.getAnswer() == 3);
+            option4.setChecked(item.getAnswer() == 4);
+        }
+        else {
+            option1.setEnabled(true);
+            option2.setEnabled(true);
+            option3.setEnabled(true);
+            option4.setEnabled(true);
+
+            option1.setOnCheckedChangeListener((compoundButton, b) -> {
+                item.setAnswer(1);
+                assert listener != null;
+                listener.onItemClicked(item, compoundButton);
+            });
+            option2.setOnCheckedChangeListener((compoundButton, b) -> {
+                item.setAnswer(2);
+                assert listener != null;
+                listener.onItemClicked(item, compoundButton);
+            });
+            option3.setOnCheckedChangeListener((compoundButton, b) -> {
+                item.setAnswer(3);
+                assert listener != null;
+                listener.onItemClicked(item, compoundButton);
+            });
+            option4.setOnCheckedChangeListener((compoundButton, b) -> {
+                item.setAnswer(4);
+                assert listener != null;
+                listener.onItemClicked(item, compoundButton);
+            });
+        }
 
     }
+
 }
