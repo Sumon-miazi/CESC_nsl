@@ -222,7 +222,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:maxLines="2"
-                                android:text="Quiz\nTest"
+                                android:text="Online\nExam"
                                 android:textAlignment="center"
                                 android:textColor="@color/quiz_text"
                                 android:textSize="12sp"

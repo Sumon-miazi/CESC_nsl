@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="14dp"
+    android:layout_margin="6dp"
+    android:background="@drawable/attendance_bg">
+
+    <TextView
+        android:id="@+id/questionNoHintId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green_active"
+        android:padding="6dp"
+        android:text="Question No"
+        android:textAlignment="center"
+        android:textColor="#004D40"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/removeQuestionBoxId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_cancel"
+        app:layout_constraintBottom_toTopOf="@+id/questionBoxId"
+        app:layout_constraintStart_toStartOf="@+id/questionNoHintId"
+        app:layout_constraintTop_toTopOf="@+id/questionNoHintId"
+        app:tint="@color/white" />
+
+    <EditText
+        android:id="@+id/questionBoxId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_question"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/questionNoHintId" />
+
+    <CheckBox
+        android:id="@+id/op1Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/ans1Id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ans1Id" />
+
+    <EditText
+        android:id="@+id/ans1Id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Enter option - 1"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/op1Id"
+        app:layout_constraintTop_toBottomOf="@+id/questionBoxId" />
+
+    <CheckBox
+        android:id="@+id/op2Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/ans2Id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ans2Id" />
+
+    <EditText
+        android:id="@+id/ans2Id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Enter option - 2"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/op2Id"
+        app:layout_constraintTop_toBottomOf="@+id/ans1Id" />
+
+
+    <CheckBox
+        android:id="@+id/op3Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/ans3Id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ans3Id" />
+
+    <EditText
+        android:id="@+id/ans3Id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Enter option - 3"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/op3Id"
+        app:layout_constraintTop_toBottomOf="@+id/ans2Id" />
+
+
+    <CheckBox
+        android:id="@+id/op4Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/ans4Id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ans4Id" />
+
+    <EditText
+        android:id="@+id/ans4Id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Enter option - 3"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/op4Id"
+        app:layout_constraintTop_toBottomOf="@+id/ans3Id" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

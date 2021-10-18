@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/heebo_extra_bold"
-                        android:text="Class Routine"
+                        android:text="Academic"
                         android:textAllCaps="true"
                         android:textColor="@color/academic_txt"
                         android:textSize="@dimen/t_dashboard_menu_txt_size"
@@ -207,6 +207,7 @@
                         android:textColor="@color/menu_text_color"
                         android:textSize="@dimen/t_dashboard_submenu_txt_size"
                         android:textStyle="bold"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/t_classRoutineViewId"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -225,6 +226,7 @@
                         android:textColor="@color/menu_text_color"
                         android:textSize="@dimen/t_dashboard_submenu_txt_size"
                         android:textStyle="bold"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/t_teacherRoutineViewId"
                         app:layout_constraintTop_toBottomOf="@+id/t_onlineClassViewId"
                         tools:layout_editor_absoluteX="0dp" />
@@ -697,17 +699,17 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/reportCardId"
+                android:id="@+id/sendNotiCardId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/report_tint"
+                android:backgroundTint="@color/result_tint"
                 android:layout_marginStart="@dimen/t_dashboard_menu_card_margin_start"
                 android:layout_marginTop="@dimen/t_dashboard_menu_card_margin_top"
                 android:layout_marginEnd="@dimen/t_dashboard_menu_card_margin_end"
                 android:layout_marginBottom="@dimen/t_dashboard_menu_card_margin_bottom"
                 android:clickable="true"
                 android:focusable="true"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:onClick="cardViewClicked"
                 app:cardCornerRadius="10dp"
@@ -725,7 +727,7 @@
                         android:id="@+id/idamw6"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_report_card"
+                        android:src="@drawable/ic_baseline_send"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -734,9 +736,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/heebo_extra_bold"
-                        android:text="Report"
+                        android:text="Send Notification"
                         android:textAllCaps="true"
-                        android:textColor="@color/report_txt"
+                        android:textColor="@color/result_txt"
                         android:textSize="@dimen/t_dashboard_menu_txt_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/idamw6"
@@ -762,7 +764,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reportCardId">
+                app:layout_constraintTop_toBottomOf="@+id/sendNotiCardId">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

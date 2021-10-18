@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.itbeebd.cesc_nsl.MainActivity;
 import com.itbeebd.cesc_nsl.R;
-import com.itbeebd.cesc_nsl.activities.LoginActivity;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.teacherApi.LoginApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
@@ -36,6 +35,11 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
     private ExpandableLayout resultExpandableLayout;
     private ExpandableLayout reportExpandableLayout;
     private ExpandableLayout lessonPlan_expandable_layout;
+
+    private Button t_onlineClassViewId;
+    private Button t_classRoutineViewId;
+    private Button t_teacherRoutineViewId;
+    private Button t_onlineExamViewId;
 
     private Button t_addAttendanceViewId;
     private Button t_attendanceListViewId;
@@ -64,6 +68,11 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
         reportExpandableLayout = findViewById(R.id.report_expandable_layout);
         lessonPlan_expandable_layout = findViewById(R.id.lessonPlan_expandable_layout);
 
+        t_onlineClassViewId = findViewById(R.id.t_onlineClassViewId);
+        t_classRoutineViewId = findViewById(R.id.t_classRoutineViewId);
+        t_teacherRoutineViewId = findViewById(R.id.t_teacherRoutineViewId);
+        t_onlineExamViewId = findViewById(R.id.t_onlineExamViewId);
+
         t_addAttendanceViewId = findViewById(R.id.t_addAttendanceViewId);
         t_attendanceListViewId = findViewById(R.id.t_attendanceListViewId);
         t_absentFeeViewId = findViewById(R.id.t_absentFeeViewId);
@@ -81,6 +90,14 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
         teacherDao = new TeacherDao();
 
         teacherDao.clearGuidedStudentDetails();
+
+        t_teacherRoutineViewId.setOnClickListener(view -> {
+            startActivity(new Intent(this, TeacherRoutineActivity.class));
+        });
+
+        t_onlineExamViewId.setOnClickListener(view -> {
+            startActivity(new Intent(this, OnlineExamActivity.class));
+        });
 
         t_addAttendanceViewId.setOnClickListener(this);
         t_attendanceListViewId.setOnClickListener(this);
@@ -121,8 +138,8 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
 
     public void cardViewClicked(View view) {
         if(view.getId() == R.id.academicCardId){
-           // academicExpandableLayout.toggle();
-            startActivity(new Intent(this, TeacherRoutineActivity.class));
+            academicExpandableLayout.toggle();
+           // startActivity(new Intent(this, TeacherRoutineActivity.class));
         }
         else if(view.getId() == R.id.studentCardId){
             studentExpandableLayout.toggle();
