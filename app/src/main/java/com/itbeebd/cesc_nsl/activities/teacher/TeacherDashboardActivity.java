@@ -151,8 +151,9 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
         else if(view.getId() == R.id.resultCardId){
             resultExpandableLayout.toggle();
         }
-        else if(view.getId() == R.id.reportCardId){
-            reportExpandableLayout.toggle();
+        else if(view.getId() == R.id.sendNotiCardId){
+            startActivity(new Intent(this, SendNotificationActivity.class));
+           // reportExpandableLayout.toggle();
         }
         else if(view.getId() == R.id.guidedStudentCardId){
             startActivity(new Intent(this, GuideStudentListActivity.class));

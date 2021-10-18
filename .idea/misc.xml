@@ -62,6 +62,7 @@
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_quiz_archive.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_quiz_list.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_send_notification.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_student_all_notification.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_student_dashboard.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_student_list.xml" value="0.33" />

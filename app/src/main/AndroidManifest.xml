@@ -29,6 +29,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".activities.teacher.SendNotificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.teacher.OnlineExamActivity"
             android:exported="false" />
         <activity
