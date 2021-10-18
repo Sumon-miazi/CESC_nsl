@@ -37,6 +37,7 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     private CountDownTimer countDownTimer;
     private String type;
     private QuizAdapter quizAdapter;
+    private boolean quizAlreadySubmitted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,8 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
         quizTimerViewId = findViewById(R.id.quizTimerViewId);
         timeRId = findViewById(R.id.timeRId);
         quizSubmitBtnId = findViewById(R.id.quizSubmitBtnId);
+
+        quizSubmitBtnId.setOnClickListener(view -> submitQuizResult());
 
         if(getIntent().hasExtra("quiz")){
             quizArrayList = (ArrayList<Quiz>) getIntent().getSerializableExtra("quiz");
@@ -84,6 +87,11 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
         }
     }
 
+    private void submitQuizResult(){
+        quizAlreadySubmitted = true;
+        quizTimerViewId.setText("Quiz Submitted");
+    }
+
     private void countDown(int timeInMillis, int interval){
         if(countDownTimer == null)
             countDownTimer =  new CountDownTimer(timeInMillis, interval) {
@@ -106,6 +114,7 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
                     quizTimerViewId.setText("Quiz has finished");
                     timeRId.setVisibility(View.INVISIBLE);
                     quizSubmitBtnId.setVisibility(View.GONE);
+                    if(!quizAlreadySubmitted) submitQuizResult();
                 }
             }.start();
     }
@@ -143,6 +152,7 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
             quizAdapter.notifyItemChanged(i);
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Respond to the action bar's Up/Home button
