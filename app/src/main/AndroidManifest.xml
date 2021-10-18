@@ -28,6 +28,7 @@
         android:theme="@style/Theme.CESC_nsl"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
+
         <activity
             android:name=".activities.teacher.SendNotificationActivity"
             android:exported="false" />
@@ -173,7 +174,35 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- these are sugar orm settings -->
+        </activity>
+
+        <!-- these are firebase cloud notification settings -->
+        <service
+            android:name=".activities.student.FirebaseCloudMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/notification_logo" />
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/notification_channel_id" />
+
+        <!-- these are sugar orm settings -->
         <meta-data
             android:name="DATABASE"
             android:value="cesc_nsl.db" />
@@ -185,7 +214,9 @@
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="com.itbeebd.cesc_nsl.sugarClass" /> <!-- file provider settings -->
+            android:value="com.itbeebd.cesc_nsl.sugarClass" />
+
+        <!-- file provider settings -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.itbeebd.cesc_nsl.utils.NotificationReminder"

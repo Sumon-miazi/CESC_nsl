@@ -62,7 +62,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(String userId, String password) {
-        new LoginApi(this, "Signing in...").studentLogin(userId, password, "123456", ((isSuccess, message) -> {
+        new LoginApi(this, "Signing in...").studentLogin(
+                userId,
+                password,
+                CustomSharedPref.getInstance(this).getNotificationToken(),
+                ((isSuccess, message) -> {
             if(isSuccess){
                 CustomSharedPref.getInstance(this).setUserLoggedInOrNot(true);
                 Intent intent = new Intent(this, StudentDashboardActivity.class);

@@ -62,6 +62,16 @@ public class CustomSharedPref {
         editor.apply();
     }
 
+    // firebase notification token
+    public String getNotificationToken() {
+        return sharedPreferences.getString("NotificationToken", "");
+    }
+
+    public void setNotificationToken(String flag) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("NotificationToken", flag);
+        editor.apply();
+    }
 
 
     // user auth token
