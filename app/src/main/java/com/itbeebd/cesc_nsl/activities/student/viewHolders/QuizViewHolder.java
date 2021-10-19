@@ -59,22 +59,22 @@ public class QuizViewHolder extends BaseViewHolder<Quiz, OnRecyclerObjectClickLi
             option4.setEnabled(true);
 
             option1.setOnCheckedChangeListener((compoundButton, b) -> {
-                item.setAnswer(1);
+                item.setCheckedAnswer(1);
                 assert listener != null;
                 listener.onItemClicked(item, compoundButton);
             });
             option2.setOnCheckedChangeListener((compoundButton, b) -> {
-                item.setAnswer(2);
+                item.setCheckedAnswer(2);
                 assert listener != null;
                 listener.onItemClicked(item, compoundButton);
             });
             option3.setOnCheckedChangeListener((compoundButton, b) -> {
-                item.setAnswer(3);
+                item.setCheckedAnswer(3);
                 assert listener != null;
                 listener.onItemClicked(item, compoundButton);
             });
             option4.setOnCheckedChangeListener((compoundButton, b) -> {
-                item.setAnswer(4);
+                item.setCheckedAnswer(4);
                 assert listener != null;
                 listener.onItemClicked(item, compoundButton);
             });

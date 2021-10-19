@@ -9,6 +9,7 @@ public class Quiz implements Serializable {
     private String option3;
     private String option4;
     private int answer;
+    private int checkedAnswer;
 
     public Quiz(String question, String option1, String option2, String option3, String option4, int answer) {
         this.question = question;
@@ -17,6 +18,7 @@ public class Quiz implements Serializable {
         this.option3 = option3;
         this.option4 = option4;
         this.answer = answer;
+        this.checkedAnswer = 0;
     }
 
     public String getQuestion() {
@@ -45,5 +47,13 @@ public class Quiz implements Serializable {
 
     public void setAnswer(int answer) {
         this.answer = answer;
+    }
+
+    public int getCheckedAnswer() {
+        return checkedAnswer;
+    }
+
+    public void setCheckedAnswer(int checkedAnswer) {
+        this.checkedAnswer = checkedAnswer;
     }
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,13 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.student.adapters.QuizAdapter;
+import com.itbeebd.cesc_nsl.api.studentApi.QuizApi;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.utils.dummy.LiveQuiz;
 import com.itbeebd.cesc_nsl.utils.dummy.Quiz;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectClickListener<Quiz> {
 
@@ -38,6 +41,8 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     private String type;
     private QuizAdapter quizAdapter;
     private boolean quizAlreadySubmitted = false;
+    private int rightAnswer = 0;
+    private int wrongAnswer = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +80,10 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
         setupAdapter();
         liveQuizTimerLayoutId.setVisibility(View.VISIBLE);
         quizSubmitBtnId.setVisibility(View.VISIBLE);
-        countDown(30000, 1000);
+        countDown((int) getDateDiff(getDateFromString(
+                liveQuiz.getExamEndDateTime()),
+                Calendar.getInstance().getTime())
+        );
     }
 
     private void setupAdapter() {
@@ -88,23 +96,43 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     }
 
     private void submitQuizResult(){
-        quizAlreadySubmitted = true;
-        quizTimerViewId.setText("Quiz Submitted");
+        rightAnswer = 0;
+        wrongAnswer = 0;
+        calculate();
+
+        new QuizApi(this, "Submitting...").submitLiveExam(
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                liveQuiz.getId(),
+                rightAnswer,
+                wrongAnswer,
+                (isSuccess, message) -> {
+                    quizAlreadySubmitted = isSuccess;
+                    if(isSuccess || message.equals("Already submitted")){
+                        quizTimerViewId.setText("Quiz Submitted");
+                        countDownTimer.cancel();
+                        quizSubmitBtnId.setVisibility(View.GONE);
+                        timeRId.setVisibility(View.INVISIBLE);
+                    }
+                    else {
+                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                        quizSubmitBtnId.setVisibility(View.VISIBLE);
+                        timeRId.setVisibility(View.VISIBLE);
+                    }
+                }
+        );
     }
 
-    private void countDown(int timeInMillis, int interval){
-        if(countDownTimer == null)
-            countDownTimer =  new CountDownTimer(timeInMillis, interval) {
+    private void countDown(int timeInMillis){
+            countDownTimer =  new CountDownTimer(timeInMillis, 1000) {
 
                 public void onTick(long millisUntilFinished) {
-                    Long totalSecRemaining = millisUntilFinished / interval;
+                    Long totalSecRemaining = millisUntilFinished / 1000;
                     Long hour = totalSecRemaining / 3600;
 
                     totalSecRemaining = totalSecRemaining % 3600;
                     Long min = totalSecRemaining / 60;
 
                     Long sec = totalSecRemaining % 60;
-
 
                     String timeRemaining = hour + "h : " + min + "m : " + sec +"s";
                     quizTimerViewId.setText(timeRemaining);
@@ -122,16 +150,30 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     private Date getDateFromString(String dateString){
         System.out.println("????????? " + dateString);
         Date date;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //   format.setTimeZone(TimeZone.getTimeZone("GMT"));
         try {
             date = format.parse(dateString);
             System.out.println("????????? " + date);
+            return date;
         } catch (Exception ignore) {
             ignore.printStackTrace();
-            date = new Date();
         }
-        return date;
+        return null;
+    }
+
+    private long getDateDiff(Date startDate, Date endDate) {
+
+        // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            long time = startDate.getTime() - endDate.getTime()  ;
+            if(time < 0) return 1;
+            else return time;
+            // return TimeUnit.DAYS.convert(format.parse(newDate).getTime() - Calendar.getInstance().getTime(), TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
     }
 
     @Override
@@ -152,6 +194,25 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
             quizAdapter.notifyItemChanged(i);
         });
     }
+
+    private void calculate(){
+        for(int i = 0; i < quizArrayList.size(); i++){
+            if(quizArrayList.get(i).getCheckedAnswer() != 0){
+                if(quizArrayList.get(i).getCheckedAnswer() == quizArrayList.get(i).getAnswer()) {
+                    rightAnswer += 1;
+                }
+                else {
+                    wrongAnswer += 1;
+                }
+            }
+        }
+    }
+
+
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

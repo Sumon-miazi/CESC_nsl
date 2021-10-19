@@ -79,4 +79,12 @@ public class RetrofitRequestBody {
         map.put("to_date", toDate);
         return map;
     }
+
+    public Map<String, Object> submitLiveQuiz(int examId, int rightAnswer, int wrongAnswer) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("examId", examId);
+        map.put("rightAnswer", rightAnswer);
+        map.put("wrongAnswer", wrongAnswer);
+        return map;
+    }
 }

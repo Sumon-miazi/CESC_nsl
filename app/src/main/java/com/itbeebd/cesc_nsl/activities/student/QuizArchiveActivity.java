@@ -42,7 +42,7 @@ public class QuizArchiveActivity extends AppCompatActivity implements OnRecycler
     }
 
     private void callQuizArchiveApi() {
-        new QuizApi(this).getQuizArchive(
+        new QuizApi(this, "Loading...").getQuizArchive(
                 CustomSharedPref.getInstance(this).getAuthToken(),
                 (object, message) -> {
                     if(object != null){

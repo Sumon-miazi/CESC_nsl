@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
+import com.itbeebd.cesc_nsl.interfaces.BooleanResponse;
 import com.itbeebd.cesc_nsl.interfaces.ResponseObj;
 import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 import com.itbeebd.cesc_nsl.utils.dummy.LiveQuiz;
@@ -27,15 +28,15 @@ public class QuizApi extends BaseService {
     final RetrofitRequestBody requestBody;
     private CustomProgressDialog progressDialog;
 
-    public QuizApi(Context context) {
+    public QuizApi(Context context, String message) {
         this.context = context;
         requestBody = new RetrofitRequestBody();
-        this.progressDialog = new CustomProgressDialog(context, "Loading...");
+        this.progressDialog = new CustomProgressDialog(context, message);
     }
 
-    public void getQuizArchive(String token, ResponseObj responseObj) {
+    public void getQuizArchive(String authToken, ResponseObj responseObj) {
         progressDialog.show();
-        Call<ResponseBody> quizArchiveCall = service.getRequestPath(token, ApiUrls.QUIZ_ARCHIVE);
+        Call<ResponseBody> quizArchiveCall = service.getRequestPath(authToken, ApiUrls.QUIZ_ARCHIVE);
         quizArchiveCall.enqueue(new Callback<ResponseBody>() {
 
             @Override
@@ -111,9 +112,9 @@ public class QuizApi extends BaseService {
         });
     }
 
-    public void getLiveQuizList(String token, ResponseObj responseObj) {
+    public void getLiveQuizList(String authToken, ResponseObj responseObj) {
         progressDialog.show();
-        Call<ResponseBody> apiCall = service.getRequestPath(token, ApiUrls.LIVE_QUIZ_LIST);
+        Call<ResponseBody> apiCall = service.getRequestPath(authToken, ApiUrls.LIVE_QUIZ_LIST);
         apiCall.enqueue(new Callback<ResponseBody>() {
 
             @Override
@@ -164,9 +165,9 @@ public class QuizApi extends BaseService {
         });
     }
 
-    public void getLiveQuizzes(String token, int id, ResponseObj responseObj) {
+    public void getLiveQuizzes(String authToken, int id, ResponseObj responseObj) {
         progressDialog.show();
-        Call<ResponseBody> quizArchiveCall = service.getRequestPath(token, ApiUrls.QUIZ_ARCHIVE, requestBody.examId(id));
+        Call<ResponseBody> quizArchiveCall = service.getRequestPath(authToken, ApiUrls.LIVE_QUIZ_QUESTION, requestBody.examId(id));
         quizArchiveCall.enqueue(new Callback<ResponseBody>() {
 
             @Override
@@ -217,6 +218,46 @@ public class QuizApi extends BaseService {
                 progressDialog.dismiss();
                 System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
                 responseObj.data(null, t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void submitLiveExam(String authToken, int examId, int rightAnswer, int wrongAnswer, BooleanResponse booleanResponse){
+        progressDialog.show();
+        Call<ResponseBody> studentLogout = service.getRequestPath(authToken, ApiUrls.SUBMIT_LIVE_QUIZ, requestBody.submitLiveQuiz(examId, rightAnswer, wrongAnswer));
+        studentLogout.enqueue(new Callback<ResponseBody>(){
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                JSONObject jsonObject = null;
+                if(response.isSuccessful() && response != null){
+                    System.out.println(">>>>>>>>>> " + response.body());
+                    try {
+                        jsonObject =  new JSONObject(response.body().string());
+                        System.out.println(">>>>>>>>>> " + jsonObject);
+                        booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(">>>>>>>>>> catch " + e.fillInStackTrace());
+                        booleanResponse.response(false, e.getLocalizedMessage());
+                    }
+
+
+                }
+                else {
+                    booleanResponse.response(response.isSuccessful(), response.toString());
+                    System.out.println(">>>>>>>>>> " + response.isSuccessful());
+                    System.out.println(">>>>>>>>>> " + response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                booleanResponse.response(false, t.getLocalizedMessage());
+                System.out.println(">>>>>>>>>> " + t.getLocalizedMessage());
             }
         });
     }

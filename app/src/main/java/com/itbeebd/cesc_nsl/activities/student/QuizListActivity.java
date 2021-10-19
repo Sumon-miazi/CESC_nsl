@@ -56,7 +56,7 @@ public class QuizListActivity extends AppCompatActivity  implements OnRecyclerOb
     }
 
     private void callLiveQuizApi() {
-        new QuizApi(this).getLiveQuizList(
+        new QuizApi(this, "Loading...").getLiveQuizList(
                 CustomSharedPref.getInstance(this).getAuthToken(),
                 (object, message) -> {
                     if(object != null){
@@ -97,7 +97,7 @@ public class QuizListActivity extends AppCompatActivity  implements OnRecyclerOb
     @Override
     public void onItemClicked(LiveQuiz item, View view) {
 
-        new QuizApi(this).getLiveQuizzes(
+        new QuizApi(this,"Loading...").getLiveQuizzes(
                 CustomSharedPref.getInstance(this).getAuthToken(),
                 item.getId(),
                 (object, message) -> {
