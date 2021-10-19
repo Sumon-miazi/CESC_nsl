@@ -51,8 +51,14 @@ public class QuizListActivity extends AppCompatActivity  implements OnRecyclerOb
 //        liveQuizzes.add(new LiveQuiz("Sociology", "Test quiz", "2021-07-03T10:09:06.000000Z"));
 //        liveQuizzes.add(new LiveQuiz("Computer", "Test quiz", "2021-07-03T10:09:06.000000Z"));
 //        liveQuizzes.add(new LiveQuiz("Ict", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        callLiveQuizApi();
+
       //  setUpAdapter();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        callLiveQuizApi();
     }
 
     private void callLiveQuizApi() {

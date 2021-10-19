@@ -96,7 +96,7 @@ public class TeacherDashboardActivity extends AppCompatActivity implements View.
         });
 
         t_onlineExamViewId.setOnClickListener(view -> {
-            startActivity(new Intent(this, OnlineExamActivity.class));
+            startActivity(new Intent(this, OnlineExamListActivity.class));
         });
 
         t_addAttendanceViewId.setOnClickListener(this);

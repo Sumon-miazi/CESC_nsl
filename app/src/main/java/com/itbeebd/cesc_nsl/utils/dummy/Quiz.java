@@ -3,6 +3,7 @@ package com.itbeebd.cesc_nsl.utils.dummy;
 import java.io.Serializable;
 
 public class Quiz implements Serializable {
+    private int id;
     private String question;
     private String option1;
     private String option2;
@@ -11,7 +12,8 @@ public class Quiz implements Serializable {
     private int answer;
     private int checkedAnswer;
 
-    public Quiz(String question, String option1, String option2, String option3, String option4, int answer) {
+    public Quiz(int id, String question, String option1, String option2, String option3, String option4, int answer) {
+        this.id = id;
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;

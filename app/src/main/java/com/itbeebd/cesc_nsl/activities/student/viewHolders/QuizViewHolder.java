@@ -46,39 +46,64 @@ public class QuizViewHolder extends BaseViewHolder<Quiz, OnRecyclerObjectClickLi
         option3.setText(Html.fromHtml(item.getOption3()));
         option4.setText(Html.fromHtml(item.getOption4()));
 
-        if(type.equals("oldQuiz")){
-            option1.setChecked(item.getAnswer() == 1);
-            option2.setChecked(item.getAnswer() == 2);
-            option3.setChecked(item.getAnswer() == 3);
-            option4.setChecked(item.getAnswer() == 4);
-        }
-        else {
+        if(type.equals("liveQuiz")){
             option1.setEnabled(true);
             option2.setEnabled(true);
             option3.setEnabled(true);
             option4.setEnabled(true);
 
-            option1.setOnCheckedChangeListener((compoundButton, b) -> {
-                item.setCheckedAnswer(1);
-                assert listener != null;
-                listener.onItemClicked(item, compoundButton);
-            });
-            option2.setOnCheckedChangeListener((compoundButton, b) -> {
-                item.setCheckedAnswer(2);
-                assert listener != null;
-                listener.onItemClicked(item, compoundButton);
-            });
-            option3.setOnCheckedChangeListener((compoundButton, b) -> {
-                item.setCheckedAnswer(3);
-                assert listener != null;
-                listener.onItemClicked(item, compoundButton);
-            });
-            option4.setOnCheckedChangeListener((compoundButton, b) -> {
-                item.setCheckedAnswer(4);
-                assert listener != null;
-                listener.onItemClicked(item, compoundButton);
-            });
+            option1.setChecked(item.getCheckedAnswer() == 1);
+            option2.setChecked(item.getCheckedAnswer() == 2);
+            option3.setChecked(item.getCheckedAnswer() == 3);
+            option4.setChecked(item.getCheckedAnswer() == 4);
         }
+        else {
+            option1.setChecked(item.getAnswer() == 1);
+            option2.setChecked(item.getAnswer() == 2);
+            option3.setChecked(item.getAnswer() == 3);
+            option4.setChecked(item.getAnswer() == 4);
+        }
+
+
+        option1.setOnClickListener(v -> {
+            if (option1.isChecked()) {
+                item.setCheckedAnswer(1);
+            } else {
+                item.setCheckedAnswer(0);
+            }
+            assert listener != null;
+            listener.onItemClicked(item, null);
+        });
+
+        option2.setOnClickListener(v -> {
+            if (option2.isChecked()) {
+                item.setCheckedAnswer(2);
+            } else {
+                item.setCheckedAnswer(0);
+            }
+            assert listener != null;
+            listener.onItemClicked(item, null);
+        });
+
+        option3.setOnClickListener(v -> {
+            if (option3.isChecked()) {
+                item.setCheckedAnswer(3);
+            } else {
+                item.setCheckedAnswer(0);
+            }
+            assert listener != null;
+            listener.onItemClicked(item, null);
+        });
+
+        option4.setOnClickListener(v -> {
+            if (option4.isChecked()) {
+                item.setCheckedAnswer(4);
+            } else {
+                item.setCheckedAnswer(0);
+            }
+            assert listener != null;
+            listener.onItemClicked(item, null);
+        });
 
     }
 

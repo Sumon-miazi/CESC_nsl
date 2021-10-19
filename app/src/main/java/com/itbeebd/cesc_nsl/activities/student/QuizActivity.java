@@ -41,6 +41,7 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     private String type;
     private QuizAdapter quizAdapter;
     private boolean quizAlreadySubmitted = false;
+    private boolean timeEnd = false;
     private int rightAnswer = 0;
     private int wrongAnswer = 0;
 
@@ -89,6 +90,7 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     private void setupAdapter() {
         if(quizArrayList != null){
             quizAdapter = new QuizAdapter(this, type);
+            quizAdapter.setListener(this);
             quizAdapter.setItems(quizArrayList);
             quizRecyclerViewId.setLayoutManager(new LinearLayoutManager(this));
             quizRecyclerViewId.setAdapter(quizAdapter);
@@ -111,13 +113,12 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
                         quizTimerViewId.setText("Quiz Submitted");
                         countDownTimer.cancel();
                         quizSubmitBtnId.setVisibility(View.GONE);
-                        timeRId.setVisibility(View.INVISIBLE);
                     }
                     else {
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                         quizSubmitBtnId.setVisibility(View.VISIBLE);
-                        timeRId.setVisibility(View.VISIBLE);
                     }
+                    timeRId.setVisibility(View.INVISIBLE);
                 }
         );
     }
@@ -139,6 +140,7 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
                 }
 
                 public void onFinish() {
+                    timeEnd = true;
                     quizTimerViewId.setText("Quiz has finished");
                     timeRId.setVisibility(View.INVISIBLE);
                     quizSubmitBtnId.setVisibility(View.GONE);
@@ -178,12 +180,17 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
 
     @Override
     public void onItemClicked(Quiz item, View view) {
+        if(timeEnd){
+            Toast.makeText(this, "Quiz time has finished. New answer will not count", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        System.out.println(item.getQuestion() + " " + item.getCheckedAnswer());
+
         for(int i = 0; i < quizArrayList.size(); i++){
             if(item.getQuestion().equals(quizArrayList.get(i).getQuestion())){
                 quizArrayList.set(i,quizArrayList.get(i));
-
                 refreshAdapter(i);
-
                 break;
             }
         }
@@ -208,11 +215,21 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(!quizAlreadySubmitted){
+            timeEnd = true;
+            countDownTimer.cancel();
+            quizTimerViewId.setText("Quiz has finished");
+            submitQuizResult();
+        }
+    }
 
-
-
-
-
+    @Override
+    public void onBackPressed() {
+        if(quizAlreadySubmitted) super.onBackPressed();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

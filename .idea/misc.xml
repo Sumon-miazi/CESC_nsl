@@ -57,6 +57,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_online_class.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_online_exam.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_online_exam_list.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_payment_history.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_payment_invoice.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.2" />
@@ -112,6 +113,7 @@
         <entry key="app/src/main/res/layout/single_library_book_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_menu_layout.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_online_class.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/single_online_exam_list_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_payment_history_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_quiz_archive_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_quiz_list_view.xml" value="0.5" />
@@ -143,7 +145,7 @@
   <component name="jsonEditor">
     <option name="stateMap">
       <map>
-        <entry key="CESC_nsl" value="{&#10;  &quot;teacher_id&quot;: 84,&#10;  &quot;name&quot;: &quot;Test title&quot;,&#10;  &quot;date&quot;: &quot;2021-9-20&quot;,&#10;  &quot;full_date&quot;: &quot;2021-9-20 16:29:00&quot;,&#10;  &quot;exam_end_time&quot;: &quot;2021-9-20 16:30:00&quot;,&#10;  &quot;time&quot;: &quot;16:29:00&quot;,&#10;  &quot;to_time&quot;: &quot;16:30:00&quot;,&#10;  &quot;total_question&quot;: 2,&#10;  &quot;total_mark&quot;: 30,&#10;  &quot;question_mark&quot;: 15,&#10;  &quot;pass_mark&quot;: 15,&#10;  &quot;std_class_id&quot;: 10,&#10;  &quot;subject_id&quot;: 115,&#10;  &quot;religion&quot;: &quot;Christianity&quot;,&#10;  &quot;status&quot;: &quot;d&quot;,&#10;  &quot;auto_publish&quot;: &quot;no&quot;,&#10;  &quot;question&quot;: [&#10;    {&#10;      &quot;question&quot;: &quot;question 1&quot;,&#10;      &quot;option1&quot;: &quot;a&quot;,&#10;      &quot;option2&quot;: &quot;b&quot;,&#10;      &quot;option3&quot;: &quot;c&quot;,&#10;      &quot;option4&quot;: &quot;d&quot;,&#10;      &quot;answer&quot;: 1&#10;    },&#10;    {&#10;      &quot;question&quot;: &quot;question 2&quot;,&#10;      &quot;option1&quot;: &quot;a&quot;,&#10;      &quot;option2&quot;: &quot;b&quot;,&#10;      &quot;option3&quot;: &quot;c&quot;,&#10;      &quot;option4&quot;: &quot;d&quot;,&#10;      &quot;answer&quot;: 3&#10;    }&#10;  ]&#10;}" />
+        <entry key="CESC_nsl" value="{&#10;  &quot;onlineExam&quot;: {&#10;    &quot;id&quot;: 1,&#10;    &quot;religion&quot;: &quot;Islam&quot;,&#10;    &quot;auto_publish&quot;: &quot;no&quot;,&#10;    &quot;std_class_id&quot;: &quot;10&quot;,&#10;    &quot;subject_id&quot;: &quot;115&quot;,&#10;    &quot;section_id&quot;: null,&#10;    &quot;status&quot;: &quot;p&quot;,&#10;    &quot;date&quot;: &quot;2021-10-19&quot;,&#10;    &quot;time&quot;: &quot;17:51:00&quot;,&#10;    &quot;question_mark&quot;: 5,&#10;    &quot;to_time&quot;: &quot;17:52:00&quot;,&#10;    &quot;name&quot;: &quot;Text online quiz&quot;,&#10;    &quot;total_mark&quot;: 10,&#10;    &quot;total_question&quot;: 2,&#10;    &quot;pass_mark&quot;: 2,&#10;    &quot;full_date&quot;: &quot;2021-10-19 17:51:00&quot;,&#10;    &quot;exam_end_time&quot;: &quot;2021-10-19 17:52:00&quot;,&#10;    &quot;class&quot;: {&#10;      &quot;id&quot;: 10,&#10;      &quot;name&quot;: &quot;8&quot;&#10;    },&#10;    &quot;subject&quot;: {&#10;      &quot;id&quot;: 115,&#10;      &quot;name&quot;: &quot;Information and Communication Technology&quot;&#10;    }&#10;  },&#10;  &quot;student_answer_ids&quot;: null,&#10;  &quot;question&quot;: [&#10;    {&#10;      &quot;id&quot;: 3,&#10;      &quot;online_exam_id&quot;: 1,&#10;      &quot;option1&quot;: &quot;op1&quot;,&#10;      &quot;option2&quot;: &quot;op2&quot;,&#10;      &quot;option3&quot;: &quot;op3&quot;,&#10;      &quot;option4&quot;: &quot;op4&quot;,&#10;      &quot;question&quot;: &quot;&lt;p&gt;Question 1&lt;\/p&gt;&quot;&#10;    },&#10;    {&#10;      &quot;id&quot;: 4,&#10;      &quot;online_exam_id&quot;: 1,&#10;      &quot;option1&quot;: &quot;op1&quot;,&#10;      &quot;option2&quot;: &quot;op2&quot;,&#10;      &quot;option3&quot;: &quot;op3&quot;,&#10;      &quot;option4&quot;: &quot;op4&quot;,&#10;      &quot;question&quot;: &quot;&lt;p&gt;Question 2&lt;\/p&gt;&quot;&#10;    }&#10;  ],&#10;  &quot;since_start&quot;: &quot;00:00:23&quot;,&#10;  &quot;time_over&quot;: &quot;no&quot;&#10;}" />
       </map>
     </option>
   </component>

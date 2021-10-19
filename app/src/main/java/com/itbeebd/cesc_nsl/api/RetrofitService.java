@@ -69,6 +69,12 @@ public interface RetrofitService {
             @Body Map<String, Object> body
     );
 
+    @GET("auth/onlineExam/{id}/")
+    Call<ResponseBody> getQuizQuestion(
+            @Header("Authorization") String authorization,
+            @Path("id") int path
+    );
+
 
     @GET("auth/get-students/{classId}/{sectionId}")
     Call<ResponseBody> getStudentForAttendance(

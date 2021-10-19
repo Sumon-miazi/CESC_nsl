@@ -70,6 +70,7 @@ public class QuizApi extends BaseService {
                                 JSONObject object = questionJsonArray.getJSONObject(i);
 
                                 Quiz quiz = new Quiz(
+                                        object.optInt("id"),
                                         object.optString("question"),
                                         object.optString("option1"),
                                         object.optString("option2"),
@@ -167,25 +168,27 @@ public class QuizApi extends BaseService {
 
     public void getLiveQuizzes(String authToken, int id, ResponseObj responseObj) {
         progressDialog.show();
-        Call<ResponseBody> quizArchiveCall = service.getRequestPath(authToken, ApiUrls.LIVE_QUIZ_QUESTION, requestBody.examId(id));
+        Call<ResponseBody> quizArchiveCall = service.getQuizQuestion(authToken, id);
         quizArchiveCall.enqueue(new Callback<ResponseBody>() {
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 progressDialog.dismiss();
-                JSONArray data;
+                JSONObject jsonObject;
                 if (response.isSuccessful() && response != null) {
 
                     try {
-                        data = new JSONArray(response.body().string());
+                        jsonObject = new JSONObject(response.body().string());
 
-                        System.out.println(">>>>>>>>>> quizArchiveCall " + data);
+                        System.out.println(">>>>>>>>>> quizArchiveCall " + jsonObject);
+                        JSONArray question = jsonObject.getJSONArray("question");
                         ArrayList<Quiz> quizArrayList = new ArrayList<>();
 
-                        for (int j = 0; j < data.length(); j++) {
-                            JSONObject object = data.getJSONObject(j);
+                        for (int j = 0; j < question.length(); j++) {
+                            JSONObject object = question.getJSONObject(j);
 
                             Quiz quiz = new Quiz(
+                                    object.optInt("id"),
                                     object.optString("question"),
                                     object.optString("option1"),
                                     object.optString("option2"),
