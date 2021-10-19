@@ -119,12 +119,14 @@ public class QuizApi extends BaseService {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 progressDialog.dismiss();
-                JSONArray data;
+                JSONObject jsonObject;
                 if (response.isSuccessful() && response != null) {
 
                     try {
                         Gson gson = new Gson();
-                        data = new JSONArray(response.body().string());
+                        jsonObject = new JSONObject(response.body().string());
+
+                        JSONArray data = jsonObject.getJSONArray("data");
 
                         System.out.println(">>>>>>>>>> quizArchiveCall " + data);
 
@@ -132,6 +134,7 @@ public class QuizApi extends BaseService {
 
                         for (int i = 0; i < data.length(); i++) {
                             LiveQuiz liveQuiz = gson.fromJson(data.getJSONObject(i).toString(), LiveQuiz.class);
+                            liveQuiz.setSubjectName(data.getJSONObject(i).getJSONObject("subject").getString("name"));
                             liveQuizArrayList.add(liveQuiz);
                         }
 

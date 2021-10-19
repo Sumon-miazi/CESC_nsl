@@ -17,8 +17,8 @@ import com.itbeebd.cesc_nsl.utils.dummy.LiveQuiz;
 import com.parassidhu.simpledate.SimpleDateKt;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 public class QuizListViewHolder  extends BaseViewHolder<LiveQuiz, OnRecyclerObjectClickListener<LiveQuiz>> {
     private Context context;
@@ -27,8 +27,12 @@ public class QuizListViewHolder  extends BaseViewHolder<LiveQuiz, OnRecyclerObje
     private TextView examTitleId;
     private TextView timeRemainningId;
     private TextView examDateId;
+    private TextView examEndDateId;
+    private TextView timerHintId;
     private Button participateBtnId;
-    private CountDownTimer countDownTimer;
+    private CountDownTimer startCountDownTimer;
+    private CountDownTimer endCountDownTimer;
+    private boolean examTimeEnd;
 
     public QuizListViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
@@ -39,8 +43,11 @@ public class QuizListViewHolder  extends BaseViewHolder<LiveQuiz, OnRecyclerObje
         examTitleId = itemView.findViewById(R.id.examTitleId);
         timeRemainningId = itemView.findViewById(R.id.timeRemainingId);
         examDateId = itemView.findViewById(R.id.examDateId);
+        examEndDateId = itemView.findViewById(R.id.examEndDateId);
+        timerHintId = itemView.findViewById(R.id.timerHintId);
         participateBtnId = itemView.findViewById(R.id.participateBtnId);
-
+        startCountDownTimer = null;
+        endCountDownTimer = null;
     }
 
 
@@ -48,24 +55,36 @@ public class QuizListViewHolder  extends BaseViewHolder<LiveQuiz, OnRecyclerObje
     public void onBind(LiveQuiz item, @Nullable OnRecyclerObjectClickListener<LiveQuiz> listener) {
         subjectNameViewId.setText(item.getSubjectName());
         examTitleId.setText(item.getExamTitle());
-      //  timeRemainningId.setText(timeClockId.getText());
-        examDateId.setText(SimpleDateKt.toDateTimeStandardIn12Hours(getDateFromString(item.getExamStartDateTime())));
-        System.out.println("Exam time >>>>>>> " + item.getExamStartDateTime());
+
+        String examStartStr = "Quiz will start at: " + SimpleDateKt.toDateTimeStandardIn12Hours(getDateFromString(item.getExamStartDateTime()));
+        String examEndStr = "Quiz will End at: " + SimpleDateKt.toDateTimeStandardIn12Hours(getDateFromString(item.getExamEndDateTime()));
+
+        examDateId.setText(examStartStr);
+        examEndDateId.setText(examEndStr);
 
         participateBtnId.setOnClickListener(view -> {
             assert listener != null;
             listener.onItemClicked(item, view);
         });
 
-        countDown(100000, 1000);
+        // exam start timer
+        timeRemainningId.setTextColor(context.getResources().getColor(R.color.white_inactive_5));
+        timerHintId.setText(R.string.start_hint);
+        countDown((int) getDateDiff(getDateFromString(
+                item.getExamStartDateTime()),
+                Calendar.getInstance().getTime()),
+                item
+        );
+
     }
 
-    private void countDown(int timeInMillis, int interval){
-        if(countDownTimer == null)
-        countDownTimer =  new CountDownTimer(timeInMillis, interval) {
+    private void countDown(int timeInMillis, LiveQuiz item){
+        this.examTimeEnd = false;
+        if(startCountDownTimer == null)
+            startCountDownTimer =  new CountDownTimer(timeInMillis, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                Long totalSecRemaining = millisUntilFinished / interval;
+                Long totalSecRemaining = millisUntilFinished / 1000;
                 Long hour = totalSecRemaining / 3600;
 
                 totalSecRemaining = totalSecRemaining % 3600;
@@ -73,31 +92,91 @@ public class QuizListViewHolder  extends BaseViewHolder<LiveQuiz, OnRecyclerObje
 
                 Long sec = totalSecRemaining % 60;
 
-
                 String timeRemaining = hour + "h : " + min + "m : " + sec +"s";
                 timeRemainningId.setText(timeRemaining);
             }
 
             public void onFinish() {
-                timeRemainningId.setText("Quiz is started");
-                participateBtnId.setVisibility(View.VISIBLE);
+                callTimerFinish(item);
             }
         }.start();
+    }
+
+    private void countDown2(int timeInMillis, LiveQuiz item){
+        this.examTimeEnd = true;
+        if(endCountDownTimer == null)
+            endCountDownTimer =  new CountDownTimer(timeInMillis, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    Long totalSecRemaining = millisUntilFinished / 1000;
+                    Long hour = totalSecRemaining / 3600;
+
+                    totalSecRemaining = totalSecRemaining % 3600;
+                    Long min = totalSecRemaining / 60;
+
+                    Long sec = totalSecRemaining % 60;
+
+                    String timeRemaining = hour + "h : " + min + "m : " + sec +"s";
+                    timeRemainningId.setText(timeRemaining);
+                }
+
+                public void onFinish() {
+                    callTimerFinish(item);
+                }
+            }.start();
+    }
+
+    private void callTimerFinish(LiveQuiz item){
+        if(examTimeEnd){
+            timeRemainningId.setText("Quiz Ended");
+            timerHintId.setText("Result will publish soon");
+            participateBtnId.setVisibility(View.GONE);
+        }
+        else {
+            countDown2((int) getDateDiff(getDateFromString(
+                    item.getExamEndDateTime()),
+                    Calendar.getInstance().getTime()),
+                    item
+            );
+            timeRemainningId.setTextColor(context.getResources().getColor(R.color.red_inactive));
+            timerHintId.setText("Quiz End Time Remaining");
+            participateBtnId.setVisibility(View.VISIBLE);
+        }
     }
 
     private Date getDateFromString(String dateString){
         System.out.println("????????? " + dateString);
         Date date;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+     //   format.setTimeZone(TimeZone.getTimeZone("GMT"));
         try {
             date = format.parse(dateString);
             System.out.println("????????? " + date);
+            return date;
         } catch (Exception ignore) {
             ignore.printStackTrace();
-            date = new Date();
         }
-        return date;
+        return null;
+    }
+
+
+
+    /**
+     * Get a diff between two dates
+     * @return the diff value, in the days
+     */
+    private long getDateDiff(Date startDate, Date endDate) {
+
+       // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            long time = startDate.getTime() - endDate.getTime()  ;
+            if(time < 0) return 1;
+            else return time;
+           // return TimeUnit.DAYS.convert(format.parse(newDate).getTime() - Calendar.getInstance().getTime(), TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
     }
 
 //    private Date getDateFromString(String dateString){

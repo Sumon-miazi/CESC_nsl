@@ -37,22 +37,22 @@ public class QuizListActivity extends AppCompatActivity  implements OnRecyclerOb
 
         quizListRecyclerViewId = findViewById(R.id.quizListRecyclerViewId);
 
-        liveQuizzes = new ArrayList<>();
-        liveQuizzes.add(new LiveQuiz("Bangla", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("English", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Math", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Higher Math", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Physics", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Botany", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Zoology", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Chemistry", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Chemistry 2", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Biology", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Sociology", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Computer", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-        liveQuizzes.add(new LiveQuiz("Ict", "Test quiz", "2021-07-03T10:09:06.000000Z"));
-     //   callLiveQuizApi();
-        setUpAdapter();
+//        liveQuizzes = new ArrayList<>();
+//        liveQuizzes.add(new LiveQuiz("Bangla", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("English", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Math", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Higher Math", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Physics", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Botany", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Zoology", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Chemistry", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Chemistry 2", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Biology", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Sociology", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Computer", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+//        liveQuizzes.add(new LiveQuiz("Ict", "Test quiz", "2021-07-03T10:09:06.000000Z"));
+        callLiveQuizApi();
+      //  setUpAdapter();
     }
 
     private void callLiveQuizApi() {

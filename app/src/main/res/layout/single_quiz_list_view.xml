@@ -69,6 +69,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/examTitleId" />
 
+        <TextView
+            android:id="@+id/examEndDateId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/heebo_medium"
+            android:text="23 September, 2021"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/examDateId" />
 
         <TextView
             android:id="@+id/timeRemainingId"
@@ -81,10 +94,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/examDateId" />
+            app:layout_constraintTop_toBottomOf="@+id/examEndDateId" />
 
         <TextView
-            android:id="@+id/textView50"
+            android:id="@+id/timerHintId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/heebo_light"
@@ -105,7 +118,7 @@
             android:visibility="gone"
             android:text="@string/participate_in_the_quiz"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView50"
+            app:layout_constraintTop_toBottomOf="@+id/timerHintId"
             tools:layout_editor_absoluteX="10dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

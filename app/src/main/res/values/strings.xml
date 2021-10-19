@@ -28,4 +28,5 @@
     <string name="time_remaining">Time Remaining</string>
     <string name="_0h_0m_0s">0h : 0m : 0s</string>
     <string name="enter_question">Enter Question</string>
+    <string name="start_hint">Quiz Start Time Remaining</string>
 </resources>
