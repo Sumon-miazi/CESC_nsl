@@ -24,6 +24,7 @@ public class ApiUrls {
     public static final String ONLINE_CLASS =  "online-class";
     public static final String QUIZ_ARCHIVE =  "quiz-archive";
     public static final String LIVE_QUIZ_LIST =  "onlineExam";
+    public static final String ADD_LIVE_QUIZ =  "addOnlineExam";
     public static final String LIVE_QUIZ_QUESTION =  "onlineExamQuestion";
     public static final String SUBMIT_LIVE_QUIZ =  "submitOnlineExam";
     public static final String GUIDED_STUDENT =  "guided-Student";

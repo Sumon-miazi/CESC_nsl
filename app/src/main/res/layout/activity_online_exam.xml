@@ -48,7 +48,7 @@
                     android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
                     android:backgroundTint="@color/orange_bg_light"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/a_sectionCardId"
+                    app:layout_constraintEnd_toStartOf="@+id/a_subjectCardId"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -87,7 +87,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/a_sectionCardId"
+                    android:id="@+id/a_subjectCardId"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/a_header_card_margin"
@@ -96,7 +96,7 @@
                     android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
                     android:backgroundTint="@color/green_bg_light"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/a_dateCardId"
+                    app:layout_constraintEnd_toStartOf="@+id/a_religionCardId"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/a_classCardId"
                     app:layout_constraintTop_toTopOf="parent">
@@ -108,14 +108,16 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/a_sectionViewId"
+                            android:id="@+id/a_subjectViewId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Select"
                             android:textAlignment="center"
+                            android:maxLines="1"
                             android:textColor="@color/green_active"
                             android:textSize="20sp"
+                            android:ellipsize="middle"
                             android:textStyle="bold"
                             app:autoSizeMaxTextSize="20sp"
                             app:autoSizeMinTextSize="12sp"
@@ -134,7 +136,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/a_dateCardId"
+                    android:id="@+id/a_religionCardId"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/a_header_card_margin"
@@ -145,7 +147,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/a_sectionCardId"
+                    app:layout_constraintStart_toEndOf="@+id/a_subjectCardId"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
@@ -155,7 +157,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/a_dateViewId"
+                            android:id="@+id/a_religionViewId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -172,7 +174,6 @@
                             app:autoSizeTextType="uniform" />
 
                         <TextView
-                            android:id="@+id/monthNameViewId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
@@ -196,18 +197,71 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/attendance_ToolbarId">
 
+
+
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/fromTimeCardid"
+                    android:id="@+id/a_dateCardId"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/a_header_card_margin_start"
+                    android:layout_marginEnd="@dimen/a_header_card_margin"
+                    android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
+                    android:backgroundTint="@color/blue_bg_light"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintEnd_toStartOf="@+id/fromTimeCardId"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/a_dateViewId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="Select"
+                            android:textAlignment="center"
+                            android:textColor="@color/blue_active"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:autoSizeMaxTextSize="20sp"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeTextType="uniform" />
+
+                        <TextView
+                            android:id="@+id/monthNameViewId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="@color/blue_active"
+                            android:text="MONTH"
+                            app:autoSizeMaxTextSize="12sp"
+                            app:autoSizeMinTextSize="10sp"
+                            app:autoSizeTextType="uniform" />
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fromTimeCardId"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/a_header_card_margin"
                     android:layout_marginEnd="@dimen/a_header_card_margin"
                     android:layout_marginBottom="@dimen/a_header_card_margin_bottom"
                     android:backgroundTint="@color/orange_bg_light"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/toTimeCardId"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/a_dateCardId"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
@@ -254,7 +308,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/resultStatusCardId"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/fromTimeCardid"
+                    app:layout_constraintStart_toEndOf="@+id/fromTimeCardId"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
@@ -273,6 +327,7 @@
                             android:textColor="@color/green_active"
                             android:textSize="20sp"
                             android:textStyle="bold"
+                            android:maxLines="1"
                             app:autoSizeMaxTextSize="20sp"
                             app:autoSizeMinTextSize="12sp"
                             app:autoSizeTextType="uniform" />
@@ -314,7 +369,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Select"
+                            android:text="Pending"
+                            android:maxLines="1"
                             android:textAlignment="center"
                             android:textColor="@color/blue_active"
                             android:textSize="20sp"
@@ -379,7 +435,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textMultiLine" />
+                        android:inputType="numberSigned" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -400,7 +456,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textMultiLine" />
+                        android:inputType="numberSigned" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -421,12 +477,15 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                android:clickable="false"
+                android:focusable="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine" />
+                    android:clickable="false"
+                    android:focusable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -447,7 +506,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine" />
+                    android:inputType="numberSigned" />
             </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -488,7 +547,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Select"
+                            android:text="Pending"
                             android:textAlignment="center"
                             android:textColor="@color/blue_active"
                             android:textSize="20sp"

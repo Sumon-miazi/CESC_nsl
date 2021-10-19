@@ -38,7 +38,7 @@ public class TeacherRoutineActivity extends AppCompatActivity {
 
         Toolbar mToolBar =  findViewById(R.id.classRoutine_ToolbarId);
         setSupportActionBar(mToolBar);
-        getSupportActionBar().setTitle("CLASS ROUTINE");
+        getSupportActionBar().setTitle("TEACHER ROUTINE");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         weeklyDayCardId = findViewById(R.id.weeklyDayCardId);
