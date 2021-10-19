@@ -43,6 +43,9 @@ public class ApiUrls {
     public static final String MAIN =  "cesc-home";
 
 
+    public static final String T_SEND_NOTIFICATION =  "send-notification";
+
+
 
 
     // Bank account details

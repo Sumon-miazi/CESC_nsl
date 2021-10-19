@@ -3,6 +3,8 @@ package com.itbeebd.cesc_nsl.activities.teacher;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,7 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.itbeebd.cesc_nsl.R;
+import com.itbeebd.cesc_nsl.api.teacherApi.NotificationApi;
+import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.dao.TeacherDao;
 
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
@@ -26,6 +31,11 @@ public class SendNotificationActivity extends AppCompatActivity {
     private String selectedSection;
     private String selectedClass;
     private TeacherDao teacherDao;
+    
+    private TextInputLayout notiTitleViewId;
+    private TextInputLayout notiBodyViewId;
+    private Button sendNotiBtnId;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +50,10 @@ public class SendNotificationActivity extends AppCompatActivity {
         a_classViewId = findViewById(R.id.a_classViewId);
         a_sectionCardId = findViewById(R.id.a_sectionCardId);
         a_sectionViewId = findViewById(R.id.a_sectionViewId);
+
+        notiTitleViewId = findViewById(R.id.notiTitleViewId);
+        notiBodyViewId = findViewById(R.id.notiBodyViewId);
+        sendNotiBtnId = findViewById(R.id.sendNotiBtnId);
 
         setToolTip(a_classCardId, "Select a class");
 
@@ -74,6 +88,48 @@ public class SendNotificationActivity extends AppCompatActivity {
             }
         });
 
+        sendNotiBtnId.setOnClickListener(this::sendNotification);
+    }
+
+    private void sendNotification(View view) {
+        String title = notiTitleViewId.getEditText().getText().toString().trim();
+        String message = notiBodyViewId.getEditText().getText().toString().trim();
+        if(selectedClass == null){
+            Toast.makeText(this, "Select a class first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(title.isEmpty()){
+            Toast.makeText(this, "Enter a title please", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(message.isEmpty()){
+            Toast.makeText(this, "Enter a message please", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int selectedClassId = teacherDao.getClassIdByName(selectedClass);
+        int selectedSectionId = 0;
+        if(selectedSection != null){
+            selectedSectionId = teacherDao.getSectionIdByName(selectedSection);
+        }
+        
+        callSentNotification(title, message, selectedClassId, selectedSectionId);
+    }
+
+    private void callSentNotification(String title, String message, int selectedClassId, int selectedSectionId){
+        new NotificationApi(this, "Sending...").sendNotification(
+                CustomSharedPref.getInstance(this).getAuthToken(),
+                title,
+                message,
+                selectedClassId,
+                selectedSectionId,
+                (isSuccess, message1) -> {
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                    if(isSuccess){
+                        finish();
+                    }
+                }
+        );
     }
 
     private void initClassSpinner(){
@@ -84,10 +140,11 @@ public class SendNotificationActivity extends AppCompatActivity {
         b.setItems(classes, (dialog, which) -> {
             selectedClass = classes[which];
             a_classViewId.setText(selectedClass);
-            a_sectionViewId.setText("Select");
+            a_sectionViewId.setText("Skip or Select");
 
             sections = teacherDao.getAllSectionByClassName(selectedClass);
-
+            selectedSection = null;
+            
             System.out.println(">>>>>> class " + which);
 
           //  setToolTip(a_sectionCardId, "Select a section");

@@ -160,7 +160,7 @@ public class LoginApi extends BaseService {
                     try {
                         jsonObject =  new JSONObject(response.body().string());
                         System.out.println(">>>>>>>>>> " + jsonObject);
-                        booleanResponse.response(true, jsonObject.optString("message"));
+                        booleanResponse.response(jsonObject.optBoolean("isSuccessful"), jsonObject.optString("message"));
 
                     } catch (Exception e) {
                         e.printStackTrace();

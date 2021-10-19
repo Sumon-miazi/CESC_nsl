@@ -87,4 +87,13 @@ public class RetrofitRequestBody {
         map.put("wrongAnswer", wrongAnswer);
         return map;
     }
+
+    public Map<String, Object> sendNotification(String title, String message, int selectedClassId, int selectedSectionId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("title", title);
+        map.put("message", message);
+        map.put("std_class_id", selectedClassId);
+        map.put("section_id", selectedSectionId);
+        return map;
+    }
 }

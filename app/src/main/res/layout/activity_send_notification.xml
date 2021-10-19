@@ -99,9 +99,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="Select"
+                    android:text="Skip or Select"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
                     android:gravity="center"
                     android:textColor="@color/green_active"
+                    android:maxLines="1"
                     android:textSize="30sp"
                     app:autoSizeMaxTextSize="30sp"
                     app:autoSizeMinTextSize="12sp"
@@ -188,8 +191,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:hint="Notification body"
-        app:layout_constraintBottom_toTopOf="@+id/loginBtnId"
+        android:hint="Notification message"
+        app:layout_constraintBottom_toTopOf="@+id/sendNotiBtnId"
         app:layout_constraintEnd_toEndOf="@+id/notiTitleViewId"
         app:layout_constraintStart_toStartOf="@+id/notiTitleViewId"
         app:layout_constraintTop_toBottomOf="@+id/notiTitleViewId"
@@ -203,7 +206,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/loginBtnId"
+        android:id="@+id/sendNotiBtnId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
