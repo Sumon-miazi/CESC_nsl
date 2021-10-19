@@ -3,6 +3,7 @@ package com.itbeebd.cesc_nsl;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -131,6 +132,10 @@ public class MainActivity extends AppCompatActivity {
         new TabLayoutMediator(news_event_tab_layout, news_event_pager, (tab, position) -> {
             tab.setText(newsEvent[position]);
         }).attach();
+
+        if(getIntent().hasExtra("title")){
+            showNotice(getIntent().getStringExtra("title"), getIntent().getStringExtra("messageBody"));
+        }
     }
 
     private void init() {
@@ -405,5 +410,27 @@ public class MainActivity extends AppCompatActivity {
             if(type.equals("notice")) return titles.length;
             else return newsEvent.length;
         }
+    }
+
+    private void showNotice(String title, String message){
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.notice_board_dialog);
+
+        View closeDialogId = dialog.findViewById(R.id.closeDialogId);
+        TextView contentTypeId = dialog.findViewById(R.id.contentTypeId);
+        TextView noticeTitleId = dialog.findViewById(R.id.noticeTitleId);
+        TextView noticeBodyId = dialog.findViewById(R.id.noticeBodyId);
+
+        noticeBodyId.setMovementMethod(LinkMovementMethod.getInstance());
+
+        contentTypeId.setText("Notification");
+        noticeTitleId.setText(title);
+        noticeBodyId.setText(message);
+
+        closeDialogId.setOnClickListener(view -> dialog.dismiss());
+
+        dialog.show();
     }
 }

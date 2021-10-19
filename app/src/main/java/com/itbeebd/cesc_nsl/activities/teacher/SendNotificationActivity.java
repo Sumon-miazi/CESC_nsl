@@ -124,10 +124,7 @@ public class SendNotificationActivity extends AppCompatActivity {
                 selectedClassId,
                 selectedSectionId,
                 (isSuccess, message1) -> {
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-                    if(isSuccess){
-                        finish();
-                    }
+                    Toast.makeText(this, message1, Toast.LENGTH_SHORT).show();
                 }
         );
     }
