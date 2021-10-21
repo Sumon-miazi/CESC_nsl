@@ -364,11 +364,12 @@ public class TeacherLessonPlanViewOrEditActivity extends AppCompatActivity imple
 
         for(int i = 0; i < selectedSection.length; i++){
             String data = selectedSection[i];
-            if(data != null){
-                String[] str = data.split("-");
-                selectedItems += str[1] + ", ";
-               // selectedItems += data + ", ";
-            }
+            selectedItems += data + ", ";
+//            if(data != null){
+//                String[] str = data.split("-");
+//                selectedItems +=data + ", ";
+//               // selectedItems += data + ", ";
+//            }
         }
 
         String selectedSectionStr = selectedItems.substring(0, selectedItems.length() >= 2? selectedItems.length()-2 : 0);

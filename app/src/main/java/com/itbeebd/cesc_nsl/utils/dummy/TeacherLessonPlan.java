@@ -111,7 +111,7 @@ public class TeacherLessonPlan implements Serializable {
     }
 
     public String getSubjectName(){
-        return new TeacherDao().getSubjectNameById(this.subjectId).split("-")[1];
+        return new TeacherDao().getSubjectNameById(this.subjectId);
     }
 
     public String getSectionsName() {

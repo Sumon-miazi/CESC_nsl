@@ -291,10 +291,7 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
 
         for(int i = 0; i < selectedSection.length; i++){
             String data = selectedSection[i];
-            if(data != null){
-                String[] str = data.split("-");
-                selectedItems += str[1] + ", ";
-            }
+            selectedItems += data + ", ";
         }
 
         String selectedSectionStr = selectedItems.substring(0, selectedItems.length() >= 2? selectedItems.length()-2 : 0);
