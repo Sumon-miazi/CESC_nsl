@@ -131,7 +131,7 @@ public class OnlineExamApi extends BaseService {
 
     public void getOnlineExamQuizzes(String authToken, int id, ResponseObj responseObj) {
         progressDialog.show();
-        Call<ResponseBody> quizArchiveCall = service.getRequestPath(authToken, ApiUrls.LIVE_QUIZ_QUESTION, requestBody.examId(id));
+        Call<ResponseBody> quizArchiveCall = service.getRequestPath(authToken, ApiUrls.LIVE_QUIZ_LIST, requestBody.examId(id));
         quizArchiveCall.enqueue(new Callback<ResponseBody>() {
 
             @Override
@@ -150,6 +150,7 @@ public class OnlineExamApi extends BaseService {
                             JSONObject object = data.getJSONObject(j);
 
                             Quiz quiz = new Quiz(
+                                    object.optInt("id"),
                                     object.optString("question"),
                                     object.optString("option1"),
                                     object.optString("option2"),

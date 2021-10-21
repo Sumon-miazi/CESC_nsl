@@ -3,6 +3,7 @@ package com.itbeebd.cesc_nsl.api.studentApi;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.itbeebd.cesc_nsl.api.ApiUrls;
 import com.itbeebd.cesc_nsl.api.BaseService;
 import com.itbeebd.cesc_nsl.api.RetrofitRequestBody;
@@ -130,7 +131,7 @@ public class QuizApi extends BaseService {
 
                         JSONArray data = jsonObject.getJSONArray("data");
 
-                        System.out.println(">>>>>>>>>> quizArchiveCall " + data);
+                        System.out.println(">>>>>>>>>> getLiveQuizList " + jsonObject);
 
                         ArrayList<LiveQuiz> liveQuizArrayList = new ArrayList<>();
 
@@ -225,9 +226,9 @@ public class QuizApi extends BaseService {
         });
     }
 
-    public void submitLiveExam(String authToken, int examId, int rightAnswer, int wrongAnswer, BooleanResponse booleanResponse){
+    public void submitLiveExam(String authToken, JsonObject jsonObject, BooleanResponse booleanResponse){
         progressDialog.show();
-        Call<ResponseBody> studentLogout = service.getRequestPath(authToken, ApiUrls.SUBMIT_LIVE_QUIZ, requestBody.submitLiveQuiz(examId, rightAnswer, wrongAnswer));
+        Call<ResponseBody> studentLogout = service.serviceWithJsonObject(authToken, ApiUrls.LIVE_QUIZ_LIST, jsonObject);
         studentLogout.enqueue(new Callback<ResponseBody>(){
 
             @Override

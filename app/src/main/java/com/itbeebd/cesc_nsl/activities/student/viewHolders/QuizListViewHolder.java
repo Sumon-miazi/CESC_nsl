@@ -67,15 +67,21 @@ public class QuizListViewHolder  extends BaseViewHolder<LiveQuiz, OnRecyclerObje
             listener.onItemClicked(item, view);
         });
 
-        // exam start timer
-        timeRemainningId.setTextColor(context.getResources().getColor(R.color.white_inactive_5));
-        timerHintId.setText(R.string.start_hint);
-        countDown((int) getDateDiff(getDateFromString(
-                item.getExamStartDateTime()),
-                Calendar.getInstance().getTime()),
-                item
-        );
-
+        if(item.getFinal_submit().equals("yes")){
+            timeRemainningId.setText("Already perticipate");
+            timerHintId.setText("You can't participate twice");
+            participateBtnId.setVisibility(View.GONE);
+        }
+        else {
+            // exam start timer
+            timeRemainningId.setTextColor(context.getResources().getColor(R.color.white_inactive_5));
+            timerHintId.setText(R.string.start_hint);
+            countDown((int) getDateDiff(getDateFromString(
+                    item.getExamStartDateTime()),
+                    Calendar.getInstance().getTime()),
+                    item
+            );
+        }
     }
 
     private void countDown(int timeInMillis, LiveQuiz item){

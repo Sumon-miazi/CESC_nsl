@@ -1,9 +1,11 @@
 package com.itbeebd.cesc_nsl.activities.student;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +16,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.itbeebd.cesc_nsl.R;
 import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListener;
 import com.itbeebd.cesc_nsl.activities.student.adapters.QuizAdapter;
@@ -21,6 +25,10 @@ import com.itbeebd.cesc_nsl.api.studentApi.QuizApi;
 import com.itbeebd.cesc_nsl.dao.CustomSharedPref;
 import com.itbeebd.cesc_nsl.utils.dummy.LiveQuiz;
 import com.itbeebd.cesc_nsl.utils.dummy.Quiz;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,8 +50,10 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     private QuizAdapter quizAdapter;
     private boolean quizAlreadySubmitted = false;
     private boolean timeEnd = false;
-    private int rightAnswer = 0;
-    private int wrongAnswer = 0;
+    private int questionAnswered = 0;
+    private int questionNotAnswered = 0;
+    private JsonObject jsonObject;
+    private String startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +71,8 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
         timeRId = findViewById(R.id.timeRId);
         quizSubmitBtnId = findViewById(R.id.quizSubmitBtnId);
 
-        quizSubmitBtnId.setOnClickListener(view -> submitQuizResult());
+        quizSubmitBtnId.setOnClickListener(view -> { submitQuizResult();
+        });
 
         if(getIntent().hasExtra("quiz")){
             quizArrayList = (ArrayList<Quiz>) getIntent().getSerializableExtra("quiz");
@@ -85,6 +96,8 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
                 liveQuiz.getExamEndDateTime()),
                 Calendar.getInstance().getTime())
         );
+
+        startTime = Calendar.getInstance().getTime().toString();
     }
 
     private void setupAdapter() {
@@ -98,21 +111,25 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     }
 
     private void submitQuizResult(){
-        rightAnswer = 0;
-        wrongAnswer = 0;
+        questionAnswered = 0;
+        questionNotAnswered = 0;
         calculate();
+    }
+
+    private void callSubmitApi(){
+        if(jsonObject == null) return;
 
         new QuizApi(this, "Submitting...").submitLiveExam(
                 CustomSharedPref.getInstance(this).getAuthToken(),
-                liveQuiz.getId(),
-                rightAnswer,
-                wrongAnswer,
+                jsonObject,
                 (isSuccess, message) -> {
                     quizAlreadySubmitted = isSuccess;
                     if(isSuccess || message.equals("Already submitted")){
                         quizTimerViewId.setText("Quiz Submitted");
                         countDownTimer.cancel();
                         quizSubmitBtnId.setVisibility(View.GONE);
+                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                     else {
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -144,7 +161,7 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
                     quizTimerViewId.setText("Quiz has finished");
                     timeRId.setVisibility(View.INVISIBLE);
                     quizSubmitBtnId.setVisibility(View.GONE);
-                    if(!quizAlreadySubmitted) submitQuizResult();
+                    if(!quizAlreadySubmitted) { submitQuizResult(); }
                 }
             }.start();
     }
@@ -202,17 +219,81 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
         });
     }
 
-    private void calculate(){
+    private void calculate() {
         for(int i = 0; i < quizArrayList.size(); i++){
-            if(quizArrayList.get(i).getCheckedAnswer() != 0){
-                if(quizArrayList.get(i).getCheckedAnswer() == quizArrayList.get(i).getAnswer()) {
-                    rightAnswer += 1;
-                }
-                else {
-                    wrongAnswer += 1;
-                }
+            if(quizArrayList.get(i).getCheckedAnswer() != 0) questionAnswered += 1;
+            else questionNotAnswered += 1;
+        }
+
+        generateJson();
+
+        showDialog();
+    }
+
+    private void generateJson() {
+
+        JSONArray jsonArray = new JSONArray();
+
+        for(int i = 0; i < quizArrayList.size(); i++){
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", quizArrayList.get(i).getId());
+                jsonObject.put("answers", quizArrayList.get(i).getCheckedAnswer());
+                jsonObject.put("online_exam_id", liveQuiz.getId());
+                jsonArray.put(jsonObject);
+            }
+            catch (JSONException e){
+                e.printStackTrace();
             }
         }
+
+        JSONObject examInfo = new JSONObject();
+        try {
+            examInfo.put("id", liveQuiz.getId());
+            examInfo.put("subject_id", liveQuiz.getSubject_id());
+            examInfo.put("full_date", liveQuiz.getExamStartDateTime());
+            examInfo.put("total_mark", liveQuiz.getTotal_mark());
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        JSONObject temp = new JSONObject();
+        try {
+            temp.put("start_time", startTime);
+            temp.put("final_submit", "yes");
+            temp.put("onlineExam", examInfo);
+            temp.put("questions", jsonArray);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        JsonParser jsonParser = new JsonParser();
+        jsonObject = (JsonObject) jsonParser.parse(temp.toString());
+    }
+
+
+    private void showDialog(){
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.exam_submission_confirmation_view);
+
+        TextView questionAnsweredId = dialog.findViewById(R.id.questionAnsweredId);
+        TextView questionNotAnsweredId = dialog.findViewById(R.id.questionNotAnsweredId);
+        Button closeDialogId = dialog.findViewById(R.id.closeDialogId);
+        Button examSubmitBtnId = dialog.findViewById(R.id.examSubmitBtnId);
+
+        questionAnsweredId.setText("Answered Quiz: " + questionAnswered);
+        questionNotAnsweredId.setText("Didn't Answer: " + questionNotAnswered);
+
+        closeDialogId.setOnClickListener(view -> dialog.dismiss());
+        examSubmitBtnId.setOnClickListener(view -> {
+            dialog.dismiss();
+            callSubmitApi();
+        });
+        dialog.show();
     }
 
     @Override
@@ -229,6 +310,7 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     @Override
     public void onBackPressed() {
         if(quizAlreadySubmitted) super.onBackPressed();
+        else submitQuizResult();
     }
 
     @Override

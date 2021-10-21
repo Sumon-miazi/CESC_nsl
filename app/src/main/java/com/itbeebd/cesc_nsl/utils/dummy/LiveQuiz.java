@@ -61,6 +61,9 @@ public class LiveQuiz implements Serializable {
 
     @SerializedName("exam_end_time")
     private String examEndDateTime;
+
+    @SerializedName("total_mark")
+    private int total_mark;
    // private String examDate;
 
     private ArrayList<Quiz> quizArrayList;
@@ -75,6 +78,14 @@ public class LiveQuiz implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getTotal_mark() {
+        return total_mark;
+    }
+
+    public void setTotal_mark(int total_mark) {
+        this.total_mark = total_mark;
     }
 
     public String getAuto_publish() {
