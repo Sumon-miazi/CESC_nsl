@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.sugarClass.Student;
 
 public class GuideStudentListAdapter extends GenericRecyclerAdapter<Student, OnRecyclerObjectClickListener<Student>, GuideStudentListViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public GuideStudentListAdapter(Context context) {
         super(context);

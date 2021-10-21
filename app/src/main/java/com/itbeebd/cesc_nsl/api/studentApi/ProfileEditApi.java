@@ -17,9 +17,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileEditApi extends BaseService {
-    private Context context;
+    private final Context context;
     final RetrofitRequestBody requestBody;
-    private CustomProgressDialog progressDialog;
+    private final CustomProgressDialog progressDialog;
 
     public ProfileEditApi(Context context){
         this.context = context;
@@ -66,7 +66,7 @@ public class ProfileEditApi extends BaseService {
 
                     } catch (Exception e) {
                         e.printStackTrace();
-                        System.out.println(">>>>>>>>>> catch " + e.getLocalizedMessage());;
+                        System.out.println(">>>>>>>>>> catch " + e.getLocalizedMessage());
                         booleanResponse.response(false, e.getLocalizedMessage());
                     }
                 }

@@ -5,8 +5,8 @@ import com.orm.SugarRecord;
 import java.io.Serializable;
 
 public class ResultObj extends SugarRecord implements Serializable {
-    private String examName;
-    private String subjectName;
+    private final String examName;
+    private final String subjectName;
     private int fullMark;
     private int subjectiveMark;
     private int objectiveMark;

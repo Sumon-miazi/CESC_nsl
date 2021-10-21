@@ -13,13 +13,13 @@ public class DashboardHeaderObj implements Serializable {
     private String totalNotifications;
     private ArrayList<NotificationObj> notificationObjArrayList;
 
-    private String totalOnlineClass;
+    private final String totalOnlineClass;
 
-    private String totalLessonPlan;
+    private final String totalLessonPlan;
     private ArrayList<LessonPlan> lessonPlanArrayList;
 
-    private String totalQuiz;
-    private String totalQuizArchive;
+    private final String totalQuiz;
+    private final String totalQuizArchive;
 
     private Attendance attendance;
     private ArrayList<ClassRoutine> classRoutineArrayList;

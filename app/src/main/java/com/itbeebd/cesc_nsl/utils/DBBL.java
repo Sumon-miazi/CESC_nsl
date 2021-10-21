@@ -1,10 +1,10 @@
 package com.itbeebd.cesc_nsl.utils;
 
 public class DBBL {
-    private String amount;
-    private String cardtype;
-    private String txnrefnum; // student_id
-    private String account_id;
+    private final String amount;
+    private final String cardtype;
+    private final String txnrefnum; // student_id
+    private final String account_id;
 
     public DBBL(String amount, String cardtype, String txnrefnum, String account_id) {
         this.amount = amount;

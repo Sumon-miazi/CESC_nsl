@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.OnlineClass;
 
 public class OnlineClassAdapter extends GenericRecyclerAdapter<OnlineClass, OnRecyclerObjectClickListener<OnlineClass>, OnlineClassViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public OnlineClassAdapter(Context context) {
         super(context);

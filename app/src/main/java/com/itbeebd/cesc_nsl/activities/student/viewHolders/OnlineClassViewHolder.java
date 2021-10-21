@@ -2,11 +2,9 @@ package com.itbeebd.cesc_nsl.activities.student.viewHolders;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,16 +20,16 @@ import com.itbeebd.cesc_nsl.utils.dummy.OnlineClass;
 
 public class OnlineClassViewHolder extends BaseViewHolder<OnlineClass, OnRecyclerObjectClickListener<OnlineClass>> {
 
-    private TextView subjectName;
-    private TextView lessonTitle;
-    private TextView teacherName;
-    private TextView teacherDesignation;
-    private ImageView teacherImage;
-    private ImageView downloadBtn;
-    private ImageView watchBtn;
-    private ImageView bgImage;
+    private final TextView subjectName;
+    private final TextView lessonTitle;
+    private final TextView teacherName;
+    private final TextView teacherDesignation;
+    private final ImageView teacherImage;
+    private final ImageView downloadBtn;
+    private final ImageView watchBtn;
+    private final ImageView bgImage;
     private final FileDownloader fileDownloader;
-    private Context context;
+    private final Context context;
 
     public OnlineClassViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
@@ -75,10 +73,10 @@ public class OnlineClassViewHolder extends BaseViewHolder<OnlineClass, OnRecycle
         }
 
         downloadBtn.setOnClickListener(view -> {
-            // downloadLessonFile(item);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(ApiUrls.BASE_IMAGE_URL + item.getFile()));
-            context.startActivity(intent);
+             downloadLessonFile(item);
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setData(Uri.parse(ApiUrls.BASE_IMAGE_URL + item.getFile()));
+//            context.startActivity(intent);
         });
 
         watchBtn.setOnClickListener(view -> {
@@ -105,16 +103,22 @@ public class OnlineClassViewHolder extends BaseViewHolder<OnlineClass, OnRecycle
     }
 
     private void downloadLessonFile(OnlineClass onlineClass){
-        if(fileDownloader == null) return;
-        fileDownloader.downloadFile(
-                ApiUrls.BASE_IMAGE_URL + onlineClass.getFile(),
+
+        new FileDownloader(context).downloadFile( 22,ApiUrls.BASE_IMAGE_URL + onlineClass.getFile(),
                 onlineClass.getFile().substring(onlineClass.getFile().lastIndexOf("/") + 1),
-                "OnlineClass",
-                (isSuccess, message) -> {
-            try {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-            catch (Exception ignore){}
-        });
+                "OnlineClass", (isSuccess, message) -> { });
+
+//
+//        if(fileDownloader == null) return;
+//        fileDownloader.downloadFile(
+//                ApiUrls.BASE_IMAGE_URL + onlineClass.getFile(),
+//                onlineClass.getFile().substring(onlineClass.getFile().lastIndexOf("/") + 1),
+//                "OnlineClass",
+//                (isSuccess, message) -> {
+//            try {
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//            }
+//            catch (Exception ignore){}
+//        });
     }
 }

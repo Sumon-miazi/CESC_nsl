@@ -3,14 +3,14 @@ package com.itbeebd.cesc_nsl.utils.dummy;
 import java.util.ArrayList;
 
 public class Due {
-    private int totalDue;
-    private int totalFee;
-    private int indFee;
-    private int waiver;
-    private int paidAmount;
-    private boolean payment_on_off;
-    private String paymentVCategory;
-    private String invoice;
+    private final int totalDue;
+    private final int totalFee;
+    private final int indFee;
+    private final int waiver;
+    private final int paidAmount;
+    private final boolean payment_on_off;
+    private final String paymentVCategory;
+    private final String invoice;
     private ArrayList<DueHistory> dueHistoryArrayList;
 
     public Due(int totalDue, int totalFee, int indFee, int waiver, int paidAmount, boolean payment_on_off, String paymentVCategory, String invoice) {

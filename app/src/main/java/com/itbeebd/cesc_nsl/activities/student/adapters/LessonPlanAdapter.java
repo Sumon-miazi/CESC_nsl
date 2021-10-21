@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.LessonPlan;
 
 public class LessonPlanAdapter  extends GenericRecyclerAdapter<LessonPlan, OnRecyclerObjectClickListener<LessonPlan>, LessonPlanViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public LessonPlanAdapter(Context context) {
         super(context);

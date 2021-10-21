@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.DueHistory;
 
 public class DuePaymentAdapter extends GenericRecyclerAdapter<DueHistory, OnRecyclerObjectClickListener<DueHistory>, DuePaymentViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public DuePaymentAdapter(Context context) {
         super(context);

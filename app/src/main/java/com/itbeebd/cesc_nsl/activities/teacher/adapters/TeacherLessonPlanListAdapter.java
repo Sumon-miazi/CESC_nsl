@@ -12,7 +12,7 @@ import com.itbeebd.cesc_nsl.activities.teacher.viewHolders.TeacherLessonPlanList
 import com.itbeebd.cesc_nsl.utils.dummy.TeacherLessonPlan;
 
 public class TeacherLessonPlanListAdapter   extends GenericRecyclerAdapter<TeacherLessonPlan, OnRecyclerObjectClickListener<TeacherLessonPlan>, TeacherLessonPlanListViewHolder> {
-    private Context context;
+    private final Context context;
 
     public TeacherLessonPlanListAdapter(Context context) {
         super(context);

@@ -95,7 +95,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         monthNameViewId.setText(date);
 
         statusViewId.setText(item.getStatus());
-        amountViewId.setText(String.valueOf(item.getDue_amount() + "/="));
+        amountViewId.setText(item.getDue_amount() + "/=");
 
         invoiceDetailsViewId.addView(view);
     }

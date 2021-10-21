@@ -21,15 +21,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class QuizListViewHolder  extends BaseViewHolder<LiveQuiz, OnRecyclerObjectClickListener<LiveQuiz>> {
-    private Context context;
-    private CardView rootItem;
-    private TextView subjectNameViewId;
-    private TextView examTitleId;
-    private TextView timeRemainningId;
-    private TextView examDateId;
-    private TextView examEndDateId;
-    private TextView timerHintId;
-    private Button participateBtnId;
+    private final Context context;
+    private final CardView rootItem;
+    private final TextView subjectNameViewId;
+    private final TextView examTitleId;
+    private final TextView timeRemainningId;
+    private final TextView examDateId;
+    private final TextView examEndDateId;
+    private final TextView timerHintId;
+    private final Button participateBtnId;
     private CountDownTimer startCountDownTimer;
     private CountDownTimer endCountDownTimer;
     private boolean examTimeEnd;

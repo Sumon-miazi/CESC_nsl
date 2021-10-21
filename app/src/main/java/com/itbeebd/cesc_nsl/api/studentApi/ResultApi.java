@@ -23,9 +23,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ResultApi extends BaseService {
-    private Context context;
+    private final Context context;
     final RetrofitRequestBody requestBody;
-    private CustomProgressDialog progressDialog;
+    private final CustomProgressDialog progressDialog;
 
     public ResultApi(Context context){
         this.context = context;

@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.QuizArchive;
 
 public class QuizArchiveAdapter extends GenericRecyclerAdapter<QuizArchive, OnRecyclerObjectClickListener<QuizArchive>, QuizArchiveViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public QuizArchiveAdapter(Context context) {
         super(context);

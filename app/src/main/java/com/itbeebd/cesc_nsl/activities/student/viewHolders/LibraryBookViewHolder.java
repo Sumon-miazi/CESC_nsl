@@ -1,12 +1,9 @@
 package com.itbeebd.cesc_nsl.activities.student.viewHolders;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +24,7 @@ public class LibraryBookViewHolder  extends BaseViewHolder<Book, OnRecyclerObjec
     private final ImageView bookImageId;
     private final ImageView bookDownloadBtnId;
 
-    private Context context;
+    private final Context context;
 
     public LibraryBookViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
@@ -52,20 +49,22 @@ public class LibraryBookViewHolder  extends BaseViewHolder<Book, OnRecyclerObjec
         }
 
         bookDownloadBtnId.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(item.getBookUrl()));
-            context.startActivity(intent);
-            // downloadLessonFile(item);
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setData(Uri.parse(item.getBookUrl()));
+//            context.startActivity(intent);
+             downloadLessonFile(item);
+
         });
     }
 
     private void downloadLessonFile(Book book){
-        if(fileDownloader == null) return;
-        fileDownloader.downloadFile(book.getBookUrl(), book.getBookName(), "Books", (isSuccess, message) -> {
-            try {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-            catch (Exception ignore){}
-        });
+        new FileDownloader(context).downloadFile( 11, book.getBookUrl(), book.getBookName(), "LibraryBook", (isSuccess, message) -> { });
+//        if(fileDownloader == null) return;
+//        fileDownloader.downloadFile(book.getBookUrl(), book.getBookName(), "Books", (isSuccess, message) -> {
+//            try {
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//            }
+//            catch (Exception ignore){}
+//        });
     }
 }

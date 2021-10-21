@@ -2,14 +2,14 @@ package com.itbeebd.cesc_nsl.utils.dummy;
 
 public class OnlineClass {
 
-    private String subjectName;
-    private String lessonTitle;
-    private String teacherName;
-    private String teacherDesignation;
-    private String teacherImage;
-    private String bgImage;
-    private String file;
-    private String url;
+    private final String subjectName;
+    private final String lessonTitle;
+    private final String teacherName;
+    private final String teacherDesignation;
+    private final String teacherImage;
+    private final String bgImage;
+    private final String file;
+    private final String url;
 
     public OnlineClass(String subjectName, String lessonTitle, String teacherName, String teacherDesignation, String teacherImage, String bgImage,String file, String url) {
         this.subjectName = subjectName;

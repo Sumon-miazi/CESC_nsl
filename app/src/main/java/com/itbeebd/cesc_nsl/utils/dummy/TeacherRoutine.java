@@ -3,10 +3,10 @@ package com.itbeebd.cesc_nsl.utils.dummy;
 import java.io.Serializable;
 
 public class TeacherRoutine implements Serializable {
-    private String className;
-    private String subjectName;
-    private String winterTime;
-    private String summerTime;
+    private final String className;
+    private final String subjectName;
+    private final String winterTime;
+    private final String summerTime;
 
     public TeacherRoutine(String className, String subjectName, String winterTime, String summerTime) {
         this.className = className;

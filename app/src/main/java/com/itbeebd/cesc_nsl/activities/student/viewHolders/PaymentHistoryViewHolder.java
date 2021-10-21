@@ -22,7 +22,7 @@ public class PaymentHistoryViewHolder  extends BaseViewHolder<Payment, OnRecycle
     private final TextView paymentMonthId;
     private final TextView paidAmountId;
 
-    private Context context;
+    private final Context context;
 
     public PaymentHistoryViewHolder(@NonNull View itemView, Context context) {
         super(itemView);

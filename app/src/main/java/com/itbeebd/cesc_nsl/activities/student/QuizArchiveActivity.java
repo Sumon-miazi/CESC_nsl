@@ -24,7 +24,7 @@ public class QuizArchiveActivity extends AppCompatActivity implements OnRecycler
 
     private RecyclerView quizArchiveRecyclerViewId;
     private ArrayList<QuizArchive> quizArchives;
-    private int numberOfColumns = 2;
+    private final int numberOfColumns = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GenericRecyclerAdapter<T, L extends BaseRecyclerListener, VH extends BaseViewHolder<T, L>> extends RecyclerView.Adapter<VH> {
-    private List<T> items;
+    private final List<T> items;
     private L listener;
-    private LayoutInflater layoutInflater;
+    private final LayoutInflater layoutInflater;
 
     public GenericRecyclerAdapter(Context context) {
         layoutInflater = LayoutInflater.from(context);

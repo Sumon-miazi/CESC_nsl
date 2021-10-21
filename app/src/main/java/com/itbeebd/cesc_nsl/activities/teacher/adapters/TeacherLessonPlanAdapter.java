@@ -11,7 +11,7 @@ import com.itbeebd.cesc_nsl.activities.genericClasses.OnRecyclerObjectClickListe
 import com.itbeebd.cesc_nsl.activities.teacher.viewHolders.TeacherLessonPlanViewHolder;
 
 public class TeacherLessonPlanAdapter  extends GenericRecyclerAdapter<String, OnRecyclerObjectClickListener<String>, TeacherLessonPlanViewHolder>{
-        private Context context;
+        private final Context context;
 
         public TeacherLessonPlanAdapter(Context context) {
             super(context);

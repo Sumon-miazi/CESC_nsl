@@ -6,9 +6,9 @@ public class LessonFile implements Serializable {
 
     private int file_id;
     private int teacher_upload_file_id;
-    private String fileUrl;
+    private final String fileUrl;
     private String fullUrl;
-    private String fileName;
+    private final String fileName;
 
 
     public LessonFile(String fileUrl, String fileName) {

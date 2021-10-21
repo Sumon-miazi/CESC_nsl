@@ -19,7 +19,6 @@ import androidx.core.content.FileProvider;
 import com.itbeebd.cesc_nsl.R;
 
 import java.io.File;
-import java.util.Random;
 
 public class NotificationReminder extends FileProvider  {
     private final String TAG = "NotificationReminder";
@@ -29,7 +28,7 @@ public class NotificationReminder extends FileProvider  {
         this.context = context;
     }
 
-    public void sendNotification(String title, String messageBody, String fileUrl) {
+    public void sendNotification(int id, String title, String messageBody, String fileUrl) {
 
         System.out.println("file url>>> " + fileUrl);
         File file = new File((Uri.parse("content://" + fileUrl )).getPath());
@@ -53,7 +52,7 @@ public class NotificationReminder extends FileProvider  {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 
 // notificationId is a unique int for each notification that you must define
-        int id= new Random(System.currentTimeMillis()).nextInt(1000);
+    //    id= new Random(System.currentTimeMillis()).nextInt(1000);
         notificationManager.notify(id, builder.build());
     }
 

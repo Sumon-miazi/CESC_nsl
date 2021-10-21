@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.TeacherRoutine;
 
 public class TeacherRoutineAdapter  extends GenericRecyclerAdapter<TeacherRoutine, OnRecyclerObjectClickListener<TeacherRoutine>, TeacherRoutineViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public TeacherRoutineAdapter(Context context) {
         super(context);

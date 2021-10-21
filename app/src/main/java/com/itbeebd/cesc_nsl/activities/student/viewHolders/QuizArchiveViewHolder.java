@@ -18,12 +18,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class QuizArchiveViewHolder extends BaseViewHolder<QuizArchive, OnRecyclerObjectClickListener<QuizArchive>> {
-    private Context context;
-    private CardView rootItem;
-    private TextView subjectNameViewId;
-    private TextView examTitleId;
-    private TextView totalMarkId;
-    private TextView examDateId;
+    private final Context context;
+    private final CardView rootItem;
+    private final TextView subjectNameViewId;
+    private final TextView examTitleId;
+    private final TextView totalMarkId;
+    private final TextView examDateId;
 
     public QuizArchiveViewHolder(@NonNull View itemView, Context context) {
         super(itemView);

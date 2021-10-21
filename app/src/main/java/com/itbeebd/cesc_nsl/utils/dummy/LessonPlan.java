@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class LessonPlan implements Serializable {
-    private String teacherName;
-    private String subjectName;
-    private String lessonTitle;
-    private String lastUpdated;
+    private final String teacherName;
+    private final String subjectName;
+    private final String lessonTitle;
+    private final String lastUpdated;
 
     private ArrayList<LessonFile> lessonFileArrayList;
 

@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.ClassRoutine;
 
 public class ClassRoutineAdapter extends GenericRecyclerAdapter<ClassRoutine, OnRecyclerObjectClickListener<ClassRoutine>, ClassRoutineViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public ClassRoutineAdapter(Context context) {
         super(context);

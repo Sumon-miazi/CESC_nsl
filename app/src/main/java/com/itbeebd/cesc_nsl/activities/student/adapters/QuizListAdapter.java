@@ -12,7 +12,7 @@ import com.itbeebd.cesc_nsl.activities.student.viewHolders.QuizListViewHolder;
 import com.itbeebd.cesc_nsl.utils.dummy.LiveQuiz;
 
 public class QuizListAdapter extends GenericRecyclerAdapter<LiveQuiz, OnRecyclerObjectClickListener<LiveQuiz>, QuizListViewHolder> {
-    private Context context;
+    private final Context context;
 
     public QuizListAdapter(Context context) {
         super(context);

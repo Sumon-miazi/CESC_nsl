@@ -4,17 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DueHistory implements Serializable {
-    private int academic_year;
-    private int account_head_id;
-    private String account_head_name;
-    private int amount;
-    private int due_amount;
-    private int paidAmount;
-    private int weiber;
-    private int collected_month;
-    private String month;
-    private String payment_category;
-    private String classType;
+    private final int academic_year;
+    private final int account_head_id;
+    private final String account_head_name;
+    private final int amount;
+    private final int due_amount;
+    private final int paidAmount;
+    private final int weiber;
+    private final int collected_month;
+    private final String month;
+    private final String payment_category;
+    private final String classType;
 
     public DueHistory(int academic_year, int account_head_id, String account_head_name, int amount,int paidAmount, int due_amount, int weiber, int collected_month, String month, String payment_category, String classType) {
         this.academic_year = academic_year;

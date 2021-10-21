@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.sugarClass.Book;
 
 public class LibraryBookAdapter extends GenericRecyclerAdapter<Book, OnRecyclerObjectClickListener<Book>, LibraryBookViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public LibraryBookAdapter(Context context) {
         super(context);

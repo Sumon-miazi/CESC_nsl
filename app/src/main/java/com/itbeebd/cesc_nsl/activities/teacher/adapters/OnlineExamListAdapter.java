@@ -12,7 +12,7 @@ import com.itbeebd.cesc_nsl.activities.teacher.viewHolders.OnlineExamListViewHol
 import com.itbeebd.cesc_nsl.utils.dummy.OnlineExam;
 
 public class OnlineExamListAdapter  extends GenericRecyclerAdapter<OnlineExam, OnRecyclerObjectClickListener<OnlineExam>, OnlineExamListViewHolder> {
-    private Context context;
+    private final Context context;
 
     public OnlineExamListAdapter(Context context) {
         super(context);

@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.Invoice;
 
 public class InvoiceAdapter  extends GenericRecyclerAdapter<Invoice, OnRecyclerObjectClickListener<Invoice>, InvoiceViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public InvoiceAdapter(Context context) {
         super(context);

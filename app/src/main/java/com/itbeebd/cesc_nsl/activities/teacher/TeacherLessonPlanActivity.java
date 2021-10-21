@@ -405,7 +405,7 @@ public class TeacherLessonPlanActivity extends AppCompatActivity implements OnRe
                     startActivity(intent);
                 }
                 else {
-                    startActivity(new NotificationReminder(this).openFile(item));;
+                    startActivity(new NotificationReminder(this).openFile(item));
                 }
             }
             catch (Exception e){

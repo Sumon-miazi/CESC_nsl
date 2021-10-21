@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class TermExam implements Serializable {
 
-    private Map<String, Integer> exams;
-    private List<String> examList;
+    private final Map<String, Integer> exams;
+    private final List<String> examList;
 
     public TermExam(Map<String, Integer> exams, List<String> examList) {
         this.exams = exams;

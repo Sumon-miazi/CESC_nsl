@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.sugarClass.NotificationObj;
 
 public class StudentNotificationAdapter extends GenericRecyclerAdapter<NotificationObj, OnRecyclerObjectClickListener<NotificationObj>, StudentNotificationViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public StudentNotificationAdapter(Context context) {
         super(context);

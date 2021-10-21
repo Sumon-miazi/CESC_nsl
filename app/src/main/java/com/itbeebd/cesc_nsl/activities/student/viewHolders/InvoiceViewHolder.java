@@ -23,7 +23,7 @@ public class InvoiceViewHolder extends BaseViewHolder<Invoice, OnRecyclerObjectC
     private final TextView statusViewId;
     private final TextView amountViewId;
 
-    private Context context;
+    private final Context context;
 
     public InvoiceViewHolder(@NonNull View itemView, Context context) {
         super(itemView);

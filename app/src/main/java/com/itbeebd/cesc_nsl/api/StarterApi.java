@@ -22,9 +22,9 @@ import retrofit2.Response;
 
 public class StarterApi extends BaseService {
 
-    private Context context;
+    private final Context context;
     final RetrofitRequestBody requestBody;
-    private CustomProgressDialog progressDialog;
+    private final CustomProgressDialog progressDialog;
 
     public StarterApi(Context context, String message) {
         this.context = context;

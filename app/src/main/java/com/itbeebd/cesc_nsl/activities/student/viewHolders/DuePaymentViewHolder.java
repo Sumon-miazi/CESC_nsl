@@ -26,7 +26,7 @@ public class DuePaymentViewHolder extends BaseViewHolder<DueHistory, OnRecyclerO
     private final TextView waiverId;
     private final TextView totalRemainingDueId;
 
-    private Context context;
+    private final Context context;
 
     public DuePaymentViewHolder(@NonNull View itemView, Context context) {
         super(itemView);

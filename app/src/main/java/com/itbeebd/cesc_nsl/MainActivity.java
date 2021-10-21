@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
     private Map<String, String> videoData;
 
     // tab titles
-    private String[] titles = new String[]{"GENERAL", "ACADEMIC", "ADMISSION"};
-    private String[] newsEvent = new String[]{"NEWS", "EVENT"};
+    private final String[] titles = new String[]{"GENERAL", "ACADEMIC", "ADMISSION"};
+    private final String[] newsEvent = new String[]{"NEWS", "EVENT"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -372,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class ViewPagerFragmentAdapter extends FragmentStateAdapter {
-        private String type;
+        private final String type;
         public ViewPagerFragmentAdapter(@NonNull FragmentActivity fragmentActivity, String type) {
             super(fragmentActivity);
             this.type = type;

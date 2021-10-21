@@ -5,10 +5,10 @@ import com.orm.SugarRecord;
 import java.io.Serializable;
 
 public class Book  extends SugarRecord implements Serializable {
-    private String bookUrl;
-    private String bookImageUrl;
-    private String bookName;
-    private String bookAuthorName;
+    private final String bookUrl;
+    private final String bookImageUrl;
+    private final String bookName;
+    private final String bookAuthorName;
 
     public Book(String bookUrl, String bookImageUrl, String bookName, String bookAuthorName) {
         this.bookUrl = bookUrl;

@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.sugarClass.ResultObj;
 
 public class ResultBoardAdapter  extends GenericRecyclerAdapter<ResultObj, OnRecyclerObjectClickListener<ResultObj>, ResultBoardViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public ResultBoardAdapter(Context context) {
         super(context);

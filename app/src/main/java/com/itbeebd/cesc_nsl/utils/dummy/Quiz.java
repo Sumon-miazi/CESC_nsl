@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Quiz implements Serializable {
     private int id;
-    private String question;
-    private String option1;
-    private String option2;
-    private String option3;
-    private String option4;
+    private final String question;
+    private final String option1;
+    private final String option2;
+    private final String option3;
+    private final String option4;
     private int answer;
     private int checkedAnswer;
 

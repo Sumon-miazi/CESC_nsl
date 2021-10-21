@@ -20,9 +20,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OnlineClassApi extends BaseService {
-    private Context context;
+    private final Context context;
     final RetrofitRequestBody requestBody;
-    private CustomProgressDialog progressDialog;
+    private final CustomProgressDialog progressDialog;
 
     public OnlineClassApi(Context context) {
         this.context = context;

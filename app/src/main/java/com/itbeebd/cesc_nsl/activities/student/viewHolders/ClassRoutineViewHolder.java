@@ -15,11 +15,11 @@ import com.itbeebd.cesc_nsl.utils.dummy.ClassRoutine;
 
 public class ClassRoutineViewHolder extends BaseViewHolder<ClassRoutine, OnRecyclerObjectClickListener<ClassRoutine>> {
 
-    private TextView cl_teacherNameId;
-    private TextView cl_subjectNameId;
-    private TextView cl_winterTimeViewId;
-    private TextView cl_summerTimeViewId;
-    private Context context;
+    private final TextView cl_teacherNameId;
+    private final TextView cl_subjectNameId;
+    private final TextView cl_winterTimeViewId;
+    private final TextView cl_summerTimeViewId;
+    private final Context context;
 
     public ClassRoutineViewHolder(@NonNull View itemView, Context context) {
         super(itemView);

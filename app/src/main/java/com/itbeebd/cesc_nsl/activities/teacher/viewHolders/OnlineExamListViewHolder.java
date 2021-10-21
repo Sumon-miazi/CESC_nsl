@@ -18,14 +18,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class OnlineExamListViewHolder  extends BaseViewHolder<OnlineExam, OnRecyclerObjectClickListener<OnlineExam>> {
-    private Context context;
-    private CardView rootItem;
-    private TextView subjectNameViewId;
-    private TextView examTitleId;
-    private TextView totalMarkId;
-    private TextView examDateId;
-    private TextView classNameId;
-    private TextView resultStatusId;
+    private final Context context;
+    private final CardView rootItem;
+    private final TextView subjectNameViewId;
+    private final TextView examTitleId;
+    private final TextView totalMarkId;
+    private final TextView examDateId;
+    private final TextView classNameId;
+    private final TextView resultStatusId;
 
 
     public OnlineExamListViewHolder(@NonNull View itemView, Context context) {

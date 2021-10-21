@@ -32,7 +32,7 @@ public class ResultBoardViewHolder extends BaseViewHolder<ResultObj, OnRecyclerO
     private final ExpandableLayout expandable_layout;
 
 
-    private Context context;
+    private final Context context;
 
     public ResultBoardViewHolder(@NonNull View itemView, Context context) {
         super(itemView);

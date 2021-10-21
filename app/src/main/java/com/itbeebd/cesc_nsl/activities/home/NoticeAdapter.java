@@ -12,7 +12,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.Notice;
 
 public class NoticeAdapter extends GenericRecyclerAdapter<Notice, OnRecyclerObjectClickListener<Notice>, NoticeViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public NoticeAdapter(Context context) {
         super(context);

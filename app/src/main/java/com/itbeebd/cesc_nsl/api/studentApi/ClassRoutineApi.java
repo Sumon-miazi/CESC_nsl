@@ -20,9 +20,9 @@ import retrofit2.Response;
 
 public class ClassRoutineApi extends BaseService {
 
-    private Context context;
+    private final Context context;
     final RetrofitRequestBody requestBody;
-    private CustomProgressDialog progressDialog;
+    private final CustomProgressDialog progressDialog;
 
     public ClassRoutineApi(Context context) {
         this.context = context;

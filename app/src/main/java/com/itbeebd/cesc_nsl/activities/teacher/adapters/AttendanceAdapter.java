@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.ClassAttendance;
 
 public class AttendanceAdapter extends GenericRecyclerAdapter<ClassAttendance, OnRecyclerObjectClickListener<ClassAttendance>, AttendanceViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public AttendanceAdapter(Context context) {
         super(context);

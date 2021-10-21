@@ -31,9 +31,9 @@ import retrofit2.Response;
 
 public class PaymentApi extends BaseService {
 
-    private Context context;
+    private final Context context;
     final RetrofitRequestBody requestBody;
-    private CustomProgressDialog progressDialog;
+    private final CustomProgressDialog progressDialog;
 
     public PaymentApi(Context context) {
         this.context = context;

@@ -19,7 +19,7 @@ public class StudentNotificationViewHolder extends BaseViewHolder<NotificationOb
     private final TextView notificationTitle;
     private final TextView notificationBody;
    // private final SeeMoreTextView notificationBody;
-    private Context context;
+    private final Context context;
 
     public StudentNotificationViewHolder(@NonNull View itemView, Context context) {
         super(itemView);

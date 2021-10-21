@@ -4,7 +4,7 @@ import androidx.annotation.Nullable;
 
 public class Cell {
     @Nullable
-    private String mData;
+    private final String mData;
 
     public Cell(@Nullable String data) {
         this.mData = data;

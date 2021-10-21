@@ -13,8 +13,8 @@ import com.itbeebd.cesc_nsl.utils.dummy.Quiz;
 
 public class QuizAdapter extends GenericRecyclerAdapter<Quiz, OnRecyclerObjectClickListener<Quiz>, QuizViewHolder> {
 
-    private Context context;
-    private String type;
+    private final Context context;
+    private final String type;
 
     public QuizAdapter(Context context, String type) {
         super(context);

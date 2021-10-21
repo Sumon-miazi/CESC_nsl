@@ -8,9 +8,9 @@ import com.itbeebd.cesc_nsl.utils.CustomProgressDialog;
 
 public class LessonPlanApi extends BaseService {
 
-    private Context context;
+    private final Context context;
     final RetrofitRequestBody requestBody;
-    private CustomProgressDialog progressDialog;
+    private final CustomProgressDialog progressDialog;
 
     public LessonPlanApi(Context context) {
         this.context = context;

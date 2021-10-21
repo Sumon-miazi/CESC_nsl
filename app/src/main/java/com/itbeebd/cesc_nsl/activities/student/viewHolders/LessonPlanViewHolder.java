@@ -55,7 +55,7 @@ public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerO
         lastUpdated.setText(SimpleDateKt.toDateStandard(getDateFromString(item.getLastUpdated())));
 
         lessonFileDownloaderBtnId.setOnClickListener(view -> {
-            if(item.getLessonFileArrayList() != null) downloadLessonFiles(item.getLessonFileArrayList());
+            if(item.getLessonFileArrayList() != null) downloadLessonFiles2(item.getLessonFileArrayList());
         });
     }
 
@@ -90,5 +90,19 @@ public class LessonPlanViewHolder extends BaseViewHolder<LessonPlan, OnRecyclerO
                 catch (Exception ignore){}
             });
         }
+    }
+
+    private void downloadLessonFiles2(ArrayList<LessonFile> files){
+
+        for(int i = 0; i < files.size(); i++){
+            new FileDownloader(context).downloadFile(i+1, files.get(i).getFileUrl(), files.get(i).getFileName(),"LessonPlanFiles", (isSuccess, message) -> {
+                try {
+                  //  Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+                catch (Exception ignore){}
+            });
+        }
+
+
     }
 }

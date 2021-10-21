@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.AbsentFeeObject;
 
 public class AbsentFeeAdapter  extends GenericRecyclerAdapter<AbsentFeeObject, OnRecyclerObjectClickListener<AbsentFeeObject>, AbsentFeeViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public AbsentFeeAdapter(Context context) {
         super(context);

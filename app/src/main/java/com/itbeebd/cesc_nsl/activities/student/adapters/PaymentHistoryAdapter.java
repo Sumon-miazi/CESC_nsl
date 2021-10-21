@@ -13,7 +13,7 @@ import com.itbeebd.cesc_nsl.utils.dummy.Payment;
 
 public class PaymentHistoryAdapter  extends GenericRecyclerAdapter<Payment, OnRecyclerObjectClickListener<Payment>, PaymentHistoryViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public PaymentHistoryAdapter(Context context) {
         super(context);
