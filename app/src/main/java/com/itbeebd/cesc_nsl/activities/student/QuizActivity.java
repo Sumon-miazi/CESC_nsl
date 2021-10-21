@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectClickListener<Quiz> {
 
@@ -97,8 +98,18 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
                 Calendar.getInstance().getTime())
         );
 
-        startTime = Calendar.getInstance().getTime().toString();
+        startTime = getCurrentTime();
+        System.out.println("Start time >>>>>> " + startTime);
     }
+
+    private String getCurrentTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
+                Locale.getDefault());
+        Date curDate = new Date(System.currentTimeMillis());
+        return formatter.format(curDate);
+
+    }
+
 
     private void setupAdapter() {
         if(quizArrayList != null){
@@ -198,7 +209,8 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     @Override
     public void onItemClicked(Quiz item, View view) {
         if(timeEnd){
-            Toast.makeText(this, "Quiz time has finished. New answer will not count", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Quiz time has finished. New answer will not count",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -12,8 +12,8 @@ android {
         applicationId "com.itbeebd.cesc_nsl"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 12
-        versionName "1.1.1-beta"
+        versionCode 13
+        versionName "1.1.2-beta"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,24 +52,19 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
 
-    //https://github.com/gauravk95/bubble-navigation
-     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
 
     // this is for local database debugging
-    // http://192.168.43.122:8080 <phoneIpAddress:port>
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
 
     implementation 'com.andrognito.flashbar:flashbar:1.0.2'
 
-    // sugar orm
     implementation 'com.github.satyan:sugar:1.5'
 
-    // see more textVIew
     implementation 'com.github.AhmMhd:SeeMoreTextView-Android:1.0.0'
 
-    //Image Picker Library
     implementation 'com.github.nguyenhoanglam:ImagePicker:1.4.3'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
@@ -77,46 +72,33 @@ dependencies {
 
     implementation 'com.evrencoskun.library:tableview:0.8.9.4'
 
-    // simple date format like 23 September, 2021
     implementation 'com.github.sidhuparas:SimpleDate:2.1.0'
 
-//spinner
-    //https://github.com/Chivorns/SmartMaterialSpinner
     implementation 'com.github.chivorns:smartmaterialspinner:1.5.0'
 
-    //expendable layout
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
-    // file Downloader
     implementation "com.tonyodev.fetch2:fetch2:3.0.12"
     implementation "com.tonyodev.fetch2okhttp:fetch2okhttp:3.0.12"
 
-
-    // Drawer menu
     implementation 'com.czerwii:SlidingdrawerMenu:1.0.1'
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
-    //firebase settings
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-appcheck-debug:16.0.0-beta03'
 
-    // check network state
     implementation 'com.github.jumadeveloper:networkmanager:0.0.2'
 
-    // lottie animation
     implementation 'com.airbnb.android:lottie:4.1.0'
 
-    // tooltip library
     implementation 'com.github.douglasjunior:android-simple-tooltip:1.0.0-rc.0'
 
     implementation 'com.github.abhishekti7:UnicornFilePicker:1.0.2'
 
-    //Slider library
-    // Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.6'
     implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.5'
 

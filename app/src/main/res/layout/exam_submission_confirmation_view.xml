@@ -70,7 +70,7 @@
             android:text="If you want to submit the quiz hit the submit button below."
             android:textSize="20sp"
             android:textAlignment="center"
-            android:textColor="@color/text_color_white"
+            android:textColor="@color/text_color_black"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/questionAnsweredId"
             app:layout_constraintEnd_toEndOf="parent"

@@ -56,8 +56,8 @@ public class QuizListViewHolder  extends BaseViewHolder<LiveQuiz, OnRecyclerObje
         subjectNameViewId.setText(item.getSubjectName());
         examTitleId.setText(item.getExamTitle());
 
-        String examStartStr = "Quiz will start at: " + SimpleDateKt.toDateTimeStandardIn12Hours(getDateFromString(item.getExamStartDateTime()));
-        String examEndStr = "Quiz will End at: " + SimpleDateKt.toDateTimeStandardIn12Hours(getDateFromString(item.getExamEndDateTime()));
+        String examStartStr = "Quiz start time: " + SimpleDateKt.toDateTimeStandardIn12Hours(getDateFromString(item.getExamStartDateTime()));
+        String examEndStr = "Quiz end time: " + SimpleDateKt.toDateTimeStandardIn12Hours(getDateFromString(item.getExamEndDateTime()));
 
         examDateId.setText(examStartStr);
         examEndDateId.setText(examEndStr);
