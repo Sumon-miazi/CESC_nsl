@@ -48,7 +48,7 @@
             android:padding="10dp"
             android:text="NOTICE"
             android:textStyle="bold"
-            android:textColor="@color/primary_active"
+            android:textColor="@color/text_color_white"
             android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/noticeBodyId"
             app:layout_constraintEnd_toEndOf="parent"

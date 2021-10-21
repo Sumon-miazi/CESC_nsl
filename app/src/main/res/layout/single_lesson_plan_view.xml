@@ -38,7 +38,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="Md. Suman Miazi"
-            android:textColor="@color/blue_primary_dark"
+            android:textColor="@color/text_color_black"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/lessonFileDownloaderBtnId"

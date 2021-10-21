@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 public class VideoPlayerActivity extends YouTubeBaseActivity{
 
-    private final String api_key = "A2GXEp_5yjILvY";
+    private final String api_key = "AIzaSyAuSGEB2VN1JB1Ix554pA2GXEp_5yjILvY";
 
     private AndExoPlayerView andExoPlayerView;
     // Get reference to the view of Video player
@@ -40,10 +40,10 @@ public class VideoPlayerActivity extends YouTubeBaseActivity{
            // playVideo(getIntent().getStringExtra("web_url"));
           //  youtubeSetupAndPlay(getIntent().getStringExtra("web_url"));
             ytVideoUrl = getIntent().getStringExtra("web_url");
-
+            System.out.println("web url >>>>> " + ytVideoUrl);
         }
         else if(getIntent().hasExtra("file_url")){
-
+            playVideo(getIntent().getStringExtra("file_url"));
         }
     }
 
@@ -94,7 +94,9 @@ public class VideoPlayerActivity extends YouTubeBaseActivity{
             System.out.println(">>>>>>>>>>matcher.group()  " + matcher.group());
             return matcher.group();
         } else {
+            Toast.makeText(this, "Video url is not valid", Toast.LENGTH_SHORT).show();
             System.out.println(">>>>>>>>>>matcher.group error");
+            finish();
             return "error";
         }
     }

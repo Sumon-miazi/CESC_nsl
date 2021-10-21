@@ -52,7 +52,7 @@
             android:paddingBottom="6dp"
             android:text="Bangle"
             android:textAllCaps="true"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color_white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
             android:fontFamily="@font/heebo_extra_bold"
             android:padding="10dp"
             android:text="Title"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color_white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/heebo_medium"
             android:text="Suman Miazi"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color_black"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/designationId"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +125,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
+            app:tint="@color/text_color_white" />
 
         <ImageView
             android:id="@+id/watchId"
@@ -137,7 +137,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
+            app:tint="@color/text_color_white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

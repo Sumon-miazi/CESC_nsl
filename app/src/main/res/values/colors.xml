@@ -22,11 +22,16 @@
     <color name="blue_primary_dark">#0B2D51</color>
     <color name="blue_primary_dark_2">#072341</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_3">#9AFFFFFF</color>
     <color name="filter_color">#545454</color>
     <color name="black_100">#868686</color>
     <color name="white_2">#F4F4F4</color>
     <color name="white_green">#E6F6F5</color>
     <color name="white_inactive">#EEFEFF</color>
+    <color name="white_inactive_6">#EEFEFF</color>
+    <color name="green_inactive_6">#C9009688</color>
+    <color name="blue_inactive_2">#1B617AF8</color>
+    <color name="eye_tint">#60A0A2</color>
     <color name="white_inactive_2">#AEAEAE</color>
     <color name="white_inactive_3">#F3FDFF</color>
     <color name="white_inactive_4">#999999</color>
@@ -111,4 +116,7 @@
     <color name="bg_white">#FFFFFF</color>
     <color name="bg_black">#101010</color>
 
+    <color name="bg_1">#DFF1FF</color>
+    <color name="bg_2">#D2EBFF</color>
+    <color name="bg_3">#F3F5F9</color>
 </resources>

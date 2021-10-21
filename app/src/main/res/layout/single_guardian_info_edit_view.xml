@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Change Image"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color_white"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/guardianProfileViewId"
         app:layout_constraintEnd_toEndOf="@+id/guardianProfileBgViewId"

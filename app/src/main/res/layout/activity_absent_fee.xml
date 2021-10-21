@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white">
+        app:titleTextColor="@color/text_color_white">
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -229,6 +229,7 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:text="submit"
+            android:textColor="@color/text_color_white"
             android:layout_marginStart="@dimen/a_header_card_margin"
             android:layout_marginEnd="@dimen/a_header_card_margin_start"
             android:layout_marginBottom="@dimen/a_header_card_margin_bottom"

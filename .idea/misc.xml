@@ -14,11 +14,18 @@
         <entry key="app/src/main/res/drawable/default_background_rounded_rect.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/home_background_oval.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/ic__rocket.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/drawable/ic_baseline_archive.xml" value="0.165625" />
+        <entry key="app/src/main/res/drawable/ic_baseline_article.xml" value="0.165625" />
+        <entry key="app/src/main/res/drawable/ic_baseline_computer.xml" value="0.165625" />
+        <entry key="app/src/main/res/drawable/ic_baseline_credit_card.xml" value="0.165625" />
+        <entry key="app/src/main/res/drawable/ic_baseline_library_books.xml" value="0.165625" />
+        <entry key="app/src/main/res/drawable/ic_baseline_password.xml" value="0.165625" />
         <entry key="app/src/main/res/drawable/ic_baseline_person.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/ic_baseline_send.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/ic_baseline_subdirectory.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/ic_calendar_today_24.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/ic_download.xml" value="0.16614583333333333" />
+        <entry key="app/src/main/res/drawable/ic_eye.xml" value="0.165625" />
         <entry key="app/src/main/res/drawable/ic_filter.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/ic_guided_student.xml" value="0.13796296296296295" />
         <entry key="app/src/main/res/drawable/ic_lesson_plan.xml" value="0.16614583333333333" />
@@ -40,20 +47,21 @@
         <entry key="app/src/main/res/drawable/transition_background_drawable_home.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/weekly_days_bg.xml" value="0.16614583333333333" />
         <entry key="app/src/main/res/drawable/weekly_days_main_bg.xml" value="0.16614583333333333" />
-        <entry key="app/src/main/res/layout/activity_absent_fee.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_attendance.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_absent_fee.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_attendance.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_attendance_list.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_attendance_view_or_edit.xml" value="0.14947916666666666" />
         <entry key="app/src/main/res/layout/activity_change_password.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_edit_student_profile.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_edit_student_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_equal_bottom_bar.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.14" />
+        <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_guide_student_list.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_guided_student_profile.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_invoice_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_guided_student_profile.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_invoice_details.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_lesson_plan.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_library_book.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_online_class.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_online_exam.xml" value="0.2" />
@@ -63,16 +71,16 @@
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_quiz_archive.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_quiz_list.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/activity_send_notification.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_send_notification.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_student_all_notification.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_student_dashboard.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_student_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_student_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_teacher_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_teacher_lesson_plan2.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_teacher_lesson_plan_list.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_teacher_lesson_plan_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_teacher_lesson_plan_view_or_edit.xml" value="0.13489583333333333" />
-        <entry key="app/src/main/res/layout/activity_teacher_login.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_teacher_login.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_teacher_routine.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_top_bar.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_verify_otp_code.xml" value="0.18" />
@@ -83,29 +91,32 @@
         <entry key="app/src/main/res/layout/card_view_item.xml" value="0.15" />
         <entry key="app/src/main/res/layout/class_routine_block.xml" value="0.33" />
         <entry key="app/src/main/res/layout/content_student_nav.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/drawer_layout.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/drawer_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/exam_submission_confirmation_view.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_equal_bottom_bar.xml" value="0.14947916666666666" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_notice_genera.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_result_board.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_screen_slide_page.xml" value="0.14947916666666666" />
         <entry key="app/src/main/res/layout/fragment_student_dashboard.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.17" />
+        <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.21" />
         <entry key="app/src/main/res/layout/invoice_details_view.xml" value="0.15" />
         <entry key="app/src/main/res/layout/lesson_plan_block.xml" value="0.25" />
         <entry key="app/src/main/res/layout/month_name_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/no_data_found.xml" value="0.18" />
         <entry key="app/src/main/res/layout/no_internet.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/notice_board_dialog.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/single_absent_fee_view.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/notice_board_dialog.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/notification_block.xml" value="0.14947916666666666" />
+        <entry key="app/src/main/res/layout/single_absent_fee_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/single_attendance_list_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_attendance_view.xml" value="0.4640776699029126" />
         <entry key="app/src/main/res/layout/single_class_routine.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/single_dashboard_component.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/single_dashboard_component.xml" value="0.22" />
         <entry key="app/src/main/res/layout/single_due_amount_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_due_history_view.xml" value="0.67" />
         <entry key="app/src/main/res/layout/single_guardian_info_edit_view.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/single_guardian_view.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/single_guardian_view.xml" value="0.22" />
         <entry key="app/src/main/res/layout/single_guide_student_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_home_notice_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_invoice_info_view.xml" value="0.25" />
@@ -115,7 +126,7 @@
         <entry key="app/src/main/res/layout/single_menu_layout.xml" value="0.15" />
         <entry key="app/src/main/res/layout/single_online_class.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_online_exam_list_view.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/single_payment_history_view.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/single_payment_history_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_quiz_archive_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_quiz_list_view.xml" value="0.5" />
         <entry key="app/src/main/res/layout/single_quiz_setup_view.xml" value="0.33" />
@@ -125,6 +136,7 @@
         <entry key="app/src/main/res/layout/single_subject_result_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_teacher_lesson_plan_list_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_teacher_routine_view.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/table_view_cell_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/weekly_days_bg.xml" value="0.15" />
         <entry key="app/src/main/res/layout/weekly_days_view.xml" value="0.22" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.15" />

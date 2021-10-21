@@ -67,6 +67,9 @@ public class QuizListActivity extends AppCompatActivity  implements OnRecyclerOb
                 (object, message) -> {
                     if(object != null){
                         liveQuizzes = (ArrayList<LiveQuiz>) object;
+                        if(liveQuizzes.isEmpty()){
+                            Toast.makeText(this, "No Data Found!", Toast.LENGTH_SHORT).show();
+                        }
                         setUpAdapter();
                     }
                     else {
