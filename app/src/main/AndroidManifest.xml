@@ -28,18 +28,23 @@
         android:theme="@style/Theme.CESC_nsl"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
+        
         <activity
             android:name=".activities.teacher.OnlineExamListActivity"
-            android:exported="false" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.teacher.SendNotificationActivity"
-            android:exported="false" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.teacher.OnlineExamActivity"
-            android:exported="false" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.student.QuizListActivity"
-            android:exported="false" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".VerifyOtpCodeActivity"
             android:launchMode="singleTask"
