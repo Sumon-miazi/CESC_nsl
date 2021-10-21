@@ -299,18 +299,23 @@ public class QuizActivity extends AppCompatActivity implements OnRecyclerObjectC
     @Override
     protected void onStop() {
         super.onStop();
-        if(!quizAlreadySubmitted){
-            timeEnd = true;
-            countDownTimer.cancel();
-            quizTimerViewId.setText("Quiz has finished");
-            submitQuizResult();
-        }
+//        if(!quizAlreadySubmitted){
+//            timeEnd = true;
+//            countDownTimer.cancel();
+//            quizTimerViewId.setText("Quiz has finished");
+//            submitQuizResult();
+//        }
     }
 
     @Override
     public void onBackPressed() {
-        if(quizAlreadySubmitted) super.onBackPressed();
-        else submitQuizResult();
+        if(type.equals("oldQuiz")){
+            super.onBackPressed();
+        }
+        else {
+            if(quizAlreadySubmitted) super.onBackPressed();
+            else submitQuizResult();
+        }
     }
 
     @Override

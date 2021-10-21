@@ -67,8 +67,8 @@ public class QuizApi extends BaseService {
                             JSONArray questionJsonArray = quizArchiveJson.getJSONObject("quiz").getJSONArray("question");
                             ArrayList<Quiz> quizArrayList = new ArrayList<>();
 
-                            for (int j = 0; j < questionJsonArray.length(); j++) {
-                                JSONObject object = questionJsonArray.getJSONObject(i);
+                            for (int k = 0; k < questionJsonArray.length(); k++) {
+                                JSONObject object = questionJsonArray.getJSONObject(k);
 
                                 Quiz quiz = new Quiz(
                                         object.optInt("id"),
@@ -185,8 +185,8 @@ public class QuizApi extends BaseService {
                         JSONArray question = jsonObject.getJSONArray("question");
                         ArrayList<Quiz> quizArrayList = new ArrayList<>();
 
-                        for (int j = 0; j < question.length(); j++) {
-                            JSONObject object = question.getJSONObject(j);
+                        for (int k = 0; k < question.length(); k++) {
+                            JSONObject object = question.getJSONObject(k);
 
                             Quiz quiz = new Quiz(
                                     object.optInt("id"),
