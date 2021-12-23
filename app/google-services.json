@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "813786823375",
-    "project_id": "cesc-f8b4d",
-    "storage_bucket": "cesc-f8b4d.appspot.com"
+    "project_number": "981576581164",
+    "project_id": "cese-59741",
+    "storage_bucket": "cese-59741.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:813786823375:android:dd5baf01dcb2e503f455ba",
+        "mobilesdk_app_id": "1:981576581164:android:2cd7aea922df93ef321189",
         "android_client_info": {
           "package_name": "com.itbeebd.cesc_nsl"
         }
       },
       "oauth_client": [
         {
-          "client_id": "813786823375-8o2vn4admt36b682p9et55ulrhosrsee.apps.googleusercontent.com",
+          "client_id": "981576581164-29snop0tfsmnr558d5qqsr0oruh1k7nt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCWPRQWKDdIUmy_OnG9mpdLP2S0TdLZvM8"
+          "current_key": "AIzaSyBepTu5zGeKUYJhm2momyHUlIkv_MyBT_4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "813786823375-8o2vn4admt36b682p9et55ulrhosrsee.apps.googleusercontent.com",
+              "client_id": "981576581164-29snop0tfsmnr558d5qqsr0oruh1k7nt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

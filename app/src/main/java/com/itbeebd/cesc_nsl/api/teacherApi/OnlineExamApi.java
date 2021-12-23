@@ -76,9 +76,19 @@ public class OnlineExamApi extends BaseService {
         });
     }
 
-    public void getOnlineExamList(String authToken, ResponseObj responseObj) {
+    public void getOnlineExamList(String authToken,
+                                  int classId,
+                                  String fromDate,
+                                  String toDate,
+                                  String status,
+                                  ResponseObj responseObj) {
         progressDialog.show();
-        Call<ResponseBody> apiCall = service.getRequestPath(authToken, ApiUrls.LIVE_QUIZ_LIST);
+        Call<ResponseBody> apiCall = service.getRequestPath(authToken, ApiUrls.T_ONLINE_EXAM_LIST, requestBody.getOnlineExamList(
+                classId,
+                fromDate,
+                toDate,
+                status
+        ));
         apiCall.enqueue(new Callback<ResponseBody>() {
 
             @Override
@@ -89,12 +99,15 @@ public class OnlineExamApi extends BaseService {
 
                     try {
                         Gson gson = new Gson();
-                        jsonObject = new JSONObject(response.body().string());
+                       // jsonObject = new JSONObject(response.body().string());
 
-                        JSONArray data = jsonObject.getJSONArray("data");
+                        JSONArray data = new JSONArray(response.body().string());
 
-                        System.out.println(">>>>>>>>>> quizArchiveCall " + data);
+                        System.out.println(">>>>>>>>>> getOnlineExamList " + data);
 
+                        if(data.length() == 0){
+                            responseObj.data(null, "No Data Found");
+                        }
                         ArrayList<OnlineExam> onlineExams = new ArrayList<>();
 
                         for (int i = 0; i < data.length(); i++) {

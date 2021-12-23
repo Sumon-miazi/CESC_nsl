@@ -96,4 +96,13 @@ public class RetrofitRequestBody {
         map.put("section_id", selectedSectionId);
         return map;
     }
+
+    public Map<String, Object> getOnlineExamList(int classId, String fromDate, String toDate, String status) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("std_class_id", classId);
+        map.put("from_date", fromDate);
+        map.put("to_date", toDate);
+        map.put("status", status);
+        return map;
+    }
 }

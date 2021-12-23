@@ -45,6 +45,7 @@ public class ApiUrls {
 
 
     public static final String T_SEND_NOTIFICATION =  "send-notification";
+    public static final String T_ONLINE_EXAM_LIST =  "onlineExam";
 
 
 

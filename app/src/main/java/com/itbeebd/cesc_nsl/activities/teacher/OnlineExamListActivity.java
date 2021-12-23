@@ -56,6 +56,10 @@ public class OnlineExamListActivity extends AppCompatActivity implements OnRecyc
     private void callLiveQuizApi() {
         new OnlineExamApi(this, "Loading...").getOnlineExamList(
                 CustomSharedPref.getInstance(this).getAuthToken(),
+                10,
+                "2021-10-11",
+                "2021-10-30",
+                "Inactive",
                 (object, message) -> {
                     if(object != null){
                        onlineExams = (ArrayList<OnlineExam>) object;
